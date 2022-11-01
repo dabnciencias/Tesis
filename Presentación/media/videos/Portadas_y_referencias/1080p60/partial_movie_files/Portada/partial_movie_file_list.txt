@@ -1,0 +1,2 @@
+# This file is used internally by FFMPEG.
+file 'file:/home/diek/ExTr/Presen/media/videos/Portadas_y_referencias/1080p60/partial_movie_files/Portada/3885388786_364153202_122749550.mp4'

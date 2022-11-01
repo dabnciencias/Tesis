@@ -1,0 +1,16 @@
+\documentclass[tikz, border=0mm]{standalone}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\begin{center}
+\begin{tikzcd}
+                                A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[]{r}[]{y} &C \arrow[]{d}[]{c} \arrow[dashed]{r}[]{\delta} &\empty{} \\ 
+                                A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C' \arrow[dashed]{r}[swap]{\delta'} &\empty{}.
+                        \end{tikzcd}
+\end{center}
+
+\end{document}

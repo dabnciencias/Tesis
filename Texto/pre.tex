@@ -1,0 +1,131 @@
+\usepackage[margin=1.5cm]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish,es-tabla]{babel}
+\decimalpoint
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[pdftex,
+            pdfauthor={Diego Alberto Barceló Nieves},
+            pdftitle={Una Introducción a las categorías extrianguladas}]{hyperref}
+\usepackage{braket}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usetikzlibrary{babel}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{caption}
+\usepackage{mathrsfs}
+\usepackage{subcaption}
+\usepackage{subfiles}
+\usepackage{mdframed}
+\usepackage{bbm}
+\usepackage{faktor}
+\usepackage{adjustbox}
+\usepackage{mathtools}
+\usepackage[maxbibnames=99, style=alphabetic]{biblatex}
+\addbibresource{tesis.bib}
+
+\definecolor{NARANJA}{rgb}{1,0.467,0}
+\definecolor{VERDE}{rgb}{0.31,1,0}
+\definecolor{AZUL}{rgb}{0,0.53,1}
+\definecolor{ROJO}{rgb}{1,0,0}
+\definecolor{db}{rgb}{0.85,0.4,0}
+
+\hypersetup{
+    colorlinks=true,
+    citecolor=NARANJA,
+    linkcolor=AZUL,
+    filecolor=magenta,      
+    urlcolor=AZUL,
+}
+
+\numberwithin{section}{chapter}
+\newtheoremstyle{dotlessB}{}{}{}{}{\bfseries}{}{ }{}
+\theoremstyle{dotlessB}
+\newtheorem{Def}{Definición}[section] % alph (a) (b) ...
+\newtheorem*{Nota}{Nota} % alph (a) (b) ...
+\newtheorem{Obs}[Def]{Observación} % arabic (1) (2) ...
+\newtheorem{Lema}[Def]{Lema} % alph (a) (b) ...
+\newtheorem{Prop}[Def]{Proposición} % alph (a) (b) ...
+\newtheorem{Teo}[Def]{Teorema} % alph (a) (b) ...
+\newtheorem{Coro}[Def]{Corolario} % alph (a) (b) ...
+\newtheorem{Ejem}[Def]{Ejemplo} % arabic (1) (2) ...
+\newtheorem{Ejems}[Def]{Ejemplos} % arabic (1) (2) ...
+\numberwithin{equation}{section}
+
+\newcommand{\xtwoheadrightarrow}[2][]{% Por alguna bizarra razón, \xhookrightarrow sí existe pero \xtwoheadrightarrow, no.
+  \xrightarrow[#1]{#2}\mathrel{\mkern-14mu}\rightarrow
+}
+
+\newcommand{\xrightarrowtail}[2][]{% \xrightarrowtail tampoco existe.
+  \xrightarrow[#1]{#2}\mathrel{\mkern-21mu}\rightarrowtail
+}
+
+\makeatletter
+\newcommand*{\da@rightarrow}{\mathchar"0\hexnumber@\symAMSa 4B }
+\newcommand*{\da@leftarrow}{\mathchar"0\hexnumber@\symAMSa 4C }
+\newcommand*{\xdashrightarrow}[2][]{%
+  \mathrel{%
+    \mathpalette{\da@xarrow{#1}{#2}{}\da@rightarrow{\,}{}}{}%
+  }%
+}
+\newcommand{\xdashleftarrow}[2][]{%
+  \mathrel{%
+    \mathpalette{\da@xarrow{#1}{#2}\da@leftarrow{}{}{\,}}{}%
+  }%
+}
+\newcommand*{\da@xarrow}[7]{%
+  % #1: below
+  % #2: above
+  % #3: arrow left
+  % #4: arrow right
+  % #5: space left 
+  % #6: space right
+  % #7: math style 
+  \sbox0{$\ifx#7\scriptstyle\scriptscriptstyle\else\scriptstyle\fi#5#1#6\m@th$}%
+  \sbox2{$\ifx#7\scriptstyle\scriptscriptstyle\else\scriptstyle\fi#5#2#6\m@th$}%
+  \sbox4{$#7\dabar@\m@th$}%
+  \dimen@=\wd0 %
+  \ifdim\wd2 >\dimen@
+    \dimen@=\wd2 %   
+  \fi
+  \count@=2 %
+  \def\da@bars{\dabar@\dabar@}%
+  \@whiledim\count@\wd4<\dimen@\do{%
+    \advance\count@\@ne
+    \expandafter\def\expandafter\da@bars\expandafter{%
+      \da@bars
+      \dabar@ 
+    }%
+  }%  
+  \mathrel{#3}%
+  \mathrel{%   
+    \mathop{\da@bars}\limits
+    \ifx\\#1\\%
+    \else
+      _{\copy0}%
+    \fi
+    \ifx\\#2\\%
+    \else
+      ^{\copy2}%
+    \fi
+  }%   
+  \mathrel{#4}%
+}
+\makeatother
+
+\let\MakeUppercase\relax % Makes Chapter titles in headers not be in ALL CAPS
+
+\makeatletter
+\newcommand{\leqnomode}{\tagsleft@true\let\veqno\@@leqno} % Allows equation numbering to the left
+\newcommand{\reqnomode}{\tagsleft@false\let\veqno\@@eqno}
+\makeatother

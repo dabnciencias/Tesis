@@ -1,0 +1,991 @@
+\documentclass[tesis]{subfiles}
+\begin{document}
+
+\chapter{Categorías exactas} \label{Chap: Categorías exactas}
+
+Las categorías exactas\footnote{Recordamos que utilizamos el término \emph{categoría exacta} para referirnos a una categoría exacta en el sentido de Quillen, como se mencionó en la Introducción.} se componen de una categoría aditiva y una clase de cierto tipo de sucesiones de morfismos \textemdash cuya definición involucra las nociones categóricas de núcleo y conúcleo\textemdash \ que verifica una serie de axiomas descritos a continuación; en tal caso, dichas sucesiones juegan un rol análogo al de las sucesiones exactas cortas\footnote{Ver la Definición \ref{Def: Sucesión exacta}.} en las categorías abelianas\footnote{En particular, toda categoría abeliana puede ser vista como una categoría exacta, por lo que podemos considerar a estas últimas como una generalización de las primeras.}, por lo que reciben el mismo nombre.
+
+\section{Definición de categoría exacta} \label{Sec: Definición de categoría exacta}
+
+La definición de categoría exacta que presentamos a continuación es debida a Yoneda\cite[\S 2]{Yoneda}. Una axiomatización minimal está dada por Keller\cite[Appendix~A]{Keller}.
+
+\begin{Def} \label{Def: Pares núcleo-conúcleo}
+
+    Sea $\mathscr{A}$ una categoría aditiva. 
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Dos morfismos componibles $A'\xrightarrow[]{i}A\xrightarrow[]{p}A''$ forman un \emph{par núcleo-conúcleo} $(i,p)$ en $\mathscr{A}$ si $i$ es el núcleo de $p$ y $p$ es el conúcleo de $i$. 
+
+        \item Dos pares núcleo-conúcleo $(i_1,p_1), (i_2,p_2)$ son \emph{isomorfos} si existen isomorfismos $f,g$ y $h$ en $\mathscr{A}$ tales que el diagrama
+    \begin{center}
+        \begin{tikzcd}
+            A_1' \arrow[]{d}{\rotatebox{-90}{$\sim$}}[swap]{f} \arrow[]{r}[]{i_1} &A_1 \arrow[]{d}{\rotatebox{-90}{$\sim$}}[swap]{g} \arrow[]{r}[]{p_1} &A_1'' \arrow[]{d}{h}[swap]{\rotatebox{90}{$\sim$}} \\
+            A_2' \arrow[]{r}[swap]{i_2} &A_2 \arrow[]{r}[swap]{p_2} &A_2''
+        \end{tikzcd}
+    \end{center}
+    conmuta.
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}\label{Def: Monomorfismos escindibles y epimorfismos escindibles}
+
+    Sean $\mathscr{A}$ una categoría aditiva y $\mathscr{E}$ una clase de pares núcleo-conúcleo en $\mathscr{A}$.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Un \emph{monomorfismo admisible} es un morfismo $i$ para el cual existe un morfismo $p$ tal que $(i,p)\in\mathscr{E}$. Denotaremos a los monomorfismos admisibles en diagramas como $\rightarrowtail$.
+
+        \item Dualmente, un \emph{epimorfismo admisible} es un morfismo $p$ para el cual existe un morfismo $i$ tal que $(i,p)\in\mathscr{E}$. Denotaremos a los epimorfismos admisibles en diagramas como $\twoheadrightarrow$.
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}\label{Def: Estructura exacta}
+    Sea $\mathscr{A}$ una categoría aditiva. Una clase $\mathscr{E}$ de pares núcleo-conúcleo es una \emph{estructura exacta} sobre $\mathscr{A}$ si es cerrada por isomorfismos y satisface los siguientes axiomas. % La cerradura por isomorfismos está motivada por Mendoza-1.10.13
+
+    \begin{itemize}
+        \item[(E0)] Los morfismos identidad en $\mathscr{A}$ son monomorfismos admisibles. %Para todo $A\in\text{Obj}(\mathscr{A})$, el morfismo identidad $1_A$ es un monomorfismo admisible.
+
+        \item[(E0)\textsuperscript{$\ast$}] Los morfismos identidad en $\mathscr{A}$ son epimorfismos admisibles. %Para todo $A\in\text{Obj}(\mathscr{A})$, el morfismo identidad $1_A$ es un epimorfismo admisible.
+
+        \item[(E1)] La clase de monomorfismos admisibles es cerrada por composiciones.
+
+        \item[(E1)\textsuperscript{$\ast$}] La clase de epimorfismos admisibles es cerrada por composiciones.
+
+        \item[(E2)] La suma fibrada de un monomorfismo admisible a lo largo de un morfismo arbitrario existe y produce un monomorfismo admisible.
+
+        \item[(E2)\textsuperscript{$\ast$}] El producto fibrado de un epimorfismo admisible a lo largo de un morfismo arbitrario existe y produce un epimorfismo admisible.
+    \end{itemize}
+
+    \noindent Los axiomas (E2) y (E2)\textsuperscript{$\ast$} se sintetizan en los diagramas
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow{d} \arrow[tail]{r} \arrow[phantom]{dr}{\text{PO}} &B \arrow[dotted]{d} &\empty{}\arrow[phantom]{d}{\text{y}} &A' \arrow[dotted]{d} \arrow[dotted, two heads]{r} \arrow[phantom]{dr}{\text{PB}} &B' \arrow{d} \\
+            A' \arrow[dotted, tail]{r} &B' &\empty{}  &A \arrow[two heads]{r} &B,
+        \end{tikzcd}
+    \end{center}
+    respectivamente.
+\end{Def}
+
+\begin{Def}\label{Def: Categoría exacta}
+    Una \emph{categoría exacta} es un par $(\mathscr{A},\mathscr{E})$ donde $\mathscr{A}$ es una categoría aditiva y $\mathscr{E}$ es una estructura exacta sobre $\mathscr{A}$. Los elementos de $\mathscr{E}$ son llamados \emph{sucesiones exactas cortas}.
+\end{Def}
+
+\begin{Obs}\label{Bühler-2.2-2.8}\leavevmode
+    \begin{enumerate}[label=(\arabic*)]
+
+        \item La definición anterior de categoría exacta es extrínseca, pues se debe especificar una clase particular de sucesiones exactas cortas \textemdash la estructura exacta\textemdash \ para obtener una categoría exacta.
+    
+        \item El universo de las categorías exactas es dualizante.
+
+        En efecto: Se sigue del inciso (2) de la Observación \ref{Mendoza-1.9.15} y de que, por la Definición \ref{Def: Estructura exacta}, $\mathscr{E}$ es una estructura exacta sobre $\mathscr{A}$ si, y sólo si, $\mathscr{E}^\text{op}$ es una estructura exacta sobre $\mathscr{A}^\text{op}$
+
+        \item Sean $\mathscr{A}$ una categoría aditiva y $0$ un objeto cero en $\mathscr{A}$. Entonces, para cualquier $A\in\text{Obj}(\mathscr{A})$, tenemos los pares núcleo-conúcleo $(1_A,0_{A,0})$ y $(0_{0,A},1_A)$. En particular, tenemos que $(1_0,1_0)$ forma un par núcleo-conúcleo.
+
+            En efecto: Se sigue de la Observación \ref{Obs: pares núcleo-conúcleo triviales} y un resultado dual. %\footnote{¿Escribir la afirmación dual en la sección de núcleos y conúcleos?}. No, porque ya en el Capítulo 2 suponemos que se entiende cómo aplicar el principio de dualidad.
+
+        \item Los isomorfismos son monomorfismos admisibles y epimorfismos admisibles. 
+
+            En efecto: Sea $A\xrightarrow[]{f} B$ un isomorfismo en una categoría exacta. Entonces, tenemos el siguiente diagrama conmutativo
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{r}{f}[swap]{\sim} \arrow[equals]{d}{}[]{} &B \arrow[]{r}[]{} \arrow[]{d}{f^{-1}}[swap]{\rotatebox{90}{$\sim$}} &0 \arrow[equals]{d} \\
+            A \arrow[tail]{r}[swap]{1_A} &A \arrow[two heads]{r}[]{} &0,
+        \end{tikzcd}
+    \end{center}
+    donde el segundo renglón es un sucesión exacta por (3) y (E0). Dado que la clase de sucesiones exactas cortas es cerrada por isomorfismos, se sigue que $f$ es un monomorfismo admisible. Más aún, de (2) y el principio de dualidad, se sigue que $f$ es un epimorfismo admisible.
+
+%        \item Cualquier epimorfismo admisible que sea un monomorfismo también es un isomorfismo.
+%
+%            En efecto: Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta y $p:A\to A''$ en $\mathscr{A}$ un epimorfismo admisible y un monomorfismo. Entonces existe $i:A'\to A$ en $\mathscr{A}$ tal que $(i,p)\in\mathscr{E}$. COMPLETAR\footnote{Basta demostrar que $p$ es un epimorfismo escindible y aplicar el inciso (9) de la Observación 1.1.3. Para demostrar esto, pueden ser útiles el Lema 1.5.2 y su dual (relación de núcleo/conúcleo con producto fibrado/suma fibrada) junto con los axiomas (E2) y (E2)\textsuperscript{$\ast$}, así como los Ejercicios 8 y 11. Tal vez también ayuden algunos resultados sobre categorías aditivas.}
+
+    \item Los axiomas anteriores son redundantes y pueden simplificarse. Por ejemplo, en vez de suponer (E0) y (E0)\textsuperscript{$\ast$}, supongamos que el elemento identidad $1_0$ del objeto cero de $\mathscr{A}$ es un epimorfismo admisible. Entonces, para todo $A\in\text{Obj}(\mathscr{A})$ tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{equation}\label{Bühler-2.4}
+        \begin{tikzcd}
+            A \arrow[]{d}[]{} \arrow[]{r}[]{1_A} &A \arrow[]{d}[]{} \\
+            0 \arrow[two heads]{r}[swap]{1_0} &0.
+        \end{tikzcd}
+    \end{equation}
+    Sean $P\in\text{Obj}(\mathscr{A})$ y $\beta_1:P\to 0, \beta_2:P\to A$ tales que $1_0\beta_1 = 0\beta_2$. Entonces, $\beta_2:P\to A$ es el único morfismo en $\mathscr{A}$ tal que el siguiente diagrama en $\mathscr{A}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            P \arrow[bend right = 30]{ddr}[swap]{\beta_1} \arrow[bend left = 30]{drr}[]{\beta_2} \arrow[dotted]{dr}[]{\beta_2} \\
+            &A \arrow[]{d}[]{} \arrow[]{r}[]{1_A} &A \arrow[]{d}[]{} \\
+            &0 \arrow[two heads]{r}[swap]{1_0} &0.
+        \end{tikzcd}
+    \end{center}
+    Por lo tanto, el diagrama conmutativo (\ref{Bühler-2.4}) es un producto fibrado. Por (E2)\textsuperscript{$\ast$}, tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[phantom]{dr}[]{\text{PB}} \arrow[]{d}[]{} \arrow[two heads]{r}[]{1_A} &A \arrow[]{d}[]{} & &\empty{} \\
+            0 \arrow[two heads]{r}[swap]{1_0} &0 & &\empty{} \arrow[phantom]{u}[]{\forall \ A\in\text{Obj}(\mathscr{A}),}
+        \end{tikzcd}
+    \end{center}
+    de donde se sigue (E0)\textsuperscript{$\ast$}. Luego, como $1_0$ es un núcleo de sí mismo, entonces también es un monomorfismo admisible. Dualmente, se puede verificar que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[]{d}[]{} \arrow[tail]{r}[]{1_0} &0 \arrow[]{d}[]{} \\
+            A \arrow[]{r}[swap]{1_A} &A
+        \end{tikzcd}
+    \end{center}
+    es una suma fibrada para todo $A\in\text{Obj}(\mathscr{A})$. Luego, por (E2), se sigue (E0). Notemos que, puesto que $1_0$ es conúcleo de sí mismo, si inicialmente hubiéramos supuesto que $1_0$ es un monomorfismo admisible habríamos llegado a las mismas conclusiones de manera dual.
+    
+    Más aún, Keller\cite[Appendix~A]{Keller} demostró que es posible prescindir de alguno de los axiomas (E1) o (E1)\textsuperscript{$\ast$}, así como reemplazar (E2) por el siguiente axioma:
+
+    \begin{itemize}
+        \item[(E2')] Para todo $f\in\text{Hom}_\mathscr{A}(A,B)$ y para todo epimorfismo admisible $p\in\text{Hom}_\mathscr{A}(B',B)$ existen $f'\in\text{Hom}_\mathscr{A}(A',B')$ y un epimorfismo admisible $p':A'\to A$ tales que $fp'=pf'$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    A' \arrow[dotted]{r}[]{f'} \arrow[dotted, two heads]{d}[swap]{p'} &B' \arrow[two heads]{d}[]{p} \\
+                    A \arrow[]{r}[swap]{f} &B.
+                \end{tikzcd}
+            \end{center}
+    \end{itemize}
+    Esto es una consecuencia directa de la Proposición \ref{Bühler-3.1}. Alternativamente, podemos reemplazar a (E2)\textsuperscript{$\ast$} por el axioma dual de (E2').
+
+\item Es posible derivar los axiomas de categoría exacta dados por Quillen\cite[\S 2]{Quillen} a partir de los axiomas presentados en (\ref{Def: Categoría exacta}), como se muestra en \cite{Bühler}.
+
+        \item Keller\cite{Keller} utiliza los términos \emph{conflación}, \emph{inflación} y \emph{deflación} en vez de sucesión exacta corta, monomorfismo admisible y epimorfismo admisible, respectivamente. Los primeros tres términos serán rescatados en el Capítulo \ref{Chap: Categorías extrianguladas} en el contexto de las categorías extrianguladas; sin embargo, en este capítulo nos apegaremos a la terminología utilizada en la definición \ref{Def: Categoría exacta} por considerarla más descriptiva en el contexto de las categorías exactas.
+
+        %\item Los axiomas (E2) y (E2)\textsuperscript{$\ast$} definen una acción a izquerda y a derecha entre los morfismos de la categoría y la clase de las 'sucesiones exactas' (en este caso, los pares núcleo-conúcleo), respectivamente, con las cuales podemos construir grupos de extensiones a la Yoneda.
+    \end{enumerate}
+\end{Obs}
+
+%\section{Algunos resultados básicos} \label{Sec: Algunos resultados básicos}
+\section{Propiedades fundamentales de categorías exactas} \label{Sec: Propiedades fundamentales de categorías exactas}
+
+\begin{Lema}\label{Bühler-2.7}
+
+    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta y $A,B\in\text{Obj}(\mathscr{A})$. Entonces, $A\xrightarrowtail[]{\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}}A\bigoplus B\xtwoheadrightarrow[]{\begin{smallmatrix} 1 & 0 \end{smallmatrix}} B$ y $A\xrightarrowtail[]{\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}}A\bigoplus B\xtwoheadrightarrow[]{\begin{smallmatrix} 0 & 1 \end{smallmatrix}} B$ son sucesiones exactas cortas.
+\end{Lema}
+
+\begin{proof}
+    Por el Lema \ref{Mendoza-1.8.9*}, tenemos la siguiente suma fibrada en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[tail]{d}[]{} \arrow[tail]{r}[]{} &B \arrow[tail]{d}[]{\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}} \\
+            A \arrow[tail]{r}[swap]{\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}} &A\bigoplus B, \arrow[phantom]{ul}[]{\text{PO}}
+        \end{tikzcd}
+    \end{center}
+    donde las flechas de arriba y de la izquierda son monomorfismos admisibles por (E2)\textsuperscript{$\ast$}, pues $0\rightarrowtail B\xtwoheadrightarrow{1_B} B$ y $0\rightarrowtail A\xtwoheadrightarrow{1_A} A$ son sucesiones exactas cortas, mientras que las flechas de abajo y de la derecha son monomorfismos admisibles por (E2). Como por los Lemas \ref{Mendoza-1.8.2} y \ref{Mendoza-1.8.2*} los morfismos $\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}$ y $\begin{smallmatrix} 1 & 0 \end{smallmatrix}$ forman un par núcleo-conúcleo y, por definición, $\mathscr{E}$ es cerrada por isomorfismos, se sigue que $(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix},\begin{smallmatrix} 1 & 0 \end{smallmatrix})\in\mathscr{E}$. La demostración de que $(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix},\begin{smallmatrix} 0 & 1 \end{smallmatrix})\in\mathscr{E}$ es análoga.
+\end{proof}
+
+\begin{Prop}\label{Bühler-2.9}
+    La clase de sucesiones exactas cortas sobre una categoría exacta es cerrada por sumas directas. % Más generalmente, es cerrada por coproductos finitos
+\end{Prop}
+
+\begin{proof}
+    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta y $A'\rightarrowtail A\twoheadrightarrow A'', B'\rightarrowtail B\twoheadrightarrow B''$ sucesiones exactas cortas. Observemos que, para todo $C\in\text{Obj}(\mathscr{A})$, la sucesión
+    \[
+    A'\bigoplus C \rightarrowtail A\bigoplus C\twoheadrightarrow A''
+    \] 
+    es exacta, pues el segundo morfismo es un epimorfismo admisible por ser la composición de los epimorfismos admisibles $(\begin{smallmatrix} 1 & 0 \end{smallmatrix}):A\bigoplus C\twoheadrightarrow A$ y $A\twoheadrightarrow A''$, mientras que el primer morfismo es un monomorfismo admisible por ser un núcleo del segundo morfismo. Similarmente, tenemos los monomorfismos admisibles $A'\bigoplus B'\rightarrowtail A\bigoplus B'$ y $A\bigoplus B'\rightarrowtail A\bigoplus B$. Por (E1), se sigue que su composición $A'\bigoplus B'\rightarrowtail A\bigoplus B$ es un monomorfismo admisible. Finalmente, dado que
+    \[
+    A'\bigoplus B' \rightarrowtail A\bigoplus B \twoheadrightarrow A''\bigoplus B''
+    \] 
+    es un par núcleo conúcleo, se sigue que la suma directa de las sucesiones exactas cortas $A'\rightarrowtail A\twoheadrightarrow A''$ y $B'\rightarrowtail B\twoheadrightarrow B''$ es una sucesión exacta corta.
+\end{proof}
+
+%\begin{Coro} \label{Bühler-2.10}
+%    Sea $(\mathscr{A},\mathscr{E})$ una categoría exacta. Entonces la estructura exacta $\mathscr{E}$ es una subcategoría aditiva de la categoría aditiva $\mathscr{A}^{\rightarrow\rightarrow}$ de morfismos componibles de $\mathscr{A}$\footnote{Demostrar que si $\mathscr{A}$ es una categoría aditiva entonces $\mathscr{A}^{\rightarrow\rightarrow}$ también lo es en la sección de categorías aditivas.}.
+%\end{Coro}
+%
+%\begin{proof}
+%    COMPLETAR.
+%\end{proof}
+
+\begin{Lema}\label{Bühler-2.13}
+    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta y consideremos la suma fibrada
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{a} \arrow[tail]{r}[]{i} &B \arrow[]{d}[]{b} \\
+            A' \arrow[tail]{r}[swap]{i'} &B'\arrow[phantom]{ul}[]{\text{PO}}.
+        \end{tikzcd}
+    \end{center}
+    Entonces, se cumplen las siguientes condiciones.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Si $p:B\twoheadrightarrow C$ es un conúcleo de $i$, entonces el morfismo único $p':B'\to C$ tal que $p'b=p$ y $p'i'=0$ es un conúcleo de $i'$.
+
+        \item Si $p':B'\twoheadrightarrow C$ es un conúcleo de $i'$, entonces $p=p'b$ es un conúcleo de $i$.
+    \end{enumerate}
+\end{Lema}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Sea $p:B\twoheadrightarrow C$ un conúcleo de $i$. Por la propiedad universal de la suma fibrada, existe un único morfismo $p':B'\to C$ tal que $p'b=p$ y $p' i'=0$; en particular, por el inciso (5) de la Observación \ref{Obs: Morfismos especiales}, de la primera ecuación se sigue que $p'$ es un epimorfismo. Supongamos que existe un morfismo $g:B'\to X$ en $\mathscr{A}$ tal que $gi'=0$. Entonces, $gbi=gi'a=0$ y, por la propiedad universal del conúcleo, existe un único morfismo $g':C\to X$ tal que $gb=g'p$. Observemos que
+    \begin{align*}
+        gb &= g'p \\
+            &= g'p'b \\
+            &= g'p'i \\
+            &= 0 \\
+            &= gi',
+    \end{align*}
+    por lo que tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{a} \arrow[tail]{r}[]{i} &B \arrow[]{d}[]{b} \arrow[bend left = 30]{ddr}[]{gf'} \\
+            A' \arrow[tail]{r}[swap]{i'} \arrow[bend right = 30]{drr}[swap]{gi'} &B' \arrow[shift left]{dr}[]{g'p'} \arrow[shift right]{dr}[swap]{g} \\
+                                                                                 &&X.
+        \end{tikzcd}
+    \end{center}
+    Luego, por la propiedad universal de la suma fibrada, se sigue que $g'p'=g$. Más aún, como $p'$ es un epimorfismo, $g'$ es el único morfismo tal que $g'p'=g$. Por ende, $p'$ es un conúcleo de $i'$. 
+
+        \item Sea $p':B'\twoheadrightarrow C$ un conúcleo de $i'$ y consideremos $p=p'b$. Observemos que $pi = p'bi = p'i'a=0$. Supongamos que existe un morfismo $g:B\to X$ tal que $gi=0$. Por la propiedad universal de la suma fibrada, existe un único morfismo $\gamma:B'\to X$ tal que $\gamma b=g$ y $\gamma i'=0$. Entonces, por la propiedad universal del conúcleo, existe un único morfismo $g':C\to X$ tal que $g'p'=\gamma$. Por ende, $g'p=g'p'b=\gamma b=g$. De la unicidad en la propiedad universal del conúcleo, se sigue que $g'$ es único. Por lo tanto, $p$ es un conúcleo de $i$.
+    \end{enumerate}
+\end{proof}
+
+%\begin{Prop}\label{Bühler-2.12}
+%    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta y
+%    \begin{equation}\label{2.12-1}
+%        \begin{tikzcd}
+%            A \arrow[]{d}[swap]{f} \arrow[tail]{r}[]{i} &B \arrow[]{d}[]{f'} \\
+%            A' \arrow[tail]{r}[swap]{i'} &B'
+%        \end{tikzcd}
+%    \end{equation}
+%    un diagrama conmutativo en $\mathscr{A}$. Entonces, las siguientes condiciones son equivalentes.
+%    \begin{enumerate}[label=(\alph*)]
+%    
+%        \item El diagrama (\ref{2.12-1}) es una suma fibrada.
+%
+%        \item \begin{tikzcd} A\arrow[tail]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big) } &B\bigoplus A' \arrow[two heads]{r}[]{(\begin{smallmatrix} f' \ i' \end{smallmatrix})} &B' \end{tikzcd} es una sucesión exacta corta.
+%            
+%        \item El diagrama (\ref{2.12-1}) es bicartesiano, i.e., un producto fibrado y una suma fibrada.
+%
+%        \item El diagrama en $\mathscr{A}$
+%            \begin{equation}\label{2.12-2}
+%                \begin{tikzcd}
+%                    A \arrow[]{d}[swap]{f} \arrow[tail]{r}[]{i} &B \arrow[]{d}[]{f'} \arrow[two heads]{r}[]{p} &C \arrow[equals]{d}[]{} \\
+%                    A' \arrow[tail]{r}[swap]{i'} &B' \arrow[two heads]{r}[swap]{p'} &C
+%                \end{tikzcd}
+%            \end{equation}
+%            es conmutativo y tiene renglones exactos.
+%    \end{enumerate}
+%\end{Prop}
+%
+%\begin{proof}\leavevmode
+%
+%    $(a)\Rightarrow(b)\footnote{¿Quitar esta parte de la demostración? Con las implicaciones $(b)\Rightarrow(c), (c)\Rightarrow(a), (a)\Rightarrow(d)$ y $(d)\Rightarrow(b)$ es suficiente. Tal vez los incisos podrían ser renombrados.}$ Supongamos que el diagrama (\ref{2.12-1}) es una suma fibrada. Observemos que,
+%    \begin{align*}
+%        f'i=i'f &\iff f'i-i'f=0 \\
+%                &\iff f'i + i'(-f)=0 \\
+%                &\iff (f' \ i')\big( \begin{smallmatrix} i \\ -f \end{smallmatrix} \big) = 0.
+%    \end{align*}
+%    Más aún, por la propiedad universal de la suma fibrada, tenemos que para todo $(\begin{smallmatrix} \beta_2' & \beta_1' \end{smallmatrix}):B\bigoplus A'\to S'$ tal que $(\begin{smallmatrix} \beta_2' & \beta_1' \end{smallmatrix})\big(\begin{smallmatrix} i \\ -f \end{smallmatrix} \big) = 0$ existe un único morfismo $\gamma:B'\to S'$ tal que $\gamma i'=\beta_1'$ y $\gamma f'=\beta_2'$, lo que implica que $(\begin{smallmatrix} \gamma &\gamma \end{smallmatrix}) (\begin{smallmatrix} f' & i' \end{smallmatrix}) = (\begin{smallmatrix} \beta_1' &\beta_2' \end{smallmatrix})$. De la unicidad de la propiedad universal, se sigue que $(\begin{smallmatrix} \gamma &\gamma \end{smallmatrix})$ es único. Por ende, $(\begin{smallmatrix} f' &i' \end{smallmatrix})$ es un conúcleo de $\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big)$. Veamos que $\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big)$ es un monomorfismo admisible. En efecto, observemos que se obtiene a través de la composición de los morfismos
+%    \[
+%        \begin{tikzcd} A\arrow[tail]{r}[]{\big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &A\bigoplus A\arrow[]{r}{\big(\begin{smallmatrix} 1 \ \mathop 0 \\ -f \ 1 \end{smallmatrix}\big)}[swap]{\simeq} &A\bigoplus A'\arrow[tail]{r}[]{\big(\begin{smallmatrix} i \ 0 \\ 0 \ 1 \end{smallmatrix}\big)} &B\bigoplus A', \end{tikzcd} % Arreglar matrices feas
+%    \] 
+%    que son todos monomorfismos admisibles por el Lema \ref{Bühler-2.7}, el inciso (2) de la Observación \ref{Bühler-2.2-2.8} y la Proposición \ref{Bühler-2.9}, respectivamente, por lo que es un monomorfismo admisible por (E1). \\
+%
+%    $(b)\Rightarrow(c)$ Supongamos que la sucesión corta \begin{tikzcd} A\arrow[tail]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big) } &B\bigoplus A' \arrow[two heads]{r}[]{(\begin{smallmatrix} f' \ i' \end{smallmatrix})} &B' \end{tikzcd} es exacta. Como $(\begin{smallmatrix} f' &i' \end{smallmatrix})$ es un conúcleo de $\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big)$, tenemos que
+%    \begin{align*}
+%        (\begin{smallmatrix} f' &i' \end{smallmatrix})\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big) = 0 &\implies f'i - i'f = 0 \\
+%                                &\implies f'i = i'f,
+%    \end{align*}
+%    por lo que el diagrama (\ref{2.12-1}) conmuta. Sean $S'\in\text{Obj}(\mathscr{A})$ y $A'\xrightarrow[]{\beta_1'}S', B\xrightarrow[]{\beta_2'}S'$ morfismos en $\mathscr{A}$ tales que $\beta_2'i = \beta_1' f$. Entonces, $(\begin{smallmatrix} \beta_2' &\beta_1' \end{smallmatrix})\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big)=0$ y, por la propiedad universal del conúcleo, existe un único morfismo $B\bigoplus A' \xrightarrow[]{h} S'$ en $\mathscr{A}$ tal que $h(\begin{smallmatrix} f' &i' \end{smallmatrix}) = (\begin{smallmatrix} \beta_2' &\beta_1' \end{smallmatrix})$, i.e., $hf'=\beta_2'$ y $hi'=\beta_1'$. Por ende, el diagrama (\ref{2.12-1}) es una suma fibrada. Análogamente, usando la propiedad universal del núcleo para $\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big)$ se prueba que el diagrama (\ref{2.12-1}) es un producto fibrado, de donde se sigue que es bicartesiano. \\
+%
+%    $(c)\Rightarrow(a)$ Trivial. \\
+%
+%    $(a)\Rightarrow(d)$ Se sigue del Lema \ref{Bühler-2.13}. \\
+%
+%    $(d)\Rightarrow(b)$ Por (E2)\textsuperscript{$\ast$}, existe un producto fibrado en $\mathscr{A}$
+%    \begin{center}
+%        \begin{tikzcd}
+%            D \arrow[dotted, two heads]{d}[swap]{q} \arrow[dotted, two heads]{r}[]{q'} \arrow[phantom]{dr}[]{\text{PB}} &B \arrow[two heads]{d}[]{p} \\
+%            B' \arrow[two heads]{r}[swap]{p'} &C.
+%        \end{tikzcd}
+%    \end{center}
+%    Aplicando el principio de dualidad al Lema \ref{Bühler-2.13}, obtenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+%    \begin{center}
+%        \begin{tikzcd}
+%            &A \arrow[dotted, tail]{d}[swap]{j} \arrow[equals]{r}[]{} &A \arrow[tail]{d}[]{i} \\
+%            A' \arrow[equals]{d}[]{} \arrow[dotted, tail]{r}[]{j'} &D \arrow[two heads]{d}[swap]{q} \arrow[two heads]{r}[]{q'} \arrow[phantom]{dr}[]{\text{PB}} &B \arrow[two heads]{d}[]{p} \\
+%            A' \arrow[tail]{r}[swap]{i'} &B' \arrow[two heads]{r}[swap]{p'} &C,
+%        \end{tikzcd}
+%    \end{center}
+%    cuyos renglones y columnas son sucesiones exactas cortas. Por la conmutatividad del diagrama (\ref{2.12-2}), tenemos que
+%    \begin{center}
+%        \begin{tikzcd}
+%            B \arrow[]{d}[swap]{f'} \arrow[equals]{r}[]{} &B \arrow[two heads]{d}[]{p} \\
+%            B' \arrow[two heads]{r}[swap]{p'} &C
+%        \end{tikzcd}
+%    \end{center}
+%    es un cuadrado conmutativo en $\mathscr{A}$. Por la propiedad universal del producto fibrado, existe un único morfismo $B\xrightarrow[]{k}D$ tal que $q'k=1_B$ y $qk=f'$. Como $q'(1_D - kq')=0$, por la propiedad universal del núcleo, existe un único morfismo $D\xrightarrow[]{l}A'$ tal que $j'l=1_D-kq'$. Dado que
+%    \begin{align*}
+%        j'lk &= (1_D-kq')k \\
+%             &= k-kq'k \\
+%             &= k-1_Bk \\
+%             &= 0, \\ \\
+%        j'lj' &= (1_D-kq')j' \\
+%              &= j' - kq'j' \\
+%              &= j',
+%    \end{align*}
+%    y $j'$ es un monomorfismo, se sigue que $lk=0$ y $lj'=1_{A'}$. Observemos que
+%    \begin{align*}
+%        (\begin{smallmatrix} k &j' \end{smallmatrix}) \big(\begin{smallmatrix} q' \\ l \end{smallmatrix}\big) &= kq' + j'l \\
+%                               &= 1_D, \tag{pues $j'l=1_D-kq'$} \\ \\
+%        \big(\begin{smallmatrix} q' \\ l \end{smallmatrix}\big) (\begin{smallmatrix} k &j' \end{smallmatrix}) &= \begin{pmatrix} q'k & q'j' \\ lk & lj' \end{pmatrix} \\
+%                               &= \begin{pmatrix} 1_B &0 \\ 0 &1_{A'} \end{pmatrix} \\
+%                               &= 1_{B\bigoplus A'},
+%    \end{align*}
+%    por lo que $B\bigoplus A'\xrightarrow[]{(\begin{smallmatrix} k &j' \end{smallmatrix})} D$ es un isomorfismo en $\mathscr{A}$. Más aún, de
+%    \begin{align*}
+%        i'lj &= qj'lj \\
+%             &= q(1_D-kq')j \\
+%             &= qj - (qk)(q'j) \\
+%             &= -f'i \\
+%             &= -i'f,
+%    \end{align*}
+%    se sigue que $lj=-f$, pues $i'$ es un monomorfismo, por lo que
+%    \begin{align*}
+%        (\begin{smallmatrix} f' &i' \end{smallmatrix}) &= (\begin{smallmatrix} qk &qj' \end{smallmatrix}) \\
+%                                &= q(\begin{smallmatrix} k &j' \end{smallmatrix}), \\ \\
+%        \big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big) &= \big( \begin{smallmatrix} q'j \\ lj \end{smallmatrix}\big) \\
+%                                                                 &= \big( \begin{smallmatrix} q' \\ l \end{smallmatrix}\big) j.
+%    \end{align*}
+%    Dado que $(\begin{smallmatrix} k &j' \end{smallmatrix})$ y $\big(\begin{smallmatrix} q' \\ l \end{smallmatrix}\big)$ son inversos entre sí, tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+%    \begin{center}
+%        \begin{tikzcd}
+%            A \arrow[equals]{d} \arrow[]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big)} &B\bigoplus A' \arrow[shift left = 1.5]{d}{(k \ j')}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{(f' \ i')} &B' \arrow[equals]{d} \\
+%            A \arrow[tail]{r}[swap]{j} &D \arrow[shift left = 1.5]{u}[]{\big( \begin{smallmatrix} q' \\ l \end{smallmatrix}\big)} \arrow[two heads]{r}[swap]{q} &B',
+%        \end{tikzcd}
+%    \end{center}
+%    de donde se sigue que \begin{tikzcd} A\arrow[tail]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big) } &B\bigoplus A' \arrow[two heads]{r}[]{(\begin{smallmatrix} f' \ i' \end{smallmatrix})} &B' \end{tikzcd} es una sucesión exacta corta, pues $\mathscr{E}$ es cerrada por isomorfismos.
+%    
+%\end{proof}
+
+\begin{Prop}\label{Bühler-2.12} % ¡Versión con numeración del artículo arriba!
+    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta y
+    \begin{equation}\label{2.12-1}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{f} \arrow[tail]{r}[]{i} &B \arrow[]{d}[]{f'} \\
+            A' \arrow[tail]{r}[swap]{i'} &B'
+        \end{tikzcd}
+    \end{equation}
+    un diagrama conmutativo en $\mathscr{A}$. Entonces, las siguientes condiciones son equivalentes.
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item El diagrama (\ref{2.12-1}) es una suma fibrada.
+
+        \item El diagrama en $\mathscr{A}$
+            \begin{equation}\label{2.12-2}
+                \begin{tikzcd}
+                    A \arrow[]{d}[swap]{f} \arrow[tail]{r}[]{i} &B \arrow[]{d}[]{f'} \arrow[two heads]{r}[]{p} &C \arrow[equals]{d}[]{} \\
+                    A' \arrow[tail]{r}[swap]{i'} &B' \arrow[two heads]{r}[swap]{p'} &C
+                \end{tikzcd}
+            \end{equation}
+            es conmutativo y tiene renglones exactos.
+
+        \item \begin{tikzcd} A\arrow[tail]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big) } &B\bigoplus A' \arrow[two heads]{r}[]{(\begin{smallmatrix} f' \ i' \end{smallmatrix})} &B' \end{tikzcd} es una sucesión exacta corta.
+
+        \item El diagrama (\ref{2.12-1}) es bicartesiano, i.e., un producto fibrado y una suma fibrada.           
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    $(a)\Rightarrow(b)$ Se sigue del Lema \ref{Bühler-2.13}. \\
+
+    $(b)\Rightarrow(c)$ Por (E2)\textsuperscript{$\ast$}, existe un producto fibrado en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            D \arrow[dotted, two heads]{d}[swap]{q} \arrow[dotted, two heads]{r}[]{q'} \arrow[phantom]{dr}[]{\text{PB}} &B \arrow[two heads]{d}[]{p} \\
+            B' \arrow[two heads]{r}[swap]{p'} &C.
+        \end{tikzcd}
+    \end{center}
+    Aplicando el principio de dualidad al Lema \ref{Bühler-2.13}, obtenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            &A \arrow[dotted, tail]{d}[swap]{j} \arrow[equals]{r}[]{} &A \arrow[tail]{d}[]{i} \\
+            A' \arrow[equals]{d}[]{} \arrow[dotted, tail]{r}[]{j'} &D \arrow[two heads]{d}[swap]{q} \arrow[two heads]{r}[]{q'} \arrow[phantom]{dr}[]{\text{PB}} &B \arrow[two heads]{d}[]{p} \\
+            A' \arrow[tail]{r}[swap]{i'} &B' \arrow[two heads]{r}[swap]{p'} &C,
+        \end{tikzcd}
+    \end{center}
+    cuyos renglones y columnas son sucesiones exactas cortas. Por la conmutatividad del diagrama (\ref{2.12-2}), tenemos que
+    \begin{center}
+        \begin{tikzcd}
+            B \arrow[]{d}[swap]{f'} \arrow[equals]{r}[]{} &B \arrow[two heads]{d}[]{p} \\
+            B' \arrow[two heads]{r}[swap]{p'} &C
+        \end{tikzcd}
+    \end{center}
+    es un cuadrado conmutativo en $\mathscr{A}$. Por la propiedad universal del producto fibrado, existe un único morfismo $B\xrightarrow[]{k}D$ tal que $q'k=1_B$ y $qk=f'$. Como $q'(1_D - kq')=0$, por la propiedad universal del núcleo, existe un único morfismo $D\xrightarrow[]{l}A'$ tal que $j'l=1_D-kq'$. Dado que
+    \begin{align*}
+        j'lk &= (1_D-kq')k \\
+             &= k-kq'k \\
+             &= k-1_Bk \\
+             &= 0, \\ \\
+        j'lj' &= (1_D-kq')j' \\
+              &= j' - kq'j' \\
+              &= j',
+    \end{align*}
+    y $j'$ es un monomorfismo, se sigue que $lk=0$ y $lj'=1_{A'}$. Observemos que
+    \begin{align*}
+        (\begin{smallmatrix} k &j' \end{smallmatrix}) \big(\begin{smallmatrix} q' \\ l \end{smallmatrix}\big) &= kq' + j'l \\
+                               &= 1_D, \tag{pues $j'l=1_D-kq'$} \\ \\
+        \big(\begin{smallmatrix} q' \\ l \end{smallmatrix}\big) (\begin{smallmatrix} k &j' \end{smallmatrix}) &= \begin{pmatrix} q'k & q'j' \\ lk & lj' \end{pmatrix} \\
+                               &= \begin{pmatrix} 1_B &0 \\ 0 &1_{A'} \end{pmatrix} \\
+                               &= 1_{B\bigoplus A'},
+    \end{align*}
+    por lo que $B\bigoplus A'\xrightarrow[]{(\begin{smallmatrix} k &j' \end{smallmatrix})} D$ es un isomorfismo en $\mathscr{A}$. Más aún, de
+    \begin{align*}
+        i'lj &= qj'lj \\
+             &= q(1_D-kq')j \\
+             &= qj - (qk)(q'j) \\
+             &= -f'i \\
+             &= -i'f,
+    \end{align*}
+    se sigue que $lj=-f$, pues $i'$ es un monomorfismo, por lo que
+    \begin{align*}
+        (\begin{smallmatrix} f' &i' \end{smallmatrix}) &= (\begin{smallmatrix} qk &qj' \end{smallmatrix}) \\
+                                &= q(\begin{smallmatrix} k &j' \end{smallmatrix}), \\ \\
+        \big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big) &= \big( \begin{smallmatrix} q'j \\ lj \end{smallmatrix}\big) \\
+                                                                 &= \big( \begin{smallmatrix} q' \\ l \end{smallmatrix}\big) j.
+    \end{align*}
+    Dado que $(\begin{smallmatrix} k &j' \end{smallmatrix})$ y $\big(\begin{smallmatrix} q' \\ l \end{smallmatrix}\big)$ son inversos entre sí, tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[equals]{d} \arrow[]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big)} &B\bigoplus A' \arrow[shift left = 2.5]{d}{(k \ j')}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{(f' \ i')} &B' \arrow[equals]{d} \\
+            A \arrow[tail]{r}[swap]{j} &D \arrow[shift left = 2.5]{u}{\big( \begin{smallmatrix} q' \\ l \end{smallmatrix}\big)}[swap]{\rotatebox{90}{$\sim$}} \arrow[two heads]{r}[swap]{q} &B',
+        \end{tikzcd}
+    \end{center}
+    de donde se sigue que \begin{tikzcd} A\arrow[tail]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big) } &B\bigoplus A' \arrow[two heads]{r}[]{(\begin{smallmatrix} f' \ i' \end{smallmatrix})} &B' \end{tikzcd} es una sucesión exacta corta, pues $\mathscr{E}$ es cerrada por isomorfismos.
+
+
+        $(c)\Rightarrow(d)$ Supongamos que la sucesión corta \begin{tikzcd} A\arrow[tail]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big) } &B\bigoplus A' \arrow[two heads]{r}[]{(\begin{smallmatrix} f' \ i' \end{smallmatrix})} &B' \end{tikzcd} es exacta. Como $(\begin{smallmatrix} f' &i' \end{smallmatrix})$ es un conúcleo de $\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big)$, tenemos que
+    \begin{align*}
+        (\begin{smallmatrix} f' &i' \end{smallmatrix})\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big) = 0 &\implies f'i - i'f = 0 \\
+                                &\implies f'i = i'f,
+    \end{align*}
+    por lo que el diagrama (\ref{2.12-1}) conmuta. Sean $S'\in\text{Obj}(\mathscr{A})$ y $A'\xrightarrow[]{\beta_1'}S', B\xrightarrow[]{\beta_2'}S'$ morfismos en $\mathscr{A}$ tales que $\beta_2'i = \beta_1' f$. Entonces, $(\begin{smallmatrix} \beta_2' &\beta_1' \end{smallmatrix})\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big)=0$ y, por la propiedad universal del conúcleo, existe un único morfismo $B\bigoplus A' \xrightarrow[]{h} S'$ en $\mathscr{A}$ tal que $h(\begin{smallmatrix} f' &i' \end{smallmatrix}) = (\begin{smallmatrix} \beta_2' &\beta_1' \end{smallmatrix})$, i.e., $hf'=\beta_2'$ y $hi'=\beta_1'$. Por ende, el diagrama (\ref{2.12-1}) es una suma fibrada. Análogamente, usando la propiedad universal del núcleo para $\big(\begin{smallmatrix} i \\ -f \end{smallmatrix}\big)$ se prueba que el diagrama (\ref{2.12-1}) es un producto fibrado, de donde se sigue que es bicartesiano. \\
+
+    $(d)\Rightarrow(a)$ Trivial.    
+\end{proof}
+
+\begin{Obs}\label{Obs: de Bühler-2.12(c)}
+    El inciso (c) de la Proposición \ref{Bühler-2.12} equivale a que la sucesión
+    \begin{center}
+        \begin{tikzcd}
+            A\arrow[tail]{r}[]{\big( \begin{smallmatrix} i \\ f \end{smallmatrix}\big) } &B\bigoplus A' \arrow[two heads]{r}[]{(\begin{smallmatrix} f' \ -i' \end{smallmatrix})} &B'
+        \end{tikzcd}
+    \end{center}
+    sea exacta corta. Más aún, estos pares núcleo-conúcleo son isomorfos.
+    \vspace{1mm}
+
+    En efecto: Se sigue del diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{\big( \begin{smallmatrix} i \\ -f \end{smallmatrix}\big)} &B\bigoplus A' \arrow[]{d}{\big( \begin{smallmatrix} 1 \ \ 0 \\ 0 \ -1 \end{smallmatrix} \big)}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{(\begin{smallmatrix} f' \ i' \end{smallmatrix})} &B' \arrow[equals]{d}[]{} \\
+            A \arrow[]{r}[swap]{\big( \begin{smallmatrix} i \\ f \end{smallmatrix}\big)} &B\bigoplus A' \arrow[]{r}[swap]{(\begin{smallmatrix} f' \ -i' \end{smallmatrix})} &B',
+        \end{tikzcd}
+    \end{center}
+    donde el morfismo $\big(\begin{smallmatrix} 1 &0 \\ 0 &-1 \end{smallmatrix}\big):B\bigoplus A'\to B\bigoplus A'$ es un isomorfismo por ser una involución.
+\end{Obs}
+
+\begin{Prop}\label{Bühler-2.15}
+    El producto fibrado de un monomorfismo admisible a lo largo de un epimorfismo admisible produce un monomorfismo admisible. 
+\end{Prop}
+
+\begin{proof}
+
+    Consideremos el diagrama conmutativo
+    \begin{equation}\label{2.1.8-1}
+        \begin{tikzcd}
+            A' \arrow[phantom]{dr}[]{\text{PB}} \arrow[two heads]{d}[swap]{e'} \arrow[]{r}[]{i'} &B' \arrow[two heads]{d}[]{e} \arrow[two heads]{r}[]{pe} &C \arrow[equals]{d}[]{} \\
+            A \arrow[tail]{r}[swap]{i} &B \arrow[two heads]{r}[swap]{p} &C,
+        \end{tikzcd}
+    \end{equation}
+    donde $e'$ es un epimorfismo admisible por (E2)\textsuperscript{$\ast$}, $p$ es un conúcleo de $i$ y, por ende, un epimorfismo admisible, y $pe$ es un epimorfismo admisible por (E1)\textsuperscript{$\ast$}. Por el inciso (1) de la Observación \ref{Mendoza-1.5.3} y el Corolario \ref{Mendoza-Ejer.8(a)}, tenemos que $i'$ es un monomorfismo. Para ver que es un monomorfismo admisible, basta ver que $i'$ es un núcleo de $pe$. Observemos del diagrama (\ref{2.1.8-1}) que $pei'=pie'=0$. Supongamos que existe un morfismo $g:X\to B'$ tal que $peg=0$. Como $i$ es un núcleo de $p$, existe un único morfismo $f:X\to A$ tal que $eg=if$. Por la propiedad universal del producto fibrado, existe un único morfismo $f':X\to A'$ tal que $e'f'=f$ y $i'f'=g$. Más aún, como $i'$ es un monomorfismo, $f'$ es el único morfismo tal que $i'f'=g$. Por ende, $i'$ es un núcleo de $pe$.
+\end{proof}
+
+\begin{Prop}\label{Bühler-2.15*}
+    La suma fibrada de un epimorfismo admisible a lo largo de un monomorfismo admisible produce un epimorfismo admisible.
+\end{Prop}
+
+\begin{proof}
+    Se sigue de aplicar el principio de dualidad a la Proposición \ref{Bühler-2.15}.
+\end{proof}
+
+\begin{Prop}[Axioma oscuro]\label{Bühler-2.16}
+    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta e $i:A\to B$ un morfismo en $\mathscr{A}$ que admite un conúcleo. Si existe un morfismo $j:B\to C$ en $\mathscr{A}$ tal que la composición $ji:A\rightarrowtail C$ es un monomorfismo admisible, entonces $i$ es un monomorfismo admisible.
+\end{Prop}
+
+\begin{proof}
+    Sea $k:B\to D$ un conúcleo de $i$. Supongamos que existe un morfismo $j:B\to C$ en $\mathscr{A}$ tal que $ji:A\rightarrowtail C$ es un monomorfismo admisible. Entonces, por (E2) tenemos la siguiente suma fibrada en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{i} \arrow[tail]{r}[]{ji} &C \arrow[]{d}[]{} \\
+            B \arrow[tail]{r}[]{} &E\arrow[phantom]{ul}[]{\text{PO}}.
+        \end{tikzcd}
+    \end{center}
+    De la Proposición \ref{Bühler-2.12}, la Observación \ref{Obs: de Bühler-2.12(c)} y la cerradura de $\mathscr{E}$ por isomorfismos, se sigue que $\big(\begin{smallmatrix} ji \\ i \end{smallmatrix}\big):A\rightarrowtail C\bigoplus B$ es un monomorfismo admisible. Observemos que $\big(\begin{smallmatrix} 1_C &-j \\ 0 &1_B \end{smallmatrix}\big):C\bigoplus B\to C\bigoplus B$ es un isomorfismo por lo que, por el inciso (3) de la Observación \ref{Bühler-2.2-2.8}, en particular es un monomorfismo admisible. Por (E1), se sigue que $\big(\begin{smallmatrix} 0 \\ i \end{smallmatrix}\big) = \big(\begin{smallmatrix} 1_C &-j \\ 0 & 1_B \end{smallmatrix}\big) \big(\begin{smallmatrix} ji \\ i \end{smallmatrix}\big)$ es un monomorfismo admisible. Dado que $\big(\begin{smallmatrix} 1_C &0 \\ 0 &k \end{smallmatrix}\big)$ es un conúcleo de $\big(\begin{smallmatrix} 0 \\ i \end{smallmatrix}\big)$, es un epimorfismo admisible. Consideremos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{i} &B \arrow[]{d}[]{\big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} \arrow[]{r}[]{k} &D \arrow[]{d}[]{\big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} \\
+            A \arrow[tail]{r}[swap]{\big(\begin{smallmatrix} 0 \\ i \end{smallmatrix}\big)} &C\bigoplus B \arrow[two heads]{r}[swap]{\big( \begin{smallmatrix} 1_C \ 0 \\ 0 \ k \end{smallmatrix}\big)} &C\bigoplus D\arrow[phantom]{ul}[]{\quad \text{PB}}.
+        \end{tikzcd}
+    \end{center}
+    Puesto que el cuadrado del lado derecho es un producto fibrado, por (E2)\textsuperscript{$\ast$} se sigue que $k$ es un epimorfismo admisible y que $i$ es un núcleo de $k$, de donde se sigue que $i$ es un monomorfismo admisible.
+\end{proof}
+
+\begin{Obs}
+    La afirmación de la Proposición \ref{Bühler-2.16}, así como su afirmación dual, están dadas por el axioma c) en la definición de Quillen de categoría exacta \cite[\S 2]{Quillen}. Previamente, se había demostrado que es una consecuencia de los axiomas debidos a Yoneda\cite{Yoneda}. El axioma c) fue bautizado por Thomason como el ``axioma obscuro'' en \cite{Thomason}, y su redundancia fue luego redescubierta por Keller\cite{Keller}, a quien se debe la demostración anterior.
+\end{Obs}
+
+\begin{Coro}\label{Bühler-2.18}
+    Sean $(i,p)$ y $(i',p')$ pares de morfismos componibles. Si la suma directa $\big(i\bigoplus i', p\bigoplus p'\big)$ es una sucesión exacta corta, entonces $(i,p)$ y $(i',p')$ son sucesiones exactas cortas.
+\end{Coro}
+
+\begin{proof}
+    Dado que $p$ es conúcleo de $i$ y
+    \[
+        i = \big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)i = \big(\begin{smallmatrix} i &0 \\ 0 &i' \end{smallmatrix}\big) \big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big),
+    \] 
+    de la Proposición \ref{Bühler-2.16} se sigue que $i$ es un monomorfismo admisible, por lo que $(i,p)$ es una sucesión exacta corta. El otro resultado se obtiene de forma análoga.
+\end{proof}
+
+\begin{Coro}\label{Bühler-2.19}
+    Supongamos que el diagrama
+    \begin{center}
+        \begin{tikzcd}
+            A' \arrow[]{d}[swap]{a} \arrow[tail]{r}[]{f'} &B' \arrow[tail]{d}[]{b} \\
+            A \arrow[tail]{r}[swap]{f} &B\arrow[phantom]{ul}[]{\text{PO}}
+        \end{tikzcd}
+    \end{center}
+    es una suma fibrada. Entonces $a$ es un monomorfismo admisible.
+\end{Coro}
+
+\begin{proof}
+    Por (E1), de la hipótesis se sigue que $fa:A'\to B$ es un monomorfismo admisible. Sea $b':B\twoheadrightarrow B''$ un conúcleo de $b$. Entonces, por el inciso (b) del Lema \ref{Bühler-2.13}, tenemos que $a':=b'f$ es un conúcleo de $a$. Por ende, el resultado se sigue de la Proposición \ref{Bühler-2.16}. 
+\end{proof}
+
+%\section{Algunos lemas importantes} \label{Sec: Algunos lemas importantes}
+
+A continuación, demostraremos algunos lemas ampliamente conocidos en el contexto de las categorías abelianas que también son válidos para categorías exactas. Las demostraciones se basarán en la siguiente observación:
+
+\begin{Prop}\label{Bühler-3.1}
+    Sea $(\mathscr{A},\mathscr{E})$ una categoría exacta. Entonces todo morfismo entre dos sucesiones exactas cortas $A'\rightarrowtail B'\twoheadrightarrow C'$ y $A\rightarrowtail B\twoheadrightarrow C$ se factoriza a través de una sucesión exacta corta $A\rightarrowtail D\twoheadrightarrow C'$ de tal forma que los dos cuadrados marcados con BC en el siguiente diagrama conmutativo
+    \begin{center}
+        \begin{tikzcd}
+            A' \arrow[]{d}[swap]{a} \arrow[phantom]{dr}[]{\text{BC}} \arrow[tail]{r}[]{f'} &B' \arrow[]{d}[]{b'} \arrow[two heads]{r}[]{g'} &C' \arrow[equals]{d}[]{} \\
+            A \arrow[equals]{d}[]{} \arrow[tail]{r}[swap]{m} &D \arrow[]{d}[swap]{b''} \arrow[two heads]{r}[]{e} &C' \arrow[]{d}[]{c} \\
+            A \arrow[tail]{r}[swap]{f} &B \arrow[two heads]{r}[swap]{g} &C\arrow[phantom]{ul}[]{\text{BC}}
+        \end{tikzcd}
+    \end{center}
+    son bicartesianos. %En particular, existe un isomorfismo canónico de la suma fibrada $A\cup_{A'}B'$ con el producto fibrado $B\times_C C'$.
+\end{Prop}
+
+\begin{proof}
+    Consideremos el morfismo entre sucesiones exactas
+    \begin{equation}\label{2.2.1-1}
+        \begin{tikzcd}
+            A' \arrow[]{d}[swap]{a} \arrow[tail]{r}[]{f'} &B' \arrow[]{d}[]{b} \arrow[two heads]{r}[]{g'} &C' \arrow[]{d}[]{c} \\
+            A \arrow[tail]{r}[swap]{f} &B \arrow[two heads]{r}[swap]{g} &C.
+        \end{tikzcd}
+    \end{equation}
+    Sean $D\in\text{Obj}(\mathscr{A})$ y $A\xrightarrow[]{m} D, B'\xrightarrow[]{b'} D\in\text{Mor}(\mathscr{A})$ tales que el diagrama
+    \begin{center}
+        \begin{tikzcd}
+            A' \arrow[]{d}[swap]{a} \arrow[tail]{r}[]{f'} &B' \arrow[]{d}[]{b'} \\
+            A \arrow[tail]{r}[swap]{m} &D\arrow[phantom]{ul}[]{\text{PO}}
+        \end{tikzcd}
+    \end{center}
+    es una suma fibrada en $\mathscr{A}$. Por la propiedad universal de la suma fibrada, existe un único morfismo $e:D\to C'$ en $\mathscr{A}$ tal que $eb'=g'$ y $em=0$, así como un único morfismo $D\xrightarrow[]{b''} B$ tal que $b''b'=b$ y $b''m=f$. Dado que $g'$ es un conúcleo de $f'$, por el inciso (a) del Lema \ref{Bühler-2.13} se sigue que $e$ es un conúcleo de $m$. Como por el diagrama (\ref{2.2.1-1}) tenemos que $gfa=cg'f'=gbf'$, por la propiedad universal de la suma fibrada existe un único morfismo $D\xrightarrow[]{\gamma} C$ tal que $\gamma m=gf$ y $\gamma b'=cg'=gb$. Ya que $\gamma m=gf=gb''m$ y $\gamma b' = cg' = ceb'$, se sigue que $gb''=\gamma=ce$, por lo que tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{equation}\label{2.2.1-3}
+        \begin{tikzcd}
+            A' \arrow[]{d}[swap]{a} \arrow[phantom]{dr}[]{\text{PO}} \arrow[tail]{r}[]{f'} &B' \arrow[]{d}[]{b'} \arrow[two heads]{r}[]{g'} &C' \arrow[equals]{d}[]{} \\
+            A \arrow[equals]{d}[]{} \arrow[tail]{r}[swap]{m} &D \arrow[]{d}[swap]{b''} \arrow[two heads]{r}[]{e} &C' \arrow[]{d}[]{c} \\
+            A \arrow[tail]{r}[swap]{f} &B \arrow[two heads]{r}[swap]{g} &C.
+        \end{tikzcd}
+    \end{equation}
+    Más aún, por la propiedad universal de la suma fibrada se sigue que el cuadrado inferior derecho del diagrama (\ref{2.2.1-3}) es una suma fibrada, por lo que el resultado se sigue de la Proposición \ref{Bühler-2.12}.
+\end{proof}
+
+\begin{Coro}[]\label{Bühler-3.2}
+    Consideremos un morfismo de sucesiones exactas cortas
+    \begin{center}
+        \begin{tikzcd}
+            A' \arrow[]{d}[swap]{a} \arrow[tail]{r}[]{} &B' \arrow[]{d}[]{b} \arrow[two heads]{r}[]{} &C' \arrow[]{d}[]{c} \\
+            A \arrow[tail]{r}[]{} &B \arrow[two heads]{r}[]{} &C.
+        \end{tikzcd}
+    \end{center}
+    Si $a$ y $c$ son isomorfismos (o monomorfismos admisibles, o epimorfismos admisibles), entonces $b$ también lo es.
+\end{Coro}
+
+\begin{proof}\leavevmode
+    Consideremos el diagrama
+        \begin{equation}\label{2.2.2-1}
+            \begin{tikzcd}
+                A' \arrow[]{d}[swap]{a} \arrow[phantom]{dr}[]{\text{BC}} \arrow[tail]{r}[]{f'} &B' \arrow[]{d}[]{b'} \arrow[two heads]{r}[]{g'} &C' \arrow[equals]{d}[]{} \\
+                A \arrow[equals]{d}[]{} \arrow[tail]{r}[swap]{m} &D \arrow[]{d}[swap]{b''} \arrow[two heads]{r}[]{e} &C' \arrow[]{d}[]{c} \\
+                A \arrow[tail]{r}[swap]{f} &B \arrow[two heads]{r}[swap]{g} &C,\arrow[phantom]{ul}[]{\text{BC}}
+            \end{tikzcd}
+        \end{equation}
+        donde $b=b''b'$, obtenido como en la Proposición \ref{Bühler-3.1}. \\
+
+    Supongamos que $a$ y $c$ son isomorfismos. Entonces por los Corolarios \ref{Mendoza-Ejer.8(a)} y \ref{Mendoza-Ejer.8(a)*} tenemos que $b'$ y $b''$ son isomorfismos, respectivamente, de donde se sigue que $b$ es un isomorfismo. \\
+
+    Supongamos que $a$ y $c$ son monomorfismos admisibles. Entonces, por (E2) se sigue que $b'$ es un monomorfismo admisible, mientras que del diagrama (\ref{2.2.2-1}) y la Proposición \ref{Bühler-2.15} se sigue que $b''$ es un monomorfismo admisible. Luego, por (E1), tenemos que $b$ es un monomorfismo admisible. \\
+
+    Supongamos que $a$ y $c$ son epimorfismos admisibles. Entonces, por (E2)\textsuperscript{$\ast$} se sigue que $b''$ es un epimorfismo admisible, mientras que del diagrama (\ref{2.2.2-1}) y la Proposición \ref{Bühler-2.15*} se sigue que $b'$ es un epimorfismo admisible. Luego, por (E1)\textsuperscript{$\ast$}, tenemos que $b$ es un epimorfismo admisible.
+\end{proof}
+
+%\begin{Coro}[Lema del 3]\label{Bühler-3.2}
+%    Consideremos un morfismo de sucesiones exactas cortas
+%    \begin{center}
+%        \begin{tikzcd}
+%            A' \arrow[]{d}[swap]{a} \arrow[tail]{r}[]{} &B' \arrow[]{d}[]{b} \arrow[two heads]{r}[]{} &C' \arrow[]{d}[]{c} \\
+%            A \arrow[tail]{r}[]{} &B \arrow[two heads]{r}[]{} &C.
+%        \end{tikzcd}
+%    \end{center}
+%    Entonces, se cumplen las siguientes condiciones.
+%    
+%    \begin{enumerate}[label=(\alph*)]
+%    
+%        \item Si $a$ y $c$ son isomorfismos (o monomorfismos admisibles, o epimorfismos admisibles), entonces $b$ también lo es.
+%
+%        \item Si dos de los morfismos $a,b$ y $c$ son isomorfismos, entonces el tercero también lo es.
+%    \end{enumerate}
+%\end{Coro}
+%
+%\begin{proof}\leavevmode
+%    \begin{enumerate}[label=(\alph*)]
+%        \item Consideremos el diagrama
+%        \begin{equation}\label{2.2.2-1}
+%            \begin{tikzcd}
+%                A' \arrow[]{d}[swap]{a} \arrow[phantom]{dr}[]{\text{BC}} \arrow[tail]{r}[]{f'} &B' \arrow[]{d}[]{b'} \arrow[two heads]{r}[]{g'} &C' \arrow[equals]{d}[]{} \\
+%                A \arrow[equals]{d}[]{} \arrow[tail]{r}[swap]{m} &D \arrow[]{d}[swap]{b''} \arrow[two heads]{r}[]{e} &C' \arrow[]{d}[]{c} \\
+%                A \arrow[tail]{r}[swap]{f} &B \arrow[two heads]{r}[swap]{g} &C,\arrow[phantom]{ul}[]{\text{BC}}
+%            \end{tikzcd}
+%        \end{equation}
+%        donde $b=b''b'$, obtenido como en la Proposición \ref{Bühler-3.1}. \\
+%
+%        Supongamos que $a$ y $c$ son isomorfismos. Entonces por los Corolarios \ref{Mendoza-Ejer.8(a)} y \ref{Mendoza-Ejer.8(a)*} tenemos que $b'$ y $b''$ son isomorfismos, respectivamente, de donde se sigue que $b$ es un isomorfismo. \\
+%
+%        Supongamos que $a$ y $c$ son monomorfismos admisibles. Entonces, por (E2) se sigue que $b'$ es un monomorfismo admisible, mientras que del diagrama (\ref{2.2.2-1}) y la Proposición \ref{Bühler-2.15} se sigue que $b''$ es un monomorfismo admisible. Luego, por (E1), tenemos que $b$ es un monomorfismo admisible. \\
+%
+%        Supongamos que $a$ y $c$ son epimorfismos admisibles. Entonces, pro (E2)\textsuperscript{$\ast$} se sigue que $b''$ es un epimorfismo admisible, mientras que del diagrama (\ref{2.2.2-1}) y la Proposición \ref{Bühler-2.15*} se sigue que $b'$ es un epimorfismo admisible. Luego, por (E1)\textsuperscript{$\ast$}, tenemos que $b$ es un epimorfismo admisible.
+%
+%        \item COMPLETAR.
+%
+%    \end{enumerate}
+%\end{proof}
+
+\begin{Lema}[Tercer Teorema de Isomorfismo de Noether]\label{Bühler-3.5}
+    Consideremos el diagrama
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[tail]{r}[]{} &B \arrow[tail]{d}[]{} \arrow[two heads]{r}[]{} &X \\
+            A \arrow[tail]{r}[]{} &C \arrow[two heads]{d}[]{} \arrow[two heads]{r}[]{} &Y \\
+                                  &Z \arrow[equals]{r}[]{} &Z
+        \end{tikzcd}
+    \end{center}
+    en una categoría exacta $(\mathscr{A},\mathscr{E})$, donde los primeros dos renglones y la columna de en medio son sucesiones exactas cortas, y el cuadrado es conmutativo. Entonces, el diagrama anterior se puede completar por una columna exacta $X\rightarrowtail Y\twoheadrightarrow Z$, de tal forma que el diagrama completado conmute, de manera única. Más aún, el cuadrado superior derecho del diagrama completado es bicartesiano.
+\end{Lema}
+
+\begin{proof}
+    Observemos que, por hipótesis, la composición $A\rightarrowtail C\twoheadrightarrow Y$ es nula y es igual a $A\rightarrowtail B\rightarrowtail C\twoheadrightarrow Y$. Además, como la sucesión $A\rightarrowtail B\twoheadrightarrow X$ es exacta corta, por la propiedad universal del conúcleo existe un único morfismo de $X\to Y$ que hace conmutar el diagrama. Por otro lado, dado que la composición $B\rightarrowtail C\twoheadrightarrow Z$ es nula, se sigue que $A\rightarrowtail B\rightarrowtail C\twoheadrightarrow Z$ también lo es. Luego, como la sucesión $A\rightarrowtail C\twoheadrightarrow Y$ es exacta corta, por la propiedad universal del conúcleo existe un único morfismo $Y\to Z$ que hace conmutar el diagrama. Finalmente, de la Proposición \ref{Bühler-2.12} y el inciso (2) de la Observación \ref{Bühler-2.2-2.8} se sigue que el cuadrado superior derecho es bicartesiano. Notemos que, por el inciso (1) de la Observación \ref{Mendoza-1.5.3}, escribiendo a $X,Y$ y $Z$ como los objetos cociente correspondientes, hemos demostrado que
+    \[
+        (C/A) / (B/A) \simeq C/B.
+    \] 
+\end{proof}
+
+\begin{Coro}[Lema $3\times3$]\label{Bühler-3.6}
+    Consideremos el diagrama conmutativo en una categoría exacta $(\mathscr{A},\mathscr{E})$
+    \begin{equation}\label{Bühler-3.6-0}
+        \begin{tikzcd}
+            A' \arrow[tail]{d}[swap]{a} \arrow[]{r}[]{f'} &B' \arrow[tail]{d}[]{b} \arrow[]{r}[]{g'} &C' \arrow[tail]{d}[]{c} \\
+            A \arrow[two heads]{d}[swap]{a'} \arrow[]{r}[]{f} &B \arrow[two heads]{d}[]{b'} \arrow[]{r}[]{g} &C \arrow[two heads]{d}[]{c'} \\
+            A'' \arrow[]{r}[swap]{f''} &B'' \arrow[]{r}[swap]{g''} &C'',
+        \end{tikzcd}
+    \end{equation}
+    donde las columnas son sucesiones exactas cortas y, adicionalmente, se cumple una de las siguientes condiciones:
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item el renglón de en medio y alguno de los renglones exteriores son sucesiones exactas cortas;
+
+        \item los renglones exteriores son sucesiones exactas cortas y $gf=0$.
+    \end{enumerate}
+    Entonces, todos los renglones del diagrama anterior son sucesiones exactas cortas.
+\end{Coro}
+
+\begin{proof}\leavevmode
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Sin pérdida de generalidad, podemos suponer que los primeros dos renglones son sucesiones exactas cortas, pues el otro caso se sigue por dualidad. Aplicando la Proposición \ref{Bühler-3.1} a los primeros dos renglones, obtenemos el siguiente diagrama conmutativo
+             \begin{equation}\label{3.6-1}
+                 \begin{tikzcd}
+                     A' \arrow[]{d}[swap]{a} \arrow[phantom]{dr}[]{\text{BC}} \arrow[tail]{r}[]{f'} &B' \arrow[]{d}[]{i} \arrow[two heads]{r}[]{g'} &C' \arrow[equals]{d}[]{} \\
+                     A \arrow[equals]{d}[]{} \arrow[tail]{r}[swap]{\overline{f}} &D \arrow[]{d}[swap]{j} \arrow[two heads]{r}[]{\overline{g}} &C' \arrow[]{d}[]{c} \\
+                     A \arrow[tail]{r}[swap]{f} &B \arrow[two heads]{r}[swap]{g} &C, \arrow[phantom]{ul}[]{\text{BC}}
+                 \end{tikzcd}
+             \end{equation}
+             donde $ji=b$. Observemos que los morfismos $i$ y $j$ son monomorfismos admisibles por el axioma (E2) y la Proposición \ref{Bühler-2.15}, respectivamente. Por el Lema \ref{Bühler-2.13}, el morfismo $i':D\to A''$ determinado por $i'i=0$ y $i'\overline{f}=a'$ es un conúcleo de $i$, y el morfismo $j':B\twoheadrightarrow C''$ dado por $j'=c'g=g''b'$ es un conúcleo de $j$. Ahora, tenemos el diagrama
+             \begin{equation}\label{3.6-2}
+                 \begin{tikzcd}
+                     B' \arrow[equals]{d}[]{} \arrow[tail]{r}[]{i} &D \arrow[tail]{d}[]{j} \arrow[two heads]{r}[]{i'} &A'' \arrow[]{d}[]{f''} \\
+                     B' \arrow[tail]{r}[swap]{b} &B \arrow[two heads]{d}[swap]{j'} \arrow[two heads]{r}[]{b'} &B'' \arrow[]{d}[]{g''} \\
+                                                 &C'' \arrow[equals]{r}[]{} &C'',
+                 \end{tikzcd}
+             \end{equation}
+             donde sabemos que los cuadrados superior izquierdo e inferior derecho son conmutativos. Del diagrama conmutativo (\ref{3.6-1}), se obtiene
+             \[
+                 (f''i')i=0=b'b=(b'j)i \quad \land \quad (b'j)\overline{f} = b'f = f''a' = (f''i')\overline{f}
+             \] 
+             que, junto con
+             \[
+                 \hspace{2cm} (f''i' \overline{f})a = (f''i'i)f' = 0 \quad \land \quad (g'j\overline{f})a = f''a'a = 0 = b'bf' = (b'ji)f'
+             \] 
+             nos da el diagrama conmutativo
+             \begin{center}
+                 \begin{tikzcd}
+                     A' \arrow[tail]{d}[swap]{a} \arrow[tail]{r}[]{f'} &B' \arrow[tail]{d}[]{i} \arrow[bend left = 30]{ddr}[]{0} \\
+                     A \arrow[tail]{r}[swap]{\overline{f}} \arrow[bend right = 30]{drr}[swap]{f''a'} &D\arrow[phantom]{ul}[]{\text{BC}} \arrow[dotted, shift right]{dr}[swap]{f''i'} \arrow[dotted, shift left]{dr}[]{b'j} \\
+                                                           &&B''.
+                 \end{tikzcd}
+             \end{center}
+             Por la propiedad universal de la suma fibrada, se sigue que $f''i'=b'j$. Por ende, el diagrama (\ref{3.6-2}) es conmutativo, por lo que podemos aplicarle el Lema \ref{Bühler-3.5} (Tercer Teorema de Isomorfismo de Noether) y concluir que la sucesión $A''\xrightarrow[]{f''}B''\xrightarrow[]{g''}C''$ es exacta corta.
+
+         \item Supongamos que los renglones exteriores son sucesiones exactas cortas y $gf=0$. Como las columnas también son sucesiones exactas cortas, por (E2), existe una suma fibrada en $\mathscr{A}$
+             \begin{center}
+                 \begin{tikzcd}
+                     B' \arrow[tail]{d}[swap]{b} \arrow[two heads]{r}[]{g'} \arrow[phantom]{dr}[]{\text{PO}} &C' \arrow[dotted, tail]{d}[]{k} \\
+                     B \arrow[dotted, two heads]{r}[swap]{j} &D,
+                 \end{tikzcd}
+             \end{center}
+             donde $j$ es un epimorfismo admisible por la Proposición \ref{Bühler-2.15*}. Aplicando el Lema \ref{Bühler-2.13}, tenemos el siguiente diagrama en $\mathscr{A}$ con sucesiones exactas cortas en sus renglones y columnas
+             \begin{center}
+                 \begin{tikzcd}
+                     A' \arrow[equals]{d}[]{} \arrow[tail, dotted]{r}[]{f'} &B' \arrow[tail]{d}[swap]{b} \arrow[two heads]{r}[]{g'} \arrow[phantom]{dr}[]{\text{PO}} &C' \arrow[tail]{d}[]{k} \\
+                     A' \arrow[dotted, tail]{r}[swap]{i} &B \arrow[dotted, two heads]{d}[swap]{b'} \arrow[two heads]{r}[swap]{j} &D \arrow[dotted, two heads]{d}[]{k'} \\
+                                                         &B'' \arrow[equals]{r}[]{} &B'',
+                 \end{tikzcd}
+             \end{center}
+             donde el conúcleo $k'$ de $k$ está determinado por $k'j=b$ y $k'k=0$, mientras que $i=bf'$ es el núcleo del epimorfismo admisible $j$. Dado que por hipótesis $gb=cg'$, por la propiedad universal de la suma fibrada, existe un único morfismo $D\xrightarrow[]{d'}C$ tal que $d'k=c$ y $d'j=g$. Además, como
+             \begin{align*}
+                 c'd'j &= c'g \\
+                       &= g''b' \\
+                       &= g''k'j
+             \end{align*}
+             y $j$ es un epimorfismo, entonces $c'd'=g''k'$, por lo que tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+             \begin{equation}\label{eq: Bühler-3.6-1}
+                 \begin{tikzcd}
+                     C' \arrow[tail]{d}[swap]{k} \arrow[equals]{r}[]{} &C' \arrow[tail]{d}[]{c} \\
+                     D \arrow[two heads]{d}[swap]{k'} \arrow[]{r}[]{d'} &C \arrow[two heads]{d}[]{c'} \\
+                     B'' \arrow[two heads]{r}[swap]{g''} &C'',
+                 \end{tikzcd}
+             \end{equation}
+             cuyas columnas son exactas. Ahora, aplicando el principio de dualidad a la Proposición \ref{Bühler-2.12}, el cuadrado inferior del diagrama conmutativo (\ref{eq: Bühler-3.6-1}) es un producto fibrado lo cual, por (E2)\textsuperscript{$\ast$}, implica que $d$ es un epimorfismo admisible. Más aún, de (E1)\textsuperscript{$\ast$}, se sigue que $g=d'j$ también es un epimorfismo admisible. Dado que el renglón inferior del diagrama (\ref{Bühler-3.6-0}) es exacto, tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+             \begin{center}
+                 \begin{tikzcd}
+                     A'' \arrow[bend right = 30, tail]{ddr}[swap]{f''} \arrow[bend left = 30]{rrd}[]{0} \\
+                     &D \arrow[two heads]{d}[swap]{k'} \arrow[two heads]{r}[]{d'} \arrow[phantom]{dr}[]{\text{PB}} &C \arrow[two heads]{d}[]{c'} \\
+                     &B'' \arrow[two heads]{r}[swap]{g''} &C''.
+                 \end{tikzcd}
+             \end{center}
+             Por la propiedad universal del producto fibrado, existe un único morfismo $A''\xrightarrow[]{d}D$ en $\mathscr{A}$ tal que $k'd=f''$ y $d'd=0$; en particular, $d$ es un núcleo de $d'$. Entonces, tenemos que
+             \begin{align*}
+                 k'(da') &= f''a' \\
+                         &= b'f \\
+                         &= k'(jf), \\ \\
+                 d'(da') &= 0 \\
+                         &= gf \\
+                         &= d'(jf),
+             \end{align*}
+             por lo que el diagrama en $\mathscr{A}$
+             \begin{center}
+                 \begin{tikzcd}
+                     A' \arrow[tail]{d}[swap]{a} \arrow[equals]{r}[]{} &A' \arrow[tail]{d}[]{i} \\
+                     A \arrow[two heads]{d}[swap]{a'} \arrow[]{r}[]{f} &B \arrow[two heads]{d}[]{j} \arrow[two heads]{r}[]{g} &C \arrow[equals]{d}[]{} \\
+                     A'' \arrow[tail]{r}[swap]{d} &D \arrow[two heads]{r}[swap]{d'} &C
+                 \end{tikzcd}
+             \end{center}
+             conmuta. Finalmente, por la Proposición dual a \ref{Bühler-2.12}, tenemos que el cuadrado inferior izquierdo del diagrama anterior es bicartesiano y, por la Proposición \ref{Bühler-2.15}, se sigue que $f$ es un núcleo de $g$, por lo que la sucesión $A\xrightarrow[]{f}B\xrightarrow[]{g}C$ es exacta corta.
+    \end{enumerate}
+\end{proof}
+
+%\section{Ejemplos de categorías exactas} \label{Sec: Ejemplos de categorías exactas}
+%
+%\begin{Def}\label{Def: Categoría cuasi abeliana}
+%    Una categoría aditiva $\mathscr{A}$ es \emph{cuasi abeliana} si se satisfacen las siguientes condiciones:
+%
+%    \begin{itemize}
+%    
+%        \item[(CA1)] $\mathscr{A}$ tiene núcleos y conúcleos.
+%
+%        \item[(CA2)] La clase de núcleos de $\mathscr{A}$ es estable bajo sumas fibradas a lo largo de morfismos arbitrarios y, dualmente, la clase de conúcleos de $\mathscr{A}$ es estable bajo productos fibrados a lo largo de morfismos arbitrarios.
+%    \end{itemize}
+%\end{Def}
+%
+%\begin{Def}\label{Bühler-5.1}
+%    Sean $(\mathscr{A},\mathscr{E})$ y $(\mathscr{A}',\mathscr{E}')$ categorías exactas. Un funtor (aditivo)\footnote{Ver si se puede extender el resultado de que un funtor exacto entre categorías aditivas es exacto (visto para categorías abelianas) y, en todo caso, poner ese resultado en vez de ``(aditivo)''.} $F:\mathscr{A}\to \mathscr{A}'$ es \emph{exacto} si $F(\mathscr{E})\subset \mathscr{E}'$, y que $F$ \emph{refleja exactitud} si $F(\sigma)\in\mathscr{E}'$ implica que $\sigma\in\mathscr{E}$ para todo $\sigma\in$COMPLETAR\footnote{Definir $\mathscr{A}^{\to\to}$.}.
+%\end{Def}
+%
+%\begin{Obs}\label{Observaciones de las categorías cuasi abelianas}
+%    El universo de las categorías abelianas es dualizante. Es decir, una categoría $\mathscr{A}$ es cuasi abeliana si, y sólo si, $\mathscr{A}^\text{op}$ es cuasi abeliana.
+%\end{Obs}
+
+% Exercise 4.3 Let \mathscr{A} be an additive category with kernels. Prove that every pull-back of a kernel is a kernel. % Podría ir en la sección de categorías punteadas, después de la definición de ``categoría con núcleos''.
+
+%\begin{Prop}\label{Bühler-4.4}
+%    La clase $\mathscr{E}_{\text{max}}$ de todos los pares núcleo-conúcleo en una categoría cuasi abeliana es una estructura exacta.
+%\end{Prop}
+%
+%\begin{proof}
+%
+%    Dado que toda categoría 
+%\end{proof}
+
+\section{El bifuntor aditivo $\text{Ext}^1$ en categorías exactas} \label{Sec: El bifuntor aditivo Ext1 en categorías exactas}
+
+\begin{Def}\label{Stovicek-5.1}
+    
+    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta y $A,C\in\text{Obj}(\mathscr{A})$.
+
+    %Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta, $n\ge1$ y $A,C\in\text{Obj}(\mathscr{A})$. . 
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        %\item Una sucesión de morfismos en $(\mathscr{A},\mathscr{E})$
+        %    \[
+        %    0 \to Z_n\to E_n \to \dots \to E_1 \to Z_0 \to 0
+        %    \] 
+        %    es \emph{exacta} si, para toda $i\in[1,n]$, se tiene que
+        %    \[
+        %    0 \to Z_i \to E_i \to Z_{i-1} \to 0
+        %    \] 
+        %    es una sucesión exacta corta.
+
+        \item Sea $\text{E}_{(\mathscr{A},\mathscr{E})}^1(C,A)$ la clase de todas las sucesiones exactas cortas en $(\mathscr{A},\mathscr{E})$ de la forma $A \rightarrowtail E \twoheadrightarrow C,$
+            %\[
+            %0 \to A\to E_n \to \dots \to E_1 \to C\to 0, 
+            %\] 
+            las cuales llamamos \emph{extensiones}. Consideremos la relación $\simeq$ en $\text{E}_{(\mathscr{A},\mathscr{E})}^1(C,A)$ dada por
+            \[
+                %(0\to A\to E_n \to \dots \to E_1 \to C \to 0) \sim (0\to A\to E'_n \to \dots \to E'_1 \to C \to 0)
+                (A \rightarrowtail E \twoheadrightarrow C) \simeq (A\rightarrowtail E' \twoheadrightarrow C)
+            \] 
+            si existe un diagrama conmutativo en $\mathscr{A}$ de la forma
+            \begin{center}
+                %\begin{tikzcd}
+                %    0 \arrow[]{r}[]{} &A \arrow[equals]{d}[]{} \arrow[]{r}[]{} &E_n \arrow[]{d}[]{} \arrow[]{r}[]{} &\dots \arrow[]{r}[]{} &E_1 \arrow[]{r}[]{} &C \arrow[equals]{d}[]{} \arrow[]{r}[]{} &0 \\
+                %    0 \arrow[]{r}[]{} &A \arrow[]{r}[]{} &E'_n \arrow[]{r}[]{} &\dots \arrow[]{r}[]{} &E'_1 \arrow[]{r}[]{} &C \arrow[]{r}[]{} &0;
+                %\end{tikzcd}
+                \begin{tikzcd}
+                    A \arrow[equals]{d}[]{} \arrow[tail]{r}[]{} &E \arrow[]{d}[]{} \arrow[two heads]{r}[]{} &C \arrow[equals]{d}[]{} \\
+                    A \arrow[tail]{r}[]{} &E' \arrow[two heads]{r}[]{} &C,
+                \end{tikzcd}
+            \end{center}
+            la cual es una relación de equivalencia en $\text{E}^1_{(\mathscr{A},\mathscr{E})}(C,A)$ (ver el Corolario \ref{Bühler-3.2}). Definimos
+            \[
+                %\text{Ext}_{(\mathscr{A},\mathscr{E})}^{n}(C,A) := E^n_{(\mathscr{A},\mathscr{E})}(C,A)/\simeq,
+                \text{Ext}_{(\mathscr{A},\mathscr{E})}^1(C,A) := \text{E}^1_{(\mathscr{A},\mathscr{E})}(C,A)/\simeq,
+            \] 
+        y denotamos a la clase de equivalencia de una extensión $\varepsilon\in \text{E}_{(\mathscr{A},\mathscr{E})}^1(C,A)$ por $[\varepsilon]$.
+
+    %    \item Sean $\varepsilon\in E_{(\mathscr{A},\mathscr{E})}^n(C,A)$ la extensión dada por $0\to A\to E_n\to \dots\to E_1\to C\to 0$ y $A'\xrightarrow[]{f}A, B\xrightarrow[]{g}B'$ en $\mathscr{A}$. Entonces, por los axiomas (E2) y (E2)\textsuperscript{$\ast$}, tenemos los diagramas conmutativos en $\mathscr{A}$
+    %\begin{center}
+    %    \begin{tikzcd}
+    %        A \arrow{d}[swap]{g} \arrow[tail]{r} \arrow[phantom]{dr}{\text{PO}} &E_n \arrow[dotted]{d} &\empty{}\arrow[phantom]{d}{\text{y}} &E_1' \arrow[dotted]{d} \arrow[dotted, two heads]{r} \arrow[phantom]{dr}{\text{PB}} &C' \arrow{d}{f} \\
+    %        A' \arrow[dotted, tail]{r} &E'_n &\empty{}  &E_1 \arrow[two heads]{r} &C,
+    %    \end{tikzcd}
+    %\end{center}
+    %por lo que el diagrama en $\mathscr{A}$
+    %\begin{center}
+    %    \begin{tikzcd}
+    %        0 \arrow[]{r}[]{} &A \arrow[equals]{d}[]{} \arrow[]{r}[]{} &E_n \arrow[equals]{d}[]{} \arrow[]{r}[]{} &E_{n-1} \arrow[equals]{d}[]{} \arrow[]{r}[]{} &\dots \arrow[]{r}[]{} &E_2 \arrow[equals]{d}[]{} \arrow[]{r}[]{} &E'_1 \arrow[phantom]{dr}[]{\text{PB}} \arrow[dotted]{d}[]{} \arrow[dotted, two heads]{r}[]{} &C' \arrow[]{d}[]{f} \arrow[]{r}[]{} &0 \\
+    %        0 \arrow[]{r}[]{} &A \arrow[phantom]{dr}[]{\text{PO}} \arrow[]{d}[swap]{g} \arrow[tail]{r}[]{} &E_n \arrow[dotted]{d}[]{} \arrow[]{r}[]{} &E_{n-1} \arrow[equals]{d}[]{} \arrow[]{r}[]{} &\dots \arrow[]{r}[]{} &E_2 \arrow[equals]{d}[]{} \arrow[]{r}[]{} &E_1 \arrow[]{d}[]{} \arrow[two heads]{r}[]{} &C \arrow[equals]{d}[]{} \arrow[]{r}[]{} &0 \\
+    %        0 \arrow[]{r}[]{} &A' \arrow[dotted, tail]{r}[]{} &E'_n \arrow[]{r}[]{} &E_{n-1} \arrow[]{r}[]{} &\dots \arrow[]{r}[]{} &E_2 \arrow[]{r}[]{} &E_1 \arrow[]{r}[]{} &C \arrow[]{r}[]{} &0
+    %    \end{tikzcd}
+    %\end{center}
+
+        \item Sean $\varepsilon\in \text{E}_{(\mathscr{A},\mathscr{E})}^1(C,A)$ la extensión dada por $A\rightarrowtail E\twoheadrightarrow C$ y $C\xrightarrow[]{f}C', A'\xrightarrow[]{g}A,$ en $\mathscr{A}$. Entonces, por los axiomas (E2) y (E2)\textsuperscript{$\ast$}, tenemos los diagramas conmutativos en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow{d}[swap]{g} \arrow[tail]{r} \arrow[phantom]{dr}{\text{PO}} &E \arrow[dotted]{d} &\empty{}\arrow[phantom]{d}{\text{y}} &E' \arrow[dotted]{d} \arrow[dotted, two heads]{r} \arrow[phantom]{dr}{\text{PB}} &C' \arrow{d}{f} \\
+                    A' \arrow[dotted, tail]{r} &E'' &\empty{}  &E \arrow[two heads]{r} &C.
+                \end{tikzcd}
+            \end{center}
+            Más aún, por la Proposición \ref{Bühler-2.12} y su dual, tenemos que el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[equals]{d}[]{} \arrow[tail]{r}[]{} &E \arrow[phantom]{dr}[]{\text{PB}} \arrow[dotted]{d}[]{} \arrow[dotted, two heads]{r}[]{} &C' \arrow[]{d}[]{f} \\
+                    A \arrow[phantom]{dr}[]{\text{PO}} \arrow[]{d}[swap]{g} \arrow[tail]{r}[]{} &E \arrow[dotted]{d}[]{} \arrow[two heads]{r}[]{} &C \arrow[equals]{d}[]{} \\
+                    A' \arrow[dotted, tail]{r}[]{} &E'' \arrow[two heads]{r}[]{} &C
+                \end{tikzcd}
+            \end{center}
+            es conmutativo y tiene renglones exactos. Definimos a las sucesiones exactas cortas del primer y tercer renglón como $\varepsilon\cdot f$ y $g\cdot\varepsilon$, respectivamente, obteniendo así las correspondencias
+            \begin{align*}
+                \text{E}^1_{(\mathscr{A},\mathscr{E})}(f,A):\text{E}^1_{(\mathscr{A},\mathscr{E})}(C,A)&\to \text{E}^1_{(\mathscr{A},\mathscr{E})}(C',A), \\
+                \varepsilon &\mapsto \varepsilon\cdot f; \\ \\
+                \text{E}^1_{(\mathscr{A},\mathscr{E})}(C,g):\text{E}^1_{(\mathscr{A},\mathscr{E})}(C,A)&\to \text{E}^1_{(\mathscr{A},\mathscr{E})}(C,A'), \\
+                \varepsilon &\mapsto g\cdot\varepsilon.
+            \end{align*}
+
+        \item Dado que las correspondencias definidas en el inciso (b) son compatibles con la relación de equivalencia $\simeq$ del inciso (a), definimos las correspondencias inducidas
+            \begin{align*}
+                \text{Ext}^1_{(\mathscr{A},\mathscr{E})}(f,A):\text{Ext}^1_{(\mathscr{A},\mathscr{E})}(C,A)&\to \text{Ext}^1_{(\mathscr{A},\mathscr{E})}(C',A), \\
+                [\varepsilon] &\mapsto [\varepsilon\cdot f]; \\ \\
+                \text{Ext}^1_{(\mathscr{A},\mathscr{E})}(C,g):\text{Ext}^1_{(\mathscr{A},\mathscr{E})}(C,A)&\to \text{Ext}^1_{(\mathscr{A},\mathscr{E})}(C,A'), \\
+                [\varepsilon] &\mapsto [g\cdot\varepsilon].
+            \end{align*}
+    \end{enumerate}
+\end{Def}
+
+\begin{Obs}\label{análogo_a_Mendoza_1.10.22}
+    Las correspondencias del inciso (c) de la Definición \ref{Stovicek-5.1} definen acciones a derecha y a izquierda, respectivamente. Más aún, estas acciones son compatibles. Notamos que estas acciones son análogas a las de los funtores Hom-contravariante $\text{Hom}_\mathscr{A}(-,A)$ y Hom-covariante $\text{Hom}_\mathscr{A}(C,-)$, respectivamente.
+\end{Obs}
+
+\begin{Def}
+    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta, $A,C\in\text{Obj}(\mathscr{A})$ y $\varepsilon,\varepsilon'\in\text{E}_{(\mathscr{A},\mathscr{E})}^1(C,A)$ las extensiones dadas por \begin{tikzcd}A\arrow[tail]{r}{\alpha} &B \arrow[two heads]{r}{\beta} &C\end{tikzcd} y \begin{tikzcd} A\arrow[tail]{r}{\alpha'} &E' \arrow[two heads]{r}{\beta'} &C \end{tikzcd}, respectivamente. Definimos la \emph{suma de Baer}
+    \[
+        [\varepsilon] + [\varepsilon'] := \big[\nabla_A\cdot\big(\varepsilon\bigoplus\varepsilon'\big)\cdot\Delta_C\big] \in \text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(C,A),
+    \] 
+    donde $\varepsilon\bigoplus\varepsilon'\in\text{Ext}_{(\mathscr{A},\mathscr{E})}^1(C\bigoplus C, A\bigoplus A)$ (ver la Proposición \ref{Bühler-2.9}) y $\Delta_C, \nabla_A$ son los morfismos diagonal y codiagonal de la Definición \ref{Def: Morfismo diagonal y codiagonal}.
+\end{Def}
+
+\begin{Lema}\label{análogo_a_Mendoza-1.10.23}
+    Sean ($\mathscr{A},\mathscr{E})$ una categoría exacta y $A,C\in\text{Obj}(\mathscr{A})$. Entonces, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item La suma de Baer define una estructura de grupo abeliano en $\text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(C,A)$, con el elemento neutro dado por
+            \begin{center}
+                \begin{tikzcd}
+                    A\arrow[tail]{r}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big) } &A\bigoplus C \arrow[two heads]{r}[]{( \begin{smallmatrix} 0 \ 1 \end{smallmatrix}) } &C.
+                \end{tikzcd}
+            \end{center}
+
+        \item Para cualesquiera $C\xrightarrow[]{f}C', A'\xrightarrow[]{g}A$ en $\mathscr{A}$, tenemos que las correspondencias
+            \begin{align*}
+                \text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(f,A) &:\text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(C,A) \to \text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(C,A'), \\
+                \text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(C,g) &:\text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(C,A) \to \text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(C',A) 
+            \end{align*}
+            son morfismos de grupos abelianos.
+    \end{enumerate}
+\end{Lema}
+
+\begin{Obs}\label{Obs: Funtor Ext1 en categorías exactas}
+    Del Lema \ref{análogo_a_Mendoza-1.10.23} se sigue que $\text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(-,-):\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ es un bifuntor aditivo.
+\end{Obs}
+
+\begin{Def}\cite[Definition 5.1]{Stovicek}\label{Def: Pares de cotorsión en categorías exactas}
+    Sea $(\mathscr{A},\mathscr{E})$ una categoría exacta. Para $S\subseteq\text{Obj}(\mathscr{A})$, definimos
+    \begin{align*}
+        S^\perp &:= \{V\in\text{Obj}(\mathscr{A}) \mid \text{Ext}_{(\mathscr{A},\mathscr{E})}^1(S,V) = 0 \text{ para todo } S\in S \}, \\
+        {}^\perp S &:= \{U\in\text{Obj}(\mathscr{A}) \mid \text{Ext}_{(\mathscr{A},\mathscr{E})}^1(U,S) = 0 \text{ para todo } S\in S \}.
+    \end{align*} 
+    Un \emph{par de cotorsión} $(\mathcal{U},\mathcal{V})$ en $(\mathscr{A},\mathscr{E})$ es un par $(\mathcal{U},\mathcal{V})$ de subcategorías plenas de $\mathscr{A}$ tal que $\mathcal{U} = {}^\perp \mathcal{V}$ y $\mathcal{U}^\perp = \mathcal{V}$. Un par de cotorsión $(\mathcal{U},\mathcal{V})$ es \emph{completo} si cumple las siguientes condiciones\footnote{Se puede demostrar que esta definición de par de cotorsión completo es equivalente a que $\mathcal{U}$ y $\mathcal{V}$ sean subcategorías plenas de $\mathscr{A}$, cerradas por sumandos directos en $\mathscr{A}$, y cumplan las condiciones $\text{Ext}_{(\mathscr{A},\mathscr{E})}^{1}(\mathcal{U},\mathcal{V})=0$, (a) y (b).}.
+
+    \begin{enumerate}[label=(\alph*)]
+
+        \item Para cualquier $C\in\text{Obj}(\mathscr{A})$, existe una sucesión exacta corta $V^C\to U^C\to C$ tal que $U^C\in\mathcal{U}, V^C\in \mathcal{V}$. 
+
+        \item Para cualquier $C\in\text{Obj}(\mathscr{A})$, existe una sucesión exacta corta $C\to V_C\to U_C$ tal que $U_C\in\mathcal{U}, V_C\in \mathcal{V}$. 
+    \end{enumerate}
+
+\end{Def}
+
+\end{document}

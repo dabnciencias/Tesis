@@ -1,0 +1,40 @@
+\documentclass[12pt,libertine]{book}
+\input{pre}
+
+\begin{document}
+
+\subfile{portada}
+
+\subfile{aviso}
+
+\subfile{agradecimientos}
+
+\tableofcontents
+
+% ¡Intentar agregar al menos un párrafo al inicio de cada subsección, siempre y cuando sea pertinente!
+
+\subfile{intro} % ¡ACTUALIZAR!
+
+\setcounter{chapter}{-1}
+\subfile{0} % 0.1 Definición de categoría, 0.2 Morfismos especiales, 0.3 Funtores (Diagramas, Propiedades universales), 0.4 Dualidad (Categoría opuesta, Principio de dualidad, Dualidad en diagramas, Categorías de subobjetos y de objetos cociente), 0.5 Objetos finales, objetos iniciales y objetos cero, 0.6 Igualadores y coigualadores, 0.7 Productos fibrados, sumas fibradas y cuadrados bicartesianos, 0.8 Productos y coproductos, 0.9 Localización (Localización canónica, Categoría opuesta y localización, Clases localizantes, Subcategorías y localización)
+%
+\setcounter{chapter}{0}
+\subfile{1} % 1.1 Categorías punteadas, núcleo y conúcleo, 1.2 Categorías semiaditivas, 1.3 Z-categorías, 1.4 Categorías preaditivas, 1.5 Categorías aditivas
+
+\setcounter{chapter}{1}
+\subfile{2}  % 2.1 Definición de categoría exacta, 2.2 Algunos resultados básicos, 2.3 Algunos lemas importantes, 2.4 Ejemplos de categorías exactas, 2.5 El funtor Ext en categorías exactas
+%
+\setcounter{chapter}{2}
+\subfile{3} % 3.1 Definición de categoría triangulada
+
+\setcounter{chapter}{3}
+\subfile{4} % 4.1 Definición de categoría extriangulada
+
+\setcounter{chapter}{4}
+\appendix
+\subfile{5}
+
+\printbibliography
+\nocite{*}
+
+\end{document}

@@ -1,0 +1,12 @@
+\documentclass[tikz, border=0mm]{standalone}
+\usepackage{amssymb}
+\usetikzlibrary{cd}
+\usetikzlibrary{babel}
+\begin{document}
+\begin{tikzcd}
+    X \arrow[equals]{d}[]{} \arrow[phantom]{dr}{\circlearrowleft} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{v} \arrow[phantom]{dr}{\circlearrowleft} \arrow[]{r}[]{u'} &Z'\arrow[dotted]{d}[]{a} \arrow[phantom]{dr}{\circlearrowleft} \arrow[]{r}[]{u''} &T(X) \arrow[equals]{d}[]{} \\
+                    X \arrow[]{r}[swap]{w} &Z \arrow[]{d}[swap]{v'} \arrow[phantom]{dr}{\circlearrowleft} \arrow[]{r}[swap]{w'} &Y' \arrow[dotted]{d}[]{b} \arrow[phantom]{dr}{\circlearrowleft} \arrow[]{r}[swap]{w''} &T(X) \arrow[]{d}[]{T(u)} \\
+                                            &X' \arrow[]{d}[swap]{v''} \arrow[phantom]{dr}{\circlearrowleft} \arrow[equals]{r}[]{} &X' \arrow[]{d}[]{c} \arrow[]{r}[swap]{v''} &T(Y), \\
+                                            &T(Y) \arrow[]{r}[swap]{T(u')} &T(Z')
+\end{tikzcd}
+\end{document}

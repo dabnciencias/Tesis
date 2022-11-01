@@ -1,0 +1,12 @@
+\documentclass[tikz, border=0mm]{standalone}
+\usepackage{amssymb}
+\usetikzlibrary{cd}
+\usetikzlibrary{babel}
+\begin{document}
+\begin{tikzcd}
+                    A \arrow[equals]{d}[]{} \arrow[phantom]{dr}[]{\circlearrowleft} \arrow[]{r}[]{f} &B \arrow[]{d}[swap]{g} \arrow[phantom]{dr}[]{\circlearrowleft} \arrow[]{r}[]{f'} &D \arrow[dotted]{d}[]{d} \arrow[dashed]{r}[]{\delta = \delta''\cdot\hspace{1mm} d} &\empty{} \\
+                    A \arrow[]{r}[swap]{h} &C \arrow[]{d}[swap]{g'} \arrow[phantom]{dr}[]{\circlearrowleft} \arrow[]{r}[swap]{h'} &E \arrow[dotted]{d}[]{e} \arrow[dashed]{r}[swap]{\delta''} &\empty{}, \\
+                                           &F \arrow[dashed]{d}[swap]{\delta'} \arrow[equals]{r}[]{} &F \arrow[dashed]{d}[]{\delta''' = f'\cdot\hspace{1mm}\delta'} \\
+                                           &\empty{} &\empty{}
+\end{tikzcd}
+\end{document}

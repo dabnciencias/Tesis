@@ -1,0 +1,2 @@
+# This file is used internally by FFMPEG.
+file 'file:/home/diek/ExTr/Presen/media/videos/Propiedades_fundamentales_de_categorías_extrianguladas/1080p60/partial_movie_files/CategoriasExtrianguladasCociente/2430737477_1743025708_1614066055.mp4'

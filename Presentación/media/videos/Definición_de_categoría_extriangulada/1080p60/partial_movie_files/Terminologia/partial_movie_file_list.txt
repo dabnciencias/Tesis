@@ -1,0 +1,2 @@
+# This file is used internally by FFMPEG.
+file 'file:/home/diek/ExTr/Presen/media/videos/Definición_de_categoría_extriangulada/1080p60/partial_movie_files/Terminologia/368871098_1743025708_2942182581.mp4'

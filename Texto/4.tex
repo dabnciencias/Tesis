@@ -1,0 +1,1599 @@
+\documentclass[tesis]{subfiles}
+\begin{document}
+
+\chapter{Categorías extrianguladas} \label{Chap: Categorías extrianguladas}
+
+Al inicio de este capítulo motivaremos el estudio de las categorías extrianguladas, empezando por observar una importante conexión entre las categorías exactas y las categorías trianguladas, dada por las categorías de Frobenius \textemdash que son un tipo particular de categoría exacta\textemdash \ y sus categorías estables asociadas \textemdash las cuales admiten una estructura de categoría triangulada. Posteriormente, daremos la definición de categoría extriangulada introducida por Nakaoka y Palu\cite{NakaokaPalu}, demostraremos algunas de sus propiedades fundamentales, mostraremos cómo las categorías extrianguladas se relacionan con las categorías exactas y las categorías trianguladas, y estudiaremos sus pares de cotorsión.
+
+\section{Categorías de Frobenius y categorías estables asociadas}\label{Sec: Categorías de Frobenius y categorías estables asociadas}
+
+\begin{Def}\label{Def: Objetos E-proyectivos y E-inyectivos en categorías exactas}
+    Sea $(\mathscr{A},\mathscr{E})$ una categoría exacta.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Definimos a los objetos \emph{$\mathscr{E}$-proyectivos} en $\mathscr{A}$ y decimos que $\mathscr{A}$ tiene \emph{suficientes $\mathscr{E}$-proyectivos} siguiendo las Definiciones \ref{Def: Objeto proyectivo} y \ref{Def: Suficientes proyectivos}, considerando epimorfismos admisibles en vez de sólo epimorfismos, y denotamos a la clase de objetos $\mathscr{E}$-proyectivos en $\mathscr{A}$ por $\text{Proj}_\mathscr{E}(\mathscr{A})$. En particular, notamos que $\text{Proj}(\mathscr{A})\subseteq\text{Proj}_\mathscr{E}(\mathscr{A})$, pues todo epimorfismo admisible es, en particular, un epimorfismo.
+
+        \item Definimos a los objetos \emph{$\mathscr{E}$-inyectivos} en $\mathscr{A}$ y decimos que $\mathscr{A}$ tiene \emph{suficientes $\mathscr{E}$-inyectivos} siguiendo las Definiciones \ref{Def: Objeto inyectivo} y \ref{Def: Suficientes inyectivos}, considerando monomorfismos admisibles en vez de sólo monomorfismos, y denotamos a la clase de objetos $\mathscr{E}$-inyectivos en $\mathscr{A}$ por $\text{Inj}_\mathscr{E}(\mathscr{A})$. En particular, notamos que $\text{Inj}(\mathscr{A})\subseteq\text{Inj}_\mathscr{E}(\mathscr{A})$, pues todo monomorfismo admisible es, en particular, un monomorfismo.
+
+        \item Un objeto $A$ en $\mathscr{A}$ es \emph{$\mathscr{E}$-proyectivo-inyectivo} si $A\in\text{Proj}_\mathscr{E}(\mathscr{A})\cap\text{Inj}_\mathscr{E}(\mathscr{A})$.
+
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}\label{Def: Categoría de Frobenius}\leavevmode
+    
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Una \emph{categoría de Frobenius} es una categoría exacta $(\mathscr{A},\mathscr{E})$ que tiene suficientes $\mathscr{E}$-proyectivos y $\mathscr{E}$-inyectivos, tal que $\text{Proj}_\mathscr{E}(\mathscr{A}) = \text{Inj}_\mathscr{E}(\mathscr{A})$. 
+
+        \item Sea $(\mathscr{A},\mathscr{E})$ una categoría de Frobenius. La \emph{categoría estable} $\underline{\mathscr{A}}$ \emph{asociada a} $(\mathscr{A},\mathscr{E})$ es aquella cuyos objetos son los mismos que los de $\mathscr{A}$, y en donde todos los morfismos en $\mathscr{A}$ que se factorizan a través de un objeto en $\text{Proj}_\mathscr{E}(\mathscr{A})$ se identifican con el morfismo cero en $\underline{\mathscr{A}}$.
+    \end{enumerate}
+\end{Def}
+
+\begin{Obs}\label{Obs: Categorías de Frobenius}
+    Sean $\mathscr{A}$ es una categoría de Frobenius y $J$ la clase de todos los morfismos en $\mathscr{A}$ que se pueden factorizar a través de un objeto proyectivo-inyectivo. Entonces, $J$ es un ideal de $\mathscr{A}$ y la categoría cociente $\mathscr{A}/J = \underline{\mathscr{A}}$. 
+
+    \vspace{1mm}
+    En efecto: Se sigue del inciso (3) la Observación \ref{Obs: Ideal de una categoría aditiva} y de la Proposición \ref{Mendoza-1.10.21}.
+\end{Obs}
+
+\begin{Prop}\label{Happel-2.6}
+    La categoría estable asociada a una categoría de Frobenius tiene estructura de categoría triangulada.
+\end{Prop}
+
+\begin{proof}
+    Los detalles se pueden consultar en \cite[Chapter~2]{Arentz-Hansen}.
+\end{proof}
+
+Existen muchos resultados de naturaleza homológica que son válidos tanto para categorías exactas como para categorías trianguladas, después de haber sido debidamente adaptados a cada contexto, y las categorías de Frobenius y sus categorías estables asociadas nos permiten tender un puente entre ellas con el cual a menudo podemos transferir resultados de un contexto a otro. La estrategia usual para pasar de un resultado válido para categorías trianguladas a un resultado que sea válido en categorías exactas es la siguiente:
+\begin{enumerate}[label=(\arabic*)]
+
+    \item Especificar el resultado en el caso de categorías estables asociadas a categorías de Frobenius.
+
+    \item Levantar todas las definiciones y afirmaciones de la categoría estable asociada a la categoría de Frobenius.
+
+    \item Adaptar la demostración para que sea válida para cualquier categoría exacta, con las suposiciones adecuadas.
+\end{enumerate}
+
+\noindent Por otro lado, es posible que un resultado válido para categorías exactas tenga un resultado análogo para categorías trianguladas, que se pueda demostrar con ayuda del siguiente procedimiento:
+\begin{enumerate}[label=(\arabic*)]
+
+    \item Especificar el resultado en el caso de una categoría de Frobenius.
+
+    \item Descender todas las definiciones y afirmaciones a su categoría estable asociada.
+
+    \item Adaptar la demostración para que sea válida para cualquier categoría triangulada, con las suposiciones adecuadas.
+\end{enumerate}
+
+\noindent A pesar de que, en ambos casos, el paso (2) no es trivial, usualmente la principal dificultad se encuentra en el paso (3). Esta misma dificultad es removida mediante el uso de las categorías extrianguladas como consecuencia de los primeros resultados obtenidos en la sección \ref{Sec: Propiedades fundamentales de categorías extrianguladas}.
+
+\section{Definición de categoría extriangulada} \label{Sec: Definición de categoría extriangulada}
+
+%Los pares de cotorsión pueden ser definidos en categorías exactas y en categorías trianguladas, como hemos visto en los Capítulos \ref{Chap: Categorías trianguladas} y \ref{Chap: Categorías exactas}, respectivamente. Una revisión cuidadosa revela que para definir un par de cotorsión en una categoría es necesario que exista un bifuntor $\text{Ext}_{}^{1}$ con características apropiadas. Las categorías extrianguladas se obtienen al extraer aquellas propiedades del funtor $\text{Ext}_{}^{1}$ en categorías exactas y categorías trianguladas que parecen relevantes desde el punto de vista de los pares de cotorsión. De esta manera, podemos definir una noción de par de cotorsión en una categoría extriangulada que generalice aquellas nociones en categorías exactas y categorías trianguladas.
+
+Una revisión cuidadosa de las definiciones de pares de cotorsión en categorías exactas y trianguladas, dadas por las Definiciones \ref{Def: Pares de cotorsión en categorías exactas} y \ref{Def: Pares de cotorsión en categorías trianguladas}, respectivamente, revela que para definir un par de cotorsión en una categoría es necesario que exista un bifuntor $\text{Ext}_{}^{1}$ con características apropiadas. Las categorías extrianguladas se obtienen al extraer aquellas propiedades de los funtores $\text{Ext}_{}^{1}$ en categorías categorías exactas y trianguladas que parecen relevantes desde el punto de vista de los pares de cotorsión. De esta manera, podemos definir una noción de par de cotorsión en una categoría extriangulada que generalice aquellas nociones en categorías exactas y categorías trianguladas.
+
+\subsection*{$\mathbb{E}$-extensiones} \label{Ssec: E-extensiones}
+
+\begin{Def}\cite[Definition 2.1]{NakaokaPalu}\label{Def: E-extensión}
+    Sean $\mathscr{A}$ una categoría aditiva y $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo. Para cualesquiera $A,C\in\text{Obj}(\mathscr{A})$, una $\mathbb{E}$-\emph{extensión} es un elemento $\delta\in\mathbb{E}(C,A)$. Por ende, formalmente, una $\mathbb{E}$-extensión es una terna $(A,\delta,C)$. En particular, decimos que el elemento $0\in\mathbb{E}(C,A)$ es la $\mathbb{E}$-\emph{extensión escindible}.
+\end{Def}
+
+\begin{Def}\cite[Definition 2.3]{NakaokaPalu}\label{Def: Morfismo de E-extensiones}
+    Sean $(A,\delta,C)$ y $(A',\delta',C')$ $\mathbb{E}$-extensiones. Un par de morfismos $a\in\text{Hom}_\mathscr{A}(A,A')$ y $c\in\text{Hom}_\mathscr{A}(C,C')$ es un \emph{morfismo de} $\mathbb{E}$-\emph{extensiones} si satisface la igualdad $a\cdot\delta = \delta'\cdot c$, y lo denotamos por $(a,c):\delta\to \delta'$.
+\end{Def}
+
+\begin{Obs}\cite[Remark 2.4]{NakaokaPalu}\label{Observaciones de morfismos de E-extensiones}
+    Sean $\mathscr{A}$ una categoría aditiva y $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item Las $\mathbb{E}$-extensiones y los morfismos de $\mathbb{E}$-extensiones forman la categoría $\mathbb{E}\text{-Ext}(\mathscr{A})$ de $\mathbb{E}$-extensiones de $\mathscr{A}$, donde la composición de morfismos y los morfismos identidad se inducen de $\mathscr{A}$.
+
+        \item Sean  $(A,\delta,C)$ una $\mathbb{E}$-extensión y $A',C'\in\text{Obj}(\mathscr{A})$. Entonces, cualquier morfismo $a\in\text{Hom}_\mathscr{A}(A,A')$ induce el morfismo de $\mathbb{E}$-extensiones
+            \[
+                (a,1_{C}):\delta\to a\cdot\delta,
+            \] 
+            y cualquier morfismo $c\in\text{Hom}_\mathscr{A}(C',C)$ induce el morfismo de $\mathbb{E}$-extensiones
+            \[
+                (1_{A},c):\delta\cdot c\to \delta.
+            \] 
+    \end{enumerate}
+\end{Obs}
+
+\begin{Obs}\cite[Definition 2.6]{NakaokaPalu}\label{Def: Suma de E-extensiones}
+    Sean $(A,\delta,C), (A',\delta',C')$ $\mathbb{E}$-extensiones y $C\xrightarrow[]{\mu_C}C\bigoplus C'\xleftarrow[]{\mu_{C'}}C', A\xleftarrow[]{\pi_A}A\bigoplus A'\xrightarrow[]{\pi_{A'}}A'$ un coproducto y un producto en $\mathscr{A}$, respectivamente. Dado que $\mathbb{E}$ es un bifuntor aditivo, por el Teorema \ref{Mendoza-1.10.2} tenemos que
+    \[
+        \mathbb{E}\big(C\bigoplus C',A\bigoplus A'\big) \simeq \mathbb{E}(C,A)\bigoplus \mathbb{E}(C,A')\bigoplus \mathbb{E}(C',A)\bigoplus \mathbb{E}(C',A').
+    \] 
+    Sea $\delta\bigoplus\delta'\in\mathbb{E}(C\bigoplus C',A\bigoplus A')$ el elemento correspondiente a $(\delta,0,0,\delta')$ según el isomorfismo anterior. Si $A=A'$ y $C=C'$, entonces, por la Proposición \ref{Prop: Multiplicación de matrices con E-matrices y compatibilidad con acciones de bimódulo}, tenemos que
+    \begin{align*}
+        \Phi_{A,C}(\nabla_A\cdot\delta\bigoplus\delta'\cdot\Delta_C) &= \varphi_{A,A\bigoplus A}(\nabla_A)\Phi_{A\bigoplus A,C\bigoplus C}(\delta\bigoplus\delta')\varphi_{C\bigoplus C,C} \\
+                                                                    &= (\begin{smallmatrix} 1 &1 \end{smallmatrix}) \big(\begin{smallmatrix} \delta &0 \\ 0 &\delta' \end{smallmatrix}\big) \big(\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\big) \\
+                                                                    &= \delta + \delta'.
+    \end{align*}
+    donde $\Delta_C:C\to C\bigoplus C$ y $\nabla_A:A\bigoplus A\to A$ son los morfismos diagonal y codiagonal\footnote{Ver la Definición \ref{Def: Morfismo diagonal y codiagonal}.}.
+\end{Obs}
+
+\subsection*{Realización de $\mathbb{E}$-extensiones} \label{Ssec: Realización de E-extensiones}
+
+\begin{Def}\cite[Definition 2.7]{NakaokaPalu}\label{NakaokaPalu-2.7}
+    Sean $\mathscr{A}$ una categoría aditiva y $A,C\in\text{Obj}(\mathscr{A})$. Dos sucesiones de morfismos $A\xrightarrow[]{x}B\xrightarrow[]{y}C$ y $A\xrightarrow[]{x'}B'\xrightarrow[]{y'}C$ en $\mathscr{A}$ son \emph{equivalentes} si existe un isomorfismo $b\in\text{Hom}_\mathscr{A}(B,B')$ tal que el siguiente diagrama conmuta
+    \begin{center}
+        \begin{tikzcd}
+            &B \arrow[]{dr}[]{y} \arrow[]{dd}{b}[swap]{\rotatebox{90}{$\sim$}} \\
+            A \arrow[]{ur}[]{x} \arrow[]{dr}[swap]{x'} &&C. \\
+                                                       &B' \arrow[]{ur}[swap]{y'}
+        \end{tikzcd}
+    \end{center}
+    Claramente, esta es una relación de equivalencia. Denotamos a la clase de equivalencia de $A\xrightarrow[]{x}B\xrightarrow[]{y}C$ por $[A\xrightarrow[]{x}B\xrightarrow[]{y}C]$.
+\end{Def}
+
+\begin{Def}\cite[Definition 2.8]{NakaokaPalu}\label{NakaokaPalu-2.8}
+    % HAY MUCHO ESPACIO AQUÍ
+    Sea $\mathscr{A}$ una categoría aditiva. \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Para cualesquiera $A,C\in\text{Obj}(\mathscr{A})$, denotamos $0 = [A\xrightarrow[]{\big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} A\bigoplus C \xrightarrow[]{(\begin{smallmatrix} 0 &1 \end{smallmatrix})} C]$.
+
+        \item Para cualesquiera dos clases de secuencias de morfismos $[A\xrightarrow[]{x}B\xrightarrow[]{y}C]$ y $[A'\xrightarrow[]{x'}B'\xrightarrow[]{y'}C']$, denotamos
+            \[
+            \big[A\xrightarrow[]{x}B\xrightarrow[]{y}C]\bigoplus[A'\xrightarrow[]{x'}B'\xrightarrow[]{y'}C'] = [A\bigoplus A'\xrightarrow[]{x\bigoplus x'} B\bigoplus B' \xrightarrow[]{y\bigoplus y'} C\bigoplus C'\big].
+            \] 
+            
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}\cite[Definition 2.9]{NakaokaPalu}\label{NakaokaPalu-2.9}
+    Sean $\mathscr{A}$ una categoría aditiva y $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo. Una \emph{realización} de $\mathbb{E}$ es una correspondencia $\mathfrak{s}$ que asocia a cada $\mathbb{E}$-extensión $\delta\in\mathbb{E}(C,A)$ una clase de equivalencia $\mathfrak{s}(\delta) = [A\xrightarrow[]{x}B\xrightarrow[]{y}C]$ tal que se cumple la condición siguiente.
+
+    \begin{itemize}
+    
+        \item[(i)] Sean $\delta\in\mathbb{E}(C,A), \delta'\in\mathbb{E}(C',A')$ $\mathbb{E}$-extensiones, con $\mathfrak{s}(\delta) = [A\xrightarrow[]{x}B\xrightarrow[]{y}C]$ y $\mathfrak{s}(\delta') = [A'\xrightarrow[]{x'}B'\xrightarrow[]{y'}C']$. Entonces, para cualquier morfismo de $\mathbb{E}$-extensiones $(a,c)\in\text{Hom}_{\mathbb{E}\text{-Ext}(\mathscr{A})}(\delta,\delta')$, existe un morfismo $b\in\text{Hom}_\mathscr{A}(B,B')$ que hace conmutar el siguiente diagrama
+            \begin{equation}\label{eq: realización de un morfismo de E-extensiones}
+                \begin{tikzcd}
+                    A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[]{r}[]{y} &C \arrow[]{d}[]{c } \\
+                    A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C'.
+                \end{tikzcd}
+            \end{equation}
+    \end{itemize}
+    En este caso, decimos que la sucesión de morfismos $A\xrightarrow[]{x}B\xrightarrow[]{y}C$ \emph{realiza a} $\delta$ y que la terna $(a,b,c)$ \emph{realiza} al morfismo de $\mathbb{E}$-extensiones $(a,c)$. Claramente, la condición (1) no depende de los representantes de las clases de equivalencias.%y que el diagrama \ref{eq: realización de un morfismo de E-extensiones} o, equivalentemente, que la terna $(a,b,c)$ \emph{realiza} al morfismo de $\mathbb{E}$-extensiones $(a,c)$. Claramente, la condición (1) no depende de los representantes de las clases de equivalencias. 
+\end{Def}
+
+\begin{Def}\cite[Definition 2.10]{NakaokaPalu}\label{NakaokaPalu-2.10}
+    Sean $\mathscr{A}$ una categoría aditiva, $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo. Una realización $\mathfrak{s}$ de $\mathbb{E}$ es \emph{aditiva} si cumple las siguientes condiciones.
+    \begin{itemize}
+    
+        \item[(i)] Para cualesquiera $A,C\in\text{Obj}(\mathscr{A})$, la $\mathbb{E}$-extensión escindible $0\in\mathbb{E}(C,A)$ satisface $\mathfrak{s}(0)=0$.
+
+        \item[(ii)] Para cualesquiera $\mathbb{E}$-extensiones $\delta=(A,\delta,C)$ y $\delta'=(A',\delta',C')$, se tiene que $\mathfrak{s}\big(\delta\bigoplus\delta'\big) = \mathfrak{s}(\delta)\bigoplus\mathfrak{s}(\delta')$.
+    \end{itemize}
+
+\end{Def}
+
+\begin{Obs}\cite[Remark 2.11]{NakaokaPalu}\label{NakaokaPalu-2.11}
+    Sean $\mathscr{A}$ una categoría aditiva, $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo y $\mathfrak{s}$ una realización aditiva de $\mathbb{E}$.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item Para cualesquiera $A,C\in\text{Obj}(\mathscr{A})$, si la $\mathbb{E}$-extensión escindible $0\in\mathbb{E}(C,A)$ es realizada por $A\xrightarrow[]{x}B\xrightarrow[]{y}C$, entonces existen una retracción $r\in\text{Hom}_\mathscr{A}(B,A)$ de $x$ y una sección $s\in\text{Hom}_\mathscr{A}(C,B)$ de $y$ tales que se tiene el isomorfismo $\big(\begin{smallmatrix} r \\ y \end{smallmatrix}\big):B\xrightarrow[]{\sim}A\bigoplus C$.
+
+        \item Para cualquier $f\in\text{Hom}_\mathscr{A}(A,B)$, la sucesión
+            \[
+                A \xrightarrow[]{\big( \begin{smallmatrix} 1 \\ -f \end{smallmatrix}\big)} A\bigoplus B \xrightarrow[]{(\begin{smallmatrix} f &1 \end{smallmatrix})} B
+            \] 
+            realiza a la $\mathbb{E}$-extensión escindible $0\in\mathbb{E}(B,A)$.
+    \end{enumerate}
+\end{Obs}
+
+\subsection*{Categoría extriangulada} \label{Ssec: Categoría extriangulada}
+
+\begin{Def}\cite[Definition 2.12]{NakaokaPalu}\label{Def: Categoría extriangulada}
+    %Sea $\mathscr{A}$ una categoría aditiva. Una \emph{pretriangulación externa} de $\mathscr{A}$ es un par $(\mathbb{E},\mathfrak{s})$ que satisface las siguientes condiciones.
+    Una \emph{categoría pre-extriangulada} es una terna $(\mathscr{A},\mathbb{E},\mathfrak{s})$, donde $\mathscr{A}$ es una categoría aditiva, tal que satisface los siguientes axiomas.
+
+    \begin{itemize}
+    
+        \item[(ET1)] $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ es un bifuntor aditivo.
+
+        \item[(ET2)] $\mathfrak{s}$ es una realización aditiva de $\mathbb{E}$.
+
+        \item[(ET3)] Sean $\delta\in\mathbb{E}(C,A)$ y $\delta'\in\mathbb{E}(C',A')$ $\mathbb{E}$-extensiones realizadas como $\mathfrak{s}(\delta) = [A\xrightarrow[]{x} B\xrightarrow[]{y} C]$ y $\mathfrak{s}(\delta') = [A'\xrightarrow[]{x'} B'\xrightarrow[]{y'} C']$. Entonces, para todo diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{equation}\label{eq: (ET3)}
+                    \begin{tikzcd}
+                        A \arrow[]{r}[]{x} \arrow[]{d}[swap]{a} &B \arrow[]{r}[]{y} \arrow[]{d}[]{b} &C \\
+                        A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C'
+                    \end{tikzcd}
+                \end{equation}
+            \end{center}
+            existe un morfismo de $\mathbb{E}$-extensiones $(a,c):\delta\to \delta'$ realizado por $(a,b,c)$.
+            
+        \item[(ET3)\textsuperscript{$\ast$}] Sean $\delta\in\mathbb{E}(C,A)$ y $\delta'\in\mathbb{E}(C',A')$ $\mathbb{E}$-extensiones realizadas como $\mathfrak{s}(\delta) = [A\xrightarrow[]{x} B\xrightarrow[]{y} C]$ y $\mathfrak{s}(\delta') = [A'\xrightarrow[]{x'} B'\xrightarrow[]{y'} C']$. Entonces, para todo diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{r}[]{x} &B \arrow[]{r}[]{y} \arrow[]{d}[swap]{b} &C \arrow[]{d}[]{c} \\
+                    A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C'
+                \end{tikzcd}
+            \end{center}
+            existe un morfismo de $\mathbb{E}$-extensiones $(a,c):\delta\to \delta'$ realizado por $(a,b,c)$.
+
+    \end{itemize}
+
+    \noindent En este caso, diremos que el par $(\mathbb{E},\mathfrak{s})$ es una \emph{pretriangulación externa} de $\mathscr{A}$. Una categoría pre-extriangulada $(\mathscr{A},\mathbb{E},\mathfrak{s})$ es \emph{extriangulada} si además satisface los siguientes axiomas.
+
+        \begin{itemize}
+
+        \item[(ET4)] Sean $(A,\delta,D)$ y $(B,\delta',F)$ $\mathbb{E}$-extensiones realizadas por $A\xrightarrow[]{f} B\xrightarrow[]{f'} D$ y $B\xrightarrow[]{g} C\xrightarrow[]{g'} F$, respectivamente. Entonces existen $E\in\text{Obj}(\mathscr{A})$, un diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{equation}\label{eq: (ET4)}
+                    \begin{tikzcd}
+                        A \arrow[equals]{d}[]{} \arrow[]{r}[]{f} &B \arrow[]{d}[swap]{g} \arrow[]{r}[]{f'} &D \arrow[]{d}[]{d} \\
+                        A \arrow[]{r}[swap]{h} &C \arrow[]{d}[swap]{g'} \arrow[]{r}[swap]{h'} &E \arrow[]{d}[]{e} \\
+                                               &F \arrow[equals]{r}[]{} &F
+                    \end{tikzcd}
+                \end{equation}
+            \end{center}
+            y una $\mathbb{E}$-extensión $\delta''\in\mathbb{E}(E,A)$ realizada por $A\xrightarrow[]{h}C\xrightarrow[]{h'}E$ tales que se satisfacen las siguientes condiciones:
+            \begin{itemize}
+            
+                \item[(i)] $D\xrightarrow[]{d}E\xrightarrow[]{e}F$ realiza a $f'\cdot\delta'$,
+
+                \item[(ii)] $\delta''\cdot d = \delta$,
+
+                \item[(iii)] $f\cdot\delta'' = \delta'\cdot e$. 
+            \end{itemize}
+            De (iii), se sigue que $(f,e):\delta''\to \delta'$ es un morfismo de $\mathbb{E}$-extensiones realizado por
+                    \[
+                        (f,1_{C},e): [A\xrightarrow[]{h}C\xrightarrow[]{h'}E] \to [B\xrightarrow[]{g}C\xrightarrow[]{g'}F].
+                    \] 
+
+                \item[(ET4)\textsuperscript{$\ast$}] Sean $(D,\delta,B)$ y $(F,\delta',C)$ $\mathbb{E}$-extensiones realizadas por $D\xrightarrow[]{f'} A\xrightarrow[]{f} B$ y $F\xrightarrow[]{g'} B\xrightarrow[]{g} C$, respectivamente. Entonces existen $E\in\text{Obj}(\mathscr{A})$, un diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    D \arrow[equals]{d}[]{} \arrow[]{r}[]{d} &E \arrow[]{d}[swap]{h'} \arrow[]{r}[]{e} &F \arrow[]{d}[]{g'} \\
+                    D \arrow[]{r}[swap]{f'} &A \arrow[]{d}[swap]{h} \arrow[]{r}[swap]{f} &B \arrow[]{d}[]{g} \\
+                                           &C \arrow[equals]{r}[]{} &C
+                \end{tikzcd}
+            \end{center}
+            y una $\mathbb{E}$-extensión $\delta''\in\mathbb{E}(C,E)$ realizada por $E\xrightarrow[]{h'}A\xrightarrow[]{h}C$ tales que se satisfacen las siguientes condiciones:
+            \begin{itemize}
+            
+                \item[(i)] $D\xrightarrow[]{d}E\xrightarrow[]{e}F$ realiza a $\delta\cdot g'$,
+
+                \item[(ii)] $e\cdot\delta'' = \delta'$,
+
+                \item[(iii)] $\delta''\cdot g = d\cdot\delta$. 
+            \end{itemize}
+            De (iii), se sigue que $(d,g):\delta\to \delta''$ es un morfismo de $\mathbb{E}$-extensiones realizado por
+                    \[
+                        (d,1_{C},g): [D\xrightarrow[]{f'}A\xrightarrow[]{f}B] \to [E\xrightarrow[]{h'}A\xrightarrow[]{h}C].
+                    \] 
+    \end{itemize}
+
+    \noindent En este caso, diremos que el par $(\mathbb{E},\mathfrak{s})$ es una \emph{triangulación externa} de $\mathscr{A}$. 
+    %\noindent En este caso, diremos que $\mathfrak{s}$ es una $\mathbb{E}$-\emph{triangulación} de $\mathscr{A}$. Una \emph{categoría externamente triangulada}, o simplemente \emph{categoría extriangulada}, es una terna $(\mathscr{A},\mathbb{E},\mathfrak{s})$ donde $\mathscr{A}$ es una categoría aditiva y $(\mathbb{E},\mathfrak{s})$ es una triangulación externa de $\mathscr{A}$.
+\end{Def}
+
+\begin{Obs}\label{Obs: Categorías extrianguladas}
+    El universo de las categorías extrianguladas es dualizante.
+\end{Obs}
+
+Los ejemplos principales de categorías extrianguladas aparecerán durante el desarrollo de las siguientes secciones.
+
+\section{Terminología en categorías extrianguladas} \label{Sec: Terminología en categorías extrianguladas}
+
+A continuación, introducimos terminología proveniente de categorías exactas y categorías trianguladas para poder argumentar en el contexto de las categorías extrianguladas utilizando términos que nos resultan familiares. Recordamos que, a pesar de que en el Capítulo \ref{Chap: Categorías exactas} decidimos utilizar los términos sucesión exacta corta, monomorfismo admisible y epimorfismo admisible por considerarlos más descriptivos en el contexto de categorías exactas, para referirse a estas nociones también se utilizan los términos conflación, inflación y deflación, respectivamente.
+
+%A continuación, introducimos terminología proveniente de categorías trianguladas y categorías exactas para poder argumentar en el contexto de las categorías extrianguladas utilizando términos que nos resultan familiares. Recordamos que, a pesar de que decidimos no utilizar los términos conflación, inflación y deflación en el Capítulo \ref{Chap: Categorías exactas}, estos equivalen a lo que definimos en \ref{Def: Categoría exacta} como sucesión exacta corta, monomorfismo escindible y epimorfismo escindible, respectivamente.
+
+\begin{Def}\cite[Definitions 2.19 \& 2.15]{NakaokaPalu}\label{Def: Terminología en categorías extrianguladas}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una terna que satisface (ET1) y (ET2).
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Un $\mathbb{E}$-\emph{triángulo} es un par $(A\xrightarrow[]{x}B\xrightarrow[]{y}C,\delta)$, donde la sucesión de morfismos $A\xrightarrow[]{x}B\xrightarrow[]{y}C$ realiza a $\delta\in\mathbb{E}(C,A)$, y lo denotamos por
+            \begin{equation}\label{NakaokaPalu-2.19.(4)}
+                A\xrightarrow[]{x}B\xrightarrow[]{y}C \xdashrightarrow{\delta}\empty{}.
+            \end{equation}
+            Notamos que esto \emph{no necesariamente} implica que $\delta$ sea un morfismo en $\mathscr{A}$ con dominio $C$.
+
+        \item Sean $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ y $A'\xrightarrow[]{x'}B'\xrightarrow[]{y'}C'\xdashrightarrow{\delta'}$ $\mathbb{E}$-triángulos. Un \emph{morfismo de} $\mathbb{E}$-\emph{triángulos} es una terna $(a,b,c)$ que realiza al morfismo de $\mathbb{E}$-extensiones $(a,c):\delta\to \delta'$ como en (\ref{eq: realización de un morfismo de E-extensiones}), y lo denotamos por
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[]{r}[]{y} &C \arrow[]{d}[]{c} \arrow[dashed]{r}[]{\delta} &\empty{} \\
+                    A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C' \arrow[dashed]{r}[swap]{\delta'} &\empty{}.
+                \end{tikzcd}
+            \end{center}
+            
+        \item Una \emph{conflación} es una sucesión $A\xrightarrow[]{x} B\xrightarrow[]{y} C$ que realiza a alguna $\mathbb{E}$-extensión $\delta\in\mathbb{E}(C,A)$.
+
+        \item Una \emph{inflación} es un morfismo $f$ en $\mathscr{A}$ que admite una conflación $A\xrightarrow[]{f} B\xrightarrow[]{}C$.
+
+        \item Una \emph{deflación} es un morfismo $f$ en $\mathscr{A}$ que admite una conflación $K\xrightarrow[]{}A\xrightarrow[]{f} B$.
+    \end{enumerate}
+\end{Def}
+
+\begin{Obs}\cite[Remark 2.16]{NakaokaPalu}\label{Obs: Terminología en categorías extrianguladas}
+
+    Usando esta nueva terminología\footnote{En artículos más recientes, se ha sugerido el uso de los términos $\mathfrak{s}$-triángulo, $\mathfrak{s}$-conflación, $\mathfrak{s}$-inflación y $\mathfrak{s}$-deflación, dado que un bifuntor adivito $\mathbb{E}$ puede tener más de una realización aditiva; sin embargo, en el presente trabajo, nos apegaremos a la terminología utilizada en el artículo original de Nakaoka y Palu\cite{NakaokaPalu}.}, podemos parafrasear lo siguiente:
+
+    \begin{itemize}
+
+        \item[$\bullet$] la condición (i) de la Definición \ref{NakaokaPalu-2.9} afirma que cualquier morfismo de $\mathbb{E}$-extensiones puede ser realizado por un morfismo de $\mathbb{E}$-triángulos;
+    
+        \item[$\bullet$] el axioma (ET3) afirma que cualquier cuadrado conmutativo entre $\mathbb{E}$-triángulos como en (\ref{eq: (ET3)}) puede completarse en un morfismo de $\mathbb{E}$-triángulos \textemdash lo cual es análogo al axioma (TR3) de categorías trianguladas, que afirma que cualquier cuadrado conmutativo entre triángulos distinguidos como en (\ref{eq: (TR3)}) puede completarse en un morfismo de triángulos distinguidos;
+
+        \item[$\bullet$] el axioma (ET4) afirma que, para cualesquiera inflaciones $A\xrightarrow[]{f}B, B\xrightarrow[]{g}C$, el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[equals]{d}[]{} \arrow[]{r}[]{f} &B \arrow[]{d}[swap]{g} \arrow[]{r}[]{f'} &D \arrow[dotted]{d}[]{d} \arrow[dashed]{r}[]{\delta = \delta''\cdot\hspace{1mm} d} &\empty{} \\
+                    A \arrow[]{r}[swap]{h} &C \arrow[]{d}[swap]{g'} \arrow[]{r}[swap]{h'} &E \arrow[dotted]{d}[]{e} \arrow[dashed]{r}[swap]{\delta''} &\empty{} \\
+                                           &F \arrow[dashed]{d}[swap]{\delta'} \arrow[equals]{r}[]{} &F \arrow[dashed]{d}[]{\delta''' = f'\cdot\hspace{1mm}\delta'} \\
+                                           &\empty{} &\empty{}
+                \end{tikzcd}
+            \end{center}
+            conmuta, con $f\cdot\delta'' = \delta'\cdot e$, donde los dos renglones y las dos columnas con tres objetos son $\mathbb{E}$-triángulos. Esto es análogo al axioma (TR4) de categorías trianguladas, como se puede ver comparándolo con el diagrama (\ref{eq: (TR4)}) de la Observación \ref{Obs: Categoría pretriangulada}.
+
+        %\item el axioma (ET4), afirmando que, para cualesquiera $\mathbb{E}$-triángulos $A\xrightarrow[]{f}B\xrightarrow[]{f'} D \xdashrightarrow{\delta}$ y $B\xrightarrow[]{g}C\xrightarrow[]{g'}F\xdashrightarrow{\delta'}$, existe un $\mathbb{E}$-triángulo $A\xrightarrow[]{h}C\xrightarrow[]{h'} E\xdashrightarrow{\delta''}$ tal que el diagrama (\ref{eq: (ET4)}) conmuta y las condiciones (i), (ii) y (iii) se satisfacen.
+    \end{itemize}
+
+    \noindent Adicionalmente, de los axiomas (ET4) y (ET4)\textsuperscript{$\ast$} se sigue que las clases de inflaciones y deflaciones son cerradas por composiciones, respectivamente. Estas implicaciones son análogas a los axiomas (E1) y (E1)\textsuperscript{$\ast$} de las categorías exactas, que afirman que tanto los monomorfismos admisibles como los epimorfismos admisibles son cerrados por composiciones. %Más aún, ahora podemos ver que el axioma (ET4) es análogo al axioma del octaedro (TR4) para categorías trianguladas. En efecto pues, cambiando un poco la notación, afirma que, para cualesquiera conflaciones $X\xrightarrow[]{u}Y, Y\xrightarrow[]{v}Z$
+\end{Obs}
+
+\begin{Def}\cite[Definition 2.17]{NakaokaPalu}\label{NakaokaPalu-2.17}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada y $\mathcal{D}\subseteq\mathscr{A}$ una subcategoría plena y aditiva, cerrada por isomorfismos. $\mathcal{D}$ es \emph{cerrada por extensiones} si para cualquier conflación $A\to B\to C$ tal que $A,C\in\mathcal{D}$ se tiene que $B\in\mathcal{D}$.
+\end{Def}
+
+\begin{Obs}\cite[Remark 2.18]{NakaokaPalu}\label{NakaokaPalu-2.18}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada y $\mathscr{B}$ una subcategoría aditiva plena de $\mathscr{A}$ cerrada por isomorfismos en $\mathscr{A}$ y extensiones. Si definimos a $\mathbb{E}\mid_\mathscr{B}$ como la restricción de $\mathbb{E}$ a $\mathscr{B}^\text{op}\times\mathscr{B}$ y a $\mathfrak{s}\mid_\mathscr{B}$ como la restricción de $\mathfrak{s}$ a $\mathbb{E}\mid_\mathscr{B}$, entonces $(\mathscr{B},\mathbb{E}\mid_B,\mathfrak{s}\mid_B)$ es una categoría extriangulada. %\footnote{Ver si algo análogo es válido para categorías exactas.}.
+\end{Obs}
+
+\section{Propiedades fundamentales de categorías extrianguladas} \label{Sec: Propiedades fundamentales de categorías extrianguladas}
+
+En esta sección, veremos cómo se le puede asociar una sucesión exacta a cada $\mathbb{E}$-triángulo en una categoría extriangulada, lo cual es similar a lo que sucede con los triángulos distinguidos en categorías trianguladas. Además, demostraremos varios resultados análogos al axioma del octaedro (TR4) de categorías trianguladas válidos en categorías extrianguladas, y mostraremos cómo se relacionan las categorías extrianguladas con las categorías exactas y las categorías trianguladas. %Mencionar algo sobre objetos inyectivos y proyectivos en categorías extrianguladas.
+
+\subsection*{Sucesión exacta asociada} \label{Ssec: Sucesión exacta asociada}
+
+Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada. El objetivo de esta sección es asociar, a cada $\mathbb{E}$-triángulo $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$, sucesiones exactas de transformaciones naturales
+\[
+    \resizebox{\hsize}{!}{$\text{Hom}_\mathscr{A}(-,A) \xrightarrow{\text{Hom}_\mathscr{A}(-,x)} \text{Hom}_\mathscr{A}(-,B) \xrightarrow{\text{Hom}_\mathscr{A}(-,y)} \text{Hom}_\mathscr{A}(-,C) \xrightarrow{\delta_\sharp} \mathbb{E}(-,A) \xrightarrow{\mathbb{E}(-,x)} \mathbb{E}(-,B) \xrightarrow{\mathbb{E}(-,y)} \mathbb{E}(-,C)$,}
+\] 
+\[
+    \resizebox{\hsize}{!}{$\text{Hom}_\mathscr{A}(C,-) \xrightarrow{\text{Hom}_\mathscr{A}(y,-)} \text{Hom}_\mathscr{A}(B,-) \xrightarrow{\text{Hom}_\mathscr{A}(x,-)} \text{Hom}_\mathscr{A}(A,-) \xrightarrow{\delta^\sharp} \mathbb{E}(C,-) \xrightarrow{\mathbb{E}(y^\text{op},-)} \mathbb{E}(B,-) \xrightarrow{\mathbb{E}(x^\text{op},-)} \mathbb{E}(A,-)$}
+\] 
+con $\delta_\sharp$ y $\delta^\sharp$ como se definen a continuación.
+
+\begin{Def}\cite[Definition 3.1]{NakaokaPalu}
+    Sean $\mathscr{A}$ una categoría aditiva y $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo. Por el Lema de Yoneda (Teorema \ref{Teo: Lema de Yoneda}), cualquier $\mathbb{E}$-extensión $\delta\in\mathbb{E}(C,A)$ induce transformaciones naturales $\delta_\sharp:\text{Hom}_\mathscr{A}(-,C)\to \mathbb{E}(-,A)$ y $\delta^\sharp:\text{Hom}_\mathscr{A}(A,-)\to \mathbb{E}(C,-)$. Para cada $X\in\text{Obj}(\mathscr{A})$, los morfismos $(\delta_\sharp)_X$ y $\delta^\sharp_X$ están dados por
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $(\delta_\sharp)_X: \text{Hom}_\mathscr{A}(X,C) \to \mathbb{E}(X,A), f\mapsto \delta\cdot f$;
+
+        \item $\delta_X^\sharp:\text{Hom}_\mathscr{A}(A,X) \to \mathbb{E}(C,X), g\mapsto g\cdot\delta$.
+    \end{enumerate}
+    Abreviaremos $(\delta_\sharp)_X(f)$ y $\delta^\sharp_X(f)$ como $\delta_\sharp f$ y $\delta^\sharp g$, respectivamente, cuando esto no lleve a confusiones.
+\end{Def}
+
+\begin{Obs}\cite[Remark 3.4]{NakaokaPalu}\label{NakaokaPalu-3.4}
+    Consideremos qué significa que las sucesiones previas de transformaciones naturales sean exactas. En \cite[Lema~2.13.3]{Santiago_Tesis_Licenciatura} se demuestra que si $\mathscr{A}$ es una categoría aditiva pequeña y $\mathscr{B}$ es una categoría abeliana, entonces la clase de funtores aditivos de $\mathscr{A}$ en $\mathscr{B}$ es una subcategoría abeliana de $\mathscr{B}^\mathscr{A}$, la cual denotaremos por $\text{Mod}(\mathscr{A})$. Más aún, se puede demostrar que, para cualesquiera $F,G,H\in\text{Mod}(\mathscr{A})$, se tiene que
+\[
+    0\to F\xrightarrow[]{\alpha}G\xrightarrow[]{\beta}H\to 0 \text{ es exacta en } \text{Mod}(\mathscr{A}) 
+\]
+\[
+    \big\Updownarrow
+\] 
+\[
+    0\to F(X)\xrightarrow[]{\alpha_X} G(X)\xrightarrow[]{\beta_X} H(X)\to 0 \text{ es exacta en Ab} \quad \forall \ X\in\text{Obj}(\mathscr{A}).
+\] 
+
+\noindent Sin embargo, una categoría aditiva no tiene por qué ser pequeña en general \textemdash aunque por definición sea localmente pequeña\textemdash, por lo que el criterio anterior no siempre es estrictamente aplicable en categorías extrianguladas. Una vez aclarado este detalle técnico e inspirándonos en la discusión previa, durante el resto de esta sección diremos que una sucesión en $\text{Mod}(\mathscr{A})$ es exacta utilizando el criterio anterior, aún cuando $\mathscr{A}$ no sea pequeña. 
+\end{Obs}
+
+\begin{Lema}\cite[Lemma 3.2]{NakaokaPalu}\label{NakaokaPalu-3.2}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría pre-extriangulada. Entonces, para cualquier $\mathbb{E}$-triángulo $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$, se cumplen las siguientes condiciones.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $yx=0$.
+
+        \item $x\cdot\delta \ (= \delta^\sharp x) =0$.
+
+        \item $\delta\cdot y \ (= \delta_\sharp y) = 0$.
+    \end{enumerate}
+\end{Lema}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Por (ET2), tenemos que la conflación $A\xrightarrow[]{1_A}A\to 0$ realiza a $0\in\mathbb{E}(0,A)$, por lo que tenemos el diagrama conmutativo
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{d}[swap]{1_A} \arrow[]{r}[]{1_A} &A \arrow[]{d}[]{x} \arrow[]{r}[]{} &0 \\
+                    A \arrow[]{r}[swap]{x} &B \arrow[]{r}[swap]{y} &C
+                \end{tikzcd}
+            \end{center}
+            en $\mathscr{A}$. Luego, por el axioma (ET3), existe un morfismo de $\mathbb{E}$-extensiones $(a,c):0\to \delta$ y, en particular, $c$ hace conmutar el siguiente diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{d}[swap]{1_A} \arrow[]{r}[]{1_A} &A \arrow[]{d}[]{x} \arrow[]{r}[]{} &0 \arrow[dotted]{d}[]{c} \\
+                    A \arrow[]{r}[swap]{x} &B \arrow[]{r}[swap]{y} &C.
+                \end{tikzcd}
+            \end{center}
+            Por ende, $yx=0$. Observemos que esto es similar a cómo se aplica el axioma (TR3) en el inciso (a) de la Proposición \ref{Mendoza_CT-1.2}.
+
+        \item Similarmente, la conflación $B\xrightarrow[]{1_B}B\to 0$ realiza a $0\in\mathbb{E}(0,B)$, por lo que tenemos el diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{d}[swap]{x} \arrow[]{r}[]{x} &B \arrow[]{d}[]{1_B} \arrow[]{r}[]{y} &C \\
+                    B \arrow[]{r}[swap]{1_B} &B \arrow[]{r}[]{} &0.
+                \end{tikzcd}
+            \end{center}
+            Por (ET3), existe un morfismo de $\mathbb{E}$-extensiones $(x,c'):\delta\to 0$, por lo que $c'$ es tal que el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{d}[swap]{x} \arrow[]{r}[]{x} &B \arrow[]{d}[]{1_B} \arrow[]{r}[]{y} &C \arrow[dotted]{d}[]{c'} \\
+                    B \arrow[]{r}[swap]{1_B} &B \arrow[]{r}[]{} &0
+                \end{tikzcd}
+            \end{center}
+            conmuta, y además $x\cdot\delta = 0\cdot c'$. Dado que $0$ es un objeto final en $\mathscr{A}$, entonces $c'=0$, y obtenemos el morfismo de $\mathbb{E}$-extensiones $(x,0):\delta\to 0$. Por definición de morfismo de $\mathbb{E}$-extensiones y el inciso (j) de la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, se sigue que
+            \begin{align*}
+                \delta^\sharp x &= x\cdot\delta \\
+                                &= 0\cdot c' \\
+                                &= 0.
+            \end{align*}
+
+        \item Se sigue de aplicar el principio de dualidad a (b).
+    \end{enumerate}
+\end{proof}
+
+\begin{Prop}\cite[Proposition 3.3]{NakaokaPalu}\label{NakaokaPalu-3.3}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una terna que satisface (ET1) y (ET2). Entonces, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item $(\mathscr{A},\mathbb{E},\mathfrak{s})$ es una categoría pre-extriangulada.
+
+%        \item Para cualquier $\mathbb{E}$-triángulo $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ y cualquier $X\in\text{Obj}(\mathscr{A})$, las sucesiones 
+%
+%            \begin{itemize}
+%
+%                \item[(2-i)] $\text{Hom}_\mathscr{A}(X,A) \xrightarrow[]{\text{Hom}_\mathscr{A}(X,x)} \text{Hom}_\mathscr{A}(X,B) \xrightarrow[]{\text{Hom}_\mathscr{A}(X,y)} \text{Hom}_\mathscr{A}(X,C) \xrightarrow[]{(\delta_\sharp)_X} \mathbb{E}(X,A) \xrightarrow[]{\mathbb{E}(X,x)} \mathbb{E}(X,B)$
+%            
+%                \item[(2-ii)] $\text{Hom}_\mathscr{A}(C,X) \xrightarrow[]{\text{Hom}_\mathscr{A}(y,X)} \text{Hom}_\mathscr{A}(B,X) \xrightarrow[]{\text{Hom}_\mathscr{A}(x,X)} \text{Hom}_\mathscr{A}(A,X) \xrightarrow[]{\delta^\sharp_X} \mathbb{E}(C,X) \xrightarrow[]{\mathbb{E}(y,X)} \mathbb{E}(B,X)$,
+%            \end{itemize}
+%            son exactas en Ab.
+
+
+        \item Para cualquier $\mathbb{E}$-triángulo $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$, las sucesiones de transformaciones naturales
+
+            \begin{itemize}
+
+                \item[(2-i)] $\text{Hom}_\mathscr{A}(-,A) \xrightarrow[]{\text{Hom}_\mathscr{A}(-,x)} \text{Hom}_\mathscr{A}(-,B) \xrightarrow[]{\text{Hom}_\mathscr{A}(-,y)} \text{Hom}_\mathscr{A}(-,C) \xrightarrow[]{\delta_\sharp} \mathbb{E}(-,A) \xrightarrow[]{\mathbb{E}(-,x)} \mathbb{E}(-,B),$
+            
+                \item[(2-ii)] $\text{Hom}_\mathscr{A}(C,-) \xrightarrow[]{\text{Hom}_\mathscr{A}(y,-)} \text{Hom}_\mathscr{A}(B,-) \xrightarrow[]{\text{Hom}_\mathscr{A}(x,-)} \text{Hom}_\mathscr{A}(A,-) \xrightarrow[]{\delta^\sharp} \mathbb{E}(C,-) \xrightarrow[]{\mathbb{E}(y,-)} \mathbb{E}(B,-)$
+            \end{itemize}
+            son exactas en $\text{Mod}(\mathscr{A}^\text{op})$ y $\text{Mod}(\mathscr{A})$, en el sentido de la Observación \ref{NakaokaPalu-3.4}.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    $(1)\Rightarrow(2)$ Supongamos que $(\mathscr{A},\mathbb{E},\mathfrak{s})$ satisface (ET3) y (ET3)\textsuperscript{$\ast$}. Demostraremos la exactitud de la sucesión (2-ii), pues la de (2-i) se puede demostrar de forma dual. \\
+
+    La exactitud en $\text{Hom}(B,X)$, para todo $X\in\text{Obj}(\mathscr{A})$, se demuestra de forma análoga al caso de categorías trianguladas\footnote{Ver el inciso (b) del Teorema \ref{Mendoza_CT-1.2}.}. \\
+
+    Por el inciso (2) del Lema \ref{NakaokaPalu-3.2}, tenemos que $\delta^\sharp_X(\text{Im}(\text{Hom}(x,X)))=0$, de donde se sigue que $\text{Im}(\text{Hom}(x,X))\subseteq\text{Ker}(\delta^\sharp_X)$. Ahora, sea $a\in\text{Hom}(A,X)$ tal que $\delta^\sharp_X(a)=a\cdot\delta=0$. Entonces, se sigue que $(a,0):\delta\to 0$ es un morfismo de $\mathbb{E}$-extensiones. Dado que $\mathfrak{s}$ realiza a $\mathbb{E}$, existe $b\in\text{Hom}(B,X)$ tal que se tiene el siguiente morfismo de $\mathbb{E}$-triángulos
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[]{r}[]{y} &C \arrow[]{d}[]{} \arrow[dashed]{r}[]{\delta} &{} \\
+            X \arrow[]{r}[swap]{1_X} &X \arrow[]{r}[]{} &0 \arrow[dashed]{r}[swap]{a\cdot\delta = 0} &{}.
+        \end{tikzcd}
+    \end{center}
+    En particular, tenemos que $a = bx = \text{Hom}(x,X)(b)$, por lo que $\text{Ker}(\delta^\sharp_X)\subseteq\text{Im}(\text{Hom}(x,X))$. \\
+
+    Sea $A\xrightarrow[]{f}X$ en $\mathscr{A}$. Luego, 
+    \begin{align*}
+        \mathbb{E}(y^\text{op},X)(\delta^\sharp_X(f)) &= f\cdot(\delta\cdot y) \\   
+                                                      &= f\cdot0 \tag{Lema \ref{NakaokaPalu-3.2}(c)} \\
+                                                      &= 0, \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(j)}
+    \end{align*}
+    por lo que $\text{Im}(\delta^\sharp_X)\subseteq\text{Ker}(\mathbb{E}(y^\text{op},X))$. Veamos ahora que $\text{Ker}(\mathbb{E}(y^\text{op},X))\subseteq\text{Im}(\delta^\sharp_X)$. Sea $\theta\in\mathbb{E}(C,X)$ una $\mathbb{E}$-extensión tal que $\mathbb{E}(y^\text{op},X)(\theta) = \theta\cdot y = 0$. Por (ET2), podemos realizar a $\theta$ y $\theta\cdot y$ como los $\mathbb{E}$-triángulos $X\xrightarrow[]{f}Y\xrightarrow[]{g}C\xdashrightarrow{\theta}$ y $X\xrightarrow[]{m}Z\xrightarrow[]{e}B\xdashrightarrow{\theta\cdot y}$, respectivamente. Entonces, el morfismo de $\mathbb{E}$-extensiones $(1_X,y):\theta\cdot y\to \theta$ puede ser realizado por el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{m} &Z \arrow[]{d}[swap]{e'} \arrow[]{r}[]{e} &B \arrow[]{d}[]{y} \arrow[dashed]{r}[]{\theta\cdot y} &{} \\
+            X \arrow[]{r}[swap]{f} &Y \arrow[]{r}[swap]{g} &C \arrow[dashed]{r}[swap]{\theta} &{},
+        \end{tikzcd}
+    \end{center}
+    para algún $e'\in\text{Hom}(Z,Y)$. Dado que la $\mathbb{E}$-extensión $\theta\cdot y$ es escindible, por el inciso (1) de la Observación \ref{NakaokaPalu-2.11}, se sigue que $e$ tiene una sección $s$. Aplicando (ET3)\textsuperscript{$\ast$} al diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{r}[]{x} &B \arrow[]{d}[swap]{e's} \arrow[]{r}[]{y} &C \arrow[equals]{d}[]{} \arrow[dashed]{r}[]{\delta} &{} \\
+            X \arrow[]{r}[swap]{f} &Y \arrow[]{r}[swap]{g} &C, \arrow[dashed]{r}[swap]{\theta} &{}
+        \end{tikzcd}
+    \end{center}
+    obtenemos un morfismo $a\in\text{Hom}(A,X)$, con el cual podemos formar el morfismo de $\mathbb{E}$-extensiones $(a,1_C):\delta\to \theta$. En particular, esto implica que $\theta = a\cdot\delta = \delta^\sharp_Xa$, por lo que $\text{Ker}(\mathbb{E}(y,X))\subseteq \text{Im}(\delta^\sharp_X)$. \\
+
+    (2)$\Rightarrow$(1) Supongamos que, para cualquier $\mathbb{E}$-triángulo $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$, las sucesiones (2-i) y (2-ii) son exactas en $\text{Mod}(\mathscr{A}^\text{op})$ y $\text{Mod}(\mathscr{A})$, respectivamente. Demostraremos que esto implica a (ET3), pues la demostración de que implica a (ET3)\textsuperscript{$\ast$} es dual. \\
+
+    Sean y $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ y $A'\xrightarrow[]{x'} B'\xrightarrow[]{y'} C'\xdashrightarrow{\delta'}$ $\mathbb{E}$-triángulos arbitrarios. Supongamos que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[]{r}[]{y} &C \\
+            A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C'
+        \end{tikzcd}
+    \end{center}
+    conmuta. Por el Teorema \ref{Teo: Lema de Yoneda} (Lema de Yoneda), sabemos que $\mathbb{E}(-,x)\delta_\sharp=0$ equivale a $x\cdot\delta=0$. Análogamente, tenemos que $\delta'\cdot y'=0$. Por la exactitud de la sucesión $\text{Hom}(C,C')\xrightarrow[]{(\delta'_\sharp)_C} \mathbb{E}(C,A')\xrightarrow[]{\mathbb{E}(C,x')} \mathbb{E}(C,B')$ y la igualdad
+    \begin{align*}
+        \mathbb{E}(C,x')(a\cdot\delta) &= x'\cdot (a\cdot\delta) \\
+                                       &= (x'a)\cdot\delta \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(d)} \\
+                                       &= (bx)\cdot\delta \\
+                                       &= b\cdot (x\cdot\delta) \\
+                                       &= b\cdot0 \\
+                                       &= 0, \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(j)}
+    \end{align*}
+    existe $c'\in\text{Hom}(C,C')$ tal que $a\cdot\delta = (\delta')_\sharp c' = \delta'\cdot c'$. Por ende, $(a,c'):\delta\to \delta'$ es un morfismo de $\mathbb{E}$-extensiones. Supongamos que $(a,c')$ es realizado por el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[swap]{b'} \arrow[]{r}[]{y} &C \arrow[]{d}[]{c'} \arrow[dashed]{r}[]{\delta} &{} \\
+            A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C' \arrow[dashed]{r}[swap]{\delta'} &{}.
+        \end{tikzcd}
+    \end{center}
+    Entonces, por la exactitud de $\text{Hom}(C,B')\xrightarrow[]{\text{Hom}(y,B')} \text{Hom}(B,B')\xrightarrow[]{\text{Hom}(x,B')} \text{Hom}(A,B')$ y la igualdad
+    \begin{align*}
+        (b-b')x &= bx - b'x \\
+                &= x'a - x'a \\
+                &= 0,
+    \end{align*}
+    se sigue que existe $c''\in\text{Hom}(C,B')$ tal que $c''y = b-b'$. Por ende, definiendo $c:= c'+y'c''$, tenemos que
+    \begin{align*}
+        cy &= c'y + y'c''y \\
+           &= y'b' + (y'b-y'b') \\
+           &= y'b, \\ \\
+        \delta'\cdot c &= \delta\cdot(c' + y'c'') \\
+                       &= \delta'\cdot c' + \delta'\cdot(y'c'') \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(f)} \\
+                       &= \delta'\cdot c' + (\delta'\cdot y')\cdot c'' \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(h)} \\
+                       &= \delta'\cdot c' \tag{Proposición \ref{NakaokaPalu-3.2}} \\
+                       &= a\cdot\delta.
+    \end{align*}
+    Por ende, $(\mathscr{A},\mathbb{E},\mathfrak{s})$ satisface (ET3).
+\end{proof}
+    %Por el Lema \ref{NakaokaPalu-3.2}, tenemos que
+    %\begin{align*}
+    %    \text{Hom}_\mathscr{A}(x,X)\text{Hom}_\mathscr{A}(y,X) &= \text{Hom}_\mathscr{A}(yx,X) \\
+    %                                                           &= \text{Hom}_\mathscr{A}(0,X) \\
+    %                                                           &= 0; \tag{Teorema \ref{Mendoza-1.10.2}}
+    %\end{align*}
+    %además, para todo $f\in\text{Hom}_\mathscr{A}(B,X)$, se sigue que
+    %\begin{align*}
+    %    \big( \delta^\sharp_X \text{Hom}_\mathscr{A}(x,X) \big)(f) &= \delta^\sharp_X \big( \text{Hom}_\mathscr{A}(x,X)(f) \big) \\
+    %                                                             &= \delta^\sharp_X (fx) \\
+    %                                                             &= (fx)_\ast\delta \\
+    %                                                             &= f_\ast x_\ast\delta \tag{$\mathbb{E}(C,fx)(\delta) = \big(\mathbb{E}(C,f)\mathbb{E}(C,x)\big)(\delta)$} \\
+    %                                                             &= f_\ast0 \\
+    %                                                             &= 0,
+    %\end{align*}
+    %por lo que $\delta^\sharp\text{Hom}_\mathscr{A}(x,X)=0$. Más aún, se sigue que COMPLETAR.
+
+Los siguientes dos corolarios se siguen directamente de la Proposición \ref{NakaokaPalu-3.3}.
+
+\begin{Coro}\cite[Corollary 3.5]{NakaokaPalu}\label{NakaokaPalu-3.5}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría pre-extriangulada y
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[]{r}[]{y} &C \arrow[]{d}[]{c} \arrow[dashed]{r}[]{\delta} &\empty{} \\
+            A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C' \arrow[dashed]{r}[swap]{\delta'} &\empty{}
+        \end{tikzcd}
+    \end{center}
+    un morfismo de $\mathbb{E}$-triángulos arbitrario. Entonces, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $a$ se factoriza a través de $x$.
+
+        \item $a\cdot\delta = \delta'\cdot c = 0$.
+
+        \item $c$ se factoriza a través de $y'$.
+    \end{enumerate}
+    En particular, considerando el caso trivial $\delta=\delta'$ y $(a,b,c)=(1_A,1_B,1_C)$, obtenemos que%\footnote{Probablemente de aquí viene el nombre de $\mathbb{E}$-extensión escindible. ¿Mencionarlo aquí, o mover la definición hasta después de este Corolario?}
+\[
+x \text{ tiene una retracción } \iff \delta \text{ se escinde } \iff y \text{ tiene una sección.}
+\] 
+\end{Coro}
+
+\begin{Coro}\cite[Corollary 3.6]{NakaokaPalu}\label{NakaokaPalu-3.6}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría pre-extriangulada. Entonces, para cualquier morfismo de $\mathbb{E}$-triángulos $(a,b,c)$, se cumplen las siguientes condiciones.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Si $a$ y $c$ son isomorfismos en $\mathscr{A}$ o, equivalentemente, si $(a,c)$ es un isomorfismo en $\mathbb{E}$-$\text{Ext}(\mathscr{A})$, entonces $b$ es un isomorfismo en $\mathscr{A}$.
+
+        \item Si $a$ y $b$ son isomorfismos en $\mathscr{A}$, entonces $c$ también lo es.
+
+        \item Si $b$ y $c$ son isomorfismos en $\mathscr{A}$, entonces $a$ también lo es.
+    \end{enumerate}
+\end{Coro}
+
+\begin{Prop}\cite[Proposition 3.7]{NakaokaPalu}\label{NakaokaPalu-3.7}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría pre-extriangulada y $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ un $\mathbb{E}$-triángulo arbitrario. Si $a\in\text{Hom}_\mathscr{A}(A,A')$ y $c\in\text{Hom}_\mathscr{A}(C',C)$ son isomorfismos, entonces
+    \[
+    A'\xrightarrow[]{x a^{-1}} B\xrightarrow[]{c^{-1} y} C' \xdashrightarrow{a\cdot\delta\cdot c}
+    \] 
+    es un $\mathbb{E}$-triángulo.
+\end{Prop}
+
+\begin{proof}
+
+    Sea $\mathfrak{s}(a\cdot\delta\cdot c) = [A' \xrightarrow[]{x'} B'\xrightarrow[]{y'} C']$. Observemos que
+    \begin{align*}
+        (a\cdot\delta\cdot c)\cdot c^{-1} &=  (a\cdot\delta)\cdot(cc^{-1}) \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(h)} \\
+                                         &= a\cdot\delta\cdot1_C \\
+                                         &= a\cdot\delta, \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(g)}
+    \end{align*}
+    por lo que $(a,c^{-1}):\delta\to a\cdot\delta\cdot c$ es un morfismo de $\mathbb{E}$-extensiones. Sea $(a,b,c^{-1})$ un morfismo de $\mathbb{E}$-triángulos
+    \begin{equation}\label{eq: 3.7.1}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[]{r}[]{y} &C \arrow[]{d}[]{c^{-1}} \arrow[dashed]{r}[]{\delta} &\empty{} \\
+            A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C' \arrow[dashed]{r}[swap]{a\cdot\delta\cdot c} &\empty{}
+        \end{tikzcd}
+    \end{equation}
+    que realiza a $(a,c^{-1})$. Dado que por hipótesis $a$ es un isomorfismo, del Corolario \ref{NakaokaPalu-3.6} se sigue que $b$ es un isomorfismo. Luego, de (\ref{eq: 3.7.1}) obtenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            &B \arrow[]{dd}{b}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{dr}[]{c^{-1} y} \\
+            A' \arrow[]{ur}[]{x a^{-1}} \arrow[]{dr}[swap]{x'} &&C', \\
+                                                               &B' \arrow[]{ur}[swap]{y'}
+        \end{tikzcd}
+    \end{center}
+    por lo que $[A'\xrightarrow[]{x a^{-1}} B'\xrightarrow[]{c^{-1} y} C'] = [A' \xrightarrow[]{x'} B'\xrightarrow[]{y'} C'] = \mathfrak{s}(a\cdot\delta\cdot c)$.
+\end{proof}
+
+El siguiente resultado establece relaciones entre conflaciones que realizan a una misma $\mathbb{E}$-extensión.
+
+\begin{Coro}\cite[Corollary 3.8]{NakaokaPalu}\label{NakaokaPalu-3.8}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría pre-extriangulada y $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ un $\mathbb{E}$-triángulo arbitrario. Entonces, para cualquier $\delta'\in\mathbb{E}(C,A)$, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\mathfrak{s}(\delta) = \mathfrak{s}(\delta')$.
+
+        \item $\delta' = a\cdot\delta$ para algún automorfismo $a\in\text{Hom}_\mathscr{A}(A,A)$ tal que $xa=x$.
+
+        \item $\delta' = \delta\cdot c$ para algún automorfismo $c\in\text{Hom}_\mathscr{A}(C,C)$ tal que $cy=y$.
+
+        \item $\delta' = a\cdot\delta\cdot c$ para algunos automorfismos $a\in \text{Hom}_\mathscr{A}(A,A), c\in\text{Hom}_\mathscr{A}(C,C)$ tales que $xa=x$ y $cy=y$.
+    \end{enumerate}
+\end{Coro}
+
+\begin{proof}
+
+    La implicación $\text{(d)}\Rightarrow\text{(a)}$ se sigue de la Proposición \ref{NakaokaPalu-3.7}, las implicaciones $\text{(a)}\Rightarrow\text{(b)}$ y $\text{(a)}\Rightarrow\text{(c)}$ se siguen del Corolario \ref{NakaokaPalu-3.6}, y las implicaciones $\text{(b)}\Rightarrow\text{(d)}$ y $\text{(c)}\Rightarrow\text{(d)}$ son triviales.
+\end{proof}
+
+\begin{Def}\cite[Definition 3.9]{NakaokaPalu}\label{NakaokaPalu-3.9}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría pre-extriangulada y $A\xrightarrow[]{f}B$ en $\mathscr{A}$.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Si $f$ es una inflación, para cualquier conflación arbitraria $A\xrightarrow[]{f}B\xrightarrow[]{}C$, denotamos al objeto $C$ por $\text{Cone}(f)$.
+
+        \item Si $f$ es una deflación, para cualquier conflación arbitraria $K\xrightarrow[]{}A\xrightarrow[]{f}B$, denotamos al objeto $K$ por $\text{CoCone}(f)$.
+    \end{enumerate}
+\end{Def}
+
+\begin{Obs}\cite[Remark 3.10]{NakaokaPalu}\label{NakaokaPalu-3.10}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría pre-extriangulada.
+
+    \begin{enumerate}[label=(\arabic*)]
+
+        \item Para toda inflación $f\in\text{Hom}_\mathscr{A}(A,B)$, $\text{Cone}(f)$ es único hasta isomorfismos en $\mathscr{A}$.
+
+            En efecto: Sean $f$ una inflación y $A\xrightarrow[]{f}B\xrightarrow[]{g}C\xdashrightarrow{\delta}, A\xrightarrow[]{f}B\xrightarrow[]{g'}C'\xdashrightarrow{\delta'}$ $\mathbb{E}$-triángulos. Entonces, por (ET3), existe $c\in\text{Hom}_\mathscr{A}(C,C')$ tal que el siguiente diagrama conmuta
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[equals]{d}[]{} \arrow[]{r}[]{f} &B \arrow[equals]{d}[]{} \arrow[]{r}[]{g} &C \arrow[dotted]{d}[]{c} \arrow[dashed]{r}[]{\delta} &\empty{} \\
+                    A \arrow[]{r}[swap]{f} &B \arrow[]{r}[swap]{g'} &C' \arrow[dashed]{r}[swap]{\delta'} &\empty{}.
+                \end{tikzcd}
+            \end{center}
+            Por el Corolario \ref{NakaokaPalu-3.6}, $c$ es un isomorfismo en $\mathscr{A}$. Por ende, $\text{Cone}(f)$ es único hasta isomorfismos en $\mathscr{A}$. 
+
+            Remarcamos que, dado que $f\in\text{Hom}_\mathscr{A}(A,B)$ es una inflación, la notación $\text{Cone}(f)$ no debe ser confundida con aquella utilizada en la sección \ref{Sec: Límites y colímites} para denotar a la categoría de conos sobre un funtor, pues denotamos a los funtores con letras mayúsculas.
+
+        \item Para toda deflación $f\in\text{Hom}_\mathscr{A}(A,B)$, $\text{CoCone}(f)$ es único hasta isomorfismos en $\mathscr{A}$.
+
+            En efecto: La demostración es dual a la de (1).
+
+            Similarmente, remarcamos que, dado que $f\in\text{Hom}_\mathscr{A}(A,B)$ es una deflación, la notación $\text{CoCone}(f)$ no debe ser confundida con aquella utilizada en la sección \ref{Sec: Límites y colímites} para denotar a la categoría de coconos sobre un funtor, pues denotamos a los funtores con letras mayúsculas.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Prop}\cite[Proposition 3.11]{NakaokaPalu}\label{NakaokaPalu-3.11}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría pre-extriangulada, $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ un $\mathbb{E}$-triángulo y $X\in\text{Obj}(\mathscr{A})$. Entonces, se cumplen las siguientes condiciones.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Si $(\mathscr{A}, \mathbb{E}, \mathfrak{s})$ satisface (ET4), entonces $\mathbb{E}(X,A)\xrightarrow[]{\mathbb{E}(X,x)}\mathbb{E}(X,B)\xrightarrow[]{\mathbb{E}(X,y)}\mathbb{E}(X,C)$ es exacta en Ab.
+
+        \item Si $(\mathscr{A}, \mathbb{E}, \mathfrak{s})$ satisface (ET4)\textsuperscript{$\ast$}, entonces $\mathbb{E}(C,X)\xrightarrow[]{\mathbb{E}(y^\text{op},X)}\mathbb{E}(B,X)\xrightarrow[]{\mathbb{E}(x^\text{op},X)}\mathbb{E}(A,X)$ es exacta en Ab.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Observemos que
+            \begin{align*}
+                \mathbb{E}(X,y)\mathbb{E}(X,x) &= \mathbb{E}(X,yx) \tag{$\mathbb{E}$ es un funtor} \\
+                                               &= \mathbb{E}(X,0) \tag{Lema \ref{NakaokaPalu-3.2}} \\
+                                               &= 0, \tag{$\mathbb{E}$ es aditivo}
+            \end{align*}
+            de donde se sigue que $\text{Im}(\mathbb{E}(X,x))\subseteq\text{Ker}(\mathbb{E}(X,y))$. Ahora, sea $\theta\in\mathbb{E}(X,B)$ una $\mathbb{E}$-extensión arbitraria, realizada por el $\mathbb{E}$-triángulo $B\xrightarrow[]{f}Y\xrightarrow[]{g}X\xdashrightarrow{\theta}$. Por (ET4), existen $E\in\text{Obj}(\mathscr{A}), \theta'\in\mathbb{E}(E,A)$ y un diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[equals]{d}[]{} \arrow[]{r}[]{x} &B \arrow[]{d}[swap]{f} \arrow[]{r}[]{y} &C \arrow[]{d}[]{d} \\
+                    A \arrow[]{r}[swap]{h} &Y \arrow[]{d}[swap]{g} \arrow[]{r}[swap]{h'} &E \arrow[]{d}[]{e} \\
+                                           &X \arrow[equals]{r}[]{} &X
+                \end{tikzcd}
+            \end{center}
+            que cumple las siguientes condiciones
+            \begin{align*}
+                \mathfrak{s}(\theta\cdot y) &= [C\xrightarrow[]{d} E\xrightarrow[]{e} X], \\
+                \mathfrak{s}(\theta') &= [A\xrightarrow[]{h} Y\xrightarrow[]{h'} E], \\
+                x\cdot\theta' &= \theta\cdot e.
+            \end{align*}
+            Supongamos que $\mathbb{E}(X,y)(\theta)=y\cdot\theta=0$. Entonces, $y\cdot\theta$ es una $\mathbb{E}$-extensión escindible y, por la Observación \ref{NakaokaPalu-2.11}, se sigue que $e$ tiene una sección $s\in\text{Hom}(X,E)$. Luego, tenemos que $\theta'\cdot s\in\mathbb{E}(X,A)$ es tal que
+            \begin{align*}
+                \mathbb{E}(X,x)(\theta'\cdot s) &= x\cdot(\theta'\cdot s) \\
+                                                &= (x\cdot\theta')\cdot s \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(i)} \\
+                                                &= (\theta\cdot e)\cdot s \\
+                                                &= \theta\cdot(es) \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(h)} \\
+                                                &= \theta\cdot 1_X \\
+                                                &= \theta, \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(g)}
+            \end{align*}
+            de donde concluimos que $\text{Ker}(\mathbb{E}(X,y))\subseteq\text{Im}(\mathbb{E}(X,x))$.
+
+        \item Dual a (a).
+    \end{enumerate}
+\end{proof}
+
+\begin{Coro}\cite[Corollary 3.12]{NakaokaPalu}\label{NakaokaPalu-3.12}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada tal que $\text{Mod}(\mathscr{A})$ o, equivalentemente, $\text{Mod}(\mathscr{A}^\text{op})$ es localmente pequeña. Entonces, para cualquier $\mathbb{E}$-triángulo $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$, las sucesiones de transformaciones naturales
+\[
+    \resizebox{\hsize}{!}{$\text{Hom}_\mathscr{A}(-,A) \xrightarrow{\text{Hom}_\mathscr{A}(-,x)} \text{Hom}_\mathscr{A}(-,B) \xrightarrow{\text{Hom}_\mathscr{A}(-,y)} \text{Hom}_\mathscr{A}(-,C) \xrightarrow{\delta_\sharp} \mathbb{E}(-,A) \xrightarrow{\mathbb{E}(-,x)} \mathbb{E}(-,B) \xrightarrow{\mathbb{E})(-,y)} \mathbb{E}(-,C)$}
+\] 
+    \[
+        \resizebox{\hsize}{!}{$\text{Hom}_\mathscr{A}(C,-) \xrightarrow{\text{Hom}_\mathscr{A}(y,-)} \text{Hom}_\mathscr{A}(B,-) \xrightarrow{\text{Hom}_\mathscr{A}(x,-)} \text{Hom}_\mathscr{A}(A,-) \xrightarrow{\delta^\sharp} \mathbb{E}(C,-) \xrightarrow{\mathbb{E}(y,-)} \mathbb{E}(B,-) \xrightarrow{\mathbb{E})(x,-)} \mathbb{E}(A,-),$}
+\] 
+son exactas en $\text{Mod}(\mathscr{A}^\text{op})$ y $\text{Mod}(\mathscr{A})$, respectivamente.
+\end{Coro}
+
+\begin{proof}
+
+    Se sigue directamente de las Proposiciones \ref{NakaokaPalu-3.3} y \ref{NakaokaPalu-3.11}.
+\end{proof}
+
+\subsection*{Octaedros trasladados} \label{Ssec: Octaedros trasladados}
+
+Como se mencionó en la Observación \ref{Obs: Terminología en categorías extrianguladas}, el axioma (ET4) es análogo al axioma del octaedro (TR4) de categorías trianguladas. En esta sección, veremos otros resultados de categorías extrianguladas análogos a (TR4).
+
+\begin{Lema}\cite[Lemma 3.14]{NakaokaPalu}\label{NakaokaPalu-3.14} %\footnote{Nakaoka y Palu dicen que hay un resultado análogo para categorías trianguladas.}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada y $A\xrightarrow[]{f}B\xrightarrow[]{f'}D\xdashrightarrow{\delta_f}, B\xrightarrow[]{g}C\xrightarrow[]{g'}F\xdashrightarrow{\delta_g}, A\xrightarrow[]{h}C\xrightarrow[]{h_0} E_0\xdashrightarrow{\delta_h}$ $\mathbb{E}$-triángulos tales que $h=gf$. Entonces, existen morfismos $d_0, e_0$ en $\mathscr{A}$ tales que el diagrama en $\mathscr{A}$
+    \begin{equation}\label{NakaokaPalu-3.14_1}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{f} &B \arrow[]{d}[swap]{g} \arrow[]{r}[]{f'} &D \arrow[]{d}[]{d_0} \\
+            A \arrow[]{r}[swap]{h} &C \arrow[]{d}[swap]{g'} \arrow[]{r}[swap]{h_0} &E_0 \arrow[]{d}[]{e_0} \\
+                                   &F \arrow[equals]{r}[]{} &F
+        \end{tikzcd}
+    \end{equation}
+    conmuta, y se satisfacen las siguientes condiciones:
+
+    \begin{enumerate}
+    
+        \item[(i)] $D\xrightarrow[]{d_0} E\xrightarrow[]{e_0} F\xdashrightarrow{f'\cdot\hspace{0.75mm}\delta_g}$ es un $\mathbb{E}$-triángulo,
+
+        \item[(ii)] $\delta_h\cdot\delta_0 = \delta_f$,
+
+        \item[(iii)] $f\cdot\delta_h = \delta_g\cdot e_0$.
+    \end{enumerate}
+\end{Lema}
+
+\begin{proof}
+
+    Por (ET4), existen $E\in\text{Obj}(\mathscr{A})$, un diagrama conmutativo (\ref{eq: (ET4)}) en $\mathscr{A}$, y un $\mathbb{E}$-triángulo $A\xrightarrow[]{h}C\xrightarrow[]{h'}E\xdashrightarrow{\delta''}$, tales que se satisfacen las siguientes condiciones:
+
+    \begin{enumerate}
+    
+        \item[(i')] $D\xrightarrow[]{d}E\xrightarrow[]{e}F\xdashrightarrow{f'\cdot\hspace{0.75mm}\delta_g}$ es un $\mathbb{E}$-triángulo,
+
+        \item[(ii')] $\delta''\cdot d=\delta_f$,
+
+        \item[(iii')] $f\cdot\delta'' = \delta_g\cdot e$.
+
+    \end{enumerate}
+
+    Por el inciso (1) de la Observación \ref{NakaokaPalu-3.10}, tenemos el morfismo de $\mathbb{E}$-triángulos
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{h} &C \arrow[equals]{d}[]{} \arrow[]{r}[]{h'} &E \arrow[]{d}[]{u} \arrow[dashed]{r}[]{\delta''} &\empty{} \\
+            A \arrow[]{r}[swap]{h} &C \arrow[]{r}[swap]{h_0} &E_0 \arrow[dashed]{r}[swap]{\delta_h} &\empty{},
+        \end{tikzcd}
+    \end{center}
+    con $u$ un isomorfismo. En particular, tenemos que $\delta'' = \delta_h\cdot u$. Definiendo $d_0:=ud$ y $e_0:=eu^{-1}$,  la conmutatividad del diagrama (\ref{NakaokaPalu-3.14_1}) se sigue de la del diagrama (\ref{eq: (ET4)}). Además, dado que $u$ es un isomorfismo, tenemos que
+    \[
+    [D\xrightarrow[]{d_0}E_0\xrightarrow[]{e_0}F] = [D\xrightarrow[]{d}E\xrightarrow[]{e}F].
+    \] 
+    Luego, de (i') se sigue (i), mientras que por (ii') y (iii') tenemos que
+    \begin{align*}
+        \delta_f &= \delta''\cdot d \\
+                 &= (\delta_h\cdot u)\cdot d \\
+                 &= \delta_h\cdot(ud) \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(h)} \\
+                 &= \delta_h\cdot d_0, \\ \\
+        \delta_g\cdot e = f\cdot\delta'' &\iff \delta_g\cdot e = f\cdot(\delta_h\cdot u) \\
+                                         &\iff \delta_g\cdot e =  (f\cdot \delta_h)\cdot u \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(i)} \\
+                                         &\iff (\delta_g\cdot e)\cdot u^{-1} = ((f\cdot\delta_h)\cdot u)\cdot u^{-1} \\
+                                         &\iff (\delta_g\cdot eu^{-1}) = (f\cdot\delta_h)\cdot uu^{-1} \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(h)} \\
+                                         &\iff (\delta_g\cdot e_0) = (f\cdot\delta_h)\cdot 1_{E_0} \\
+                                         &\iff (\delta_g\cdot e_0) = (f\cdot\delta_h) \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(g)} \\
+    \end{align*}
+\end{proof}
+
+\begin{Prop}\cite[Proposition 3.15]{NakaokaPalu}\label{NakaokaPalu-3.15}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada y $C\in\text{Obj}(\mathscr{A})$. Entonces, la siguiente proposición y su proposición dual se verifican en $(\mathscr{A},\mathbb{E},\mathfrak{s})$:
+
+    Para cualesquiera $\mathbb{E}$-triángulos $A_1\xrightarrow[]{x_1}B_1\xrightarrow[]{y_1}C\xdashrightarrow{\delta_1}, A_2\xrightarrow[]{x_2}B_2\xrightarrow[]{y_2}C\xdashrightarrow{\delta_2}$, existe un diagrama conmutativo en $\mathscr{A}$
+    \begin{equation}\label{NakaokaPalu-3.15_1}
+        \begin{tikzcd}
+            &A_2 \arrow[]{d}[swap]{n_2} \arrow[equals]{r}[]{} &A_2 \arrow[]{d}[]{x_2} \\
+            A_1 \arrow[equals]{d}[]{} \arrow[]{r}[]{n_1} &N \arrow[]{d}[swap]{e_2} \arrow[]{r}[]{e_1} &B_2 \arrow[]{d}[]{y_2} \\
+            A_1 \arrow[]{r}[swap]{x_1} &B_1 \arrow[]{r}[swap]{y_1} &C,
+        \end{tikzcd}
+    \end{equation}
+    tal que se satisfacen las condiciones
+
+    \begin{enumerate}
+    
+        \item[(i)] $\mathfrak{s}(\delta_1\cdot y_2) = [A_1\xrightarrow[]{n_1}N\xrightarrow[]{e_1}B_2]$,
+
+        \item[(ii)] $\mathfrak{s}(\delta_2\cdot y_1) = [A_2\xrightarrow[]{n_2}N\xrightarrow[]{e_2}B_1]$,
+
+        \item[(iii)] $n_1\cdot\delta_1 + n_2\cdot\delta_2 = 0$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}
+    Dado que $\mathfrak{s}$ es una realización aditiva de $\mathbb{E}$, tenemos que
+    \[
+    \mathfrak{s}\big(\delta_1\bigoplus\delta_2\big) = \big[A_1\bigoplus A_2 \xrightarrow[]{x_1\bigoplus x_2} B_1\bigoplus B_2 \xrightarrow[]{y_1\bigoplus y_2} C\bigoplus C\big].
+    \] 
+    Sean \begin{tikzcd} A_1 \arrow[shift left]{r}[]{\mu_1} &A_1 \bigoplus A_2 \arrow[shift left]{l}[]{\pi_1} \arrow[shift right]{r}[swap]{\pi_2} &A_2 \arrow[shift right]{l}[swap]{\mu_2} \end{tikzcd} un biproducto en $\mathscr{A}$ y $\nu = (\delta_1\bigoplus\delta_2)\cdot\Delta_C$, con $\mathfrak{s}(\nu) = \big[A_1\bigoplus A_2 \xrightarrow[]{j} N\xrightarrow[]{k} C\big]$. Por el inciso (b) de la Proposición \ref{Prop: Multiplicación de matrices con E-matrices y compatibilidad con acciones de bimódulo}, tenemos que
+    \begin{align*}
+        \Phi^\mathbb{E}_{A_1\bigoplus A_2,C}(\nu) &= \Phi^\mathbb{E}_{A_1\bigoplus A_2, C}\big((\delta_1\bigoplus\delta_2)\cdot\Delta_C\big) \\
+                                    &= \Phi^\mathbb{E}_{A_1\bigoplus A_2, C\bigoplus C}(\delta_1\bigoplus\delta_2)\varphi_{C\bigoplus C,C}(\Delta_C) \\
+                                    &= \big(\begin{smallmatrix} \delta_1 &0 \\ 0 &\delta_2 \end{smallmatrix}\big)\big( \begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\big) \\
+                                    &= \big(\begin{smallmatrix} \delta_1 \\ \delta_2 \end{smallmatrix}\big).
+    \end{align*}
+    Dado que
+    \begin{align*}
+        (\begin{smallmatrix} 1 &0 \end{smallmatrix})\big( \begin{smallmatrix} \delta_1 \\ \delta_2 \end{smallmatrix}\big) &= 1\cdot\delta_1 + 0\cdot\delta_2 \\
+                               &= \delta_1, \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(g) y (j)} \\
+        (\begin{smallmatrix} 0 &1 \end{smallmatrix})\big( \begin{smallmatrix} \delta_1 \\ \delta_2 \end{smallmatrix}\big) &= 0\cdot\delta_1 + 1\cdot\delta_2 \\
+                               &= \delta_2,
+    \end{align*}
+    de las Proposiciones \ref{Mendoza-1.8.11} y \ref{Mendoza-1.8.11g}, se sigue que
+    \begin{equation}\label{eq: 3.15_1}
+        \pi_1\cdot\nu = \delta_1 \quad \land \quad \pi_2\cdot\nu = \delta_2.
+    \end{equation}
+
+    Aplicando (ET4) a $\mathfrak{s}(0) = \big[A_1\xrightarrow[]{\mu_1}A_1\bigoplus A_2\xrightarrow[]{\pi_2}A_2\big]$ y $\mathfrak{s}(\nu) = \big[A_1\bigoplus A_2\xrightarrow[]{j}N\xrightarrow[]{k}C\big]$, obtenemos $B_2'\in\text{Obj}(\mathscr{A}), \theta_1\in\mathbb{E}(B_2',A_1)$ y un diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A_1 \arrow[equals]{d}[]{} \arrow[]{r}[]{\mu_1} &A_1\bigoplus A_2 \arrow[]{d}[swap]{j} \arrow[]{r}[]{\pi_2} &A_2 \arrow[]{d}[]{x_2'} \\
+            A_1 \arrow[]{r}[swap]{n_1} &N \arrow[]{d}[swap]{k} \arrow[]{r}[swap]{e_1'} &B_2' \arrow[]{d}[]{y_2'} \\
+                                       &C \arrow[equals]{r}[]{} &C
+        \end{tikzcd}
+    \end{center}
+    tales que  $\mathfrak{s}(\pi_2\cdot\nu) = [A_2\xrightarrow[]{x_2'}B_2\xrightarrow[]{y_2'}C]$, $\theta_1\cdot x_2 = 0$, $\mathfrak{s}(\theta_1) = [A_1\xrightarrow[]{n_1}N\xrightarrow[]{e_1'}B_2']$, y $(\mu_1,y_2'):\theta_1\to \nu$ es un morfismo de $\mathbb{E}$-extensiones realizado por $(\mu_1,1_N,y_2')$, por lo que $\nu\cdot y_2' = \mu_1\cdot\theta_1$. En particular, tenemos que
+    \[
+        [A_2 \xrightarrow[]{x_2'} B_2\xrightarrow[]{y_2'} C] = \mathfrak{s}(\delta_2) = [A_2\xrightarrow[]{x_2} B_2\xrightarrow[]{y_2} C].
+    \] 
+    Por ende, existe un isomorfismo $b_2\in\text{Hom}_\mathscr{A}(B_2,B_2')$ tal que $b_2x_2=x_2'$ y $y_2'b_2=y_2$. Definiendo $e_1 := b_2^{-1} e_1'$, de la Proposición \ref{NakaokaPalu-3.7} se sigue que $\mathfrak{s}(\theta_1\cdot b_2) = [A_1\xrightarrow[]{n_1}N\xrightarrow[]{e_1}B_2]$, y obtenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A_1 \arrow[equals]{d}[]{} \arrow[]{r}[]{\mu_1} &A_1\bigoplus A_2 \arrow[]{d}[swap]{j} \arrow[]{r}[]{\pi_2} &A_2 \arrow[]{d}[]{x_2} \\
+            A_1 \arrow[]{r}[swap]{n_1} &N \arrow[]{d}[swap]{k} \arrow[]{r}[swap]{e_1} &B_2 \arrow[]{d}[]{y_2} \\
+                                                            &C \arrow[equals]{r}[]{} &C,
+        \end{tikzcd}
+    \end{center}
+    el cual, por la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, satisface
+    \begin{align*}
+        \delta_1\cdot y_2 &= (\pi_1\cdot\nu)\cdot y_2 \\
+                          &= (\pi_1\cdot\nu)\cdot(y_2'\cdot b_2) \\
+                          &= \pi_1\cdot((\nu\cdot y_2')\cdot b_2) \\
+                          &= \pi_1\cdot((\mu_1\cdot\theta_1)\cdot b_2) \\
+                          &= ((\pi_1\cdot\mu_1)\cdot\theta_1)\cdot b_2 \\
+                          &= 1_{A_1}\cdot\theta_1\cdot b_2 \\
+                          &= \theta_1\cdot b_2,
+    \end{align*}
+    de donde se sigue (i). \\
+
+    Análogamente, de $\mathfrak{s}(0) = [A_2\xrightarrow[]{\mu_2}A_1\bigoplus A_2\xrightarrow[]{\pi_1}A_1]$ y $\mathfrak{s}(\nu) = \big[A_1\bigoplus A_2\xrightarrow[]{j}N\xrightarrow[]{k}C\big]$, tenemos que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A_2 \arrow[equals]{d}[]{} \arrow[]{r}[]{\mu_2} &A_1\bigoplus A_2 \arrow[]{d}[swap]{j} \arrow[]{r}[]{\pi_1} &A_1 \arrow[]{d}[]{x_1} \\
+            A_2 \arrow[]{r}[swap]{n_2} &N \arrow[]{d}[swap]{k} \arrow[]{r}[swap]{e_2} &B_1 \arrow[]{d}[]{y_1} \\
+                                                            &C \arrow[equals]{r}[]{} &C,
+        \end{tikzcd}
+    \end{center}
+    conmuta, de donde se sigue (ii). \\
+
+    Observemos que, de los dos diagramas conmutativos anteriores, tenemos que
+    \begin{align*}
+        e_2n_1 &= e_1j\mu_1 \\
+               &= x_1\pi_1\mu_1 \\
+               &= x_1, \\ \\
+        e_1n_2 &= e_1j\mu_2 \\
+               &= x_2\pi_2\mu_2 \\
+               &= x_2, \\ \\
+        y_2e_1 &= k \\
+               &= y_1e_2,
+    \end{align*}
+    por lo que el diagrama (\ref{eq: 3.15_1}) conmuta. Más aún, de (\ref{eq: 3.15_1}), el Lema \ref{NakaokaPalu-3.2} y la Proposición, \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, tenemos que
+    \begin{align*}
+        n_1\cdot\delta_1 + n_2\cdot\delta_2 &= (j\mu_1)\cdot\delta_1 + (j\mu_2)\cdot\delta_2 \\
+                                            &= (j\mu_1)\cdot(\pi_1\cdot\nu) + (j\mu_2)\cdot(\pi_2\cdot\nu) \\ 
+                                            &= j\cdot(\mu_1\pi_1)\cdot\nu + j\cdot(\mu_2\pi_1)\cdot\nu \\
+                                            &= j\cdot(\mu_1\pi_1+\mu_2\pi_2)\cdot\nu \\
+                                            &= j\cdot 1_{A_1\bigoplus A_2} \cdot\nu \\
+                                            &= j\cdot\nu \\
+                                            &= 0.
+    \end{align*}
+    Finalmente, por la Observación \ref{Obs: Categorías extrianguladas} y el principio de dualidad, se sigue que la proposición dual también es válida en $(\mathscr{A},\mathbb{E},\mathfrak{s})$.
+\end{proof}
+
+\begin{Coro}\cite[Corollary 3.16]{NakaokaPalu}\label{NakaokaPalu-3.16}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada, y $x\in\text{Hom}_\mathscr{A}(A,B)$, $f\in\text{Hom}_\mathscr{A}(A,D)$ morfismos arbitrarios. Entonces, si $x$ es una inflación, $\big( \begin{smallmatrix} f \\ x \end{smallmatrix} \big) \in\text{Hom}_\mathscr{A}(A,D\bigoplus B)$ también lo es. Más aún, la proposición dual para deflaciones también se cumple.
+\end{Coro}
+
+\begin{proof}
+
+    Por la Observación \ref{Obs: Categorías extrianguladas} y el principio de dualidad, es suficiente demostrar la proposición para inflaciones. \\
+
+    Sea $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ un $\mathbb{E}$-triángulo. Supongamos que $\mathfrak{s}(f\cdot\delta) = [D\xrightarrow[]{d}E\xrightarrow[]{e}C]$. Por la Proposición \ref{NakaokaPalu-3.15}, obtenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{equation}\label{eq: 3.16_1}
+        \begin{tikzcd}
+            &A \arrow[equals]{r}[]{} \arrow[]{d}[swap]{m} &A \arrow[]{d}[]{x} \\
+            D \arrow[equals]{d}[]{} \arrow[]{r}[]{k} &M \arrow[]{d}[]{e} \arrow[]{r}[swap]{l} &B \arrow[]{d}[]{y} \arrow[dashed]{r}[]{(f\cdot\delta)\cdot y} &\empty{} \\
+            D \arrow[]{r}[swap]{d} &E \arrow[dashed]{d}[swap]{\delta\cdot e} \arrow[]{r}[swap]{e} &C \arrow[dashed]{d}[]{\delta} \arrow[dashed]{r}[swap]{f\cdot\delta} &\empty{} \\
+                                   &\empty{} &\empty{}
+        \end{tikzcd}
+    \end{equation}
+    compuesta de $\mathbb{E}$-triángulos que satisfacen $m\cdot\delta + f\cdot\delta\cdot k = 0$. Dado que, por los incisos (i) y (j) de la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, tenemos que
+    \begin{align*}
+        (f\cdot\delta)\cdot y &= f\cdot (\delta\cdot y) \\
+                              &= f\cdot0 \\
+                              &= 0,
+    \end{align*}
+    podemos suponer que $M=D\bigoplus B, k = \big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix} \big), l = (\begin{smallmatrix}0 &1 \end{smallmatrix})$. Sean $p\in\text{Hom}_\mathscr{A}(M,D), i\in\text{Hom}_\mathscr{A}(B,M)$ tales que \begin{tikzcd} D \arrow[shift left]{r}[]{k} &M \arrow[shift left]{l}[]{p} \arrow[shift right]{r}[swap]{l} &B \arrow[shift right]{l}[swap]{i} \end{tikzcd} es un biproducto en $\mathscr{A}$. Por la Proposición \ref{NakaokaPalu-3.3}, tenemos que la sucesión $\text{Hom}_\mathscr{A}(B,M) \xrightarrow[]{\text{Hom}_\mathscr{A}(x,M)} \text{Hom}_\mathscr{A}(A,M) \xrightarrow[]{\delta^\sharp} \mathbb{E}(C,M)$ es exacta en Ab. Más aún, por el Lema \ref{NakaokaPalu-3.2}, tenemos que $\delta^\sharp(m+kf) = (m+kf)\cdot\delta = 0$. Por ende, existe $b\in\text{Hom}_\mathscr{A}(B,M)$ tal que $bx = m+kf$. Modificando a $A\xrightarrow[]{m}M\xrightarrow[]{e}E$ con el automorfismo%\footnote{Revisar esta expresión.}
+    \[
+        n = \begin{pmatrix} -1 &pb \\ 0 &1 \end{pmatrix} = \begin{pmatrix} -1 &0 \\ 0 &1 \end{pmatrix} (1_M - kpbl):M\xrightarrow[]{\sim}M,
+    \] 
+    obtenemos una conflación $A\xrightarrow[]{nm}D\bigoplus B\xrightarrow[]{en^{-1}}E$. Luego, dado que
+    \begin{align*}
+        pnm &= -p(1_M - kpbl)m \\
+            &= pkpblm - pm \\
+            &= pbx - pm \\
+            &= pkf \\
+            &= f, \\ \\
+        lnm &= l(1_M - kpbl)m \\
+            &= lm \\
+            &= x,
+    \end{align*}
+    se sigue que $nm = \big( \begin{smallmatrix} f \\ x \end{smallmatrix} \big)$.
+\end{proof}
+
+\begin{Prop}\cite[Proposition 3.17]{NakaokaPalu}\label{NakaokaPalu-3.17}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada. Entonces, para cualesquiera $\mathbb{E}$-triángulos $D\xrightarrow[]{f}A\xrightarrow[]{f'}C\xdashrightarrow{\delta_f}, A\xrightarrow[]{g}B\xrightarrow[]{g'}F\xdashrightarrow{\delta_g}, E\xrightarrow[]{h}B\xrightarrow[]{h'}C\xdashrightarrow{\delta_h}$ tales que $h'g=f'$, existen un $\mathbb{E}$-triángulo $D\xrightarrow[]{d}E\xrightarrow[]{e}F\xdashrightarrow{\theta}$ y un diagrama conmutativo en $\mathscr{A}$
+    \begin{equation}\label{eq: 3.17_0}
+        \begin{tikzcd}
+            D \arrow[]{d}[swap]{d} \arrow[]{r}[]{f} &A \arrow[]{d}[]{g} \arrow[]{r}[]{f'} &C \arrow[equals]{d}[]{} \\
+            E \arrow[]{d}[swap]{e} \arrow[]{r}[]{h} &B \arrow[]{d}[]{g'} \arrow[]{r}[]{h'} &C \\
+            F \arrow[equals]{r}[]{} &F
+        \end{tikzcd}
+    \end{equation}
+    tales que se satisfacen las condiciones
+    \begin{enumerate}
+    
+        \item[(i)] $d\cdot\delta_f = \delta_h$,
+
+        \item[(ii)] $f\cdot\theta = \delta_g$,
+
+        \item[(ii)] $\theta\cdot g' + \delta_f\cdot h' = 0$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}
+
+    Por (ET4), existen $\mathbb{E}$-triángulos $D\xrightarrow[]{gf}B\xrightarrow[]{a}G\xdashrightarrow{\mu}$ y $C\xrightarrow[]{b}G\xrightarrow[]{c}F\xdashrightarrow{\nu}$ tales que el diagrama en $\mathscr{A}$
+    \begin{equation}\label{eq: 3.17_1}
+        \begin{tikzcd}
+            D \arrow[equals]{d}[]{} \arrow[]{r}[]{f} &A \arrow[]{d}[swap]{g} \arrow[]{r}[]{f'} &C \arrow[]{d}[]{b} \\
+            D \arrow[]{r}[swap]{gf} &B \arrow[]{d}[swap]{g'} \arrow[]{r}[swap]{a} &G \arrow[]{d}[]{c} \\
+                                    &F \arrow[equals]{r}[]{} &F
+        \end{tikzcd}
+    \end{equation}
+    conmuta, con $f'\cdot\delta_g=\nu, \mu\cdot b=\delta_f$ y $\delta_g\cdot c = f\cdot\mu$. Del Lema \ref{NakaokaPalu-3.2} y la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, se sigue que
+    \begin{align*}
+        \nu &= f'\cdot\delta_g \\
+            &= (h'g)\cdot\delta_g \\
+            &= h'\cdot(g\cdot\delta_g) \\
+            &= h'\cdot0 \\
+            &= 0.
+    \end{align*}Por ende, hasta equivalencia, podemos suponer que $G = C\bigoplus F, b = \big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix} \big)$ y $c = (\begin{smallmatrix} 0 &1 \end{smallmatrix})$. Entonces, por la conmutatividad del diagrama (\ref{eq: 3.17_1}), tenemos que $a = \big( \begin{smallmatrix} a_1 \\ a_2 \end{smallmatrix} \big) :B\to G = C\bigoplus F$ satisface $a_1g=f'$ y $a_2=g'$. Dado que $h'-a_1\in\text{Hom}_\mathscr{A}(B,C)$ satisface $(h'-a_1)g=f'-f'=0$, existe $z\in\text{Hom}_\mathscr{A}(F,C)$ tal que $zg' = h'-a_1$. Sea $z' = \big( \begin{smallmatrix} -z \\ 1 \end{smallmatrix} \big)$. Aplicando el resultado dual del Lema \ref{NakaokaPalu-3.14} al diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            &E \arrow[]{d}[swap]{h} &F \arrow[]{d}[]{z'} \\
+            D \arrow[]{r}[swap]{gf} &B \arrow[]{d}[swap]{h'} \arrow[]{r}[]{a} &G \arrow[]{d}[]{( \begin{smallmatrix} 1 \ z \end{smallmatrix})} \arrow[dashed]{r}[]{\mu} &\empty{} \\
+                                    &C \arrow[dashed]{d}[swap]{\delta_h} \arrow[equals]{r}[]{} &C \arrow[dashed]{d}[]{0} \\
+                                    &\empty{} &\empty{}
+        \end{tikzcd}
+    \end{center}
+    obtenemos un $\mathbb{E}$-triángulo $D\xrightarrow[]{d}E\xrightarrow[]{e}F\xdashrightarrow{\theta}$ tal que el diagrama en $\mathscr{A}$
+    \begin{equation}\label{eq: 3.17_2}
+        \begin{tikzcd}
+            D \arrow[equals]{d}[]{} \arrow[]{r}[]{d} &E \arrow[]{d}[swap]{h} \arrow[]{r}[]{e} &F \arrow[]{d}[]{z'} \\
+            D \arrow[]{r}[swap]{gf} &B \arrow[]{d}[swap]{h'} \arrow[]{r}[swap]{a} &G \arrow[]{d}[]{(\begin{smallmatrix} 1 \ z \end{smallmatrix})} \\
+                                    &C \arrow[equals]{r}[]{} &C
+        \end{tikzcd}
+    \end{equation}
+    conmuta, y se satisface $\theta = \mu\cdot z', d\cdot\mu = \delta_h\cdot(\begin{smallmatrix} 1 &z \end{smallmatrix})$. Por la conmutatividad del diagrama (\ref{eq: 3.17_2}), tenemos que
+    \begin{align*}
+        gf &= hd, \\ \\
+        ah = z'e &\iff \big( \begin{smallmatrix} a_1 \\ a_2 \end{smallmatrix} \big) h = \big( \begin{smallmatrix} -z \\ 1 \end{smallmatrix} \big) e \\
+                 &\iff \big( \begin{smallmatrix} a_1h \\ a_2h \end{smallmatrix} \big) = \big( \begin{smallmatrix} -ze \\ e \end{smallmatrix} \big) \\
+                 &\iff a_2h = ev \\
+                 &\iff g'h=e, \\ \\
+            ( \begin{smallmatrix} 1 \ z \end{smallmatrix} ) a = h' &\iff ( \begin{smallmatrix} 1 \ z \end{smallmatrix} ) \big( \begin{smallmatrix} a_1 \\ a_2 \end{smallmatrix} \big) g = h'g \\
+                                                                   &\iff a_1 g + za_2 g = h'g \\
+                                                                   &\iff f' + zg'g = h'g \\
+                                                                   &\iff f' + (h'-a_1)g = h'g \\
+                                                                   &\iff f' = h'g, \tag{puesto que $(h'-a_1)g=f'-f'$}
+    \end{align*}
+    por lo que el diagrama (\ref{eq: 3.17_0}) conmuta. Luego, por la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, tenemos que
+    \begin{align*}
+        d\cdot\mu = \delta_h\cdot(\begin{smallmatrix} 1 \ z \end{smallmatrix}) &\iff (d\cdot\mu)\cdot b = (\delta_h\cdot(\begin{smallmatrix} 1 \ z \end{smallmatrix}))\cdot b \\
+                                                                               &\iff d\cdot (\mu\cdot b) = \delta_h\cdot\big( (\begin{smallmatrix} 1 \ z \end{smallmatrix}) \big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix} \big)  \big) \\
+                                                                               &\iff d\cdot\delta_f = \delta_h\cdot 1_C \\
+                                                                               &\iff d\cdot\delta_f = \delta_h,
+    \end{align*}
+    obteniéndose (i). Por otro lado, observemos que
+    \begin{align*}
+        (f\cdot\theta)\cdot c &= f\cdot ((\mu\cdot z')\cdot c) \\
+                              &= f\cdot(\mu\cdot z'c) \\
+                              &= f\cdot \bigg(\mu\cdot\begin{pmatrix} 0 & -z \\ 0 & 1 \end{pmatrix}\bigg) \\
+                              &= f\cdot\big(\mu\cdot\big( 1 - \big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big) (\begin{smallmatrix} 1 \ z \end{smallmatrix})\big)\big) \\
+                              &= f\cdot\mu - f\cdot \big(\mu\cdot\big( b(\begin{smallmatrix} 1 \ z \end{smallmatrix})\big)\big) \\
+                              &= f\cdot\mu - f\cdot((\mu\cdot b)\cdot(\begin{smallmatrix} 1 \ z \end{smallmatrix})) \\
+                              &= f\cdot\mu - f\cdot(\delta_f\cdot (\begin{smallmatrix} 1 &z \end{smallmatrix}\big)) \\
+                              &= f\cdot\mu \tag{Por el Lema \ref{NakaokaPalu-3.2}} \\
+                              &= \delta_g\cdot c.
+    \end{align*}
+    Luego, como $c$ es un epimorfismo, tenemos que $\mathbb{E}(c,A)$ es inyectiva, de donde se sigue (ii). Finalmente, tenemos que
+    \begin{align*}
+        \theta\cdot g' + \delta_f\cdot h' &= (\mu\cdot z')\cdot g' + (\mu\cdot b)\cdot h' \\
+                                          &= \mu\cdot(z'g') + \mu\cdot(bh') \\
+                                          &= \mu\cdot(z'g' + bh') \\
+                                          &= \mu\cdot\big( \big(\begin{smallmatrix} -zg' \\ g' \end{smallmatrix}\big) + \big(\begin{smallmatrix} h' \\ 0 \end{smallmatrix}\big) \big) \\
+                                          &= \mu\cdot\big( \begin{smallmatrix} a_1 \\ g' \end{smallmatrix} \big) \tag{pues $zg' = h-a_1$} \\
+                                          &= \mu\cdot a \\
+                                          &= 0.
+    \end{align*}
+\end{proof}
+
+\subsection*{Relación con categorías exactas} \label{Ssec: Relación con categorías exactas}
+
+\begin{Ejem}\cite[Example 2.13]{NakaokaPalu}\label{NakaokaPalu-2.13}
+    Una categoría exacta con una restricción adicional (relacionada con ``pequeñez'') puede ser vista como una categoría extriangulada, como se detalla a continuación. \\
+
+    Sean $(\mathscr{A},\mathscr{E})$ una categoría exacta y $A,C\in\text{Obj}(\mathscr{A})$. Entonces, por el Lema del 3 (Corolario \ref{Bühler-3.2}), sabemos que para cualquier morfismo de sucesiones exactas cortas
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[tail]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[two heads]{r}[]{y} &C \arrow[equals]{d}[]{} \\
+            A \arrow[tail]{r}[swap]{x'} &B' \arrow[two heads]{r}[swap]{y'} &C
+        \end{tikzcd}
+    \end{center}
+    se tiene que $b$ es un isomorfismo. Por ende, considerando la misma relación de equivalencia que en la Definición \ref{NakaokaPalu-2.7}, definimos a $\text{Ext}^1(C,A)$ como la colección de todas las clases de equivalencia de sucesiones exactas cortas de la forma $A\xrightarrowtail{x}B\xtwoheadrightarrow{y}C$. En este caso, $\text{Ext}^1(C,A)$ es un conjunto cuando se satisface alguna de las siguientes condiciones:
+
+    \begin{enumerate}
+    
+        \item[(i)] $\mathscr{A}$ es equivalente a una categoría pequeña;
+
+        \item[(ii)] $\mathscr{A}$ tiene suficientes proyectivos o suficientes inyectivos.
+    \end{enumerate}
+
+    En caso de que $\text{Ext}^1(C,A)$ sea un conjunto para cualesquiera $A,C\in\text{Obj}(\mathscr{A})$, obtenemos un bifuntor aditivo $\text{Ext}^{1}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ de manera análoga a como se hizo en la sección \ref{Sec: El bifuntor aditivo Ext1 en categorías exactas} para la relación de equivalencia $\simeq$, verificándose así (ET1). Resumimos esta construcción utilizando la notación de categorías extrianguladas como sigue.
+
+    \begin{itemize}
+    
+        \item[$\bullet$] Para cualesquiera $\delta = [A\xrightarrowtail{x}B\xtwoheadrightarrow{y}C]\in\text{Ext}^1(C,A)$ y $C\xrightarrow[]{f}C', A'\xrightarrow[]{g}A$ en $\mathscr{A}$, tenemos que el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[equals]{d}[]{} \arrow[tail]{r}[]{} &B \arrow[phantom]{dr}[]{\text{PB}} \arrow[dotted]{d}[]{} \arrow[dotted, two heads]{r}[]{} &C' \arrow[]{d}[]{f} \\
+                    A \arrow[phantom]{dr}[]{\text{PO}} \arrow[]{d}[swap]{g} \arrow[tail]{r}[]{} &B \arrow[dotted]{d}[]{} \arrow[two heads]{r}[]{} &C \arrow[equals]{d}[]{} \\
+                    A' \arrow[dotted, tail]{r}[]{} &B'' \arrow[two heads]{r}[]{} &C
+                \end{tikzcd}
+            \end{center}
+            conmuta y tiene renglones exactos, de donde definimos
+            \begin{align*}
+                \text{Ext}^{1}(f,A)(\delta) &= f\cdot\delta = [A\rightarrowtail B\twoheadrightarrow C'], \\
+                \text{Ext}^{1}(C,g)(\delta) &= \delta\cdot g = [A'\rightarrowtail B\twoheadrightarrow C].
+            \end{align*}
+
+        \item[$\bullet$] Para cualesquiera $\delta = [A\xrightarrowtail{x} B\xtwoheadrightarrow{y} C], \delta' = [A\xrightarrowtail{x'} B'\xtwoheadrightarrow{y'} C]\in\text{Ext}^{1}(C,A)$, la suma $\delta+\delta'$ está dada por la suma de Baer
+            \[
+                \nabla_A\cdot\big(\delta\bigoplus\delta')\cdot\Delta_C,
+            \] 
+                en concordancia con la Observación \ref{Def: Suma de E-extensiones}. En particular, el elemento neutro de $\text{Ext}^{1}(C,A)$ está dado por \begin{tikzcd} 0 = [ A \arrow[tail]{r}[]{\big( \begin{smallmatrix} 1_A \\ 0 \end{smallmatrix}\big)} &A\bigoplus C \arrow[two heads]{r}[]{(\begin{smallmatrix} 0 \ 1_C \end{smallmatrix})} &C ] \end{tikzcd}. %$0 = [A\xrightarrowtail{\big( \begin{smallmatrix} 1_A \\ 0 \end{smallmatrix}\big) } A\bigoplus C \xtwoheadrightarrow{( \begin{smallmatrix} 0 &1_C \end{smallmatrix}) } C].$
+    \end{itemize}
+
+    Ahora, definiendo a la realización $\mathfrak{s}(\delta)$ de $\delta = [A\xrightarrowtail{x} B\xtwoheadrightarrow{y} C]$ como $\delta$ mismo, (ET2) se satisface trivialmente. Luego, (ET3) se sigue de la Proposición \ref{Bühler-3.1} y la propiedad universal del conúcleo; dualmente, (ET3)\textsuperscript{$\ast$} se sigue de la Proposición dual a \ref{Bühler-3.1} y la propiedad universal del núcleo. Finalmente, (ET4) se sigue del Lema \ref{Bühler-3.5} y, dualmente, se obtiene (ET4)\textsuperscript{$\ast$}.
+\end{Ejem}
+
+Conversamente, tenemos el siguiente resultado.
+
+\begin{Coro}\cite[Corollary 3.18]{NakaokaPalu}\label{NakaokaPalu-3.18}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada en la cual toda inflación es un monomorfismo y toda deflación es un epimorfismo, y $\mathscr{S}$ la clase de conflaciones dadas por los $\mathbb{E}$-triángulos. Entonces, $(\mathscr{A},\mathscr{S})$ es una categoría exacta.
+\end{Coro}
+
+\begin{proof}
+
+    Sea $A\xrightarrow[]{x}B\xrightarrow[]{y}C$ un elemento de $\mathscr{S}$. De las sucesiones exactas obtenidas en la Proposición \ref{NakaokaPalu-3.3} y la hipótesis de que toda inflación es un monomorfismo se sigue que $x$ es un núcleo de $y$. Dualmente, tenemos que $y$ es un conúcleo de $x$. Por ende, los elementos de $\mathscr{S}$ son pares núcleo-conúcleo. \\
+
+    Sean $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ un $\mathbb{E}$-triángulo arbitrario y $A'\xrightarrow[]{x'}B'\xrightarrow[]{y'}C'$ un par núcleo-conúcleo, y supongamos que existen isomorfismos $a\in\text{Hom}_\mathscr{A}(A,A'), b\in\text{Hom}_\mathscr{A}(B,B'), c\in\text{Hom}_\mathscr{A}(C,C')$ tales que $x'a = bx$ y $y'b = cy$. Por la Proposición \ref{NakaokaPalu-3.7}, obtenemos un $\mathbb{E}$-triángulo $A'\xrightarrow[]{xa^{-1}} B\xrightarrow[]{cy} C'\xdashrightarrow{(c^{-1})^\ast a_\ast\delta}$. Entonces, tenemos que $\mathfrak{s}(\delta) = [A'\xrightarrow[]{xa^{-1}} B\xrightarrow[]{cy} C'] = [A'\xrightarrow[]{x'}B'\xrightarrow[]{y'}C']$, lo que implica que $A'\xrightarrow[]{x'}B'\xrightarrow[]{y'}C'$ es un elemento de $\mathscr{S}$. Por ende, $\mathscr{S}$ es cerrada por isomorfismos. \\
+
+    Por (ET2) y (ET2)\textsuperscript{$\ast$}, tenemos que $A\xrightarrow[]{1_A}A\to 0$ y $0\to A\xrightarrow[]{1_A}A$ son elementos de $\mathscr{S}$, demostrándose (E0) y (E0)\textsuperscript{$\ast$}. \\
+
+    De (ET4) y (ET4)\textsuperscript{$\ast$} se siguen se siguen (E1) y (E1)\textsuperscript{$\ast$}, como se mencionó en la Observación \ref{Obs: Terminología en categorías extrianguladas}. \\
+
+    Sean $A\xrightarrow[]{x} B\xrightarrow[]{y} C\xdashrightarrow{\delta}$ un $\mathbb{E}$-triángulo arbitrario y $A\xrightarrow[]{a}A'$ en $\mathscr{A}$. Por el Corolario \ref{NakaokaPalu-3.16}, existe una conflación
+    \[
+        A\xrightarrow[]{\big( \begin{smallmatrix} x \\ -a \end{smallmatrix} \big)} B\bigoplus A' \xrightarrow[]{(\begin{smallmatrix} b &x' \end{smallmatrix})} B'.
+    \] 
+    Dado que dicha conflación es un par núcleo-conúcleo, se sigue que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{a} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \\
+            A' \arrow[]{r}[swap]{x'} &B'
+        \end{tikzcd}
+    \end{center}
+    es una suma fibrada. Más aún, por el dual de la Proposición \ref{NakaokaPalu-3.17}, tenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            &A' \arrow[]{d}[swap]{\big( \begin{smallmatrix} 0 \\ 1 \end{smallmatrix} \big)} \arrow[equals]{r}[]{} &A' \arrow[]{d}[]{x'} \\
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{ \big( \begin{smallmatrix} x \\ -a \end{smallmatrix} \big)} &B\bigoplus A' \arrow[]{d}[]{(\begin{smallmatrix} 1 \ 0 \end{smallmatrix})} \arrow[]{r}[swap]{(\begin{smallmatrix} b \ x' \end{smallmatrix})} &B' \arrow[]{d}[]{y'} \\
+            A \arrow[]{r}[swap]{x} &B \arrow[]{r}[swap]{y} &C,
+        \end{tikzcd}
+    \end{center}
+    lo que muestra que $x'$ es una inflación, demostrándose (E2). Dualmente, se demuestra (E2)\textsuperscript{$\ast$}.
+\end{proof}
+
+\subsection*{Relación con categorías trianguladas} \label{Ssec: Relación con categorías trianguladas}
+
+Consideremos una categoría triangulada $(\mathscr{A},T,\Delta)$ y el bifuntor aditivo $\mathbf{E}^1:=\text{Ext}^1_{(\mathscr{A},T,\Delta)}$ visto en la sección \ref{Sec: El bifuntor aditivo Ext1 en categorías trianguladas}. Observemos que, en este caso, para $\delta\in\mathbf{E}^1(C,A)=\text{Hom}_\mathscr{A}(C,T(A))$ y $A\xrightarrow[]{a}A', C'\xrightarrow[]{c}C$ en $\mathscr{A}$, se tiene que
+\[
+    a\cdot\delta = T(a)\delta \quad \land \quad \delta\cdot c = \delta c.
+\] 
+El siguiente resultado demuestra que dar una triangulación de $\mathscr{A}$ con el funtor de traslación $T$ es equivalente a dar una $\mathbf{E}^1$-triangulación de $\mathscr{A}$.
+
+\begin{Prop}\cite[Proposition 3.22]{NakaokaPalu}\label{NakaokaPalu-3.22}
+    Para una categoría aditiva $\mathscr{A}$ y un automorfismo aditivo $T:\mathscr{A}\xrightarrow[]{\sim}\mathscr{A}$, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Sea $(\mathscr{A},T,\Delta)$ una categoría triangulada. Si para cada $\delta\in\mathbf{E}^1(C,A) = \text{Hom}(C,T(A))$, tomamos un triángulo distinguido
+            \[
+                A\xrightarrow[]{x}B\xrightarrow[]{y}C\xrightarrow[]{\delta}T(A)
+            \] 
+            y definimos $\mathfrak{s}(\delta) := [A\xrightarrow[]{x}B\xrightarrow[]{y}C]$, entonces $(\mathscr{A},\mathbf{E}^1,\mathfrak{s})$ es una categoría extriangulada.
+
+        \item Supongamos que $\mathfrak{s}$ es una $\mathbf{E}^1$-triangulación externa de $\mathscr{A}$. Si definimos una clase $\Delta$ como
+            \[
+                A\xrightarrow[]{x}B\xrightarrow[]{y}C\xrightarrow[]{\delta}T(A)\in\Delta \iff \mathfrak{s}(\delta) = [A\xrightarrow[]{x}B\xrightarrow[]{y}C],
+            \] 
+            entonces $(\mathscr{A},T,\Delta)$ es una categoría triangulada.
+            
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item (ET1) se sigue de la Observación \ref{Obs: Funtor E1}. \\
+
+            Sean $A,C\in\text{Obj}(\mathscr{A}), \delta\in\mathbf{E}^1(C,A)$ y $A\xrightarrow[]{x} B\xrightarrow[]{y} C\xrightarrow[]{\delta} T(A), \ A\xrightarrow[]{x'} B'\xrightarrow[]{y'} C'\xrightarrow[]{\delta} T(A)$ triángulos distinguidos. Entonces, del Lema \ref{Mendoza_CT-1.1} y el inciso (c) del Teorema \ref{Mendoza_CT-1.2}, se sigue que el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[equals]{d}[]{} \arrow[]{r}[]{x} &B \arrow[dotted]{d}[]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{y} &C \arrow[equals]{d}[]{} \arrow[]{r}[]{\delta} &T(A) \arrow[equals]{d}[]{} \\
+                    A \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C \arrow[]{r}[swap]{\delta} &T(A) \\
+                \end{tikzcd}
+            \end{center}
+            conmuta. Entonces, por la Definición \ref{NakaokaPalu-2.7}, tenemos que
+            \[
+                \mathfrak{s}(\delta) = [A\xrightarrow[]{x} B\xrightarrow[]{y} C] = [A\xrightarrow[]{x'} B'\xrightarrow[]{y'} C],
+            \] 
+            por lo que $\mathfrak{s}$ está bien definida. Luego, del Corolario \ref{Mendoza_CT-1.6} y la Proposición \ref{Mendoza_CT-1.5}, se sigue que $\mathfrak{s}$ es una realización aditiva de $\mathbf{E}^1$, verificándose (ET2). \\
+
+        (ET3) y (ET3)\textsuperscript{$\ast$} se siguen directamente del Lema \ref{Mendoza_CT-1.1}. \\
+
+        (ET4) se sigue del axioma del octaedro, y (ET4)\textsuperscript{$\ast$} se sigue del mismo axioma y de la Proposición \ref{Mendoza_CT-Ejer.5}. \\
+
+    \item Sean $\eta = (E,E',E'',e,e',e''), \mu = (M,M',M'',m,m',m'')\in\text{Obj}(\mathscr{T}(\mathscr{A},T))$. Supongamos que $(f,g,h):\eta\simeq\mu$ en $\mathscr{T}(\mathscr{A},T)$ y $\mu\in\Delta$. Entonces, $\mathfrak{s}(m'') = [M\xrightarrow[]{m}M'\xrightarrow[]{m'}M'']$ y tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+            \begin{equation}\label{eq: 3.22-2}
+                \begin{tikzcd}
+                    E \arrow[]{d}{\rotatebox{-90}{$\sim$}}[swap]{f} \arrow[]{r}[]{e} &E' \arrow[]{d}{\rotatebox{-90}{$\sim$}}[swap]{g} \arrow[]{r}[]{e'} &E'' \arrow[]{d}{h}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{e''} &T(E) \arrow[]{d}{T(f)}[swap]{\rotatebox{90}{$\sim$}} \\
+                    M \arrow[]{r}[swap]{m} &M' \arrow[]{r}[swap]{m'} &M'' \arrow[]{r}[swap]{m''} &T(M).
+                \end{tikzcd}
+            \end{equation}
+            Como $f^{-1}\in\text{Hom}_\mathscr{A}(M,E)$ y $h\in\text{Hom}_\mathscr{A}(E'',M'')$, de la Proposición \ref{NakaokaPalu-3.7}, se sigue que
+            \[
+                \mathfrak{s}\big( f^{-1}\cdot(m''\cdot h) \big) = [E \xrightarrow[]{mf} M'\xrightarrow[]{h^{-1}m'}E''].
+            \] 
+            Luego, de la conmutatividad del diagrama (\ref{eq: 3.22-2}), se sigue que
+            \begin{align*}
+                f^{-1}\cdot(m''\cdot h) &= T(f^{-1})m''h \\
+                                        &= e,
+            \end{align*}
+            y que el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    &E' \arrow[]{dr}[]{e'} \arrow[]{dd}{g}[swap]{\rotatebox{90}{$\sim$}} \\
+                    E \arrow[]{ur}[]{e} \arrow[]{dr}[swap]{mf} &&E'' \\
+                                                               &M' \arrow[]{ur}[swap]{h^{-1}m'}
+                \end{tikzcd}
+            \end{center}
+            conmuta, por lo que $\mathfrak{s}(e'') = [E\xrightarrow[]{e} E'\xrightarrow[]{e'} E'']$, lo que implica que $\eta\in\Delta$. Por ende, $\Delta$ es cerrada por isomorfismos. \\
+
+            Sea $X\in\text{Obj}(\mathscr{A})$. Por el inciso (2) de la Observación \ref{NakaokaPalu-2.11}, tenemos que
+            \[
+            X \xrightarrow[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} X\bigoplus 0\xrightarrow[]{(\begin{smallmatrix} 0 & 1 \end{smallmatrix} )} 0
+            \] 
+            realiza a la $\mathbf{E}^1$-extensión escindible $0\in\mathbf{E}^1(0,X)$. Como $X\bigoplus 0\simeq X$ en $\mathscr{A}$, tenemos el diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    X \arrow[equals]{d}[]{} \arrow[]{r}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &X\bigoplus0 \arrow[]{d}[]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{} &0 \arrow[equals]{d}[]{} \\
+                    X \arrow[]{r}[swap]{1_X} &X \arrow[]{r}[]{} &0.
+                \end{tikzcd}
+            \end{center}
+            Por ende, $\mathfrak{s}(0) = \big[X \xrightarrow[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} X\bigoplus 0\xrightarrow[]{} 0 \big] = [X\xrightarrow[]{1_X}X\to 0]$, de donde se sigue que $X\xrightarrow[]{1_X}X\to 0\to T(X)$ es un triángulo distinguido, probándose (TR1a). \\
+
+            Para poder demostrar (TR1b), debemos primero demostrar (TR2). Sea $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ un $\mathbf{E}^1$-triángulo arbitrario. Aplicando la Proposición \ref{NakaokaPalu-3.15} a $A\to 0\to T(A)\xdashrightarrow{\mathbf{1}}$ y $\delta$, tenemos el diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{d}[]{} \arrow[]{r}[]{x} &B \arrow[]{d}[]{m'} \arrow[]{r}[]{y} &C \arrow[equals]{d}[]{} \\
+                    0 \arrow[]{d}[]{} \arrow[]{r}[]{} &M \arrow[]{d}[]{e'} \arrow[]{r}[]{e} &C \\
+                    T(A) \arrow[equals]{r}[]{} &T(A),
+                \end{tikzcd}
+            \end{center}
+            con
+            \begin{enumerate}
+            
+                \item[(i)] $[0\to M\xrightarrow[]{e} C] = 0\cdot\delta = 0$,
+
+                \item[(ii)] $\delta\cdot e + \mathbf{1}\cdot e' = 0$,
+
+                \item[(iii)] $\mathfrak{s}(T(x)) = \mathfrak{s}(x\cdot\mathbf{1}) = [ B\xrightarrow[]{m'} M\xrightarrow[]{e'} T(A) ]$.
+            \end{enumerate}
+            Por (i) y el inciso (1) de la Observación \ref{NakaokaPalu-2.11}, se sigue que $e$ es un isomorfismo. De (ii), tenemos que $\delta e + e' = 0$ en $\text{Hom}(M,T(A))$, por lo que $e'e^{-1} = -\delta$. Ahora, por (iii), tenemos que
+            \begin{align*}
+                \mathfrak{s}(T(x)) &= [B\xrightarrow[]{m'}M\xrightarrow[]{e'}T(A)] \\
+                               &= [B\xrightarrow[]{e^{-1}y} M\xrightarrow[]{e'} T(A)].
+            \end{align*}
+            Luego, del diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    &M \arrow[]{dr}[]{e'} \arrow[]{dd}{e}[swap]{\rotatebox{90}{$\sim$}} \\
+                    B \arrow[]{ur}[]{e^{-1}y} \arrow[]{dr}[swap]{y} &&T(A), \\
+                                              &C \arrow[]{ur}[swap]{-\delta}
+                \end{tikzcd}
+            \end{center}
+            se sigue que $\mathfrak{s}\big(T(x)\big) = [B\xrightarrow[]{y}C\xrightarrow[]{-\delta}T(A)]$, por lo que $B\xrightarrow[]{y}C\xrightarrow[]{-\delta}T(A)\xrightarrow[]{T(x)}T(B)$ es un triángulo distinguido, el cual es isomorfo a $B\xrightarrow[]{y}C\xrightarrow[]{\delta}T(A)\xrightarrow[]{-T(x)}T(B)$. Por ende, (TR2) se verifica. \\
+
+            Sea $X\xrightarrow[]{f}Y$ en $\mathscr{A}$. Entonces, $f\in\text{Hom}(X,Y)= \mathbf{E}^1(X,T^{-1}(Y))$. Como $\mathfrak{s}$ es una $\mathbf{E}^1$-triangulación de $\mathscr{A}$, tenemos que existe una clase de equivalencia tal que $\mathfrak{s}(f) = [T^{-1}(Y)\xrightarrow[]{\alpha}Z\xrightarrow[]{\beta}X]$, lo que implica que $T^{-1}(Y)\xrightarrow[]{\alpha}Z\xrightarrow[]{\beta}X\xrightarrow[]{f}Y$ pertenece a $\Delta$. Aplicando (TR2) dos veces, se sigue que $X\xrightarrow[]{f}Y\xrightarrow[]{-T(\alpha)} T(Z)\xrightarrow[]{-T(\beta)} T(X)$ es un triángulo distinguido, probándose (TR1b). \\
+
+            Supongamos que $\eta,\mu\in\Delta$ y que existen $E\xrightarrow[]{f}M, E'\xrightarrow[]{g}M'$ en $\mathscr{A}$ tales que $ge = mf$. Entonces, por (ET3), existe $E''\xrightarrow[]{h}M''$ en $\mathscr{A}$ tal que $\eta\xrightarrow[]{(f,h)}\mu$ es un morfismo de $\mathbf{E}^1$-extensiones realizado por $(f,g,h)$. En particular, tenemos que $\eta\xrightarrow[]{(f,g,h)}\mu\in\text{Mor}(\mathscr{T}(\mathscr{A},T))$, por lo que se verifica (TR3). \\
+
+            Hasta ahora, hemos visto que $(\mathscr{A},T,\Delta)$ es una categoría pretriangulada. Sean $X\xrightarrow[]{u}Y, Y\xrightarrow[]{v}Z\in\text{Mor}(\mathscr{A})$. Entonces, por (TR1b), podemos formar el diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{v} \arrow[]{r}[]{i} &Z' \arrow[]{r}[]{i'} &T(X) \arrow[equals]{d}[]{} \\
+                    X \arrow[]{r}[swap]{vu} &Z \arrow[]{d}[swap]{j} \arrow[]{r}[swap]{k} &Y' \arrow[]{r}[swap]{k'} &T(X) \arrow[]{d}[]{T(u)} \\
+                                            &X' \arrow[]{d}[swap]{j'} \arrow[equals]{r}[]{} &X' \arrow[]{d}[]{T(i)j'} \arrow[]{r}[swap]{j'} &T(Y), \\
+                                            &T(Y) \arrow[]{r}[swap]{T(i)} &T(Z')
+                \end{tikzcd}
+            \end{center}
+            cuyos primeros dos renglones, así como su segunda columna, son triángulos distinguidos. Por ende, tenemos que
+            \begin{align*}
+                \mathfrak{s}(i') &= X\xrightarrow[]{u}Y\xrightarrow[]{i}Z', \\
+                \mathfrak{s}(j') &= Y\xrightarrow[]{v}Z\xrightarrow[]{j}X',\\
+                \mathfrak{s}(k') &= X\xrightarrow[]{vu}Z\xrightarrow[]{k}Y'.
+            \end{align*}
+            En particular, $u$ y $v$ son inflaciones y, de (ET4) y la Observación \ref{Obs: Terminología en categorías extrianguladas}, obtenemos el diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{v} \arrow[]{r}[]{i} &Z' \arrow[]{d}[]{d} \arrow[dashed]{r}[]{i' = k'\cdot d} &\empty{} \\
+                    X \arrow[]{r}[swap]{vu} &Z \arrow[]{d}[swap]{j} \arrow[]{r}[swap]{k} &Y' \arrow[]{d}[]{e} \arrow[dashed]{r}[swap]{k'} &\empty{} \\
+                                           &X' \arrow[dashed]{d}[swap]{j'} \arrow[equals]{r}[]{} &X' \arrow[dashed]{d}[]{i\cdot j'} \\
+                                           &\empty{} &\empty{}
+                \end{tikzcd}
+            \end{center}
+            con $u\cdot k' = j'\cdot e$, donde los dos renglones y las dos columnas son $\mathbf{E}^1$-triángulos. Por lo tanto, tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{v} \arrow[]{r}[]{i} &Z'\arrow[]{d}[]{d} \arrow[]{r}[]{i'} &T(X) \arrow[equals]{d}[]{} \\
+                    X \arrow[]{r}[swap]{vu} &Z \arrow[]{d}[swap]{j} \arrow[]{r}[swap]{k} &Y' \arrow[]{d}[]{e} \arrow[]{r}[swap]{k'} &T(X) \arrow[]{d}[]{T(u)} \\
+                                            &X' \arrow[]{d}[swap]{j'} \arrow[equals]{r}[]{} &X' \arrow[]{d}[]{T(i)j'} \arrow[]{r}[swap]{j'} &T(Y), \\
+                                            &T(Y) \arrow[]{r}[swap]{T(i)} &T(Z')
+                \end{tikzcd}
+            \end{center}
+            donde los dos renglones y las dos columnas son triángulos distinguidos, pues $Z'\xrightarrow[]{d} Y'\xrightarrow[]{e} X'\xdashrightarrow{i_\ast j'}$ es un $\mathbf{E}^1$-triángulo, verificándose así (TR4).
+    \end{enumerate}
+\end{proof}
+
+\subsection*{Objetos proyectivos e inyectivos} \label{Ssec: Objetos proyectivos e inyectivos}
+
+\begin{Def}\cite[Definitions 3.23 \& 3.25]{NakaokaPalu}\label{NakaokaPalu-3.23}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada. Definimos a los objetos \emph{$\mathbb{E}$-proyectivos} en $\mathscr{A}$ y decimos que $\mathscr{A}$ tiene \emph{suficientes $\mathbb{E}$-proyectivos} siguiendo las Definiciones \ref{Def: Objeto proyectivo} y \ref{Def: Suficientes proyectivos}, considerando deflaciones en vez de epimorfismos, y denotamos a la clase de objetos $\mathbb{E}$-proyectivos en $\mathscr{A}$ por $\text{Proj}_\mathbb{E}(\mathscr{A})$.
+\end{Def}
+
+\begin{Prop}\cite[Proposition 3.24]{NakaokaPalu}\label{NakaokaPalu-3.24}
+    Un objeto $P$ en $\mathscr{A}$ es $\mathbb{E}$-proyectivo si, y sólo si, se satisface que $\mathbb{E}(P,A)=0$ para cualquier $A\in\text{Obj}(\mathscr{A})$.
+\end{Prop}
+
+\begin{proof}\leavevmode
+    ($\Rightarrow$) Supongamos que $P$ es $\mathbb{E}$-proyectivo. Sean $A\in\mathscr{A}$ y $\delta\in\mathbb{E}(P,A)$, con $\mathfrak{s}(\delta) = [A\xrightarrow[]{x}M\xrightarrow[]{y}P]$. Dado que $P$ es $\mathbb{E}$-proyectivo, existe $m\in\text{Hom}_\mathscr{A}(P,M)$ tal que el siguiente diagrama en $\mathscr{A}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[]{r}[]{} &P \arrow[]{d}[swap]{m} \arrow[equals]{r}[]{} &P \arrow[equals]{d}[]{} \\
+            A \arrow[]{r}[swap]{x} &M \arrow[]{r}[swap]{y} &P.
+        \end{tikzcd}
+    \end{center}
+    Luego, por (ET3)\textsuperscript{$\ast$}, se sigue que el triple $(0,m,1_P)$ realiza al morfismo de $\mathbb{E}$-triángulos $(0,1_P):0\to \delta$. En particular, tenemos que
+    \begin{align*}
+        \delta &= \delta\cdot 1_p \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(g)} \\
+               &= 0 \\
+               &= 0\cdot0. \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(j)} \\
+    \end{align*}
+
+    ($\Leftarrow$) Se sigue directamente de la sucesión exacta (2-ii) en la Proposición \ref{NakaokaPalu-3.3}.
+\end{proof}
+
+\begin{Ejem}\cite[Example 3.26]{NakaokaPalu}\label{NakaokaPalu-3.26} 
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría exacta que cumpla con alguna de las condiciones de ``pequeñez'' del Ejemplo \ref{NakaokaPalu-2.13} y que, por lo tanto, pueda ser vista como una categoría extriangulada. Entonces, la Definición \ref{NakaokaPalu-3.23} coincide con el inciso (a) de la Definición \ref{Def: Objetos E-proyectivos y E-inyectivos en categorías exactas}. En particular, $\text{Proj}(\mathscr{A})\subseteq\text{Proj}_\mathbb{E}(\mathscr{A})$.
+
+        \item Sea $(\mathscr{A},\mathbf{E}^1,\mathfrak{s})$ una categoría extriangulada, con $\mathbf{E}^1(-,-):=\text{Hom}(-,-[1])$ y $[1]:\mathscr{A}\to \mathscr{A}$ un automorfismo aditivo, que puede ser vista como una categoría triangulada por el inciso (b) de la Proposición \ref{NakaokaPalu-3.22}. Entonces, $\text{Proj}_{\mathbf{E}^1}(\mathscr{A})$ consiste en todos los objetos cero en $\mathscr{A}$. Más aún, siempre tiene suficientes $\mathbf{E}^1$-proyectivos. Notemos que, en este caso, puede ocurrir que exista un objeto $P'\in\text{Proj}(\mathscr{A})$ tal que $P'\notin \text{Proj}_{\mathbf{E}^1}(\mathscr{A})$, lo cual sucede cuando $\mathscr{A}$ es semisimple y $\mathscr{A}\neq\varnothing$.
+
+            En efecto: Por la propiedad universal del objeto cero, se sigue que todo objeto cero en $\mathscr{A}$ es $\mathbf{E}^1$-proyectivo. Por otro lado,  sea $P\in\text{Proj}_{\mathbf{E}^1}(\mathscr{A})$. Entonces, por (TR1a) y la Proposición \ref{Mendoza_CT-1.3}, tenemos que $P[-1]\to 0\to P\xrightarrow[]{1_P}P\in\Delta$, lo que implica que $P[-1]\to 0\to P\xdashrightarrow{1_P}$ es un $\mathbf{E}^1$-triángulo. Como $P$ es $\mathbf{E}^1$-proyectivo, existe un morfismo que hace conmutar el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    &&P \arrow[dotted]{dl}[]{} \arrow[]{d}[]{1_P} \\
+                    P[-1] \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &P \arrow[dashed]{r}[]{1_P} &{},
+                \end{tikzcd}
+            \end{center}
+            por lo que $1_P=0$. Por el inciso (3) de la Observación \ref{Mendoza-1.5.1-Ejer.51}, se sigue que $P$ es un objeto cero en $\mathscr{A}$. En particular, la existencia del $\mathbf{E}^1$-triángulo $X[-1]\to 0\to X\xdashrightarrow{1_X}$ para todo $X\in\text{Obj}(\mathscr{A})$, por (TR1a) y la Proposición \ref{Mendoza_CT-1.3}, implica que $(\mathscr{A},\mathbf{E},\mathfrak{s})$ tiene suficientes $\mathbf{E}^1$-proyectivos.
+
+%        \item Supongamos que $(\mathscr{A},\mathbf{E}^1,\mathfrak{s})$ es una categoría triangulada, como en la Proposición \ref{NakaokaPalu-3.22}, con una es una subcategoría rígida $\mathscr{R}$ (es decir, que para cualesquiera $R_1,R_2\in\text{Obj}(\mathscr{R})$, se tiene que $\mathbf{E}^{1}(R_1,R_2)=0$). Sea $\mathscr{D}$ la subcategoría plena de $\mathscr{A}$ cuyos objetos $X$ satisfacen que $\mathbf{E}^{1}(R,X)=0$ para cualesquiera $R\in\text{Obj}(\mathscr{R})$. Entonces $\mathscr{D}$ es una subcategoría aditiva de $\mathscr{A}$ cerrada por extensiones, la cual es extriangulada por la Observación \ref{NakaokaPalu-2.18}. Luego, tenemos que:
+%            \begin{enumerate}[label=(\alph*)]
+%            
+%                \item $\mathscr{R}\subseteq\text{Proj}(\mathscr{D})$;
+%
+%                \item $\text{Proj}(\mathscr{D})=\mathscr{R}$ y $\mathscr{D}$ tiene suficientes $\mathbf{E}^1$-proyectivos si, y sólo si, $\mathscr{R}$ es precubriente.
+%            \end{enumerate}
+%
+%            En efecto: Veamos primero que $\mathscr{D}$ es una subcategoría aditiva\footnote{Definir en el Capítulo 1.} de $\mathscr{A}$ cerrada por extensiones. COMPLETAR.
+    \end{enumerate}
+\end{Ejem}
+
+\begin{Coro}\cite[Corollary 3.27]{NakaokaPalu}\label{NakaokaPalu-3.27}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada con suficientes $\mathbb{E}$-proyectivos. Entonces, para cualquier objeto $C\in\text{Obj}(\mathscr{A})$ y cualquier $\mathbb{E}$-triángulo $A\xrightarrow[]{x}P\xrightarrow[]{y}C\xdashrightarrow{\delta}$, con $P\in\text{Proj}(\mathscr{A})$, la sucesión
+    \[
+        \text{Hom}_\mathscr{A}(P,-)\xrightarrow[]{\text{Hom}_\mathscr{A}(x,-)} \text{Hom}_\mathscr{A}(A,-) \xrightarrow[]{\delta^\sharp} \mathbb{E}(C,-) \to 0
+    \] 
+    es exacta. En particular, tenemos un isomorfismo natural $\mathbb{E}(C,-) \simeq \text{CoKer}(\text{Hom}_\mathscr{A}(x,-))$.
+\end{Coro}
+
+\begin{proof}
+
+    Se sigue directamente de las Proposiciones \ref{NakaokaPalu-3.3} y \ref{NakaokaPalu-3.24}.
+\end{proof}
+
+%El isomorfismo del Corolario \ref{NakaokaPalu-3.27} es natural en $C$ en el sentido siguiente.
+
+\begin{Obs}\cite[Remark 3.28]{NakaokaPalu}\label{NakaokaPalu-3.28}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada con suficientes $\mathbb{E}$-proyectivos. Sean $C\xrightarrow[]{c} C'$ en $\mathscr{A}$ y $A\xrightarrow[]{x}P\xrightarrow[]{y}C\xdashrightarrow{\delta}, \ A'\xrightarrow[]{x'} P'\xrightarrow[]{y'}C'\xdashrightarrow{\delta}$ un par de $\mathbb{E}$-triángulos tales que $P,P'\in\text{Proj}_\mathbb{E}(\mathscr{A})$. Entonces, por la proyectividad de $P$ y (ET3)\textsuperscript{$\ast$}, obtenemos un morfismo de $\mathbb{E}$-triángulos $(q,c):\delta\to \delta'$ y, por ende, un morfismo de sucesiones exactas, como sigue
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{q} \arrow[]{r}[]{x} &P \arrow[]{d}[]{p} \arrow[]{r}[]{y} &C \arrow[]{d}[]{c} \arrow[dashed]{r}[]{\delta} &\empty{} \\
+            A' \arrow[]{r}[swap]{x'} &P' \arrow[]{r}[swap]{y'} &C' \arrow[swap]{r}[swap]{\delta'} &\empty{}
+        \end{tikzcd}
+        \begin{tikzcd}
+            \text{Hom}_\mathscr{A}(P,-) \arrow[]{r}[]{\resizebox{15mm}{!}{$\text{Hom}_\mathscr{A}(x,-)$}} &\text{Hom}_\mathscr{A}(A,-) \arrow[]{r}[]{\delta^\sharp} &\mathbb{E}(C,-) \arrow{r} &0 \\
+            \text{Hom}_\mathscr{A}(P',-) \arrow[]{u}[]{\text{Hom}_\mathscr{A}(p,-)} \arrow[]{r}[swap]{\resizebox{15mm}{!}{$\text{Hom}_\mathscr{A}(x',-)$}} &\text{Hom}_\mathscr{A}(A',-) \arrow[]{u}[swap]{\text{Hom}_\mathscr{A}(q,-)} \arrow[]{r}[swap]{\delta'^\sharp} &\mathbb{E}(C',-) \arrow[]{r}[]{} \arrow[]{u}[swap]{\mathbb{E}(c^\text{op},-)} &0.
+        \end{tikzcd}
+    \end{center}
+\end{Obs}
+
+Por la Observación \ref{Obs: Categorías extrianguladas}, los resultados duales para objetos inyectivos en categorías extrianguladas son válidos.
+
+\begin{Lema}\cite[Lemma 3.29]{NakaokaPalu}\label{NakaokaPalu-3.29}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada, $A\xrightarrow[]{x}B\xrightarrow[]{y}C\xdashrightarrow{\delta}$ un $\mathbb{E}$-triángulo, $i\in\text{Hom}_\mathscr{A}(A,I)$ con $I\in\text{Inj}_\mathbb{E}(\mathscr{A})$ y $p_C$ la proyección de $C\bigoplus I$ a $C$. Entonces, la $\mathbb{E}$-extensión $\delta\cdot p_C$ es realizada por un $\mathbb{E}$-triángulo de la forma
+    \[
+        A\xrightarrow[]{x_I} B\bigoplus I\xrightarrow[]{y_I} C\bigoplus I\xdashrightarrow{\delta\cdot p_C},
+    \] 
+    donde $x_I = \big(\begin{smallmatrix} x \\ i \end{smallmatrix}\big)$ y $y_I = \big(\begin{smallmatrix} y &\ast \\ \ast &\ast \end{smallmatrix}\big)$.
+\end{Lema}
+
+\begin{proof}
+
+    Por el Corolario \ref{NakaokaPalu-3.16}, tenemos un $\mathbb{E}$-triángulo $A\xrightarrow[]{x_I} B\bigoplus I\xrightarrow[]{d} D\xdashrightarrow{\nu}$. Por la Proposición dual a \ref{NakaokaPalu-3.17}, obtenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            &I \arrow[]{d}[swap]{\big( \begin{smallmatrix} 0 \\ 1 \end{smallmatrix} \big)} \arrow[equals]{r}[]{} &I \arrow[]{d}[]{e} \\
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{x_I} &B\bigoplus I \arrow[]{d}[]{(\begin{smallmatrix} 1 \ 0 \end{smallmatrix})} \arrow[]{r}[]{d} &D \arrow[]{d}[]{f} \arrow[dashed]{r}[]{\nu} &\empty{} \\
+            A \arrow[]{r}[swap]{x} &B \arrow[dashed]{d}[swap]{0} \arrow[]{r}[swap]{y} &C \arrow[dashed]{d}[]{\theta} \arrow[dashed]{r}[swap]{\delta} &\empty{}, \\
+                                   &\empty{} &\empty{}
+        \end{tikzcd}
+    \end{center}
+    que satisface $\delta\cdot f=\nu$. Dado que $I\in\text{Inj}_\mathbb{E}(\mathscr{A})$, se sigue que $\theta=0$. Por ende, existe un isomorfismo $n:C\bigoplus I\xrightarrow[]{\sim} D$ tal que $n\big(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\big) = c$ y $fn = (\begin{smallmatrix} 1 &9 \end{smallmatrix})$. Entonces, para $p_C = (\begin{smallmatrix} 1 &0 \end{smallmatrix}):C\bigoplus I\to C$, tenemos que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{x_I} &B \arrow[]{d}[]{(\begin{smallmatrix} 1 \ 0 \end{smallmatrix})} \arrow[]{r}[]{n^{-1}d} &C\bigoplus I \arrow[]{d}[]{(\begin{smallmatrix} 1 \ 0 \end{smallmatrix}) = p_C} \arrow[dashed]{r}[]{\nu\cdot n} &\empty{} \\
+            A \arrow[]{r}[swap]{x} &B \arrow[]{r}[swap]{y} &C \arrow[dashed]{r}[swap]{\delta} &\empty{}
+        \end{tikzcd}
+    \end{center}
+    es un morfismo de $\mathbb{E}$-triángulos. Entonces, $n^{-1}d$ satisface que
+    \begin{align*}
+        p_C(n^{-1}d)\big(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\big) &= y(\begin{smallmatrix} 1 &0 \end{smallmatrix})\big(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\big) \\
+                                                                           &= y,
+    \end{align*}
+    por lo que es de la forma $\big( \begin{smallmatrix} y &\ast \\ \ast &\ast \end{smallmatrix}\big)$.
+\end{proof}
+
+A continuación, mostramos un ejemplo de una categoría extriangulada que no es exacta ni triangulada en general.
+
+\begin{Prop}\cite[Proposition 3.30]{NakaokaPalu}\label{NakaokaPalu-3.30}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada y $\mathscr{I}\subseteq\mathscr{A}$ una subcategoría aditiva plena de $\mathscr{A}$ cerrada por isomorfismos en $\mathscr{A}$. Si $\mathscr{I}\subseteq\text{Proj}_\mathbb{E}(\mathscr{A})\cap\text{Inj}_\mathbb{E}(\mathscr{A})$, entonces la categoría cociente $\mathscr{A}/\mathscr{I}$ tiene una estructura de categoría extriangulada, inducida de la de $\mathscr{A}$. En particular, a cada categoría extriangulada $(\mathscr{A},\mathbb{E},\mathfrak{s})$ podemos asociarle una categoría extriangulada ``reducida'' $\mathscr{A}' := \mathscr{A}/(\text{Proj}(\mathscr{A})\cap\text{Inj}(\mathscr{A}))$ que satisface $\text{Proj}_\mathbb{E}(\mathscr{A}')\cap\text{Inj}_\mathbb{E}(\mathscr{A}')=0$.
+\end{Prop}
+
+\begin{proof}
+
+    Sea $\overline{\mathscr{A}} = \mathscr{A}/\mathscr{I}$. \\
+
+    Dado que $\mathbb{E}(\mathscr{I},\mathscr{A}) = \mathbb{E}(\mathscr{A},\mathscr{I}) = 0$, podemos definir un bifuntor aditivo $\overline{\mathbb{E}}: \overline{\mathscr{A}}^\text{op}\times \overline{\mathscr{A}}\to \text{Ab}$ dado por
+    \begin{align*}
+        \overline{\mathbb{E}}(C,A) &= \mathbb{E}(C,A) \quad \forall \ A,C\in\text{Obj}(\mathscr{A}), \\
+        \overline{\mathbb{E}}(\overline{c},\overline{a}) &= \mathbb{E}(c,a) \quad \forall \ a\in\text{Hom}_\mathscr{A}(A,A'), c\in\text{Hom}_\mathscr{A}(C,C'),
+    \end{align*}
+    donde $\overline{a}$ y $\overline{c}$ son las clases de correspondencia en $\mathscr{A}/\mathscr{I}$ correspondientes a $a$ y $c$, respectivamente. \\
+
+    Para cualquier $\overline{\mathbb{E}}$-extensión $\delta\in \overline{\mathbb{E}}(C,A) = \mathbb{E}(C,A)$, definimos
+    \[
+        \overline{\mathfrak{s}}(\delta) := \overline{\mathfrak{s}(\delta)} = [A\xrightarrow[]{\overline{x_0}} B\xrightarrow[]{\overline{y_0}} C],
+    \] 
+    donde $\mathfrak{s}(\delta) = [A\xrightarrow[]{x_0} B\xrightarrow[]{y_0} C]$. Veamos que $\overline{\mathfrak{s}}$ es una realización aditiva de $\overline{\mathbb{E}}$. Sea $(\overline{a},\overline{c}):\delta=(A,\delta,C)\to \delta'=(A',\delta',C')$ un morfismo de $\overline{\mathbb{E}}$-extensiones. Por definición, esto equivale a que $(a,c):\delta\to \delta'$ sea un morfismo de $\mathbb{E}$-extensiones. Supongamos que $\overline{\mathfrak{s}}(\delta) = [A\xrightarrow[]{\overline{x}} B\xrightarrow[]{\overline{y}} C], \ \overline{\mathfrak{s}}(\delta') = [A'\xrightarrow[]{\overline{x'}} B'\xrightarrow[]{\overline{y'}} C']$. Dado que la condición de la Definición \ref{NakaokaPalu-2.9} no depende de los representantes de las clases de equivalencia de suseciones en $\overline{\mathscr{A}}$, podemos suponer que $\mathfrak{s}(\delta) = [A\xrightarrow[]{x} B\xrightarrow[]{y} C], \mathfrak{s}(\delta') = [A'\xrightarrow[]{x'} B'\xrightarrow[]{y'} C']$. Entonces, existe un morfismo $b\in\text{Hom}_\mathscr{A}(B,B')$ tal que $(a,b,c)$ realiza a $(a,c)$, de donde se sigue que $(\overline{a},\overline{b},\overline{c})$ realiza a $(\overline{a}, \overline{c})$. Por otro lado, la igualdad $\overline{\mathfrak{s}} = 0$ se satisface trivialmente, mientras que 
+    \begin{align*}
+        \overline{\mathfrak{s}}\big(\delta\bigoplus\delta'\big) &= \overline{\mathfrak{s}\big(\delta\bigoplus\delta'\big)} \\
+                                                     &= \overline{\mathfrak{s}(\delta) \bigoplus \mathfrak{s}(\delta')} \\
+                                                     &= \big[A\bigoplus A'\xrightarrow[]{\overline{x\bigoplus x'}} B\bigoplus B' \xrightarrow[]{\overline{y\bigoplus y'}} C\bigoplus C'\big] \\
+                                                     &= [A\xrightarrow[]{\overline{x}} B\xrightarrow[]{\overline{y}} C] \bigoplus [A'\xrightarrow[]{\overline{x'}} B'\xrightarrow[]{\overline{y'}} C'] \\
+                                                     &= \overline{\mathfrak{s}}(\delta) \bigoplus \overline{\mathfrak{s}}(\delta').
+    \end{align*}
+
+    Ahora, supongamos que tenemos $\overline{\mathfrak{s}}(\delta) = [A\xrightarrow[]{\overline{x}} B\xrightarrow[]{\overline{y}} C], \overline{\mathfrak{s}}(\delta') = [A'\xrightarrow[]{\overline{x'}} B'\xrightarrow[]{\overline{y'}} C']$ y $\overline{a}\in\text{Hom}_{\overline{\mathscr{A}}}(A,A'),\break \overline{b}\in\text{Hom}_{\overline{\mathscr{A}}}(B,B')$ tales que $\overline{x'} \overline{a} = \overline{b} \overline{x}$. Entonces, nuevamente, podemos suponer que $\mathfrak{s}(\delta) = [A\xrightarrow[]{x} B\xrightarrow[]{y} C], \mathfrak{s}(\delta') = [A'\xrightarrow[]{x'} B'\xrightarrow[]{y'} C']$. Por $\overline{x'} \overline{a} = \overline{b} \overline{x}$, existen $I\in\text{Obj}(\mathscr{I}), i\in\text{Hom}_\mathscr{A}(A,I)$ y $j\in\text{Hom}_\mathscr{A}(I,B')$ tales que $x'a = bx + ji$. Por el Lema \ref{NakaokaPalu-3.29}, obtenemos el $\mathbb{E}$-triángulo
+    \[
+        A\xrightarrow[]{x_I} B\bigoplus I\xrightarrow[]{y_I} C\bigoplus I\xdashrightarrow{\delta\cdot p_C},
+    \] 
+    el cual induce el isomorfismo de $\mathbb{E}$-triángulos
+    \begin{equation}\label{eq: 3.29-1}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{\overline{x_I}} &B\bigoplus I \arrow[]{d}[]{\overline{p_B}} \arrow[]{r}[]{\overline{y_I}} &C\bigoplus I \arrow[]{d}[]{\overline{p_C}} \arrow[dashed]{r}[]{\delta\cdot p_C} &\empty{} \\
+            A \arrow[]{r}[swap]{x} &B \arrow[]{r}[swap]{y} &C \arrow[dashed]{r}[swap]{\delta} &\empty{}.
+        \end{tikzcd}
+    \end{equation}
+    Por otro lado, dado que $(\mathscr{A},\mathbb{E},\mathfrak{s})$ cumple el axioma (ET3), tenemos el siguiente morfismo de $\mathbb{E}$-triángulos.
+    \begin{equation}\label{eq: 3.29-2}
+       \begin{tikzcd}
+           A \arrow[equals]{d}[]{} \arrow[]{r}[]{x_I} &B\bigoplus I \arrow[]{d}[]{(\begin{smallmatrix} b \ j \end{smallmatrix})} \arrow[]{r}[]{y_I} &C\bigoplus I \arrow[]{d}[]{c} \arrow[dashed]{r}[]{\delta\cdot p_C} &\empty{} \\
+            A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C' \arrow[dashed]{r}[swap]{\delta'} &\empty{}.
+       \end{tikzcd} 
+    \end{equation}
+    De los diagramas (\ref{eq: 3.29-1}) y (\ref{eq: 3.29-2}), obtenemos un morfismo de $\overline{\mathbb{E}}$-extensiones $(\overline{a}, \overline{c} \overline{p_C}^{-1}):\delta\to \delta'$ tal que $(\overline{c}\overline{p_C}^{-1})\overline{y} = \overline{y'} \overline{b}$. Dualmente, se demuestra (ET3)\textsuperscript{$\ast$}. \\
+
+    Sean $A\xrightarrow[]{\overline{f}} B\xrightarrow[]{\overline{f'}} D\xdashrightarrow{\delta}$ y $B\xrightarrow[]{\overline{g}} C\xrightarrow[]{\overline{g'}} F\xdashrightarrow{\delta'}$ $\overline{\mathbb{E}}$-triángulos. Entonces, siguiendo los mismos argumentos de antes, podemos suponer que $A\xrightarrow[]{f} B\xrightarrow[]{f'} D\xdashrightarrow{\delta}$ y $B\xrightarrow[]{g} C\xrightarrow[]{g'} F\xdashrightarrow{\delta'}$ son $\mathbb{E}$-triángulos. Entonces, puesto que $(\mathscr{A},\mathbb{E},\mathfrak{s})$ cumple el axioma (ET4), obtenemos el diagrama conmutativo en $\mathscr{A}$ 
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[equals]{d}[]{} \arrow[]{r}[]{f} &B \arrow[]{d}[]{g} \arrow[]{r}[]{f'} &D \arrow[]{d}[]{d} \\
+            A \arrow[]{r}[swap]{h} &C \arrow[]{d}[swap]{g'} \arrow[]{r}[swap]{h'} &E \arrow[]{d}[]{e} \\
+                                   &F \arrow[equals]{r}[]{} &F
+        \end{tikzcd}
+    \end{center}
+    compuesto de conflaciones, que satisface $\mathfrak{s}(f'\cdot\delta') = [D\xrightarrow[]{d} E\xrightarrow[]{e} F], \delta''\cdot d = \delta$ y $f\cdot\delta'' = \delta'\cdot e$. La imagen de este diagrama en $\overline{\mathscr{A}}$ muestra que también se verifica (ET4) en $(\overline{\mathscr{A}},\overline{\mathbb{E}},\overline{\mathfrak{s}})$. Dualmente, se demuestra (ET4)\textsuperscript{$\ast$}.
+\end{proof}
+
+\begin{Coro}\cite[Corollary 3.32]{NakaokaPalu}\label{NakaokaPalu-3.32}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada y $\mathscr{I}\subseteq\mathscr{A}$ una subcategoría aditiva plena de $\mathscr{A}$ cerrada por isomorfismos en $\mathscr{A}$ tal que $\mathbb{E}(\mathscr{I},\mathscr{I})=0$. Si $\mathscr{Z}\subseteq\mathscr{A}$ es la subcategoría plena de los objetos $Z\in\text{Obj}(\mathscr{A})$ tales que $\mathbb{E}(Z,I) = \mathbb{E}(I,Z)=0$ para todo $I\in\text{Obj}(\mathscr{I})$, entonces $\mathscr{Z}/\mathscr{I}$ es una categoría extriangulada.
+\end{Coro}
+
+\begin{proof}
+
+    Se sigue de la Observación \ref{NakaokaPalu-2.18} y la Proposición \ref{NakaokaPalu-3.30}.
+\end{proof}
+
+\subsection*{Pares de cotorsión} \label{Ssec: Pares de cotorsión}
+
+\begin{Def}\cite[Definition 4.1]{NakaokaPalu}\label{NakaokaPalu-4.1}
+    Sea $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada. Un \emph{par de cotorsión (completo)} $(\mathcal{U},\mathcal{V})$ en $(\mathscr{A},\mathbb{E},\mathfrak{s})$ es un par $(\mathcal{U},\mathcal{V})$ de subcategorías aditivas plenas de $\mathscr{A}$, cerradas por sumandos directos en $\mathscr{A}$, tal que cumple las siguientes condiciones.
+
+    \begin{enumerate}[label=(\alph*)]
+
+        \item $\mathbb{E}(\mathcal{U},\mathcal{V}) = 0$.
+
+        \item Para cualquier $C\in\text{Obj}(\mathscr{A})$, existe una conflación $V^C\to U^C\to C$ tal que $U^C\in\mathcal{U}, V^C\in \mathcal{V}$. 
+
+        \item Para cualquier $C\in\text{Obj}(\mathscr{A})$, existe una conflación $C\to V_C\to U_C$ tal que $U_C\in\mathcal{U}, V_C\in \mathcal{V}$. 
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}\cite[Definition 4.2]{NakaokaPalu}\label{NakaokaPalu-4.2}
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada y $\mathcal{X},\mathcal{Y}\subseteq\mathscr{A}$ un par de subcategorías plenas cerradas por isomorfismos. Definimos las subcategorías plenas $\text{Cone}(\mathcal{X},\mathcal{Y})$ y $\text{CoCone}(\mathcal{X},\mathcal{Y})$ de $\mathscr{A}$, las cuales son cerradas por isomorfismos, como sigue.
+
+    \begin{enumerate}
+    
+        \item[(i)] $C\in\text{Obj}(\mathscr{A})$ pertenece a $\text{Cone}(\mathcal{X},\mathcal{Y})$ si, y sólo si, admite una conflación $X\to Y\to C$ con $X\in \mathcal{X}, Y\in \mathcal{Y}$.
+
+        \item[(ii)] $C\in\text{Obj}(\mathscr{A})$ pertenece a $\text{CoCone}(\mathcal{X},\mathcal{Y})$ si, y sólo si, admite una conflación $C\to X\to Y$ con $X\in \mathcal{X}, Y\in \mathcal{Y}$.
+    \end{enumerate}
+\end{Def}
+
+\begin{Obs}\cite[Remarks 4.3, 4.4, 4.6 \& 4.7]{NakaokaPalu}\label{NakaokaPalu-4.3,4.4,4.6,4.7}
+
+    Sean $(\mathscr{A},\mathbb{E},\mathfrak{s})$ una categoría extriangulada y $\mathcal{U},\mathcal{V}$ subcategorías plenas de $\mathscr{A}$ cerradas por isomorfismos. 
+    
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item Si $\mathcal{U}$ y $\mathcal{V}$ son subcategorías aditivas de $\mathscr{A}$, entonces del axioma (ET2) se sigue que $\text{Cone}(\mathcal{U},\mathcal{V})$ y $\text{CoCone}(\mathcal{U},\mathcal{V})$ también lo son.
+
+        \item Si $(\mathcal{U},\mathcal{V})$ es un par de cotorsión completo en $(\mathscr{A},\mathbb{E},\mathfrak{s})$ entonces, por la Observación \ref{NakaokaPalu-2.11}, tenemos que
+            \[
+                C\in\mathcal{U} \iff \mathbb{E}(C,\mathcal{V}) = 0 \quad \land \quad C\in\mathcal{V} \iff \mathbb{E}(\mathcal{U},C) = 0
+            \] 
+            para todo $C\in\text{Obj}(\mathscr{A})$. Más aún, por la Proposición \ref{NakaokaPalu-3.11}, se sigue que las subcategorías $\mathcal{U}$ y $\mathcal{V}$ son cerradas por extensiones en $\mathscr{A}$.
+
+        \item $(\mathcal{U},\mathcal{V})$ es un par de cotorsión completo en $(\mathscr{A},\mathbb{E},\mathfrak{s})$, si, y sólo si, $\mathscr{A} = \text{Cone}(\mathcal{V},\mathcal{U}) = \text{CoCone}(\mathcal{V},\mathcal{U})$.
+
+        \item Si $\mathcal{X}\subseteq\mathscr{A}$ es una subcategoría entonces, por el inciso (2) y la Proposición \ref{NakaokaPalu-3.24}, tenemos que $(\mathcal{X},\mathscr{A})$ es un par de cotorsión completo si, y sólo si, $(\text{Proj}_\mathbb{E}(\mathscr{A}),\mathscr{A})$ es un par de cotorsión si, y sólo si $\mathscr{A}$ tiene suficientes $\mathbb{E}$-proyectivos. Más aún, se verifica una observación análoga para objetos $\mathbb{E}$-inyectivos.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Coro}\cite[Corollary 4.5]{NakaokaPalu}\label{NakaokaPalu-4.5}
+    Sean $(\mathcal{U},\mathcal{V})$ un par de cotorsión en una categoría extriangulada $(\mathscr{A},\mathbb{E},\mathfrak{s})$ y $C\in\text{Obj}(\mathscr{A})$. Si $U\in\mathcal{U}$ y existe una sección $C\to U$ o una retracción $U\to C$, entonces $C\in\mathcal{U}$, y similarmente para $\mathcal{V}$.
+\end{Coro}
+
+\begin{proof}
+
+    Supongamos que $U\in\mathcal{U}$. Sean $s\in\text{Hom}_\mathscr{A}(C,U)$ y $r\in\text{Hom}_\mathscr{A}(U,C)$ tales que $rs = 1_C$. Entonces, tenemos el siguiente diagrama conmutativo de transformaciones naturales
+    \begin{center}
+        \begin{tikzcd}
+            &\mathbb{E}(U,-) \arrow[]{dr}[]{\mathbb{E}(s^\text{op},-)} \\
+            \mathbb{E}(C,-) \arrow[]{ur}[]{\mathbb{E}(r^\text{op},-)} \arrow[]{rr}[swap]{\mathbb{E}(1_C{}^\text{op},-) = 1_{\mathbb{E}(C,-)}} &&\mathbb{E}(C,-).
+        \end{tikzcd}
+    \end{center}
+    Luego, $\mathbb{E}(U,\mathcal{V}) = 0$ implica que $\mathbb{E}(C,\mathcal{V}) = 0$ y, del inciso (2) de la Observación \ref{NakaokaPalu-4.3,4.4,4.6,4.7}, se sigue que $C\in\mathcal{U}$.
+\end{proof}
+
+\end{document}

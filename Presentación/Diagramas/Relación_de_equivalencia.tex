@@ -1,0 +1,11 @@
+\documentclass[tikz, border=0mm]{standalone}
+\usepackage{amssymb}
+\usetikzlibrary{cd}
+\usetikzlibrary{babel}
+\begin{document}
+\begin{tikzcd}
+            &B \arrow[]{dr}[]{y} \arrow[]{dd}{b}[swap]{\rotatebox{90}{$\sim$}} \\
+    A \arrow[]{ur}[]{x} \arrow[phantom]{r}{\circlearrowleft} \arrow[]{dr}[swap]{x'} &\empty{} &C. \arrow[phantom]{l}{\circlearrowleft} \\
+                                                       &B' \arrow[]{ur}[swap]{y'}
+\end{tikzcd}
+\end{document}

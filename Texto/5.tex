@@ -1,0 +1,2074 @@
+\documentclass[tesis]{subfiles}
+\begin{document}
+
+\chapter{Categorías abelianas}\label{Chap: Categorías abelianas}
+
+En este Apéndice, presentamos la definición de categoría abeliana dada por Mitchell\cite{Mitchell} e incluimos algunos resultados de categorías abelianas relevantes para el desarrollo del texto principal. Antes de esto, definimos algunas nociones generales de teoría de categorías necesarias para definir las categorías abelianas que no fueron incluidas en el Capítulo \ref{Chap: Algunas nociones generales de la teoría de categorías} y mostramos propiedades básicas de algunos tipos de categorías previas a las Puppe-exactas, las cuales definen la estructura exacta de las categorías abelianas.
+
+\section{Intersecciones, uniones, imágenes y preimágenes} \label{Sec: Intersecciones, uniones, imágenes y preimágenes}
+
+\begin{Def}\label{Def: Intersección}
+    Sean $\mathscr{C}$ una categoría, $A\in\text{Obj}(\mathscr{C})$ y $\{\mu_i:A_i\hookrightarrow A\}_{i\in I}$ una familia de subobjetos de $A$. Una \emph{intersección} de dicha familia es un morfismo $A'\xrightarrow[]{\mu}A$ en $\mathscr{C}$ tal que satisface las siguientes condiciones.
+
+    \begin{itemize}
+    
+        \item[(I1)] Para cada $i\in I$, $\mu$ se factoriza a través de $\mu_i$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    A' \arrow[]{rr}[]{\mu} \arrow[dotted]{dr}[swap]{\exists \ v_i} &&A \\
+                                                                                  &A_i \arrow[]{ur}[swap]{\mu_i}
+                \end{tikzcd}
+                \quad $\forall \ i\in I$.
+            \end{center}
+
+        \item[(I2)] Sea $B\xrightarrow[]{\theta}A$ en $\mathscr{C}$. Si, para cada $i\in I$, $\theta$ se factoriza a través de $\mu_i$, entonces $\theta$ se factoriza de forma única a través de $\mu$; diagramáticamente
+            \begin{center}
+                \begin{tikzcd}
+                    B \arrow[dotted]{dr}[swap]{\exists \ \eta_i} \arrow[]{rr}[]{\theta} &&A \\
+                                                                                        &A_i \arrow[]{ur}[swap]{\mu_i}
+                \end{tikzcd}
+                \quad $\forall \ i\in I$ \quad $\implies$ \quad
+                \begin{tikzcd}
+                    B \arrow[dotted]{dr}[swap]{\exists! \ \eta} \arrow[]{rr}[]{\theta} &&A. \\
+                                                                                       &A' \arrow[]{ur}[swap]{\mu}
+                \end{tikzcd}
+            \end{center}
+            
+            
+    \end{itemize}
+\end{Def}
+
+\begin{Obs}\label{Mendoza-1.3.1}
+    Sea $A'\xrightarrow[]{\mu}A$ la intersección de una familia de subobjetos $\{\mu_i:A_i\hookrightarrow A\}_{i\in I}$ en una categoría $\mathscr{C}$.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item $\mu\in\text{Mon}_\mathscr{C}(-,A)$ y $\mu\le\mu_i$ para cada $i\in I$.
+
+            En efecto: Sean \begin{tikzcd} X \arrow[shift left]{r}[]{\alpha_1} \arrow[shift right]{r}[swap]{\alpha_2} &A' \arrow[]{r}[]{\mu} &A \end{tikzcd} tales que $\mu\alpha_1 = \mu\alpha_2$. Veamos que $\alpha_1=\alpha_2$. Por ser $\mu$ una intersección de $\{\mu_i:A_i\to A\}_{i\in I}$, tenemos el diagrama conmutativo en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    A' \arrow[dotted]{dr}[swap]{v_i} \arrow[]{rr}[]{\mu} &&A \\
+                                                                         &A_i \arrow[]{ur}[swap]{\mu_i}
+                \end{tikzcd}
+                \quad $\forall \ i\in I$.
+            \end{center}
+            Ahora, consideremos a $X\xrightarrow[]{\theta:=\mu\alpha_1}A$. Como, para cada $i\in I$, se tiene que
+            \begin{align*}
+                \mu_i(v_i\alpha_1) &= (\mu_i v_i)\alpha_1 \\
+                                   &= \mu\alpha_1 \\
+                                   &= \theta,
+            \end{align*}
+            por (I2), se sigue que existe un único morfismo $X\xrightarrow[]{\eta}A'$ que hace conmutar el siguiente diagrama en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    X \arrow[dotted]{dr}[swap]{\exists ! \ \eta} \arrow[]{rr}[]{\theta} &&A. \\
+                                                                                        &A' \arrow[]{ur}[swap]{\mu}
+                \end{tikzcd}
+            \end{center}
+            Dado que $\mu\alpha_1 = \theta = \mu\alpha_2$, por la unicidad de $\eta$ se sigue que $\alpha_1=\alpha_2$, lo que implica que $\mu$ es un monomorfismo. En particular, para cada $i\in I$, tenemos que $\mu\le\mu_i$, pues $v_i\in\text{Mon}_\mathscr{C}(-,A)(\mu,\mu_i)$.
+
+        \item En vista de (1), si $A''\xhookrightarrow{\mu'} A$ es otra intersección de $\{\mu_i:A_i\to A\}_{i\in I}$, entonces $\mu'\simeq \mu$ en $\text{Mon}_\mathscr{C}(-,A)$. 
+
+            En efecto: Por ser $\mu'$ una intersección de $\{\mu_i:A_i\to A\}_{i\in I}$, de (I1), se sigue que el siguiente diagrama en $\mathscr{C}$ conmuta
+            \begin{center}
+                \begin{tikzcd}
+                    A'' \arrow[dotted]{dr}[swap]{v_i'} \arrow[]{rr}[]{\mu'} &&A \\
+                                                                            &A \arrow[]{ur}[swap]{\mu_i}
+                \end{tikzcd}
+                \quad $\forall \ i\in I$;
+            \end{center}
+            luego, por (I2), existe $A''\xrightarrow[]{v'} A'$ en $\mathscr{C}$ tal que hace conmutar el siguiente diagrama en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    A'' \arrow[dotted]{dr}[swap]{v'} \arrow[]{rr}[]{\mu'} &&A. \\
+                                                                          &A' \arrow[]{ur}[swap]{\mu}
+                \end{tikzcd}
+            \end{center}
+            Ahora, por (1), sabemos que $\mu'\in\text{Mon}_\mathscr{C}(-,A)$. Luego, del diagrama anterior se sigue que $\mu'\le\mu$. Análogamente, se obtiene que $\mu\le\mu'$ y, por el inciso (2) de la Observación \ref{Mendoza-1.1.2}, concluimos que $\mu'\simeq\mu$ en $\text{Mon}_\mathscr{C}(-,A)$.
+
+        \item En vista de (2), y en caso de que exista, denotaremos por
+            \[
+            \bigcap_{i\in I}A_i\xhookrightarrow{\mu}A
+            \] 
+            a la elección de una intersección de la familia $\{\mu_i:A_i\to A\}_{i\in I}$.
+
+        \item Supongamos que $I=\varnothing$. Entonces, $A\xrightarrow[]{1_A}A$ es la intersección de $\{\mu_i:A_i\hookrightarrow A\}_{i\in I}$; esto es,
+            \[
+            \bigcap_{i\in \varnothing}A_i = A.
+            \] 
+
+            En efecto: Sea $I=\emptyset$. Dado que $A\xrightarrow[]{1_A} A$ es un isomorfismo, entonces por el inciso (6) de la Observación \ref{Obs: Morfismos especiales}, tenemos que $1_A$ es un monomorfismo, por lo que $A$ es un subobjeto de $A$, vía $1_A$. Dado que la familia de subobjetos $\{A_i\xhookrightarrow{\mu_i} A\}_{i\in I}$ es vacía, entonces $\mu$ se factoriza a través de cada $\mu_i$ por vacuidad. Sea $B\xrightarrow[]{\theta} A$ en $\mathscr{C}$ tal que se factoriza a través de cada $\mu_i$ lo que, por vacuidad, significa que $\theta$ es un morfismo arbitrario. Como $1_A\theta=\theta$, entonces $\theta$ se factoriza a través de $1_A$ trivialmente. Más aún, si $B\xrightarrow[]{\sigma} A$ es tal que $1_A\sigma=\theta$, $\sigma=1_A\sigma=\theta$, por lo que la factorización de $\theta$ a través de $1_A$ es única. 
+    \end{enumerate}
+\end{Obs}
+
+\begin{Prop}\label{Mendoza-1.8.5,1.8.7}
+    Sean $\mathscr{C}$ una categoría, $A,B\in\text{Obj}(\mathscr{C})$ tales que existe $A\prod B$ en $\mathscr{C}$ y $\alpha,\beta:A\to B$ en $\mathscr{C}$. Por la propiedad universal del producto, podemos considerar $\theta_1,\theta_2:A\to A\prod B$ en $\mathscr{C}$ tales que hacen conmutar los siguientes diagramas en $\mathscr{C}$
+    \begin{equation}\label{eq: Mendoza-1.8.7-1}
+        \begin{tikzcd}
+            &B \\
+            A \arrow[]{ur}[]{\alpha} \arrow[]{dr}[swap]{1_A} \arrow[]{rr}[]{\theta_1} &&A\prod B \arrow[]{ul}[swap]{\pi_2} \arrow[]{dl}[]{\pi_1} \\
+                                                                                      &A
+        \end{tikzcd}
+        \quad
+        \begin{tikzcd}
+            &B \\
+            A \arrow[]{ur}[]{\beta} \arrow[]{dr}[swap]{1_A} \arrow[]{rr}[]{\theta_2} &&A\prod B \arrow[]{ul}[swap]{\pi_2} \arrow[]{dl}[]{\pi_1} \\
+                                                                                      &A
+        \end{tikzcd}
+    \end{equation}
+    En particular, de $\pi_1\theta_1 = 1_A = \pi_1\theta$ y los incisos (6) y (5) de la Observación \ref{Obs: Morfismos especiales}, se sigue que $\theta_1$ y $\theta_2$ son monomorfismos. Las siguientes condiciones se verifican.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Si el diagrama en $\mathscr{C}$
+            \begin{equation}\label{eq: Mendoza-1.8.7-2}
+                \begin{tikzcd}
+                    K \arrow[]{d}[swap]{\mu_2} \arrow[]{r}[]{\mu_1} &A \arrow[]{d}[]{\theta_1} \\
+                    A \arrow[]{r}[swap]{\theta_2} &A\prod B
+                \end{tikzcd}
+            \end{equation}
+            conmuta, entonces $\mu_1 = \mu_2$.
+            
+        \item Las siguientes condiciones son equivalentes.
+
+            \begin{itemize}
+                
+                \item[(b1)] El diagrama en $\mathscr{C}$
+                    \begin{equation}\label{eq: Mendoza-1.8.5-1}
+                        \begin{tikzcd}
+                            K \arrow[]{d}[swap]{\mu} \arrow[]{r}[]{\mu} &A \arrow[hook]{d}[]{\theta_1} \\
+                            A \arrow[hook]{r}[swap]{\theta_2} &A\prod B
+                        \end{tikzcd}
+                    \end{equation}
+                    conmuta y $K\xrightarrow{\theta_1\mu} A\prod B$ es la intersección de $\theta_1$ y $\theta_2$.
+
+                \item[(b2)] $\mu = \text{Equ}(\alpha,\beta)$.
+            \end{itemize}
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Supongamos que el diagrama (\ref{eq: Mendoza-1.8.7-2}) conmuta. De la conmutatividad de los diagramas (\ref{eq: Mendoza-1.8.7-1}), se sigue que
+            \begin{align*}
+                \mu_1 &= 1_A\mu_1 \\
+                      &= (\pi_1\theta_1)\mu_1 \\
+                      &= \pi_1(\theta_1\mu_1) \\
+                      &= \pi_1(\theta_2\mu_2) \\
+                      &= (\pi_1\theta_2)\mu_2 \\
+                      &= 1_A\mu_2 \\
+                      &= \mu_2.
+            \end{align*}
+
+        \item (b1)$\Rightarrow$(b2) Por la Proposición \ref{Mendoza-1.3.2}, tenemos que el diagrama (\ref{eq: Mendoza-1.8.5-1}) es un producto fibrado en $\mathscr{C}$. Veamos que $K\xrightarrow[]{\mu}A$ es un ecualizador de \begin{tikzcd} A \arrow[shift left]{r}[]{\alpha} \arrow[shift right]{r}[swap]{\beta} &B\end{tikzcd}. En efecto, tenemos que
+            \begin{align*}
+                \beta\mu &= \pi_2\theta_2\mu \\
+                         &= \pi_2\theta_1\mu \\
+                         &= \alpha\mu.
+            \end{align*}
+            Ahora, sea $X\xrightarrow[]{\gamma} A$ en $\mathscr{C}$ tal que $\alpha\gamma = \beta\gamma$. Dado que
+            \begin{align*}
+                \pi_1(\theta_1\gamma) &= (\pi_1\theta_1)\gamma \\
+                                      &= 1_A\gamma \\
+                                      &= (\pi_1\theta_2)\gamma \\
+                                      &= \pi_1(\theta_2\gamma), \\ \\
+                \pi_2(\theta_1\gamma) &= (\pi_2\theta_1)\gamma \\
+                                      &= \alpha\gamma \\
+                                      &= \beta\gamma \\
+                                      &= (\pi_2\theta_2)\gamma \\
+                                      &= \pi_2(\theta_2\gamma),
+            \end{align*}
+            por la propiedad universal del producto, se sigue que $\theta_1\gamma = \theta_2\gamma$. Luego, como el diagrama $(\ref{eq: Mendoza-1.8.5-1})$ es un producto fibrado, por la propiedad universal del producto fibrado, existe $X\xrightarrow[]{\overline{\gamma}} K$ en $\mathscr{C}$ tal que hace conmutar el siguiente diagrama
+            \begin{equation}\label{eq: Mendoza-1.8.5-2}
+                \begin{tikzcd}
+                    X \arrow[bend right = 30]{ddr}[swap]{\gamma} \arrow[dotted]{dr}[]{\overline{\gamma}} \arrow[bend left = 30]{rrd}[]{\gamma} \\
+                    &K \arrow[]{d}[swap]{\mu} \arrow[]{r}[]{\mu} &A \arrow[]{d}[]{\theta_1} \\
+                    &A \arrow[]{r}[swap]{\theta_2} &A\prod B.
+                \end{tikzcd}
+            \end{equation}
+            Más aún, como por el Corolario \ref{Mendoza-Ejer.8(a)} tenemos que $\mu$ es un monomorfismo, se sigue que $\overline{\gamma}$ es el único morfismo en $\mathscr{C}$ que hace conmutar el diagrama (\ref{eq: Mendoza-1.8.5-2}). En particular, $\overline{\gamma}$ es el único morfismo en $\mathscr{C}$ tal que $\mu \overline{\gamma} = \gamma$. \\
+
+            (b2)$\Rightarrow$(b1) Sea $\mu=\text{Equ}(\alpha,\beta)$. Por la Proposición \ref{Mendoza-1.3.2}, es suficiente verificar que el cuadrado del diagrama (\ref{eq: Mendoza-1.8.5-1}) es un producto fibrado en $\mathscr{C}$. Sean \begin{tikzcd} X \arrow[shift left]{r}[]{\alpha_1} \arrow[shift right]{r}[swap]{\alpha_2} &A \end{tikzcd} tales que $\theta_1\alpha_1 = \theta_2\alpha_2$. Dado que
+            \begin{align*}
+                \pi_1(\theta_2\mu) &= (\pi_1\theta_2)\mu \\
+                                   &= 1_A\mu \\
+                                   &= (\pi_1\theta_1)\mu \\
+                                   &= \pi_1(\theta_1\mu), \\ \\
+                \pi_2(\theta_2\mu) &= (\pi_2\theta_2)\mu \\
+                                   &= \beta\mu \\
+                                   &= \alpha\mu \tag{$\mu = \text{Equ}(\alpha,\beta)$} \\
+                                   &= (\pi_2\theta_1)\mu \\
+                                   &= \pi_2(\theta_1\mu),
+            \end{align*}
+            de la propiedad universal del producto, se sigue que $\theta_2\mu = \theta_1\mu$. Observemos que
+            \begin{align*}
+                \alpha_1 &= 1_A\alpha_1 \\
+                         &= \pi_1\theta_1\alpha_1 \\
+                         &= \pi_1\theta_2\alpha_2 \\
+                         &= 1_A\alpha_2 \\
+                         &= \alpha_2,
+            \end{align*}
+            por lo que
+            \begin{align*}
+                \beta\alpha_1 &= \beta\alpha_2 \\
+                              &= \pi_2\theta_2\alpha_2 \\
+                              &= \pi_2\theta_1\alpha_1 \\
+                              &= \alpha\alpha_1.
+            \end{align*}
+            Luego, de la propiedad universal del ecualizador, se sigue que existe un único morfismo $X\xrightarrow[]{\lambda} K$ en $\mathscr{C}$ tal que $\mu\lambda = \alpha_1$.
+    \end{enumerate}
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.3.2}
+    Sean $\mathscr{C}$ una categoría, $A_1\xhookrightarrow[]{\alpha_1} A\xhookleftarrow[]{\alpha_2} A_2$ en $\mathscr{C}$ y
+    \begin{center}
+        \begin{tikzcd}
+        P \arrow[]{d}[swap]{\beta_1} \arrow[]{r}[]{\beta_2} &A_2 \arrow[]{d}[]{\alpha_2} \\
+        A_1 \arrow[]{r}[swap]{\alpha_1} &A
+        \end{tikzcd}
+    \end{center}
+    un diagrama conmutativo en $\mathscr{C}$. Entonces, dicho cuadrado es un producto fibrado si, y sólo si, $P\xrightarrow[]{\mu:=\alpha_2\beta_2} A$ es la intersección de $\alpha_1$ y $\alpha_2$.
+\end{Prop}
+
+\begin{proof}
+
+    ($\Rightarrow$) De la hipótesis, se sigue que $\mu$ se factoriza a través de $\alpha_1$ y $\alpha_2$, por lo que se verifica (I1). Sea $\{\eta_i:P'\to A_i\}_{i=1,2}$ una familia de morfismos en $\mathscr{C}$ tal que $\theta = \alpha_1\eta_1 = \alpha_2\eta_2$. Entonces, por la propiedad universal del producto fibrado, existe $P'\xrightarrow[]{\eta}P$ en $\mathscr{C}$ tal que el siguiente diagrama en $\mathscr{C}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            P' \arrow[bend left = 30]{rrd}[]{\eta_2} \arrow[dotted]{dr}[swap]{\eta} \arrow[bend right = 30]{ddr}[swap]{\eta_1} \\
+            &P \arrow[]{d}[swap]{\beta_1} \arrow[]{r}[]{\beta_2} \arrow[]{dr}[]{\mu} &A_2 \arrow[]{d}[]{\alpha_2} \\
+            &A_1 \arrow[]{r}[swap]{\alpha_1} &A.
+        \end{tikzcd}
+    \end{center}
+    Por ende,
+    \begin{align*}
+        \mu\eta &= \alpha_2\beta_2\eta \\
+                &= \alpha_2\eta_2 \\
+                &= \theta.
+    \end{align*}
+    Más aún, como $\alpha_1$ es un monomorfismo, por el Corolario \ref{Mendoza-Ejer.8(a)} tenemos que $\beta_2$ es un monomorfismo, de donde sigue que $\eta$ es el único morfismo en $\mathscr{C}$ tal que $\mu\eta=\theta$. \\
+
+    ($\Leftarrow$) Sean $P'\xrightarrow[]{\eta_i}A_i$ en $\mathscr{C}$, con $i\in\{1,2\}$, tales que $\alpha_2\eta_2 = \alpha_1\eta_1$. Consideremos a $\xrightarrow{\theta:=\alpha_2\eta_2}A$. Como $\alpha_2\eta_2 = \alpha_1\eta_1$, por la propiedad universal de la intersección, tenemos que existe un morfismo $P'\xrightarrow[]{\eta}P$ en $\mathscr{C}$ tal que $\theta = \mu\eta$. Dado que
+    \begin{align*}
+        \alpha_2(\beta_2\eta) &= (\alpha_2\beta_2)\eta \\
+                              &= \mu\eta \\
+                              &= \theta \\
+                              &= \alpha_2\eta_2
+    \end{align*}
+    y $\alpha_2$ es un monomorfismo, se sigue que $\beta_2\eta = \eta_2$. Análogamente, usando que $\alpha_1$ es un monomorfismo, se obtiene que $\beta_1\eta = \eta_1$. Finalmente, como por el inciso (1) de la Observación \ref{Mendoza-1.3.1} sabemos que $\mu$ es un monomorfismo, se sigue que $\eta$ es el único morfismo en $\mathscr{C}$ tal que $\theta=\mu\eta$.
+\end{proof}
+
+\begin{Def}
+    Sea $\mathscr{C}$ una categoría. $\mathscr{C}$ es una categoría \emph{con intersecciones} si, para cualquier $A\in\text{Obj}(\mathscr{C})$ y cualquier familia $\{\mu_i:A_i\hookrightarrow A\}_{i\in I}$ de subobjetos de $A$, existe una intersección $\mu: \bigcap_{i\in I}A_i\to A$. Si las intersecciones existen sólo para conjuntos de índices finitos, decimos que $\mathscr{C}$ \emph{tiene intersecciones finitas}.
+\end{Def}
+
+\begin{Teo}\label{Mendoza-1.8.8}
+    Sea $\mathscr{C}$ una categoría con coproductos finitos. Entonces, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\mathscr{C}$ tiene igualadores.
+
+        \item $\mathscr{C}$ tiene productos fibrados.
+
+        \item $\mathscr{C}$ tiene intersecciones finitas.
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}
+
+    Las implicaciones (a)$\implies$(b), (b)$\implies$(c) y (c)$\implies$(a) se siguen de las Proposiciones \ref{Mendoza-1.8.6}, \ref{Mendoza-1.3.2} y \ref{Mendoza-1.8.5,1.8.7}, respectivamente.
+\end{proof}
+
+A continuación, presentamos la noción dual de la intersección, dado que será usada más adelante.
+
+\begin{Def}\label{Mendoza-Ejer.35}
+    Sean $\mathscr{C}$ una categoría, $A\in\text{Obj}(\mathscr{C})$ y $\{\beta_i:A\twoheadrightarrow A_i'\}_{i\in I}$ una familia de objetos cociente de $A$. Una \emph{cointersección} de dicha familia es un morfismo $A\xrightarrow[]{\theta} A'$ en $\mathscr{C}$ tal que satisface las siguientes condiciones.
+
+    \begin{itemize}
+        \item[(CI1)] Para cada $i\in I$, $\theta$ se factoriza a través de cada $\beta_i$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{rr}[]{\theta} \arrow[two heads]{dr}[swap]{\beta_i} &&A' \\
+                                                                         &A_i' \arrow[dotted]{ur}[swap]{v_i}
+                \end{tikzcd}
+                \quad $\forall \ i\in I$.
+            \end{center}
+
+        \item[(CI2)] Sea $A\xrightarrow[]{\mu} B$ en $\mathscr{C}$. Si, para cada $i\in I$, $\mu$ se factoriza a través de $\beta_i$, entonces $\mu$ se factoriza a través de $\theta$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{rr}[]{\mu} \arrow[two heads]{dr}[swap]{\beta_i} & &B \\
+                                                                               &A_i' \arrow[dotted]{ur}[swap]{\exists \ \eta_i} 
+                \end{tikzcd}
+                \quad $\forall \ i\in I$ \quad $\implies$ \quad
+                \begin{tikzcd}
+                    A \arrow[]{rr}[]{\mu} \arrow[]{dr}[swap]{\theta} &&B. \\
+                                                                     &A'\arrow[dotted]{ur}[swap]{\eta}
+                \end{tikzcd}
+            \end{center}
+            En caso de que exista una cointersección para $\{\beta_i:A\twoheadrightarrow A_i'\}_{i\in I}$, la denotaremos por $A\xrightarrow[]{\theta}\bigcap_{i\in I}^{\text{op}}A_i'$.
+    \end{itemize}
+\end{Def}
+
+\begin{Def}
+    Consideremos el siguiente diagrama en una categoría $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            A' \arrow[hook]{d}[swap]{u} &B' \arrow[hook]{d}[]{h} \\
+            A \arrow[]{r}[swap]{f} &B.
+        \end{tikzcd}
+    \end{center}
+    Decimos que $u$ es \emph{llevado a} $h$, \emph{vía} $f$, si existe $A'\xrightarrow[]{f'}B'$ en $\mathscr{C}$ tal que $hf' = fu$; diagramáticamente,
+    \begin{center}
+        \begin{tikzcd}
+            A' \arrow[hook]{d}[swap]{u} \arrow[dotted]{r}[]{f'} &B' \arrow[hook]{d}[]{h} \\
+            A \arrow[]{r}[swap]{f} &B.
+        \end{tikzcd}
+    \end{center}
+\end{Def}
+
+\begin{Def}\label{Def: Unión}
+    Sean $\mathscr{C}$ una categoría, $A\in\text{Obj}(\mathscr{C})$ y $\{u_i:A_i\hookrightarrow A\}_{i\in I}$ una familia de subobjetos de $A$. Una \emph{unión} de dicha familia es un subobjeto $A'\xhookrightarrow{u}A$ de $A$ tal que las siguientes condiciones se satisfacen.
+    \begin{itemize}
+    
+        \item[(U1)] $u_1\le u$ para todo $i\in I$.
+
+        \item[(U2)] Si $A\xrightarrow[]{f}B$ en $\mathscr{C}$ es tal que cada $u_i$ es llevado, vía $f$, a algún subobjeto $B'\xhookrightarrow{\mu} B$, entonces $u$ es llevado a $\mu$, vía $f$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    A' \arrow[bend right = 30]{ddr}[swap]{u} \arrow[dotted, bend left = 30]{drr}[]{\exists \ f''} \\
+                    &A_i \arrow[hook]{d}[swap]{u_i} \arrow[]{r}[]{f_i} &B' \arrow[hook]{d}[]{\mu} \\
+                    &A \arrow[]{r}[swap]{f} &B
+                \end{tikzcd}
+                \quad para todo $i\in I$.
+            \end{center}
+    \end{itemize}
+\end{Def}
+
+\begin{Obs}\label{Mendoza-1.3.4}
+    Sean $\mathscr{C}$ una categoría, $A\in\text{Obj}(\mathscr{C})$ y $A'\xrightarrow[]{u}A$ una unión de subobjetos $\{u_i:A_i\hookrightarrow A\}_{i\in I}$ de $A$.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item Sean $B'\xhookrightarrow{\mu}B$ y $\{f'_i:A_i\to B'\}_{i\in I}$ tales que $\mu f'_i = fu_i$ para todo $i\in I$. Entonces, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    A' \arrow[dotted, bend left = 30]{rrd}[]{f''} \arrow[bend right = 30]{ddr}[swap]{u} \\
+                    &A_i \arrow[dotted]{ul}[swap]{v_i} \arrow[]{d}[swap]{u_i} \arrow[]{r}[]{f'_i} &B \arrow[]{d}[]{\mu} \\
+                    &A \arrow[]{r}[swap]{f} &B.
+                \end{tikzcd}
+            \end{center}
+
+            En efecto: por (U1), para cada $i\in I$, existe $A_i\xrightarrow[]{v_i}A'$ en $\mathscr{C}$ tal que $uv_i = u_i$. Luego, por (U2), existe $A'\xrightarrow[]{f''}B'$ en $\mathscr{C}$ tal que $\mu f'' = fu$. Como para cada $i\in I$ tenemos que
+            \begin{align*}
+                \mu f''v_i &= fuv_i \\
+                            &= fu_i \\
+                            &= \mu f'_i
+            \end{align*}
+            y $\mu$ es un monomorfismo, se sigue que $f''v_i = f'_i$ para cada $i\in I$.
+
+        \item Si $X\xhookrightarrow{\nu}A$ es tal que $u_i\le\nu$ para cada $i\in I$, entonces $u\le\nu$. %En particular, $A'\xhookrightarrow[]{u}A$ es el subobjeto más pequeño de $\mathscr{A}$, con respecto...
+
+            En efecto: haciendo $f:= 1_A$ y $\mu:= \nu$ en (1), se tiene el diagrama conmutativo
+            \begin{center}
+                \begin{tikzcd}
+                    A' \arrow[dotted, bend left = 30]{rrd}[]{} \arrow[bend right = 30]{ddr}[swap]{u} \\
+                    &A_i \arrow[hook]{d}[swap]{u_i} \arrow[]{r}[]{} &X \arrow[hook]{d}[]{\nu} \\
+                    &A \arrow[equals]{r}[]{} &A,
+                \end{tikzcd}
+            \end{center}
+            por lo que $u\le\nu$.
+
+        \item Si $A''\xhookrightarrow[]{u'} A$ es otra unión de $\{u_i:A_i\to A\}_{i\in I}$, entonces $u\simeq u'$ en $\text{Mon}_\mathscr{C}(-,A)$.
+
+            En efecto: aplicando (2) a $u$ y $u'$, se sigue que $u\le u'$ y $u'\le u$. Luego, del inciso (2) de la Observación \ref{Mendoza-1.1.2}, tenemos que $u\simeq u'$ en $\text{Mon}_\mathscr{C}(-,A)$.
+
+        \item En vista de (3), y en caso de que exista, denotaremos por
+            \[
+                \bigcup_{i\in I}A_i \xhookrightarrow{u} A
+            \] 
+            a la elección de una unión de $\{u_i:A_i\to A\}_{i\in I}$.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Def}\label{Def: Categoría con uniones}
+    Sea $\mathscr{C}$ una categoría. $\mathscr{C}$ es una categoría \emph{con uniones} si, para cualquier $A\in\text{Obj}(\mathscr{C})$ y cualquier familia $\{u_i:A_i\hookrightarrow A\}_{i\in I}$ en $\mathscr{C}$, existe la unión $\bigcup_{i\in I}A_i\xhookrightarrow{u}A$. Si las uniones existen sólo para conjuntos de índices finitos, diremos que $\mathscr{C}$ \emph{tiene uniones finitas}.
+\end{Def}
+
+\begin{Def}\label{Def: Imagen}
+    Sean $\mathscr{C}$ una categoría y $A\xrightarrow[]{f}B$ en $\mathscr{C}$. Una \emph{imagen} de $f$ es un subobjeto $I\xhookrightarrow{\mu} B$ de $B$ tal que satisface las siguientes condiciones.
+
+    \begin{itemize}
+    
+        \item[(Im1)] Existe $A\xrightarrow[]{f'}I$ en $\mathscr{C}$ tal que $f=\mu f'$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[dotted]{dr}[swap]{f'} \arrow[]{rr}[]{f} &&B. \\
+                                                                     &I \arrow[hook]{ur}[swap]{\mu}
+                \end{tikzcd}
+            \end{center}
+
+        \item[(Im2)] Si $I'\xhookrightarrow{\mu'} B$ es un subobjeto de $B$ tal que existe $A\xrightarrow[]{f''}I'$ con $f=\mu'f''$, entonces $\mu\le\mu'$; diagramáticamente
+            \begin{center}
+                \begin{tikzcd}
+                    &I' \arrow[hook]{dr}[]{\mu'} \\
+                    A \arrow[]{ur}[]{f''} \arrow[]{dr}[swap]{f'} &&B \\
+                                                                 &I \arrow[hook]{ur}[swap]{\mu}
+                \end{tikzcd}
+                \quad $\implies$ \quad
+                \begin{tikzcd}
+                    I' \arrow[hook]{dr}[]{\mu'} \\
+                    &B. \\
+                    I \arrow[dotted]{uu}[]{} \arrow[hook]{ur}[swap]{\mu}
+                \end{tikzcd}
+            \end{center}
+    \end{itemize}
+\end{Def}
+
+\begin{Obs}\label{Mendoza-1.4.1}
+    Sean $\mathscr{C}$ una categoría, $A\xrightarrow[]{f} B$ en $\mathscr{C}$ y $I\xhookrightarrow{\mu} B$ una imagen de $f$ en $\mathscr{C}$.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item La composición $A\xrightarrow[]{f'} I\xhookrightarrow[]{\mu} B$ en (Im1) se dice que es una \emph{factorización de} $f$ \emph{a través de su imagen}.
+
+        \item Sea $A\xrightarrow[]{f''} I'\xhookrightarrow{\mu'} B$ una factorización de $f$ a través de $\mu'\in\text{Mon}_\mathscr{C}(-,B)$. Entonces, existe un único morfismo $I\xrightarrow[]{u}I'$ en $\mathscr{C}$ que hace conmutar el siguiente diagrama
+            \begin{center}
+                \begin{tikzcd}
+                    &I' \arrow[hook]{dr}[]{\mu'} \\
+                    A \arrow[]{ur}[]{f''} \arrow[]{dr}[swap]{f'} &&B. \\
+                                                                 &I \arrow[dotted]{uu}[swap]{\exists! \ u} \arrow[hook]{ur}[swap]{\mu}
+                \end{tikzcd}
+            \end{center}
+            
+            En efecto, por (Im2), existe $I\xrightarrow[]{u}I'$ en $\mathscr{C}$ tal que $\mu=\mu'u$. Luego, dado que
+            \begin{align*}
+                \mu'uf' &= \mu f' \\
+                        &= f \\
+                        &= \mu'f''
+            \end{align*}
+            y $\mu'$ es un monomorfismo, tenemos que $uf'=f''$.
+
+        \item Si $J\xhookrightarrow{\nu}B$ es otra imagen de $f$, entonces $\mu\simeq\nu$ en $\text{Mon}_\mathscr{C}(-,B)$.
+
+            En efecto, por (IM2), se tiene que $\mu\le\nu$ y $\nu\le\mu$. Luego, del inciso (3) de la Observación \ref{Mendoza-1.1.2}, se sigue que $\mu\simeq\nu$ en $\text{Mon}_\mathscr{C}(-,B)$.
+
+        \item En vista del inciso (3), y en caso de que exista, denotaremos por $\text{Im}(f)\xhookrightarrow{\mu} B$ a la elección de una imagen de $f$. %En particular, $\text{Im}(f)\xhookrightarrow{\mu} B$ es el subobjeto más pequeño en $(\overline{\text{Mon}}_\mathscr{C}(-,B),\le)$ a través del cual se factoriza $f$.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Prop}\label{Mendoza-Ejer.19}
+    Sea $A\xrightarrow[]{f}B$ un monomorfismo en una categoría $\mathscr{C}$. Entonces, $A\xrightarrow[]{f}B$ es una imagen de $f$, es decir, $\text{Im}(f)\simeq f$ en $\text{Mon}_\mathscr{C}(-,B)$.
+\end{Prop}
+
+\begin{proof}
+    Observemos que $A\xrightarrow[]{f}B$ es un subobjeto de $B$ y que $1_A\in\text{Mor}(\mathscr{C})$ tal que $f=f1_A$. Supongamos que existen $I'\xhookrightarrow{\mu'} B$ y $A\xrightarrow[]{f''} I'$ en $\mathscr{C}$ tales que $f=\mu'f''$. Entonces, tenemos el diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &I' \arrow[hook]{dr}[]{\mu'} \\
+            A \arrow[]{ur}[]{f''} \arrow[]{dr}[swap]{1_A} &&B. \\
+                                                          &A \arrow[]{uu}[]{f''} \arrow[hook]{ur}[swap]{f}
+        \end{tikzcd}
+    \end{center}
+    Por ende, $A\xhookrightarrow{f}B$ es una imagen de $f$ y, del inciso (3) de la Observación \ref{Mendoza-1.4.1}, se sigue que $\text{Im}(f)\simeq f$ en $\text{Mon}_\mathscr{C}(-,B)$.
+\end{proof}
+
+\begin{Def}\label{Def: Categoría balanceada}
+    Sea $\mathscr{C}$ una categoría. $\mathscr{C}$ es \emph{balanceada} si todo morfismo que es un monomorfismo y un epimorfismo es un isomorfismo.
+\end{Def}
+
+\begin{Prop}\label{Mendoza-1.4.3}
+    Sean $\mathscr{C}$ una categoría balanceada y $A\xrightarrow[]{f}B$ en $\mathscr{C}$ tal que existe $\text{Im}(f)$ en $\mathscr{C}$. Si $A\xtwoheadrightarrow{f'} I\xhookrightarrow{\mu}B$ es tal que $\mu f'=f$, entonces $I\xhookrightarrow{\mu}B$ es una imagen de $f$.
+\end{Prop}
+
+\begin{proof}
+
+    Sean $A\xtwoheadrightarrow{f'} I\xhookrightarrow{\mu}B$ tal que $\mu f'=f$ y $A\xrightarrow[]{f''} \text{Im}(f)\xhookrightarrow{\nu} B$ una factorización de $f$ a través de su imagen. Entonces, por el inciso (2) de la Proposición \ref{Mendoza-1.4.1}, tenemos que existe $\text{Im}(f)\xrightarrow[]{u} I$ en $\mathscr{C}$ tal que hacer conmutar el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &I \arrow[hook]{dr}[]{\mu} \\
+            A \arrow[two heads]{ur}[]{f'} \arrow[]{dr}[swap]{f''} &&B. \\
+                                                                  &\text{Im}(f) \arrow[dotted]{uu}[swap]{u} \arrow[hook]{ur}[swap]{\nu}
+        \end{tikzcd}
+    \end{center}
+    Luego, del inciso (5) de la Observación \ref{Obs: Morfismos especiales}, se sigue que $u$ es un monomorfismo y un epimorfismo. Como $\mathscr{C}$ es balanceada, $u$ es un isomorfismo, de donde concluimos que $\mu\simeq\nu$ en $\text{Mon}_\mathscr{C}(-,B)$.
+\end{proof}
+
+\begin{Def}\label{Def: Categoría con imágenes}
+    Sea $\mathscr{C}$ una categoría. $\mathscr{C}$ es una \emph{categoría con imágenes} si todo morfismo $A\xrightarrow[]{f} B$ en $\mathscr{C}$ tiene una imagen $I\xhookrightarrow{\mu}B$ en $\mathscr{C}$. Si, además, el morfismo $A\xrightarrow[]{f'}I$ tal que $f=\mu f'$ es un epimorfismo, se dice que $\mathscr{C}$ \emph{tiene imágenes epimórficas}.
+\end{Def}
+
+\begin{Def}\label{Def: Coimagen}
+    Sean $\mathscr{C}$ una categoría y $A\xrightarrow[]{f}B$ en $\mathscr{C}$. Una \emph{coimagen} de $f$ es un objeto cociente $A\xtwoheadrightarrow{p} J$ de $A$ tal que satisface las siguientes condiciones.
+
+    \begin{itemize}
+    
+        \item[(CoIm1)] Existe $J\xrightarrow[]{f'}B$ en $\mathscr{C}$ tal que $f=f'p$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[two heads]{dr}[swap]{p} \arrow[]{rr}[]{f} &&B. \\
+                                                                     &J \arrow[dotted]{ur}[swap]{f'}
+                \end{tikzcd}
+            \end{center}
+
+        \item[(CoIm2)] Si $A\xtwoheadrightarrow{p'} J'$ es un objeto cociente de $A$ tal que existe $J'\xrightarrow[]{f''}B$ con $f=f''p'$, entonces $p\le p'$; diagramáticamente
+            \begin{center}
+                \begin{tikzcd}
+                    &J \arrow[]{dr}[]{f'} \\
+                    A \arrow[two heads]{ur}[]{p} \arrow[two heads]{dr}[swap]{p'} &&B \\
+                                                                 &J' \arrow[]{ur}[swap]{f''}
+                \end{tikzcd}
+                \quad $\implies$ \quad
+                \begin{tikzcd}
+                    &J \\
+                    A \arrow[two heads]{ur}[]{p} \arrow[two heads]{dr}[swap]{p'} \\
+                    &J'. \arrow[dotted]{uu}[]{}
+                \end{tikzcd}
+            \end{center}
+    \end{itemize}
+\end{Def}
+
+\begin{Def}\label{Def: Categoría con imágenes}
+    Sea $\mathscr{C}$ una categoría. $\mathscr{C}$ es una \emph{categoría con coimágenes} si todo morfismo $A\xrightarrow[]{f} B$ en $\mathscr{C}$ tiene una coimagen $A\xtwoheadrightarrow{p}J$ en $\mathscr{C}$.
+\end{Def}
+
+\begin{Def}\label{Def: Preimagen}
+    Sea $A\xrightarrow[]{f}B$ un morfismo en una categoría $\mathscr{C}$. La \emph{imagen inversa por} $f$ de $B'\xhookrightarrow{\alpha_1} B$ es el producto fibrado en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            P \arrow[]{d}[swap]{\beta_1} \arrow[]{r}[]{\beta_2} &B' \arrow[hook]{d}[]{\alpha_1} \\
+            A \arrow[]{r}[swap]{f} &B,
+        \end{tikzcd}
+    \end{center}
+    donde el objeto $P$ suele denotarse por $f^{-1}(B')$.
+    
+\end{Def}
+
+%\begin{Obs}\label{Mendoza-1.4.5}
+%    Sean $\mathscr{C}$ una categoría, $A\xrightarrow[]{f}B$ en $\mathscr{C}$ y consideremos a la imagen inversa por $f$ de $B'\xhookrightarrow{\alpha_1}B$. Entonces, el morfismo $f^{-1}(B')\xrightarrow[]{\beta_1}A$ es el subobjeto más grande en $(\overline{\text{Mon}}_\mathscr{C}(-,A),\le)$ que es llevado a $B'\xhookrightarrow{\alpha_1}B$ vía $f$.
+%\end{Obs}
+
+\section{Categorías con núcleos y conúcleos} \label{Sec: Categorías con núcleos y conúcleos}
+
+\begin{Def}\label{Categoría con núcleos}
+    Sea $\mathscr{C}$ una categoría con objeto cero. Entonces, $\mathscr{C}$ es una \emph{categoría con núcleos} si cada morfismo en $\mathscr{C}$ tiene un núcleo.
+\end{Def}
+
+\begin{Def}\label{Def: Funtor Ker}
+    Sean $\mathscr{C}$ una categoría con núcleos, $A\in\text{Obj}(\mathscr{C})$ y $\beta_1\xrightarrow[]{\delta}\beta_2\in\text{Epi}_\mathscr{C}(A,-)$. Entonces, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            \text{Ker}(\beta_1) \arrow[hook]{dr}[]{k_{\beta_1}} &&B_1 \arrow[]{dd}[]{\delta} \\
+                                                                &A \arrow[two heads]{ur}[]{\beta_1} \arrow[two heads]{dr}[swap]{\beta_2} \\
+            \text{Ker}(\beta_2) \arrow[hook]{ur}[swap]{k_{\beta_2}} &&B_2.
+        \end{tikzcd}
+    \end{center}
+    Como $\beta_2k_{\beta_1} = (\delta\beta_1)k_{\beta_1} = 0$, por la propiedad universal del núcleo, existe un único morfismo de $\text{Ker}(\beta_1)$ a $\text{Ker}(\beta_2)$ en $\mathscr{C}$, que denotamos por $\text{Ker}(\delta)$, tal que el siguiente diagrama en $\mathscr{C}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            \text{Ker}(\beta_1) \arrow[dotted]{dd}[swap]{\exists ! \ \text{Ker}(\delta)} \arrow[hook]{dr}[]{k_{\beta_1}} &&B_1 \arrow[]{dd}[]{\delta} \\
+                                                                &A \arrow[two heads]{ur}[]{\beta_1} \arrow[two heads]{dr}[swap]{\beta_2} \\
+            \text{Ker}(\beta_2) \arrow[hook]{ur}[swap]{k_{\beta_2}} &&B_2.
+        \end{tikzcd}
+    \end{center}
+    De esta manera, definimos la correspondencia
+    \begin{align*}
+        \text{Ker}:\text{Epi}_\mathscr{C}(A,-) &\to \text{Mon}_\mathscr{C}(-,A) \\
+        \big(\beta_1\xrightarrow[]{\delta}\beta_2\big) &\mapsto \big( \text{Ker}(\beta_1)\xrightarrow[]{\text{Ker}(\delta)} \text{Ker}(\beta_2)\big).
+    \end{align*}
+\end{Def}
+
+\begin{Obs}\label{Mendoza-1.5.10}
+    Sean $\mathscr{C}$ una categoría con núcleos y $A\in\text{Obj}(\mathscr{C})$. 
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item $\text{Ker}:\text{Epi}_\mathscr{C}(A,-)\to \text{Mon}_\mathscr{C}(-,A)$ es un funtor.
+
+        \item La correspondencia $\text{Ker}:\text{Obj}(\text{Epi}_\mathscr{C}(A,-)) \to \text{Obj}(\text{Mon}_\mathscr{C}(-,A))$ invierte el preorden. Es decir, si $\beta_1,\beta_2\in\text{Epi}_\mathscr{C}(A,-)$ son tales que $\beta_1\le\beta_2$, entonces $\text{Ker}(\beta_2)\le\text{Ker}(\beta_1)$.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Def}\label{Categoría con conúcleos}
+    Sea $\mathscr{C}$ una categoría con objeto cero. Entonces, $\mathscr{C}$ es una \emph{categoría con conúcleos} si cada morfismo en $\mathscr{C}$ tiene un conúcleo.
+\end{Def}
+
+\begin{Def}\label{Def: Funtor CoKer}
+    Sean $\mathscr{C}$ una categoría con conúcleos, $A\in\text{Obj}(\mathscr{C})$ y $\alpha_1\xrightarrow[]{\gamma}\alpha_2\in\text{Mon}_\mathscr{C}(-,A)$. Entonces, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            A_1 \arrow[]{dd}[swap]{\gamma} \arrow[hook]{dr}[]{\alpha_1} &&\text{CoKer}(\alpha_1) \\
+                                                                       &A \arrow[two heads]{ur}[]{c_{\alpha_1}} \arrow[two heads]{dr}[swap]{c_{\alpha_2}} \\
+            A_2 \arrow[hook]{ur}[swap]{\alpha_2} &&\text{CoKer}(\alpha_2).
+        \end{tikzcd}
+    \end{center}
+    Como $c_{\alpha_2} \alpha_1 = c_{\alpha_2}(\alpha_2\gamma) = 0$, por la propiedad universal del conúcleo, existe un único morfismo de $\text{CoKer}(\alpha_1)$ a $\text{CoKer}(\alpha_2)$ en $\mathscr{C}$, que denotamos por $\text{CoKer}(\gamma)$, tal que el siguiente diagrama en $\mathscr{C}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            A_1 \arrow[]{dd}[swap]{\gamma} \arrow[hook]{dr}[]{\alpha_1} &&\text{CoKer}(\alpha_1) \arrow[dotted]{dd}[]{\exists ! \ \text{CoKer}(\gamma)} \\
+                                                                       &A \arrow[two heads]{ur}[]{c_{\alpha_1}} \arrow[two heads]{dr}[swap]{c_{\alpha_2}} \\
+            A_2 \arrow[hook]{ur}[swap]{\alpha_2} &&\text{CoKer}(\alpha_2).
+        \end{tikzcd}
+    \end{center}
+    De esta manera, definimos la correspondencia
+    \begin{align*}
+        \text{CoKer}:\text{Mon}_\mathscr{C}(-,A) &\to \text{Epi}_\mathscr{C}(A,-) \\
+        \big(\alpha_1\xrightarrow[]{\gamma}\alpha_2\big) &\mapsto \big( \text{CoKer}(\alpha_1)\xrightarrow[]{\text{CoKer}(\gamma)} \text{CoKer}(\alpha_2)\big).
+    \end{align*}
+\end{Def}
+
+\begin{Obs}\label{Mendoza-1.5.10*}
+    Sean $\mathscr{C}$ una categoría con conúcleos y $A\in\text{Obj}(\mathscr{C})$. 
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item $\text{CoKer}:\text{Mon}_\mathscr{C}(-,A)\to \text{Epi}_\mathscr{C}(A,-)$ es un funtor.
+
+        \item La correspondencia $\text{CoKer}:\text{Obj}(\text{Mon}_\mathscr{C}(-,A))\to \text{Obj}(\text{Epi}_\mathscr{C}(A,-))$ invierte el preorden. Es decir, si $\alpha_1,\alpha_2\in\text{Mon}_\mathscr{C}(-,A)$ son tales que $\alpha_1\le\alpha_2$, entonces $\text{CoKer}(\alpha_2) \le \text{CoKer}(\alpha_1)$.
+    \end{enumerate}
+\end{Obs}
+
+\section{Categorías normales y conormales} \label{Sec: Categorías normales y conormales}
+
+\begin{Def}\label{Def: Categorías normales y conormales}
+    Una categoría $\mathscr{C}$ es \emph{normal} si tiene objeto cero y cada monomorfismo en $\mathscr{C}$ es núcleo de algún morfismo en $\mathscr{C}$. Dualmente, una categoría $\mathscr{C}$ es \emph{conormal} si $\mathscr{C}^\text{op}$ es normal.
+\end{Def}
+
+\begin{Prop}\label{Mendoza-1.6.1}
+    Sea $\mathscr{C}$ una categoría normal con núcleos. Entonces, $\mathscr{C}$ tiene imágenes inversas e intersecciones finitas.
+\end{Prop}
+
+\begin{proof}
+    Sean $A\xrightarrow[]{f}B$ y $B'\xhookrightarrow{\mu}B$ en $\mathscr{C}$. Dado que $\mathscr{C}$ es normal, existe $B\xrightarrow[]{\alpha}C$ tal que $\mu=\text{Ker}(\alpha)$ y, como $\mathscr{C}$ tiene núcleos, existe $\text{Ker}(\alpha f)$. Luego, de
+    \begin{align*}
+        0 &= (\alpha f)k_{\alpha f} \\
+          &= \alpha(fk_{\alpha f})
+    \end{align*}
+    y la propiedad universal del núcleo, se sigue que existe $\text{Ker}(\alpha f)\xrightarrow[]{f'} B'$ tal que el siguiente diagrama en $\mathscr{C}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            \text{Ker}(\alpha f) \arrow[dotted]{d}[swap]{f'} \arrow[]{r}[]{k_{\alpha f}} &A \arrow[]{d}[]{f} \arrow[]{r}[]{\alpha f} &C \arrow[equals]{d}[]{} \\
+            B' \arrow[hook]{r}[swap]{\mu} &B \arrow[]{r}[swap]{\alpha} &C.
+        \end{tikzcd}
+    \end{center}
+    Luego, por la Proposición \ref{Mendoza-1.5.7}, el cuadrado izquierdo del diagrama anterior es un producto fibrado, por lo que $f^{-1}(B') = \text{Ker}(\alpha f)$. \\
+
+    Sea $\{A_i\xhookrightarrow[]{\mu_i} A\}_{i\in I}$ una familia finita de subobjetos de $A$. Por el inciso (4) de la Observación \ref{Mendoza-1.3.1} sabemos que, para $I=\varnothing$, existe $\bigcap_{i\in I}A_i$. Supongamos que $|I|=n\in\mathbb{N}-\{0\}$. Por inducción, es suficiente mostrar la existencia de $A_1\cap A_2$ para $\{A_1\xhookrightarrow[]{\mu_1}A, A_2\xhookrightarrow{\mu_2}A\}$. Ahora, dado que existen imágenes inversas, se tiene el producto fibrado en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            \mu_2^{-1}(A_1) \arrow[]{d}[]{} \arrow[]{r}[]{\beta_2} &A_2 \arrow[hook]{d}[]{\alpha_2} \\
+            A_2 \arrow[hook]{r}[swap]{\alpha_1} &A.
+        \end{tikzcd}
+    \end{center}
+    Luego, por la Proposición \ref{Mendoza-1.3.2}, se tiene que $A_1\cap A_2 \simeq \mu_2^{-1}(A_1)$ en $\text{Mon}_\mathscr{C}(-,A)$.
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.6.2}
+    Sean $\mathscr{C}$ una categoría con núcleos y conúcleos, y $A\in\text{Obj}(\mathscr{C})$. Entonces, para los funtores
+    \[
+    \text{Mon}_\mathscr{C}(-,A)\xrightarrow[]{\text{CoKer}} \text{Epi}_\mathscr{C}(A,-) \xrightarrow[]{\text{Ker}} \text{Mon}_\mathscr{C}(-,A),
+    \] 
+    se satisfacen las siguientes condiciones.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\text{Ker}\text{CoKer}\simeq 1_{\text{Mon}_\mathscr{C}(-,A)}$ si $\mathscr{C}$ es normal.
+
+        \item $\text{CoKer}\text{Ker}\simeq 1_{\text{Epi}_\mathscr{C}(A,-)}$ si $\mathscr{C}$ es conormal.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Sea $\mathscr{C}$ normal. Entonces, para cada $A'\xhookrightarrow[]{\alpha} A$ en $\mathscr{C}$, existe $A\xrightarrow[]{f_\alpha}B$ en $\mathscr{C}$ tal que $\alpha = \text{Ker}(f_\alpha)$. Luego, por la Proposición \ref{Mendoza-1.5.8}, se tiene el siguiente diagrama conmutativo en $\mathscr{C}$
+            \begin{equation}\label{eq: 1.6.2-1}
+                \begin{tikzcd}
+                    A' \arrow[dotted]{dr}{\sim}[swap]{\exists! \ \overline{\alpha}} \arrow[hook]{rr}[]{\alpha} &&A \arrow[]{r}[]{c_\alpha} &\text{CoKer}(\alpha) \\
+                                                                                                              &\text{Ker}(\text{CoKer}(\alpha)), \arrow[hook]{ur}[swap]{\alpha':=k_{c_\alpha}}
+                \end{tikzcd}
+            \end{equation}
+            donde $\overline{\alpha}$ es un isomorfismo en $\text{Mon}_\mathscr{C}(-,A)$. Veamos que
+            \[
+            \eta:1_{\text{Mon}_\mathscr{C}(-,A)}\to \text{Ker}\text{CoKer},
+            \] 
+            con $\eta_a:=\overline{\alpha}$, es un isomorfismo natural. Por el inciso (4) de la Observación \ref{Obs: Transformaciones naturales}, basta ver que $\eta$ es una transformación natural. En efecto, sea $\alpha_1\xrightarrow[]{h}\alpha_2$ en $\text{Mon}_\mathscr{C}(-,A)$. Entonces, por el diagrama (\ref{eq: 1.6.2-1}), tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+        \begin{center}
+            \begin{tikzcd}
+                     &\text{Ker}\circ\text{CoKer}(\alpha_1) \arrow[hook]{dd}[]{\alpha_1'} \arrow[bend left = 105, looseness = 2.5]{dddd}[]{\overline{h}:=\text{Ker}\circ\text{CoKer}(h)} \\
+                A_1' \arrow[hook]{dr}[swap]{\alpha_1} \arrow[]{ur}{\overline{\alpha}_1}[swap]{\sim} \arrow[]{dd}[swap]{h} & &\text{CoKer}(\alpha_1) \arrow[]{dd}[]{\text{CoKer}(h)} \\
+                     &A \arrow[two heads]{ur}[swap]{c_{\alpha_1}} \arrow[two heads]{dr}[swap]{c_{\alpha_2}} \\
+                A_2' \arrow[hook]{ur}[swap]{\alpha_2} \arrow[]{dr}{\overline{\alpha}_2}[swap]{\sim} & &\text{CoKer}(\alpha_2). \\
+                     &\text{Ker}\circ\text{CoKer}(\alpha_2) \arrow[hook]{uu}[swap]{\alpha_2'}
+            \end{tikzcd}
+        \end{center}
+        De la Definición \ref{Def: Funtor Ker}, tenemos que $\overline{h}$ es el único morfismo en $\mathscr{C}$ tal que $\alpha_2'\overline{h}=\alpha_1'$. Dado que
+        \begin{align*}
+            \alpha_2'(\overline{\alpha}_2h(\overline{\alpha}_1^{-1})) &= (\alpha_2'\overline{\alpha}_2)(h(\overline{\alpha}_1)^{-1}) \\
+                                                                      &= \alpha_2 h(\overline{\alpha}_1)^{-1} \\
+                                                                      &= \alpha_1(\overline{\alpha}_1)^{-1} \\
+                                                                      &= \alpha_1',
+        \end{align*}
+        por unicidad, se sigue que
+        \begin{align*}
+            \overline{h} &= \overline{\alpha}_2 h (\overline{\alpha}_1)^{-1} \\
+                         &= \eta_{\alpha_2} h \eta_{\alpha_1}^{-1}.
+        \end{align*}
+        Por ende, para todo $\alpha_1\xrightarrow[]{h} \alpha_2$ en $\text{Mon}_\mathscr{C}(-,A)$, tenemos el siguiente diagrama conmutativo
+        \begin{center}
+            \begin{tikzcd}
+                \alpha_1 \arrow[]{d}[swap]{\eta_{\alpha_1}} \arrow[]{rr}[]{h} & &\alpha_2 \arrow[]{d}[]{\eta_{\alpha_2}} \\
+                \text{Ker}\circ\text{CoKer}(\alpha_1) \arrow[]{rr}[swap]{\text{Ker}\circ\text{CoKer}(h)} & &\text{Ker}\circ\text{CoKer}(\alpha_2).
+            \end{tikzcd}
+        \end{center}
+
+    \item Sea $\mathscr{C}$ conormal. Entonces, para cada $A\xtwoheadrightarrow{\alpha} A'$ en $\mathscr{C}$, existe $B\xrightarrow{f_\alpha} A$ tal que $\alpha=\text{CoKer}(f_\alpha)$. Luego, por la Proposición dual a \ref{Mendoza-1.5.8}, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{equation}\label{1.6.2(b)-1}
+            \begin{tikzcd}
+                \text{Ker}(\alpha) \arrow[]{rr}[]{} & &A \arrow[two heads]{rr}[]{\alpha} \arrow[hook]{dr}[swap]{\alpha': c_{k_\alpha}} & &A', \\
+                                   & & &\text{CoKer}\circ\text{Ker}(\alpha) \arrow[dotted]{ur}{\sim}[swap]{\exists! \ \overline{\alpha}}
+            \end{tikzcd}
+        \end{equation}
+    \end{center}
+    donde $\overline{\alpha}$ es un isomorfismo en $\text{Epi}_\mathscr{C}(A,-)$. Veamos que
+    \[
+    \eta:1_{\text{Epi}_\mathscr{C}(A,-)}\to \text{CoKer}\circ \text{Ker},
+    \] 
+    con $\eta_\alpha:= \overline{\alpha}$, es un isomorfismo natural, para lo cual basta ver que es una transformación natural. En efecto, sea $\alpha_1\xrightarrow[]{h} \alpha_2$ en $\text{Epi}_\mathscr{C}(A,-)$. Entonces, por el diagrama (\ref{1.6.2(b)-1}), tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+                 &\text{CoKer}\circ\text{Ker}(\alpha_1) \arrow[bend left = 90, looseness = 2]{dddd}[]{\overline{h}:=\text{CoKer}\circ\text{Ker}(h)} \\
+            A_1' \arrow[]{ur}{\overline{\alpha}_1}[swap]{\sim} \arrow[]{dd}[swap]{h} & &\text{Ker}(\alpha_1) \arrow[hook]{dl}[]{k_{\alpha_1}} \arrow[]{dd}[]{\text{Ker}(h)} \\
+                 &A \arrow[two heads]{uu}[swap]{\alpha_1'} \arrow[two heads]{ul}[swap]{\alpha_1} \arrow[two heads]{dl}[swap]{\alpha_2} \arrow[two heads]{dd}[]{\alpha_2'} \\
+            A_2' \arrow[]{dr}{\overline{\alpha}_2}[swap]{\sim} & &\text{Ker}(\alpha_2). \arrow[hook]{ul}[swap]{k_{\alpha_2}} \\
+                 &\text{CoKer}\circ\text{Ker}(\alpha_2)
+        \end{tikzcd}
+    \end{center}
+    De la Definición \ref{Def: Funtor CoKer}, tenemos que $\overline{h}$ es el único morfismo en $\mathscr{C}$ tal que $\alpha_2'=\overline{h}\alpha_1'$. Dado que
+    \begin{align*}
+        (\overline{\alpha}_2 h (\overline{\alpha}_1)^{-1})\alpha_1' &= \overline{\alpha}_2h((\overline{\alpha}_1^{-1})\alpha_1') \\
+                                                                    &= \overline{\alpha}_2 h \alpha_1 \\
+                                                                    &= \overline{\alpha}_2 \alpha_2 \\
+                                                                    &= \alpha_2',
+    \end{align*}
+    por unicidad, se sigue que
+    \begin{align*}
+        \overline{h} &= \overline{\alpha}_2 h (\overline{\alpha}_1)^{-1} \\
+                     &= \eta_{\alpha_2} h \eta_{\alpha_1}^{-1}.
+    \end{align*}
+    Por ende, para todo $h:\alpha_1\to \alpha_2$ en $\text{Epi}_\mathscr{C}(A,-)$, tenemos el siguiente diagrama conmutativo
+    \begin{center}
+        \begin{tikzcd}
+            \alpha_1 \arrow[]{d}[swap]{\eta_{\alpha_1}} \arrow[]{rr}[]{h} & &\alpha_2 \arrow[]{d}[]{\eta_{\alpha_2}} \\
+            \text{CoKer}\circ\text{Ker}(\alpha_1) \arrow[]{rr}[swap]{\text{CoKer}\circ\text{Ker}(h)} & &\text{CoKer}\circ\text{Ker}(\alpha_2).
+        \end{tikzcd}
+    \end{center}
+    \end{enumerate}
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.6.4}
+    Para una categoría $\mathscr{C}$, con núcleos y conúcleos, y $A\xrightarrow[]{f}B$ en $\mathscr{C}$, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Existe un único morfismo $A\xrightarrow{\overline{f}} \text{Ker}(\text{CoKer}(f))$ tal que $k_{c_f} \overline{f}=f$; diagramáticamente,
+
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{rr}[]{f} \arrow[dotted]{dr}[swap]{\overline{f}} &&B \arrow[two heads]{r}[]{c_f} &\text{CoKer}(f). \\
+                                                                              &\text{Ker}(c_f) \arrow[hook]{ur}[swap]{k_{c_f}}
+                \end{tikzcd}
+            \end{center}
+
+        \item Si $\mathscr{C}$ es normal, entonces $\text{Im}(f)\simeq \text{Ker}(\text{CoKer}(f))$ en $\text{Mon}_\mathscr{C}(-,B)$.
+
+        %\item Si $\mathscr{C}$ es normal y tiene igualadores, entonces $\overline{f}\simeq \text{CoIm}(f)$ en $\text{Epi}_\mathscr{C}(A,-)$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Dado que $c_f f=0$, por la propiedad universal del núcleo, se tiene que existe un único morfismo $A\xrightarrow[]{\overline{f}} \text{Ker}(c_f)$ en $\mathscr{C}$ tal que $k_{c_f}\overline{f} = f$.
+
+        \item Sea $\mathscr{C}$ normal. Veamos que $\text{Ker}(c_f)\xhookrightarrow{k_{c_f}} B$ es el menor subobjeto de $B$ a través del cual se factoriza $f$. En efecto, por (a), sabemos que $f$ se factoriza a través de $k_{c_f}$. Sean $A\xrightarrow[]{\beta}B'\xhookrightarrow{\gamma}B$ en $\mathscr{C}$ tales que $\gamma\beta = f$. Luego, tenemos el diagrama en $\mathscr{C}$
+        \begin{center}
+            \begin{tikzcd}
+                &B' \arrow[hook]{dr}[]{\gamma} &&\text{CoKer}(f) \\
+                A \arrow[]{ur}[]{\beta} \arrow[]{r}[]{\overline{f}} \arrow[bend right = 45]{rr}[swap]{f} &\text{Ker}(c_f) \arrow[hook]{r}[]{k_{c_f}} &B \arrow[two heads]{ur}[]{c_f} \arrow[two heads]{dr}[swap]{c_\gamma} \\
+                                                                                                         &&&\text{CoKer}(\gamma).
+            \end{tikzcd}
+        \end{center}
+        Luego, por el inciso (a) de la Proposición \ref{Mendoza-1.6.2}, tenemos que $\text{Ker}(c_f) \simeq \text{Ker}(\text{CoKer}(\gamma)) \simeq \gamma$ en $\text{Mon}_\mathscr{C}(-,B)$, por lo que $\gamma$ es un núcleo de $c_\gamma$. Ahora, como $c_\gamma f = c_\gamma\gamma\beta = 0$, por la propiedad del conúcleo tenemos que existe $\text{CoKer}(f)\xrightarrow[]{\eta}\text{CoKer}(\gamma)$ en $\mathscr{C}$ tal que hace conmutar el siguiente diagrama en $\mathscr{C}$
+        \begin{center}
+            \begin{tikzcd}
+                &\text{CoKer}(f) \arrow[dotted]{dd}[]{\eta} \\
+                B \arrow[two heads]{ur}[]{c_f} \arrow[two heads]{dr}[swap]{c_\gamma} \\
+                &\text{CoKer}(\gamma).
+            \end{tikzcd}
+        \end{center}
+        Por otro lado, como $c_\gamma k_{c_f} = \eta c_f k_{c_f} = 0$ y $\gamma$ es un núcleo de $c_f$, por la propiedad universal del núcleo tenemos que existe $\text{Ker}(c_f)\xrightarrow[]{t} B'$ en $\mathscr{C}$ tal que el siguiente diagrama en $\mathscr{C}$ conmuta
+        \begin{center}
+            \begin{tikzcd}
+                B' \arrow[hook]{dr}[]{\gamma} \\
+                \text{Ker}(c_f) \arrow[dotted]{u}[]{t} \arrow[hook]{r}[swap]{k_{c_f}} &B.
+            \end{tikzcd}
+        \end{center}
+        Por ende, $k_{c_f} \le \gamma$ y, así, $\text{Ker}(c_f)\xhookrightarrow{k_{c_f}} B$ es una imagen de $A\xrightarrow[]{f}B$.
+
+        %\item 
+
+    \end{enumerate}
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.6.5}
+    Sea $\mathscr{C}$ una categoría normal, con núcleos y conúcleos. Entonces, $\mathscr{C}$ es balanceada.
+\end{Prop}
+
+\begin{proof}
+
+    Sea $A\xrightarrow[]{f}B$ un monomorfismo y epimorfismo en $\mathscr{C}$. Por la Observación \ref{Obs: pares núcleo-conúcleo triviales}, tenemos que
+    \[
+        \text{CoKer}\big(A \xrightarrow[]{f} B\big) = (B\to 0) \quad \text{y} \quad \text{Ker}(B\to 0) = \big( B\xrightarrow[]{1_B} B\big),
+    \] 
+    de donde se sigue que $\text{Ker}(\text{CoKer}(f)) = \big(\xrightarrow[]{1_B}B\big)$. Luego, $f$ es un monomorfismo, por el inciso (a) de la Proposición \ref{Mendoza-1.6.2}, tenemos que $\text{Ker}(\text{CoKer}(f)) \simeq f$ en $\text{Mon}_\mathscr{C}(-,B)$. Por ende, $\text{Ker}(\text{CoKer}(f))\simeq \big(B\xrightarrow[]{1_B}B\big)$ en $\text{Mon}_\mathscr{C}(-,B)$ y, por el inciso (2) de la Observación \ref{Mendoza-1.1.2}, existe un isomorfismo $t:B\xrightarrow[]{\sim} A$ en $\mathscr{C}$ tal que $ft=1_B$, por lo que $f = 1_Bt^{-1} = t^{-1}$. Por lo tanto, $f$ es un isomorfismo.
+\end{proof}
+
+\section{Categorías Puppe-exactas} \label{Sec: Categorías Puppe-exactas}
+
+\begin{Def}\label{Def: Categoría Puppe-exacta}
+    Una categoría $\mathscr{C}$ es \emph{Puppe-exacta} si es normal, conormal, tiene núcleos y conúcleos, y todo $A\xrightarrow[]{f}B$ en $\mathscr{C}$ admite una factorización canónica a través de su imagen como sigue
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[two heads]{dr}[swap]{q} \arrow[]{rr}[]{f} &&B. \\
+                                                               &I \arrow[hook]{ur}[swap]{v}
+        \end{tikzcd}
+    \end{center}
+\end{Def}
+
+\begin{Def}\label{Def: Sucesión exacta}
+    Sea $\mathscr{C}$ una categoría Puppe-exacta. Una \emph{sucesión de morfismos en} $\mathscr{C}$ es un diagrama $\xi$ en $\mathscr{C}$ de la forma
+    \[
+    \dots \to M_{i-1}\xrightarrow[]{f_{i-1}} M_i\xrightarrow[]{f_i} M_{i+1} \to \dots .
+    \] 
+    Una sucesión $\xi$ en $\mathscr{C}$ es \emph{exacta en} $M_i$ si
+    \[
+        \text{Im}(f_{i-1})\simeq \text{Ker}(f_i) \text{ en } \text{Mon}_\mathscr{C}(-,M_i).
+    \] 
+    Una sucesión $\xi$ en $\mathscr{C}$ es \emph{exacta} si es exacta en $M_i$ para toda $i$. Una \emph{sucesión exacta corta} en $\mathscr{C}$ es una sucesión exacta de la forma
+    \[
+    0 \to M_1\xrightarrow[]{f_1} M_2\xrightarrow[]{f_2} M_3 \to 0.
+    \] 
+\end{Def}
+
+\begin{Prop}\label{Mendoza-1.7.1}
+    Sea $\mathscr{C}$ una categoría Puppe-exacta. Entonces, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\mathscr{C}$ es balanceada y tiene imágenes. Más aún, $\text{Im}(f)\simeq\text{Ker}(\text{CoKer}(f))$ para todo $f\in\text{Mor}(\mathscr{C})$.
+
+        \item Para $A\xrightarrow[]{f} B$ en $\mathscr{C}$, consideremos el diagrama en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    \text{Ker}(q) \arrow[hook]{r}[]{k_q} &A \arrow[two heads]{dr}[swap]{q} \arrow[]{rr}[]{f} &&B \arrow[two heads]{r}[]{c_v} &\text{CoKer}(v). \\
+                                                         &&I \arrow[hook]{ur}[swap]{v}
+                \end{tikzcd}
+            \end{center}
+            Entonces, $\text{Ker}(f)\simeq k_q, \text{CoKer}(f)\simeq c_v$ y $\text{Im}(f)\simeq v$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Por la Proposición \ref{Mendoza-1.6.5}, se sigue que $\mathscr{C}$ es balanceada. Más aún, por el inciso (b) de la Proposición \ref{Mendoza-1.6.4}, tenemos que $\mathscr{C}$ tiene imágenes y $\text{Im}(f)\simeq\text{Ker}(\text{CoKer}(f))$ para todo $f\in\text{Mor}(\mathscr{C})$.
+
+        \item Por el inciso (a) y la Proposición \ref{Mendoza-1.4.3}, se sigue que $\text{Im}(f)\simeq v$ en $\text{Mon}_\mathscr{C}(-,B)$. Como $v$ es un monomorfismo, tenemos que
+            \begin{align*}
+                \text{Ker}(f) &= \text{Ker}(vq) \\
+                              &\simeq \text{Ker}(q) \tag{Lema \ref{Mendoza-1.5.4}(b)} \\
+                              &= k_q.
+            \end{align*}
+            Por otro lado, como $q$ es un epimorfismo, tenemos que
+            \begin{align*}
+                \text{CoKer}(f) &= \text{CoKer}(vq) \\
+                                &\simeq \text{CoKer}(v) \tag{dual del Lema \ref{Mendoza-1.5.4}(b)} \\
+                                &= c_v.
+            \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{Obs}\label{Mendoza-1.7.2}
+    Sea $\mathscr{C}$ una categoría.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item Si $\mathscr{C}$ tiene igualadores, es normal y conormal, y tiene núcleos y conúcleos, entonces es Puppe-exacta.
+
+            En efecto: La existencia de factorizaciones canónicas se sigue de los incisos (a) y (c) de la Proposición \ref{Mendoza-1.6.4}.
+
+        \item El universo de las categorías Puppe-exactas es dualizante.
+
+        \item Supongamos que $\mathscr{C}$ es Puppe-exacta. Entonces, $\mathscr{C}$ tiene coimágenes. Más aún, en la factorización canónica de $A\xrightarrow[]{f} B$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[two heads]{dr}[swap]{q} \arrow[]{rr}[]{f} &&B \\
+                                                                       &I \arrow[hook]{ur}[swap]{v}
+                \end{tikzcd}
+            \end{center}
+            se tiene que $\text{CoIm}(f) \simeq q$ en $\text{Epi}_\mathscr{C}(A,-)$.
+
+            En efecto: como $q$ es un epimorfismo, tenemos que
+            \begin{align*}
+                \text{CoIm}(f) &\simeq \text{CoKer}(\text{Ker}(f)) \tag{dual de la Proposición \ref{Mendoza-1.6.4}(b)} \\
+                               &\simeq \text{CoKer}(k_q) \tag{Proposición \ref{Mendoza-1.7.1}(b)} \\
+                               &\simeq \text{CoKer}(\text{Ker}(q)) \\
+                               &\simeq q. \tag{Proposición \ref{Mendoza-1.6.2}(b)}
+            \end{align*}
+    \end{enumerate}
+\end{Obs}
+
+\begin{Prop}\label{Mendoza-1.7.3}
+    Sea $\mathscr{C}$ una categoría Puppe-exacta. Entonces, las siguientes condiciones se satisfacen.
+    \begin{enumerate}[label=(\alph*)]
+
+        \item $A\xrightarrow[]{f} B\xrightarrow[]{g} C$ es exacta en $\mathscr{C}$ si, y sólo si, $A\xleftarrow[]{f^\text{op}} B\xleftarrow[]{g^\text{op}} C$ es exacta en $\mathscr{C}^\text{op}$.
+    
+        \item $0\to A\xrightarrow[]{f} B$ es exacta en $\mathscr{C}$ si, y sólo si, $f$ es un monomorfismo en $\mathscr{C}$.
+
+        \item $A\xrightarrow[]{f} B\to 0$ es exacta en $\mathscr{C}$ si, y sólo si, $f$ es un epimorfismo en $\mathscr{C}$.
+
+        \item $0\to A\xrightarrow[]{f} B \to 0$ es exacta en $\mathscr{C}$ si, y sólo si, $f$ es un isomorfismo en $\mathscr{C}$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Por el inciso (2) de la Observación \ref{Mendoza-1.7.2}, basta probar una implicación.
+
+            ($\Rightarrow$) Supongamos que $A\xrightarrow[]{f} B\xrightarrow[]{g} C$ es exacta en $\mathscr{C}$. Consideremos la descomposición canónica
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[two heads]{dr}[swap]{q} \arrow[]{rr}[]{f} &&B \arrow[two heads]{dr}[swap]{r} \arrow[]{rr}[]{g} &&C. \\
+                                                                       &I \arrow[hook]{ur}[swap]{v} &&J \arrow[hook]{ur}[swap]{w}
+                \end{tikzcd}
+            \end{center}
+            Observemos que
+            \begin{align*}
+                \text{CoKer}(f) &\simeq \text{CoKer}(v) \tag{Proposición \ref{Mendoza-1.7.1}(b)} \\
+                                &\simeq \text{CoKer}(\text{Im}(f)) \tag{Proposición \ref{Mendoza-1.7.1}(b)} \\
+                                &\simeq \text{CoKer}(\text{Ker}(g)) \\
+                                &\simeq \text{CoIm}(g) \tag{dual de la Proposición \ref{Mendoza-1.6.4}(b)}
+            \end{align*}
+            Por ende,
+            \begin{align*}
+                \text{Ker}(f^\text{op}) &= \text{CoKer}(f)^\text{op} \\
+                                        &\simeq \text{CoIm}(g)^\text{op} \tag{dual de la Proposición \ref{Mendoza-1.6.4}(b)} \\
+                                        &= \text{Im}(g^\text{op}),
+            \end{align*}
+            de donde se sigue que $A\xleftarrow[]{f^\text{op}} B\xleftarrow[]{g^\text{op}} C$ es exacta en $\mathscr{C}^\text{op}$.
+
+        \item ($\Rightarrow$) Supongamos que $0\to A\xrightarrow[]{f} B$ es exacta en $\mathscr{C}$. Entonces, $\text{Im}(0\to A) \simeq \text{Ker}\big( A\xrightarrow[]{f} B\big)$. Como $0\to A$ es un monomorfismo, por la Proposición \ref{Mendoza-Ejer.19}, se tiene que $\text{Im}(0\to A) \simeq (0\to A)$. Consideremos la factorización canónica de $f$
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[two heads]{dr}[swap]{q} \arrow[]{rr}[]{f} &&B. \\
+                                                                       &\text{Im}(f) \arrow[hook]{ur}[swap]{v}
+                \end{tikzcd}
+            \end{center}
+            Luego, tenemos que
+            \begin{align*}
+                q &\simeq \text{CoIm}(f) \tag{Observación \ref{Mendoza-1.7.2}(3)} \\
+                  &\simeq \text{CoKer}(\text{Ker}(f)) \tag{dual de la Proposición \ref{Mendoza-1.6.4}(b)} \\
+                  &\simeq \text{CoKer}(0\to A) \\
+                  &\simeq \big( A\xrightarrow[]{1_A} A\big)
+            \end{align*}
+            en $\text{Epi}_\mathscr{C}(A,-)$. Por ende, $q$ es un isomorfismo. Como $f=vq$, de los incisos (6) y (2) de la Observación \ref{Obs: Morfismos especiales}, se sigue que $f$ es un monomorfismo.
+
+            ($\Leftarrow$) Sea $A\xrightarrow[]{f} B$ un monomorfismo en $\mathscr{C}$. Por el inciso (1) de la Observación \ref{Mendoza-1.5.3}, tenemos que $0\to A$ es un monomorfismo en $\mathscr{C}$. Luego, por la Proposición \ref{Mendoza-Ejer.19}, tenemos que $\text{Im}(0\to A)\simeq (0\to A)$ en $\text{Mon}_\mathscr{C}(-,A)$, por lo que basta ver que $\text{Ker}\big(A\xrightarrow[]{f} B\big)\simeq (0\to A)$ en $\text{Mon}_\mathscr{C}(-,A)$, para lo cual utilizaremos el inciso (1) de la Observación \ref{Mendoza-1.5.3}. Claramente, $f0=0$. Sea $X\xrightarrow[]{g} A$ tal que $fg=0$. Como $fg=0=f0$ y $f$ es un monomorfismo, se sigue que $g=0$. Luego, si existe $X\xrightarrow[]{g'} 0$ tal que el diagrama en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    &X \arrow[dotted]{dl}[swap]{g'} \arrow[]{d}[]{g=0} \\
+                    0 \arrow[]{r}[swap]{0_{0,A}} &A \arrow[]{r}[swap]{f} &B
+                \end{tikzcd}
+            \end{center}
+            conmuta, por el inciso (2) de la Observación \ref{Mendoza-1.5.1-Ejer.51}, tenemos que $g'=0$ es el único morfismo tal que $g=0_{0,A}g'$.
+
+        \item Por (a), se sigue de aplicar el principio de dualidad a (b).
+
+        \item Observemos que
+            \begin{align*}
+                0\to A\xrightarrow[]{f} B\to 0 \text{ es exacta en } \mathscr{C} &\iff f \text{ es un monomorfismo y un epimorfismo} \tag{(b) y (c)} \\
+                                                                                 &\iff f \text{ es un isomorfismo} \tag{Proposición \ref{Mendoza-1.6.5}}
+            \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{Coro}\label{Mendoza-1.7.4}
+    Sea $\mathscr{C}$ una categoría Puppe-exacta. Entonces, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item La descomposición canónica de $A\xrightarrow[]{f}B$ en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    \text{Ker}(q) \arrow[hook]{r}[]{k_q} &A \arrow[two heads]{dr}[swap]{q} \arrow[]{rr}[]{f} &&B \arrow[]{r}[]{c_v} &\text{CoKer}(v) \\
+                                                         &&I \arrow[hook]{ur}[swap]{v}
+                \end{tikzcd}
+            \end{center}
+            induce las sucesiones exactas en $\mathscr{C}$
+            \begin{align*}
+                0 &\to \text{Ker}(f) \xrightarrow[]{k_q} A \xrightarrow[]{q} \text{CoIm}(f) \to 0, \\
+                0 &\to \text{Im}(f) \xrightarrow[]{v} B \xrightarrow[]{c_v} \text{CoKer}(f) \to 0.
+            \end{align*}
+
+        \item Dado un monomorfismo $A\xhookrightarrow{f} B$ en $\mathscr{C}$, se tiene la sucesión exacta en $\mathscr{C}$
+            \[
+            0\to A\xrightarrow[]{f} B\xrightarrow[]{c_v} \text{CoKer}(f) \to 0.
+            \] 
+            En tal caso, frecuentemente escribiremos $B/A$ en vez de $\text{CoKer}(f)$.
+            
+        \item Dado un epimorfismo $A\xhookrightarrow{f} B$ en $\mathscr{C}$, se tiene la sucesión exacta en $\mathscr{C}$
+            \[
+            0\to \text{Ker}(f) \xrightarrow[]{k_q} A \xrightarrow[]{f} B\to 0.
+            \] 
+    \end{enumerate}
+\end{Coro}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Sea $A\xrightarrow[]{f} B$ en $\mathscr{C}$. Consideremos su descomposición canónica
+            \begin{center}
+                \begin{tikzcd}
+                    \text{Ker}(q) \arrow[hook]{r}{k_q} & A \arrow[two heads]{dr}[swap]{q} \arrow{rr}{f} & &B \arrow[two heads]{r}{c_v} & \text{CoKer}(v). \\
+                                                   & & \text{Im}(f) \arrow[hook]{ur}[swap]{v}
+                \end{tikzcd}
+            \end{center}
+            Como $k_q$ es un monomorfismo, por la Proposición \ref{Mendoza-Ejer.19}, tenemos que $\text{Im}(k_q)\simeq k_q=\text{Ker}(q)$ en $\text{Mon}_\mathscr{C}(-,A)$. Además, como $q$ es un epimorfismo, tenemos la siguiente sucesión exacta en $\mathscr{C}$
+            \[
+            0\to \text{Ker}(f)\xrightarrow[]{k_q}A\xrightarrow[]{q}\text{CoIm}(f)\to 0.
+            \] 
+            Ahora, como $v$ es un monomorfismo, nuevamente por la Proposición \ref{Mendoza-Ejer.19}, tenemos que $v\simeq\text{Im}(v)$ en $\text{Mon}_\mathscr{C}(-,B)$. Luego, por la Proposición \ref{Mendoza-1.7.1}, tenemos que
+            \begin{align*}
+                \text{Im}(v) &\simeq v \\
+                             &\simeq \text{Im}(f) \\
+                             &\simeq \text{Ker}(\text{CoKer}(f)) \\
+                             &\simeq \text{Ker}(c_v).
+            \end{align*}
+            Como $c_v$ es un epimorfismo, se sigue que la sucesión
+            \[
+            0\to \text{Im}(f)\xrightarrow[]{v}B\xrightarrow[]{c_v}\text{CoKer}(v)\to 0
+            \] 
+            es exacta en $\mathscr{C}$.
+
+        \item Sea $A\xhookrightarrow{f} B$ un monomorfismo en $\mathscr{C}$. Entonces, podemos descomponer a $f$ canónicamente como
+            \begin{center}
+                \begin{tikzcd}
+                    \text{Ker}(q) \arrow[hook]{r}{k_q} & A \arrow[two heads]{dr}[swap]{1_A} \arrow{rr}{f} & &B \arrow[two heads]{r}{c_v} & \text{CoKer}(f). \\
+                                                   & & A \arrow[hook]{ur}[swap]{f}
+                \end{tikzcd}
+            \end{center}
+            Luego, del inciso (a), se sigue que la sucesión
+            \[
+            0\to A\xrightarrow[]{f}B\xrightarrow[]{c_v}\text{CoKer}(f)\to 0
+            \] 
+            es exacta en $\mathscr{C}$.
+
+        \item Sea $A\xtwoheadrightarrow{f} B$ un epimorfismo en $\mathscr{C}$. Entonces, podemos descomponer a $f$ canónicamente como
+            \begin{center}
+                \begin{tikzcd}
+                    \text{Ker}(f) \arrow[hook]{r}{k_q} & A \arrow[two heads]{dr}[swap]{f} \arrow{rr}{f} & &B \arrow[two heads]{r}{c_v} & \text{CoKer}(v). \\
+                                                   & & B \arrow[hook]{ur}[swap]{1_B}
+                \end{tikzcd}
+            \end{center}
+            Luego, del inciso (a), se sigue que la sucesión
+            \[
+            0\to \text{Ker}(f) \xrightarrow[]{k_q} A\xrightarrow[]{f}B \to 0
+            \] 
+            es exacta en $\mathscr{C}$.
+    \end{enumerate}
+\end{proof}
+
+
+\begin{Lema}\label{Mendoza-Ejer.34}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y %Esto se parece a Mendoza_CT-1.1.
+    \begin{equation}\label{eq: Mendoza-Ejer.34-1}
+        \begin{tikzcd}
+            0 \arrow[]{r}[]{} &A \arrow[]{r}[]{\alpha} &B \arrow[]{d}[]{\gamma} \arrow[]{r}[]{\beta} &C \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &A' \arrow[]{r}[swap]{\alpha'} &B \arrow[]{r}[]{\beta'} &C \arrow[]{r}[]{} &0
+        \end{tikzcd}
+    \end{equation}
+    un diagrama en $\mathscr{C}$ con renglones exactos. Entonces, existe un morfismo $A\xrightarrow[]{f} A'$ en $\mathscr{C}$ tal que $\gamma\alpha = \alpha f'$ si, y sólo si, existe $C\xrightarrow[]{g}C'$ tal que $\beta'\gamma = g\beta$. Más aún, dado uno de ellos, el otro queda determinado de forma única.
+\end{Lema}
+
+\begin{proof}
+
+    ($\Rightarrow$) Supongamos que existe $A\xrightarrow[]{f}A'$ en $\mathscr{C}$ tal que $\gamma\alpha = \alpha'f$. Observemos que
+    \begin{align*}
+        \beta &\simeq \text{CoKer}(\text{Ker}(\beta)) \tag{Proposición \ref{Mendoza-1.6.2}(b)} \\
+        &\simeq \text{CoKer}(\text{Im}(\alpha)) \\
+        &\simeq \text{CoKer}(\alpha) \tag{Proposición \ref{Mendoza-Ejer.19}}
+    \end{align*}
+    y, análogamente, $\beta'\simeq \text{CoKer}(\alpha')$. En particular, tenemos que $\beta'\alpha'=0$, lo que implica que
+    \begin{align*}
+        (\beta'\gamma)\alpha &= \beta'(\gamma\alpha) \\
+                             &= \beta'(\alpha' f) \\
+                             &= (\beta'\alpha')f \\
+                             &= 0.
+    \end{align*}
+    Como $\beta\simeq\text{CoKer}(\alpha)$, por la propiedad universal del conúcleo, existe un único morfismo $C\xrightarrow[]{g}C'$ en $\mathscr{C}$ tal que $g'\beta = \beta'\gamma$. \\
+
+    % ($\Leftarrow$) Supongamos que existe $C\xrightarrow[]{g}C'$ en $\mathscr{C}$ tal que $g\beta = \beta'\gamma$. Entonces, como $\mathscr{C}$ es Puppe-exacta, tenemos que el siguiente diagrama en $\mathscr{C}^\text{op}$ es conmutativo y tiene renglones exactos
+    % \begin{equation}\label{eq: Mendoza-Ejer.34-2}
+    %     \begin{tikzcd}
+    %         0 \arrow[]{r}[]{} &C' \arrow[]{d}[]{g^\text{op}} \arrow[]{r}[]{(\beta')^\text{op}} &B' \arrow[]{d}[]{\gamma^\text{op}} \arrow[]{r}[]{(\alpha')^\text{op}} &A' \arrow[]{r}[]{} &0 \\
+    %         0 \arrow[]{r}[]{} &C \arrow[]{r}[swap]{\beta^\text{op}} &B \arrow[]{r}[swap]{\alpha^\text{op}} &A \arrow[]{r}[]{} &0.
+    %     \end{tikzcd}
+    % \end{equation}
+    % Por el inciso (2) de la Observación \ref{Mendoza-1.7.2}, sabemos que $\mathscr{C}^\text{op}$ es exacta. Aplicando la primera implicación al diagrama (\ref{eq: Mendoza-Ejer.34-2}), existe un único morfismo $f^\text{op}:A'\to A$
+    ($\Leftarrow$) Se sigue de aplicar el principio de dualidad al inciso anterior.
+\end{proof}
+
+\begin{Prop}\label{Mendoza-Ejer.36}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta, $A\in\text{Obj}(\mathscr{C})$ y $\{\alpha_i:A_i\hookrightarrow A\}_{i\in I}$ una familia de subobjetos de $A$. Si $\theta\xtwoheadrightarrow{\theta}A/A'$ es la cointersección de la familia de objetos cociente $\{\beta_i:A\twoheadrightarrow A/A_i\}_{i\in I}$, entonces $\mu = \text{Ker}\big(A\xtwoheadrightarrow[]{\theta}A/A'\big)$ es la unión de $\{\alpha_i:A_i\hookrightarrow A\}_{i\in I}$; es decir,
+    \[
+        \bigcap_{i\in I}{}^\text{op} A/A_i = A / \bigcup_{i\in I}A_i .
+    \] 
+\end{Prop}
+
+\begin{proof}
+
+    Sea $A\xrightarrow[]{\theta}A/A'$ la cointersección de la familia $\{\beta_i:A\twoheadrightarrow A/A_i\}_{i\in I}$. Entonces, para cada $i\in I$, existe $v_i:A/A_i\to A/A'$ tal que $\theta=v_i\beta_i$. Por la Proposición \ref{Mendoza-Ejer.19}, tenemos que $\text{Ker}(\beta_i)\simeq \text{Im}(\alpha_i) \simeq \alpha_i$ para cada $i\in I$, por lo que $\beta_i\alpha_i = 0$, de donde se sigue que $\theta\alpha_i = v_i\beta_i\alpha_i = 0$. Como $\mu = \text{Ker}(\theta)$, por la propiedad universal del núcleo, existen morfismos $A_i\xrightarrow[]{h_i}\text{Ker}(\theta)$ en $\mathscr{C}$ tales que $\mu h_i = \alpha_i$ para cada $i\in I$. Por ende, $\alpha_i\le\mu$ para cada $i\in I$. \\
+
+    Sean $A\xrightarrow[]{f} B$ y $B'\xhookrightarrow[]{\eta}B$ morfismos en $\mathscr{C}$ tales que cada $\alpha_i$ es llevado a $\eta$, vía $f$. Entonces, existen morfismos $\{f'_i:A_i\to B'\}_{i\in I}$ tales que $\eta f'_i = f\alpha_i$ para cada $i\in I$. Dado que $\eta$ es un monomorfismo, por el inciso (b) del Corolario \ref{Mendoza-1.7.4}, tenemos la sucesión exacta en $\mathscr{C}$
+    \[
+    0 \to B'\xrightarrow[]{\eta} B\xrightarrow[]{p} \text{CoKer}(\eta)\to 0.
+    \] 
+    Entonces, para cada $i\in I$, se tiene el siguiente diagrama conmutativo en $\mathscr{C}$ con renglones exactos
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[]{r}[]{} &A_i \arrow[]{d}[]{f'_i} \arrow[]{r}[]{\alpha_i} &A \arrow[]{d}[]{f} \arrow[]{r}[]{\beta_i} &A/A_i \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &B' \arrow[]{r}[swap]{\eta} &B \arrow[]{r}[swap]{p} &\text{CoKer}(\eta) \arrow[]{r}[]{} &0.
+        \end{tikzcd}
+    \end{center}
+    Como $\mathscr{C}$ es Puppe-exacta, por el Lema \ref{Mendoza-Ejer.34}, para cada $i\in I$, existe $A/A_i\xrightarrow[]{\gamma_i} \text{CoKer}(\eta)$ en $\mathscr{C}$ tal que $\gamma_i\beta_i=pf$. Dado que $\theta$ es la cointersección de la familia $\{\beta_i:A\to A/A_i\}_{i\in I}$, existe $A/A'\xrightarrow[]{\gamma} \text{CoKer}(\eta)$ en $\mathscr{C}$ tal que $\gamma\theta = pf$. Observemos que $\gamma$ es tal que el siguiente diagrama en $\mathscr{C}$ conmuta y tiene renglones exactos
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[]{r}[]{} &\text{Ker}(\theta) \arrow[]{r}[]{\mu} &A \arrow[]{d}[]{f} \arrow[]{r}[]{\theta} &A/A' \arrow[]{d}[]{\gamma} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &B' \arrow[]{r}[swap]{\eta} &B \arrow[]{r}[swap]{p} &\text{CoKer}(\eta) \arrow[]{r}[]{} &0.
+        \end{tikzcd}
+    \end{center}
+    Luego, como $\mathscr{C}$ es Puppe-exacta, por el Lema \ref{Mendoza-Ejer.34}, existe $\text{Ker}(\theta)\xrightarrow[]{f'} B'$ en $\mathscr{C}$ tal que $f\mu=\eta f'$. Por lo tanto, $\mu$ es llevado a $\eta$, vía $f$.
+\end{proof}
+
+
+\begin{Lema}\label{Mendoza-1.7.6}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y
+    \begin{equation} \label{eq: Mendoza-1.7.6-1}
+        \begin{tikzcd}
+            &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} \\
+            &A' \arrow[]{d}[swap]{\gamma_1} \arrow[]{r}[]{f} &A \arrow[]{d}[]{\theta_1} \\
+            0 \arrow[]{r}[]{} &B' \arrow[]{d}[swap]{\gamma_2} \arrow[]{r}[swap]{\alpha_1} &B \arrow[]{d}[]{\theta_2} \arrow[]{r}[swap]{\alpha_2} &B'' \\
+            0 \arrow[]{r}[]{} &C' \arrow[]{r}[swap]{\beta_1} &C
+        \end{tikzcd}
+    \end{equation}
+    un diagrama conmutativo en $\mathscr{C}$, con renglones y columnas exactas. Entonces, la sucesión
+    \[
+    0\to A'\xrightarrow[]{f} A\xrightarrow[]{\alpha_2\theta_1} B''
+    \] 
+    es exacta en $\mathscr{C}$.
+    
+\end{Lema}
+
+\begin{proof}
+    Por el inciso (b) de la Proposición \ref{Mendoza-1.7.3}, tenemos que $\alpha_1$ y $\gamma_1$ son monomorfismos y, como $\alpha_1\gamma_1 = \theta_1 f$, del inciso (5) de la Observación \ref{Obs: Morfismos especiales} se sigue que $f$ es un monomorfismo. Luego, por la Proposición \ref{Mendoza-Ejer.19}, $\text{Im}(f)\simeq f$, por lo que basta ver que $f\simeq \text{Ker}(\alpha_2\theta_1)$. Observemos que
+    \begin{align*}
+        (\alpha_2\theta_1)f &= \alpha_2(\theta_1 f) \\
+                            &= \alpha_2\alpha_1\gamma_1 \\
+                            &= 0.
+    \end{align*}
+    Ahora, sea $X\xrightarrow[]{\mu} A$ en $\mathscr{C}$ tal que $\alpha_2\theta_1\mu=0$. Entonces, como $\alpha_2(\theta_1\mu) = 0$ y
+    \begin{align*}
+        \alpha_1 &\simeq \text{Im}(\alpha_1) \tag{Proposición \ref{Mendoza-Ejer.19}} \\
+                 &\simeq \text{Ker}(\alpha_2),
+    \end{align*}
+    se sigue que existe $X\xrightarrow[]{v} B'$ en $\mathscr{C}$ tal que $\alpha_1v = \theta_1\mu$. Como $\beta_1$ es un monomorfismo y
+    \begin{align*}
+        \beta_1\gamma_2 v &= \theta_2\alpha_1 v \\
+                          &= \theta_2\theta_1\mu \\
+                          &= 0 \\
+                          &= \beta0,
+    \end{align*}
+    se sigue que $\gamma_2 v = 0$. Como $\gamma_1$ es un monomorfismo, por la Proposición \ref{Mendoza-Ejer.19}, tenemos que $\gamma_1\simeq\text{Im}(\gamma_1)\simeq\text{Ker}(\gamma_2)$. Luego, por la propiedad universal del núcleo, existe $X\xrightarrow[]{w}A'$ en $\mathscr{C}$ tal que $\gamma_1 w=v$. Como $\theta_1$ es un monomorfismo y
+    \begin{align*}
+        \theta_1 fw &= \alpha_1\gamma_1 w \\
+                    &= \alpha_1 v \\
+                    &= \theta_1\mu,
+    \end{align*}
+    se sigue que $fw=\mu$. Más aún, dado que $f$ es un monomorfismo, se sigue que $w$ es el único morfismo en $\mathscr{C}$ tal que $fw=\mu$. Por lo tanto, $f$ es un núcleo de $\alpha_2\theta_1$ y, del inciso (1) de la Observación \ref{Mendoza-1.5.3}, concluimos que $f\simeq\text{Ker}(\alpha_2\theta_1)$.
+\end{proof}
+
+\begin{Lema}\label{Mendoza-1.7.7}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y
+    \begin{equation} \label{eq: Mendoza-1.7.7-1}
+        \begin{tikzcd}
+            &A \arrow[]{d}[]{\theta_1} \\
+            B' \arrow[]{d}[swap]{\gamma_2} \arrow[]{r}[]{\alpha_1} &B \arrow[]{d}[]{\theta_2} \arrow[]{r}[]{\alpha_2} &B'' \arrow[]{d}[]{\psi_2} \arrow[]{r}[]{} &0 \\
+            C' \arrow[]{d}[]{} \arrow[]{r}[swap]{\beta_1} &C \arrow[]{d}[]{} \arrow[]{r}[swap]{\beta_2} &C'' \arrow[]{r}[]{} &0 \\
+                                                          0 &0
+        \end{tikzcd}
+    \end{equation}
+    un diagrama conmutativo en $\mathscr{C}$, con renglones y columnas exactas. Entonces, la sucesión
+    \[
+    A\xrightarrow[]{\alpha_2\theta_1} B''\xrightarrow[]{\psi_2} C''\to 0
+    \] 
+    es exacta en $\mathscr{C}$.
+\end{Lema}
+
+\begin{proof}
+
+    Se sigue de aplicarle el principio de dualidad al Lema \ref{Mendoza-1.7.6}, usando el inciso (a) del Lema \ref{Mendoza-1.7.3}.
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.7.8}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y
+    \begin{center}
+        \begin{tikzcd}
+            &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} \\
+            &A' \arrow[]{d}[swap]{\gamma_1} &A \arrow[]{d}[]{\theta_1} &A'' \arrow[]{d}[]{\psi_1} \\
+            0 \arrow[]{r}[]{} &B' \arrow[]{d}[swap]{\gamma_2} \arrow[]{r}[]{\alpha_1} &B \arrow[]{d}[]{\theta_2} \arrow[]{r}[]{\alpha_2} &B'' \arrow[]{d}[]{\psi_2} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &C' \arrow[]{d}[]{} \arrow[]{r}[swap]{\beta_1} &C \arrow[]{d}[]{} \arrow[]{r}[swap]{\beta_2} &C'' \arrow[]{d}[]{} \arrow[]{r}[]{} &0 \\
+                              &0 &0 &0
+        \end{tikzcd}
+    \end{center}
+    un diagrama conmutativo y exacto\footnote{Es decir, con renglones y columnas exactas.} en $\mathscr{C}$. Entonces, existe una sucesión exacta $0\to A'\xrightarrow[]{f} A\xrightarrow[]{g} A''\to 0$ en $\mathscr{C}$ tal que $\theta_1f = \alpha_1\gamma_1$ y $\psi_1 g = \alpha_2\theta_1$. Más aún, la sucesión
+    \begin{equation}\label{eq: Mendoza-1.7.8-1}
+        0\to A'\xrightarrow[]{f} A\xrightarrow[]{\alpha_2\theta_1} B''\xrightarrow[]{\psi_2} C''\to 0
+    \end{equation}
+    es exacta en $\mathscr{C}$.
+\end{Prop}
+
+\begin{proof}
+    Por el Lema \ref{Mendoza-Ejer.34}, existen $A'\xrightarrow[]{f}A$ y $A\xrightarrow[]{g}A''$ tales que $\theta_1f = \alpha_1\gamma_1$ y $\psi_1g = \alpha_2\theta_1$. Luego, por los Lemas \ref{Mendoza-1.7.6} y \ref{Mendoza-1.7.7}, se tiene que la sucesión (\ref{eq: Mendoza-1.7.8-1}) es exacta en $\mathscr{C}$. Entonces, tenemos que
+    \begin{align*}
+        \text{Im}(f) &\simeq \text{Ker}(\alpha_2\theta_1) \\
+                     &\simeq \text{Ker}(\psi_1 g) \\
+                     &\simeq \text{Ker}(g), \tag{Proposición \ref{Mendoza-1.5.4}}
+    \end{align*}
+    por lo que sólo falta ver que $g$ es un epimorfismo para demostrar que la sucesión $0\to A'\xrightarrow[]{f} A\xrightarrow[]{g} A''\to 0$ es exacta en $\mathscr{C}$. Consideremos a la factorización canónica de $\alpha_2\theta_1$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{rr}[]{\alpha_2\theta_1} \arrow[two heads]{dr}[swap]{\rho_1} &&B''. \\
+                                                                                   &I \arrow[hook]{ur}[swap]{\rho_2}
+        \end{tikzcd}
+    \end{center}
+    Observemos que
+    \begin{align*}
+        \psi_1 &\simeq \text{Im}(\psi_1) \tag{Proposición \ref{Mendoza-Ejer.19}} \\
+             &\simeq \text{Ker}(\psi_2) \\
+             &\simeq \text{Im}(\alpha_2\theta_1)
+    \end{align*}
+    en $\text{Mon}_\mathscr{C}(-,B'')$ y, por el inciso (b) de la Proposición \ref{Mendoza-1.7.1}, tenemos que $\rho_2\simeq\text{Im}(\alpha_2\theta_1)$ en $\text{Mon}_\mathscr{C}(-,B'')$, de donde se sigue que $\psi_1\simeq\rho_2$. Es decir, existe $\eta:A''\xrightarrow[]{\sim} I$ en $\mathscr{C}$ tal que hace conmutar el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            A'' \arrow[dotted]{dd}{\sim}[swap]{\exists \ \eta} \arrow[hook]{dr}[]{\psi_1} \\
+            &B''. \\
+            I \arrow[hook]{ur}[swap]{\rho_2}
+        \end{tikzcd}
+    \end{center}
+    Luego, como $\rho_2$ es un monomorfismo, de
+    \begin{align*}
+        \rho_2\eta g &= \psi_1 g \\
+                     &= \alpha_2\theta_1 \\
+                     &= \rho_2\rho_1,
+    \end{align*}
+    se sigue que $\eta g=\rho_1$, lo que implica que $g = \eta^{-1}\rho_1$. Como $\eta^{-1}$ es un isomorfismo y $\rho_1$ es un epimorfismo, por los incisos (6) y (2) de la Observación \ref{Obs: Morfismos especiales}, concluimos que $g$ es un epimorfismo.
+\end{proof}
+
+\begin{Coro}\label{Mendoza-1.7.11}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            B' \arrow[]{d}[swap]{\beta_2} \arrow[]{r}[]{\beta_1} &C' \arrow[hook]{d}[]{\alpha_1} \\
+            B \arrow[two heads]{r}[swap]{\alpha_2} &C
+        \end{tikzcd}
+    \end{center}
+    un producto fibrado. Entonces, dicho diagrama se puede completar al siguiente diagrama conmutativo y exacto en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &&0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} \\
+            0 \arrow[]{r}[]{} &A \arrow[equals]{d}[]{} \arrow[]{r}[]{\delta} &B' \arrow[]{d}[swap]{\beta_2} \arrow[]{r}[]{\beta_1} &C' \arrow[]{d}[]{\alpha_1} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &A \arrow[]{r}[swap]{\theta} &B \arrow[]{d}[swap]{\psi} \arrow[]{r}[swap]{\alpha_2} &C \arrow[]{d}[]{\gamma} \arrow[]{r}[]{} &0. \\
+                              &&C'' \arrow[]{d}[]{} \arrow[equals]{r}[]{} &C'' \arrow[]{d}[]{} \\
+                              &&0 &0
+        \end{tikzcd}
+    \end{center}
+\end{Coro}
+
+\begin{proof}
+
+    Como $\alpha_1$ es un monomorfismo, por los incisos (b) y (c) del Corolario \ref{Mendoza-1.7.4} tenemos las sucesiones exactas en $\mathscr{C}$
+    \[
+        0 \to C' \xrightarrow[]{\alpha_1} C\xrightarrow[]{\gamma} C''\to 0 \quad \text{y} \quad 0\to A\xrightarrow[]{\theta} B\xrightarrow[]{\alpha_2} C\to 0,
+    \] 
+    donde $\gamma = \text{CoKer}(\alpha_1)$ y $\theta=\text{Ker}(\alpha_2)$, por lo que podemos considerar el siguiente diagrama en $\mathscr{C}$
+    \begin{equation}\label{eq: Mendoza-1.7.11-1}
+        \begin{tikzcd}
+            &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} \\
+            &A \arrow[equals]{d}[]{} &B' \arrow[]{d}[]{\beta_2} &C' \arrow[]{d}[]{\alpha_1} \\
+            0 \arrow[]{r}[]{} &A \arrow[]{d}[]{} \arrow[]{r}[]{\theta} &B \arrow[]{d}[]{\psi} \arrow[]{r}[]{\alpha_2} &C \arrow[]{d}[]{\gamma} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \arrow[]{r}[]{} &C'' \arrow[]{d}[]{} \arrow[equals]{r}[]{} &C'' \arrow[]{d}[]{} \arrow[]{r}[]{} &0, \\
+                              &0 &0 &0
+        \end{tikzcd}
+    \end{equation}
+    donde $\gamma:=\gamma\alpha_2$. Observemos que la primera columna y el segundo renglón del diagrama (\ref{eq: Mendoza-1.7.11-1}) son exactos trivialmente. Dado que
+    \begin{align*}
+        \psi\theta &= \gamma\alpha_2\theta \\
+                   &= \gamma0 \\
+                   &= 0,
+    \end{align*}
+    ambos cuadrados del diagrama (\ref{eq: Mendoza-1.7.11-1}) conmutan. Por el inciso (a) del Corolario \ref{Mendoza-Ejer.8(a)}, $\beta_2$ es un monomorfismo y, como $\gamma$ y $\alpha_2$ son epimorfismos, por el inciso (2) de la Observación \ref{Obs: Morfismos especiales}, se sigue que $\psi$ es un epimorfismo. Por el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            B' \arrow[]{d}[swap]{\beta_2} \arrow[]{r}[]{\beta_1} &C' \arrow[hook]{d}[]{\alpha_1} \\
+            B \arrow[]{r}[swap]{\alpha_2} &C \arrow[]{d}[]{\gamma} \\
+                                          &C'',
+        \end{tikzcd}
+    \end{center}
+    cuyo cuadrado es un producto fibrado, tenemos que
+    \begin{align*}
+        \text{Im}(\beta_2) &\simeq \beta_2 \tag{Proposición \ref{Mendoza-Ejer.19}} \\
+                           &\simeq \text{Ker}(\text{Ker}(\gamma)\alpha_2) \tag{Proposición \ref{Mendoza-1.5.7}} \\
+                           &= \text{Ker}(\text{Ker}(\text{CoKer}(\alpha_1))\alpha_2) \\
+                           &\simeq \text{Ker}(\text{Im}(\alpha_1)\alpha_2) \tag{Proposición \ref{Mendoza-Ejer.19}} \\
+                           &\simeq \text{Ker}(\gamma\alpha_2) \\
+                           &\simeq \text{Ker}(\psi),
+    \end{align*}
+    de donde se sigue que el diagrama (\ref{eq: Mendoza-1.7.11-1}) es conmutativo y exacto. Entonces, por la Proposición \ref{Mendoza-1.7.8}, existe el siguiente diagrama conmutativo y exacto en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &&0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} \\
+            0 \arrow[]{r}[]{} &A \arrow[equals]{d}[]{} \arrow[]{r}[]{\delta} &B' \arrow[]{d}[]{\beta_2} \arrow[]{r}[]{\lambda} &C' \arrow[]{d}[]{\alpha_1} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &A \arrow[]{r}[swap]{\theta} &B \arrow[]{d}[]{\psi} \arrow[]{r}[swap]{\alpha_2} &C \arrow[]{d}[]{\gamma} \arrow[]{r}[]{} &0. \\
+                              &&C'' \arrow[]{d}[]{} \arrow[equals]{r}[]{} &C'' \arrow[]{d}[]{} \\
+                              &&0 &0
+        \end{tikzcd}
+    \end{center}
+    Finalmente, como $\alpha_1$ es un monomorfismo y $\alpha_1\lambda = \alpha_2\beta_2 = \alpha_1\beta_1$, se sigue que $\lambda=\beta_1$.
+\end{proof}
+
+\begin{Coro}\label{Mendoza-1.7.12}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y $A\xrightarrow[]{f}B$ en $\mathscr{C}$. Entonces, para cualquier subobjeto $B'\subseteq B$ de $B$ en $\mathscr{C}$, se tiene el siguiente diagrama conmutativo y exacto en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &&0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} \\
+            0 \arrow[]{r}[]{} &\text{Ker}(f) \arrow[equals]{d}[]{} \arrow[]{r}[]{} &f^{-1}(B') \arrow[]{d}[]{} \arrow[]{r}[]{} &\text{Im}(f)\cap B'\arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &\text{Ker}(f) \arrow[]{r}[]{} &A \arrow[]{d}[]{} \arrow[]{r}[]{} &\text{Im}(f) \arrow[]{d}[]{} \arrow[]{r}[]{} &0. \\
+                              &&\frac{\text{Im}(f)}{\text{Im}(f)\cap B'} \arrow[]{d}[]{} \arrow[equals]{r}[]{} &\frac{\text{Im}(f)}{\text{Im}(f)\cap B'} \arrow[]{d}[]{} \\
+                              &&0 &0
+        \end{tikzcd}
+    \end{center}
+\end{Coro}
+
+\begin{proof}
+    Consideremos la descomposición canónica de $f$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[two heads]{dr}[swap]{\overline{f}} \arrow[]{rr}[]{f} &&B. \\
+                                                                          &\text{Im}(f) \arrow[hook]{ur}[swap]{v}
+        \end{tikzcd}
+    \end{center}
+    Por las Proposiciones \ref{Mendoza-1.3.2} y \ref{Mendoza-1.6.1}, obtenemos el diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            f^{-1}(B') \arrow[]{d}[]{} \arrow[]{r}[]{} &B' \arrow[hook]{d}[]{\theta_1} &\text{Im}(f)\cap B' \arrow[]{l}[]{} \arrow[hook]{d}[]{} \\
+            A \arrow[bend right = 30]{rr}[swap]{q} \arrow[]{r}[swap]{f} &B &\text{Im}(f). \arrow[hook]{l}[swap]{v}
+        \end{tikzcd}
+    \end{center}
+    Luego, por la Proposición \ref{Mendoza-Ejer.9}, tenemos que el diagrama en $\mathscr{C}$
+    \begin{equation}\label{eq: Mendoza-1.7.12-1}
+        \begin{tikzcd}
+            f^{-1}(B') \arrow[]{d}[]{} \arrow[]{r}[]{} &\text{Im}(f)\cap B' \arrow[hook]{d}[]{} \\
+            A \arrow[two heads]{r}[swap]{q} &\text{Im}(f)
+        \end{tikzcd}
+    \end{equation}
+    es un producto fibrado. Finalmente, dado que por el inciso (b) de la Proposición \ref{Mendoza-1.7.1} sabemos que $\text{Ker}(q)\simeq \text{Ker}(f)$, el resultado se sigue de aplicar el Corolario \ref{Mendoza-1.7.11} al diagrama (\ref{eq: Mendoza-1.7.12-1}).
+\end{proof}
+
+\begin{Coro}\label{Mendoza-1.7.13'}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y $A_1\xhookrightarrow{\alpha_1}A$ y $A_2\xhookrightarrow{\alpha_2}A$ en $\mathscr{C}$. Entonces, se tiene el siguiente diagrama conmutativo y exacto en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} \\
+            0 \arrow[]{r}[]{} &A_1\cap A_2 \arrow[]{d}[]{} \arrow[]{r}[]{} &A_2 \arrow[]{d}[]{\alpha_2} \arrow[]{r}[]{} &A_2/(A_1\cap A_2) \arrow[]{d}[]{} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &A_1 \arrow[]{d}[]{} \arrow[]{r}[swap]{\alpha_1} &A \arrow[]{d}[]{\theta_2} \arrow[]{r}[swap]{\theta_1} &A/A_1 \arrow[]{d}[]{} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &A_1/(A_1\cap A_2) \arrow[]{d}[]{} \arrow[]{r}[]{} &A/A_2 \arrow[]{d}[]{} \arrow[]{r}[]{} &A_/(A_1\cup A_2) \arrow[]{d}[]{} \arrow[]{r}[]{} &0. \\
+                              &0 &0 &0
+        \end{tikzcd}
+    \end{center}
+\end{Coro}
+
+\begin{proof}
+    Por la Proposición \ref{Mendoza-1.3.2}, sabemos que el producto fibrado de $\alpha_1$ y $\alpha_2$ es $A_1\cap A_2$. Además, por la Proposición dual a \ref{Mendoza-1.3.2} y la Proposición \ref{Mendoza-Ejer.36}, la suma fibrada de los cocientes $\theta_1$ y $\theta_2$ es $A/(A_1\cup A_2)$, por lo que basta aplicar el Corolario \ref{Mendoza-1.7.12}.
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.9.13}
+    Sea $\mathscr{C}$ una categoría Puppe-exacta con coproductos finitos y biproductos de la forma $A\bigoplus A$ para todo $A\in\text{Obj}(\mathscr{C})$. Entonces, $\mathscr{C}$ es preaditiva.
+\end{Prop}
+
+\begin{proof}
+
+    Por el Teorema \ref{Mendoza-1.9.12}, sabemos que $\mathscr{C}$ tiene biproductos finitos y es semiaditiva. Veamos que cada $\alpha\in\text{Hom}_\mathscr{C}(A,B)$ admite inverso aditivo. En efecto, para $A\xrightarrow[]{\alpha}B$ en $\mathscr{C}$, consideremos
+    \[
+        \theta:= \begin{pmatrix} 1_A &0 \\ \alpha &1_B \end{pmatrix}:A\bigoplus B\to A\bigoplus B.
+    \] 
+    Sea $k_\theta = \big( \begin{smallmatrix} k_1 \\ k_2 \end{smallmatrix} \big):\text{Ker}(\theta)\to A\bigoplus B$ el núcleo de $\theta$ en $\mathscr{C}$. Dado que $\theta k_\theta=0$, por la Proposición \ref{Mendoza-1.9.6}, tenemos que
+    \[
+        \big( \begin{smallmatrix} 0 \\ 0 \end{smallmatrix} \big) = \begin{pmatrix} 1_A &0 \\ \alpha &1_B \end{pmatrix} \begin{pmatrix} k_1 \\ k_2 \end{pmatrix} = \begin{pmatrix} k_1 \\ \alpha k_1 + k_2 \end{pmatrix}.
+    \] 
+    Luego, por la Proposición \ref{Mendoza-1.8.11}, tenemos que $k_1=0$ y $\alpha k_1+k_2 = 0$, de donde se sigue que $k_2=0$. Como $k_\theta$ es un monomorfismo, entonces $\text{Ker}(\theta) = 0$ y, por el inciso (b) de la Proposición \ref{Mendoza-1.7.3}, $\theta$ es un monomorfismo. De manera análoga se obtiene que $\theta$ es un epimorfismo. Como por el inciso (a) de la Proposición \ref{Mendoza-1.7.1} sabemos que $\mathscr{C}$ es balanceada, entonces $\theta$ es un isomorfismo en $\mathscr{C}$. Sea
+    \[
+        \theta^{-1} = \begin{pmatrix} a &b \\ c &d \end{pmatrix}:A\bigoplus B\to A\bigoplus B.
+    \] 
+    Entonces, de
+    \begin{align*}
+        \begin{pmatrix} 1_A &0 \\ 0 &1_B \end{pmatrix} &= \theta\theta^{-1} \\
+                            &= \begin{pmatrix} 1_A &0 \\ \alpha &1_B \end{pmatrix} \begin{pmatrix} a &b \\ c &d \end{pmatrix} \\
+                            &= \begin{pmatrix} a &b \\ \alpha a+c &\alpha b + d \end{pmatrix},
+    \end{align*}
+    se sigue que $a = 1_A$ y $\alpha a+c = 0$, es decir, que $\alpha+c=0$. Por lo tanto, $-\alpha:= c$. 
+\end{proof}
+
+
+\begin{Lema}\label{Mendoza-1.9.17}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y preaditiva y $0\to A\xrightarrow[]{\alpha}B\xrightarrow[]{\beta}C\to 0$ una sucesión exacta en $\mathscr{C}$ tal que existe $C\xrightarrow[]{\gamma}B$ en $\mathscr{C}$ con $\beta\gamma=1_C$. Entonces, existe $B\xrightarrow[]{\delta}A$ en $\mathscr{C}$ tal que $\delta\alpha = 1_A$ y $B=A\coprod C$ con inclusiones naturales $\mu_1:= \alpha, \mu_2:= \gamma$ y proyecciones naturales $\pi_1:=\delta, \pi_2:=\beta$. % AQUÍ ESTÁ BIEN DEJAR EL COPRODUCTO
+\end{Lema}
+
+\begin{proof}
+    Consideremos $\theta:= 1_B-\gamma\beta\in\text{End}_\mathscr{C}(B)$. Observemos que
+    \begin{align*}
+        \theta^2 &= (1_B-\gamma\beta)(1_B-\gamma\beta) \\
+                 &= 1_B1_B - 1_B\gamma\beta - \gamma\beta 1_B + (\gamma\beta)^2 \\
+                 &= 1_B - 2\gamma\beta + \gamma(\beta\gamma)\beta \\
+                 &= 1_B - 2\gamma\beta + \gamma\beta \\
+                 &= 1_B-\gamma\beta \\
+                 &= \theta.
+    \end{align*}
+    Ahora, dado que $\beta\gamma=1_C$, del inciso (a2) de la Proposición \ref{Mendoza-1.9.16} tenemos que $\gamma\simeq \text{Ker}\big(1_B-\gamma\beta\big) = Ker\theta$. Además, como $\alpha$ y $\gamma$ son monomorfismos, del inciso (b) del Lema \ref{Mendoza-1.5.4} se sigue que
+    \begin{align*}
+        \alpha &\simeq \text{Im}(\alpha) \\
+               &\simeq \text{Ker}(\beta) \\
+               &\simeq \text{Ker}(\gamma\beta) \\
+               &= \text{Ker}(1_C - \theta).
+    \end{align*}
+    Luego, por el inciso (b) de la Proposición \ref{Mendoza-1.9.16}, tenemos que $B=A\coprod C$, con $\mu_1:=\alpha$ y $\mu_2:=\gamma$ como inclusiones naturales. Sea $\delta:=\pi_1$ y $\pi_2$ las proyecciones naturales. Finalmente, de
+    \begin{align*}
+        \pi_2\pi_1 &= 0 \\
+                   &= \beta\alpha \\
+                   &= \beta\mu_1, \\ \\
+        \pi_2\mu_2 &= 1_C \\
+                   &= \beta\gamma \\
+                   &= \beta\mu_2,
+    \end{align*}
+    y la propiedad universal del coproducto, se sigue que $\pi_2=\beta$.
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.9.19}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y preaditiva y $0\to A\xrightarrow[]{\alpha} B\xrightarrow[]{\beta} C\to 0, 0\to C\xrightarrow[]{\gamma} B\xrightarrow[]{\rho}A\to 0$ sucesiones exactas en $\mathscr{C}$ tales que $\rho\alpha=1_A$ y $\beta\gamma=1_C$. Entonces, $B=A\coprod C$, con $\mu_1=\alpha, \mu_2=\gamma, \pi_1\simeq\rho$ en $\text{Epi}_\mathscr{C}(B,-)$ y $\pi_2=\beta$.
+\end{Prop}
+
+\begin{proof}
+    Por el Lema \ref{Mendoza-1.9.17}, tenemos que $B=A\coprod C$, con $\mu_1=\alpha, \mu_2=\gamma$ y $\pi_2=\beta$. Luego, del inciso (a3) de la Proposición \ref{Mendoza-1.9.16} y el dual del inciso (b) del Lema \ref{Mendoza-1.5.4}, tenemos que
+    \begin{align*}
+        \pi_1 &\simeq \text{CoKer}(1_B - \mu_1\pi_1) \\
+              &= \text{CoKer}(\mu_2\pi_2) \\
+              &\simeq \text{CoKer}(\mu_2) \\
+              &= \text{CoKer}(\gamma)
+    \end{align*}
+    en $\text{Epi}_\mathscr{C}(B,-)$. Ahora, de la exactitud de la segunda sucesión, tenemos que $\gamma\simeq\text{Ker}(\rho)$. Por ende, del inciso (b) de la Proposición \ref{Mendoza-1.6.2}, se sigue que
+    \begin{align*}
+        \pi_1 &\simeq \text{CoKer}(\text{Ker}(\rho)) \\
+              &\simeq \rho.
+    \end{align*}
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.9.20}
+%    Para una categoría Puppe-exacta $\mathscr{C}$ y $A_1\xhookrighattow{\alpha} A \xhookleftarrow{\beta} A_2$ en $\mathscr{C}$, las siguientes condiciones se satisfacen.
+%
+%    \begin{enumerate}[label=(\alph*)]
+%    
+%        \item Si $A = A_1\coprod A_2$ con inclusiones naturales $\mu_1 = \alpha$ y $\mu_2 = \beta$, entonces $A = A_1\cup A_2$ y $A_1\cap A_2=0$.
+%
+%        \item La recíproca de (a) es cierta si $\mathscr{C}$ es preaditiva.
+%    \end{enumerate}
+    Sean $\mathscr{C}$ una categoría Puppe-exacta y $A_1\xhookrightarrow{\alpha} A \xhookleftarrow{\beta} A_2$ en $\mathscr{C}$. Entonces, si $A = A_1\coprod A_2$ con inclusiones naturales $\mu_1=\alpha$ y $\mu_2=\beta$, tenemos que $A_1\cap A_2= 0 = A/(A_1\cup A_2)$.
+\end{Prop}
+
+\begin{proof}
+    Sea $A=A_1\coprod A_2$ con inclusiones naturales $A_1\xrightarrow[]{\mu_1=\alpha}A \xleftarrow[]{\mu_2=\beta}A_2$. Por el inciso (1) de la Observación \ref{Mendoza-1.8.3(3)}, podemos suponer que $A$ tiene proyecciones naturales $A_1 \xleftarrow[]{\pi_1} A \xrightarrow[]{\pi_2} A_2$. Por el Lema \ref{Mendoza-1.8.2}, tenemos que $\mu_1\simeq\text{Ker}(\pi_2)$ y $\mu_2\simeq\text{Ker}(\pi_1)$ en $\text{Mon}_\mathscr{C}\big(-,A_1\coprod A_2\big)$, por lo que $0\to A_1\xrightarrow[]{\mu_1} A\xrightarrow[]{\pi_2}\to 0$ y $0\to A_2\xrightarrow[]{\mu_2} A\xrightarrow[]{\pi_1} A_1\to 0$ son sucesiones exactas en $\mathscr{C}$. Luego, por los Corolarios \ref{Mendoza-1.7.12} y \ref{Mendoza-1.7.13'}, se tiene el siguiente diagrama conmutativo y exacto en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} &0 \arrow[]{d}[]{} \\
+            0 \arrow[]{r}[]{} &A_1\cap A_2 \arrow[]{d}[]{} \arrow[]{r}[]{} &A_1 \arrow[]{d}[]{\mu_1} \arrow[]{r}[]{\lambda} &\text{Im}(\pi_1\mu_1) \arrow[]{d}[]{} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &A_2 \arrow[]{d}[]{} \arrow[]{r}[]{\mu_2} &A \arrow[]{d}[]{\pi_2} \arrow[]{r}[]{\pi_1} &A_1 \arrow[]{d}[]{} \arrow[]{r}[]{} &0 \\
+            0 \arrow[]{r}[]{} &\text{Im}(\pi_2\mu_2) \arrow[]{d}[]{} \arrow[]{r}[swap]{\lambda_2} &A_2 \arrow[]{d}[]{} \arrow[]{r}[]{} &A/(A_1\cup A_2) \arrow[]{d}[]{} \arrow[]{r}[]{} &0. \\
+                              &0 &0 &0
+        \end{tikzcd}
+    \end{center}
+    Como $\pi_1\mu_1 = 1_{A_1}$ y $\pi_2\mu_2 = 1_{A_2}$, tenemos que $\lambda_i = \text{Im}(\pi_i\mu_i)=1_{A_i}$ para $i\in\{1,2\}$, por lo que $A_1\cap A_2 = 0 = A/(A_1\cup A_2)$.
+\end{proof}
+
+\section{Categorías abelianas} \label{Sec: Categorías abelianas}
+
+\begin{Def}\label{Def: Categoría abeliana}
+    Una categoría $\mathscr{C}$ es \emph{abeliana} si es aditiva y Puppe-exacta.
+\end{Def}
+
+A continuación, mostramos algunas caracterizaciones útiles de las categorías abelianas.
+
+\begin{Teo}\label{Mendoza-1.10.1}
+    Para una categoría $\mathscr{C}$, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\mathscr{C}$ es abeliana.
+
+        \item $\mathscr{C}$ es aditiva, tiene núcleos y conúcleos y, para cada $A\xrightarrow[]{f} B$ en $\mathscr{C}$, el morfismo canónico inducido $\overline{f}$, en el diagrama conmutativo en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    \text{Ker}(f) \arrow[hook]{r}[]{f} &A \arrow[two heads]{d}[swap]{\text{CoKer}(k_f)} \arrow[]{r}[]{f} &B \arrow[two heads]{r}[]{c_f} &\text{CoKer}(f) \\
+                                                       &\text{CoKer}(\text{Ker}(f)) \arrow[]{r}[swap]{\overline{f}} &\text{Ker}(\text{CoKer}(f)), \arrow[hook]{u}[swap]{\text{Ker}(c_f)}
+                \end{tikzcd}
+            \end{center}
+            es un isomorfismo en $\mathscr{C}$.
+
+        \item $\mathscr{C}$ es normal y conormal, y tiene núcleos, conúcleos, productos finitos y coproductos finitos.
+
+        \item $\mathscr{C}$ es normal y conormal, y tiene productos fibrados y sumas fibradas.
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}\leavevmode
+
+    (a)$\Rightarrow$(b) Sea $A\xrightarrow[]{f}B$ en $\mathscr{C}$. Por ser $\mathscr{C}$ Puppe-exacta, se tiene la factorización canónica
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[two heads]{dr}[swap]{q} \arrow[]{rr}[]{f} &&B \\
+                                                               &I \arrow[hook]{ur}[swap]{v}.
+        \end{tikzcd}
+    \end{center}
+    Por el inciso (3) de la Observación \ref{Mendoza-1.7.2} y el dual del inciso (b) de la Proposición \ref{Mendoza-1.6.4}, tenemos que $q\simeq \text{CoIm}(f) \simeq \text{CoKer}(\text{Ker}(f))$ en $\text{Epi}_\mathscr{C}(A,-)$. Más aún, de la Proposición \ref{Mendoza-1.7.1}, se sigue que $v\simeq \text{Im}(f) \simeq \text{Ker}(\text{CoKer}(f))$ en $\text{Mon}_\mathscr{C}(-,B)$, por lo que tenemos el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+                A \arrow[two heads]{dd}[swap]{\text{CoKer}(k_f)} \arrow[]{rr}[]{f} \arrow[two heads]{dr}[swap]{q} &&B \\
+                                                                                                                  &I \arrow[hook]{ur}[swap]{v} \arrow[dotted]{dr}{\varepsilon_1}[swap]{\rotatebox{-45}{$\sim$}} \\
+                \text{CoKer}(\text{Ker}(f)) \arrow[dotted]{ur}{\rotatebox{45}{$\sim$}}[swap]{\varepsilon_0} \arrow[]{rr}[swap]{\overline{f}} &&\text{Ker}(\text{CoKer}(f)), \arrow[hook]{uu}[swap]{\text{Ker}(c_f)}
+        \end{tikzcd}
+    \end{center}
+    donde los triángulos laterales y el triángulo superior conmutan. Luego,
+    \begin{align*}
+        \text{Ker}(c_f)\varepsilon_1\varepsilon_0\text{CoKer}(k_f) = f = \text{Ker}(c_f)\overline{f}\text{CoKer}(k_f) &\implies \text{Ker}(c_f)\varepsilon_1\varepsilon_0 = \text{Ker}(c_f)\overline{f} \tag{$\text{CoKer}(k_f)$ es un epimorfismo} \\
+                                                                                                                      &\implies \varepsilon_1\varepsilon_0 = \overline{f} \tag{$\text{Ker}(c_f)$ es un monomorfismo} \\
+                                                                                                                      &\implies \overline{f} \text{ es un isomorfismo}.
+    \end{align*}
+
+    (b)$\Rightarrow$(c) Dado que $\mathscr{C}$ es aditiva, por el Teorema \ref{Mendoza-1.9.14} se sigue que $\mathscr{C}$ tiene coproductos finitos y productos finitos. Veamos que $\mathscr{C}$ es normal. Sea $A\xhookrightarrow{\alpha}B$ en $\mathscr{C}$. Entonces, por el inciso (3) de la Observación \ref{Mendoza-1.9.1 preaditiva}, se tiene que $\text{Ker}(\alpha)=0$, por lo que se tiene el diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            0 = \text{Ker}(\alpha) \arrow[]{r}[]{k_\alpha} &A \arrow[two heads]{d}[swap]{\text{CoKer}(k_\alpha)} \arrow[]{r}[]{\alpha} &B \arrow[]{r}[]{c_\alpha} &\text{CoKer}(\alpha) \\
+                                                           &\text{CoKer}(\alpha) \arrow[]{r}{\overline{\alpha}}[swap]{\sim} &\text{Ker}(\text{CoKer}(\alpha)). \arrow[hook]{u}[swap]{\text{Ker}(c_\alpha)}
+        \end{tikzcd}
+    \end{center}
+    En particular, $\alpha\simeq\text{Ker}(c_\alpha)$ en $\text{Mon}_\mathscr{C}(-,B)$. Dualmente, se comprueba que $\mathscr{C}$ es conormal. \\
+
+    (c)$\Rightarrow$(d) Por la Proposición \ref{Mendoza-1.6.1}, se tiene que $\mathscr{C}$ tiene intersecciones finitas y, como $\mathscr{C}$ tiene productos finitos, se sigue del Teorema \ref{Mendoza-1.8.8} que $\mathscr{C}$ tiene productos fibrados. Ahora, por hipótesis y por dualidad, tenemos que $\mathscr{C}^\text{op}$ también satisface la condición (c), de donde se sigue que $\mathscr{C}^\text{op}$ tiene productos fibrados, lo que implica que $\mathscr{C}$ tiene sumas fibradas. \\
+
+    (d)$\Rightarrow$(a) Nuevamente, por la hipótesis y por dualidad, se sigue que $\mathscr{C}^\text{op}$ también satisface la condición (d). Luego, por el Lema \ref{Mendoza-1.8.9} y el Lema dual a él, se sigue que $\mathscr{C}$ tiene igualadores y coigualadores. En particular, por el Lema \ref{Mendoza-1.5.2} y su Lema dual, obtenemos que $\mathscr{C}$ tiene núcleos y conúcleos. Luego, por el inciso (1) de la Observación \ref{Mendoza-1.7.2}, concluimos que $\mathscr{C}$ es exacta. Finalmente, para ver que $\mathscr{C}$ es aditiva, por la Proposición \ref{Mendoza-1.9.13}, es suficiente ver que $\mathscr{C}$ tiene biproductos de la forma $A\bigoplus B$ para cualesquiera $A,B\in\text{Obj}(\mathscr{C})$. En efecto, sean $A,B\in\text{Obj}(\mathscr{C})$. Tenemos que ver que
+    \[
+        \delta = \begin{pmatrix} 1_A &0 \\ 0 &1_B \end{pmatrix}:A\coprod B\to A\prod B
+    \] 
+    es un isomorfismo en $\mathscr{C}$. Consideremos la sucesión exacta en $\mathscr{C}$
+    \[
+    0\to K\xrightarrow[]{\delta_1} A\coprod B\xrightarrow[]{\delta} A\prod B\xrightarrow[]{\delta_2} K'\to 0,
+    \] 
+    donde $\delta_1:= \text{Ker}(\delta)$ y $\delta_2:= \text{CoKer}(\delta)$. Sean $\mu_1, \mu_2, \pi_1, \pi_2$ las inclusiones y proyecciones naturales de $A\coprod B$, y $\mu_1',\mu_2',\pi_1',\pi_2'$ las de $A\prod B$. Por el resultado dual al Lema \ref{Mendoza-1.8.2}, tenemos las sucesiones exactas en $\mathscr{C}$
+    \[
+        0\to A\xrightarrow[]{\mu_1} A\coprod B\xrightarrow[]{\pi_2} B\to 0 \quad \text{y} \quad 0\to B\xrightarrow[]{\mu_2} A\coprod B\xrightarrow[]{\pi_1} A\to 0.
+    \] 
+    Observemos que de
+    \begin{align*}
+        \pi_1\mu_1 &= 1_A \\
+                   &= \pi_1'\delta\mu_1, \\ \\
+        \pi_1\mu_2 &= 0 \\
+                   &= \pi_1'\delta\mu_2,
+    \end{align*}
+    y la propiedad universal del coproducto, se sigue que $\pi_1 = \pi_1'\delta$. Ahora, como
+    \begin{align*}
+        \pi_1\delta_1 &= \pi_1'\delta\delta_1 \\
+                      &= \pi_1'0 \\
+                      &= 0
+    \end{align*}
+    y $\mu_2\simeq\text{Ker}(\pi_1)$, por la propiedad universal del núcleo existe $K\xrightarrow[]{t}B$ en $\mathscr{C}$ tal que $\delta_1 = \mu_2t$ y, en particular, $K\subseteq B$. Análogamente, se comprueba que $K\subseteq A$. Luego, por la Proposición \ref{Mendoza-1.9.20}, tenemos que $K\subseteq A\cap B=0$, de donde se sigue que $K=0$. Dualmente, se demuestra que $K'=0$, de donde concluimos que $\delta$ es un isomorfismo en $\mathscr{C}$.
+\end{proof}
+
+\begin{Obs}\label{Mendoza-Ejer.48}
+    El universo de las categorías abelianas es dualizante.
+    \vspace{1mm}
+
+    En efecto: Se sigue de notar que cualquiera de los incisos (c) o (d) del Teorema \ref{Mendoza-1.10.1} son auto duales.
+\end{Obs}
+
+\section{Propiedades fundamentales de categorías abelianas} \label{Sec: Propiedades fundamentales de categorías abelianas}
+
+%\begin{Prop}\label{Prop: Núcleos e imágenes en categorías abelianas} % Mendoza_CT-Ejer.7
+%    Sea $\mathscr{B}$ una categoría abeliana. Entonces, para cualquier $X\xrightarrow[]{\alpha}Y$, se tiene que $\text{Im}(-\alpha)=\text{Im}(\alpha)$ y $\text{Ker}(-\alpha) = \text{Ker}(\alpha)$.
+%\end{Prop}
+%
+%\begin{proof}
+%
+%    Sean $X\xtwoheadrightarrow{q}I$ y $X\xtwoheadrightarrow{q'}I'$ imágenes de $\alpha$ y $-\alpha$, respectivamente. Dado que toda categoría abeliana es Puppe-exacta, existen $I\xhookrightarrow{v}Y, I'\xhookrightarrow{v'}Y$ en $\mathscr{B}$ tales que $vq=\alpha$ y $v'q'=-\alpha$. Como $q(-v)=-\alpha$ y
+%\end{proof}
+
+\begin{Lema}\label{Lema de "aditividad" del funtor Ker en categorías abelianas}
+    Sean $\mathscr{A}$ una categoría abeliana y $A\xrightarrow[]{f}A', B\xrightarrow[]{g}B'$ en $\mathscr{A}$. Entonces, $\text{Ker}(f\bigoplus g) \simeq \text{Ker}(f)\bigoplus \text{Ker}(g)$ en $\text{Mon}_\mathscr{A}(-,A\bigoplus B)$.
+\end{Lema}
+
+\begin{proof}
+    Sean $\kappa_f:\text{Ker}(f)\hookrightarrow A$ y $\kappa_g:\text{Ker}(g)\hookrightarrow B$ núcleos de $f$ y $g$, respectivamente. Entonces,
+    \begin{align*}
+        \big(\begin{smallmatrix} f \\ g \end{smallmatrix}\big)\big(\begin{smallmatrix} \kappa_f \\ \kappa_g \end{smallmatrix}\big) &= \big(\begin{smallmatrix} f\kappa_f \\ g\kappa_g \end{smallmatrix}\big) \\
+                                                                                                                                   &= \big(\begin{smallmatrix} 0 \\ 0 \end{smallmatrix}\big) \\
+                                                               &= 0.
+    \end{align*}
+    Ahora, sea $\big(\begin{smallmatrix} h \\ j \end{smallmatrix}\big):X\to A\bigoplus B$ en $\mathscr{A}$ tal que $\big(\begin{smallmatrix} f \\ g \end{smallmatrix}\big)\big(\begin{smallmatrix} h \\ j \end{smallmatrix}\big) = 0$. Entonces, tenemos que $fh=0$ y $gj=0$. Por la propiedad universal del núcleo, existen morfismos únicos $X\xrightarrow[]{h'}A, X\xrightarrow[]{j'}B$ en $\mathscr{A}$ tales que $h=\kappa_f h'$ y $j=\kappa_g j'$, de donde se sigue que $\big(\begin{smallmatrix} h \\ j \end{smallmatrix}\big) = \big( \begin{smallmatrix} \kappa_f \\ \kappa_g \end{smallmatrix} \big) \big(\begin{smallmatrix} h' \\ j' \end{smallmatrix}\big)$; más aún, $\big(\begin{smallmatrix} h' \\ j' \end{smallmatrix}\big)$ es el único morfismo que verifica esta ecuación. Por lo tanto, $\big(\begin{smallmatrix} \kappa_f \\ \kappa_g \end{smallmatrix}\big)$ es un núcleo de $\big( \begin{smallmatrix} f \\ g \end{smallmatrix}\big)$ y, por el inciso (1) de la Observación \ref{Mendoza-1.5.3}, concluimos que $\text{Ker}(f)\bigoplus \text{Ker}(g) \simeq \text{Ker}(f\bigoplus g)$ en $\text{Mon}_\mathscr{A}(-,A\bigoplus B)$.
+\end{proof}
+
+\begin{Prop}\label{Prop: cerradura de sucesiones exactas cortas por sumas directas finitas en categorías abelianas}
+    Sean $\mathscr{A}$ una categoría abeliana y
+    \begin{equation}\label{eq: A-1}
+        \dots\to M_{i-1}\xrightarrow[]{f_{i-1}} M_i\xrightarrow[]{f_i} M_{i+1}\to \dots,    
+    \end{equation}
+    \begin{equation}\label{eq: A-2}
+        \dots\to N_{i-1}\xrightarrow[]{g_{i-1}} N_i\xrightarrow[]{g_i} N_{i+1}\to \dots
+    \end{equation}
+    sucesiones en $\mathscr{A}$ con el mismo número de morfismos. Si las sucesiones (\ref{eq: A-1}) y (\ref{eq: A-2}) son exactas en $M_i$ y $N_i$, respectivamente, entonces la sucesión en $\mathscr{A}$
+    \begin{equation}\label{eq: A-3}
+    \dots\to  M_{i-1}\bigoplus N_{i-1}\xrightarrow[]{f_{i-1}\bigoplus g_{i-1}} M_i\bigoplus N_i\xrightarrow[]{f_i\bigoplus g_i} M_{i+1}\bigoplus N_{i+1} \to \dots
+    \end{equation}
+    es exacta en $M_i\bigoplus N_i$. En particular, la suma directa de dos sucesiones exactas en $\mathscr{A}$ con el mismo número de morfismos es exacta en $\mathscr{A}$.
+\end{Prop}
+
+\begin{proof}
+    Supongamos que las sucesiones (\ref{eq: A-1}) y (\ref{eq: A-2}) son exactas en $M_i$ y $N_i$, respectivamente. Observemos que
+    \begin{align*}
+        \text{Im}\big(f_{i-1}\bigoplus g_{i-1}\big) &\simeq \text{Ker}\big(\text{CoKer}\big(f_{i-1}\bigoplus g_{i-1}\big)\big) \tag{\ref{Mendoza-1.6.4}(b)} \\
+                                                    &\simeq \text{Ker}\big(\text{CoKer}(f_{i-1})\bigoplus \text{CoKer}(g_{i-1})\big) \tag{dual del Lema \ref{Lema de "aditividad" del funtor Ker en categorías abelianas}} \\
+                                                    &\simeq \text{Ker}\big(\text{CoKer}(f_{i-1})\big)\bigoplus \text{Ker}\big(\text{CoKer}(g_{i-1})\big) \tag{Lema \ref{Lema de "aditividad" del funtor Ker en categorías abelianas}} \\
+                                                    &\simeq \text{Im}(f_{i-1})\bigoplus \text{Im}(g_{i-1}) \tag{\ref{Mendoza-1.6.4}(b)} \\
+                                    &\simeq \text{Ker}(f_i)\bigoplus \text{Ker}(g_i) \\
+                                    &\simeq \text{Ker}\big(f_i\bigoplus g_i\big), \tag{Lema \ref{Lema de "aditividad" del funtor Ker en categorías abelianas}}
+    \end{align*}
+    por lo que la sucesión (\ref{eq: A-3}) es exacta en $M_i\bigoplus N_i$.
+\end{proof}
+
+\begin{Def}\label{Def: Funtores exactos a izquierda y a derecha}
+    Sea $F:\mathscr{A}\to \mathscr{B}$ un funtor entre categorías abelianas. Decimos que $F$ es:
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item \emph{exacto a izquierda} si, para toda sucesión exacta $0\to M_1\xrightarrow[]{f_1} M_2\xrightarrow[]{f_2} M_3$ en $\mathscr{A}$, se tiene que $0\to F(M_1)\xrightarrow[]{F(f_1)} F(M_2)\xrightarrow[]{F(f_2)} F(M_3)$ es exacta en $\mathscr{B}$;
+
+        \item \emph{exacto a derecha} si, para toda sucesión exacta $M_1\xrightarrow[]{f_1} M_2\xrightarrow[]{f_2} M_3\to 0$ en $\mathscr{A}$, se tiene que $F(M_1)\xrightarrow[]{F(f_1)} F(M_2)\xrightarrow[]{F(f_2)} F(M_3)\to 0$ es exacta en $\mathscr{B}$;
+
+        \item \emph{exacto} si es exacto a derecha y a izquierda.
+    \end{enumerate}
+\end{Def}
+
+\begin{Teo}\label{Mendoza-1.10.3}
+     Sea $F:\mathscr{A}\to \mathscr{B}$ entre categorías abelianas. Entonces, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $F$ es exacto a izquierda.
+
+        \item $F$ preserva núcleos.
+
+        \item Para toda sucesión exacta $0\to K\xrightarrow[]{f} L\xrightarrow[]{g} M\to 0$ en $\mathscr{A}$, se tiene que $0\to F(K)\xrightarrow[]{F(f)} F(L)\xrightarrow[]{F(g)} F(M)$ es exacta en $\mathscr{B}$.
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}\leavevmode
+
+    (a)$\Rightarrow$(b) Sea $X\xrightarrow[]{\alpha}Y$ un morfismo en $\mathscr{A}$. Entonces, tenemos la sucesión exacta $0\to \text{Ker}(\alpha) \xrightarrow[]{k_\alpha} X\xrightarrow[]{\alpha} Y$ en $\mathscr{A}$. Como $F$ es exacto a izquierda, entonces la sucesión $0\to F(\text{Ker}(\alpha))\xrightarrow[]{F(k_\alpha)} F(X)\xrightarrow[]{F(\alpha)}Y$ es exacta en $\mathscr{B}$. Por lo tanto, $F(k_\alpha) \simeq \text{Im}(F(k_\alpha)) \simeq \text{Ker}(F_\alpha)$ en $\text{Mon}_\mathscr{B}(-,F(X))$. \\
+
+    (b)$\Rightarrow$(c) Sea $0\to K\xrightarrow[]{f} L\xrightarrow[]{g} M\to 0$ una sucesión exacta en $\mathscr{A}$. Entonces, se sigue que
+    \begin{equation}\label{eq: Mendoza-1.10.3-1}
+        \big(0\to K\big) \simeq \text{Ker}\big(K\xrightarrow[]{f} L\big) \quad \text{y} \quad \big(K\xrightarrow[]{f} L\big) \simeq \text{Ker}\big(L\xrightarrow[]{g}M\big).
+    \end{equation}
+    Veamos que $F(0)=0$. En efecto, como $\big( 0\xrightarrow[]{1_0} \big)\simeq \text{Ker}\big( 0\xrightarrow[]{1_0} 0\big)$ y $F$ preserva núcleos, tenemos que $\big (F(0)\xrightarrow[]{1_{F(0)}} F(0) \big) \simeq \text{Ker}\big( F(0)\xrightarrow[]{1_{F(0)}} F(0) \big) \simeq \big( F(0)\xrightarrow[]{0} F(0) \big)$. Por ende, $1_{F(0)} = 0$ y, del Lema \ref{Mendoza-1.5.1-Ejer.51}, se sigue que $F(0)=0$. Ahora bien, por la ecuación \ref{eq: Mendoza-1.10.3-1} y el hecho de que $F$ preserva núcleos, tenemos que
+    \[
+        \big( 0\xrightarrow[]{} F(K)\big) \simeq \text{Ker}\big( F(K)\xrightarrow[]{F(f)} F(L) \big) \quad \text{y} \quad \big(F(K)\xrightarrow[]{F(f)} F(L) \big) \simeq \text{Ker}\big( F(L)\xrightarrow[]{F(g)} F(M)\big),
+    \] 
+    de donde se sigue que $0\to F(K)\xrightarrow[]{F(f)} F(L)\xrightarrow[]{F(g)} F(M)$ es exacta en $\mathscr{B}$. \\
+
+    (c)$\Rightarrow$(a) Sean $0\to M_1\xrightarrow[]{f_1} M_2\xrightarrow[]{f_2} M_3$ una sucesión exacta en $\mathscr{A}$ y $M_2\xtwoheadrightarrow{f_2'} \text{Im}(f_2)\xhookrightarrow{f_2''} M_3$ la factorización de $M_2\xrightarrow[]{f_2} M_3$ a través de su imagen. Entonces, tenemos las sucesiones exactas en $\mathscr{A}$
+    \begin{align*}
+        0\to M_1\xrightarrow[]{f_1} M_2\xrightarrow[]{f_2'} \text{Im}(f_2) \to 0, \\
+        0 \to \text{Im}(f_2) \xrightarrow[]{f_2''} M_3\xrightarrow[]{c_{f_2}} \text{CoKer}(f_2) \to 0.
+    \end{align*}
+        
+    Aplicando $F$ a las sucesiones anteriores y usando la hipótesis, tenemos las sucesiones exactas en $\mathscr{B}$
+    \begin{equation}\label{eq: Mendoza-1.10.3-2}
+        0\to F(M_1)\xrightarrow[]{F(f_1)} F(M_2) \xrightarrow[]{F(f_2')} F(\text{Im}(f_2)),
+    \end{equation}
+    \begin{equation}\label{eq: Mendoza-1.10.3-3}
+        0\to F(\text{Im}(f_2))\xrightarrow[]{F(f_2'')} F(M_3) \xrightarrow[]{F(c_{f_2})} F(\text{CoKer}(f_2)).
+    \end{equation}
+    Por la ecuación (\ref{eq: Mendoza-1.10.3-2}), tenemos que $F(f_1)$ es un monomorfismo y que $\text{Im}(F(f_1))\simeq\text{Ker}(F(f_2'))$ mientras que, de la ecuación (\ref{eq: Mendoza-1.10.3-3}), se sigue que $F(f_2'')$ es un monomorfismo. Luego, por el inciso (b) del Lema \ref{Mendoza-1.5.4}, en $\text{Mon}_\mathscr{B}(-,F(M_2))$ tenemos que
+    \begin{align*}
+        \text{Ker}(F(f_2)) &= \text{Ker}(F(f_2'')F(f_2')) \\
+                           &\simeq \text{Ker}(F(f_2')) \\
+                           &\simeq \text{Im}(F(f_1)).
+    \end{align*}
+    Por lo tanto, $0\to F(M_1)\xrightarrow[]{F(f_1)} F(M_2) \xrightarrow[]{F(f_2)} F(M_3)$ es exacta en $\mathscr{B}$.
+\end{proof}
+
+\begin{Teo}\label{Mendoza-Ejer.58}
+    Sea $F:\mathscr{A}\to \mathscr{B}$ entre categorías abelianas. Entonces, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $F$ es exacto a derecha.
+
+        \item $F$ preserva conúcleos.
+
+        \item Para toda sucesión exacta $0\to K\xrightarrow[]{f} L\xrightarrow[]{g} M\to 0$ en $\mathscr{A}$, se tiene que $F(K)\xrightarrow[]{F(f)} F(L)\xrightarrow[]{F(g)} F(M)\to 0$ es exacta en $\mathscr{B}$.
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}
+    Se sigue de aplicar el principio de dualidad al Teorema \ref{Mendoza-1.10.3}.
+\end{proof}
+
+\begin{Coro}\label{Mendoza-1.10.4}
+    Para un funtor $F:\mathscr{A}\to \mathscr{B}$ entre categorías abelianas, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $F$ es exacto si, y sólo si, para cualquier sucesión exacta $0\to X\xrightarrow[]{f} Y\xrightarrow[]{g} Z\to 0$ en $\mathscr{A}$, se tiene que $0\to F(X)\xrightarrow[]{F(f)} F(Y)\xrightarrow[]{F(g)} F(Z)\to 0$ es exacta en $\mathscr{B}$.
+            
+        \item Si $F$ es exacto, entonces es aditivo.
+    \end{enumerate}
+\end{Coro}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Se sigue del Teorema \ref{Mendoza-1.10.3} y la Proposición \ref{Mendoza-Ejer.58}.
+
+        \item Por la prueba del Teorema \ref{Mendoza-1.10.2}, es suficiente verificar que $F\big(X\bigoplus Y\big)= F(X)\bigoplus F(Y)$ para cualesquiera $X,Y\in\text{Obj}(\mathscr{A})$. En efecto, sean $X,Y\in\text{Obj}(\mathscr{A})$, $X\xrightarrow[]{\mu_1} X\bigoplus Y, Y\xrightarrow[]{\mu_2}X\bigoplus Y$ las inclusiones naturales y $X\bigoplus Y\xrightarrow[]{\pi_1} X, X\bigoplus Y\xrightarrow[]{\pi_2}Y$ las proyecciones naturales. Luego, por el Lema \ref{Mendoza-1.8.2}, se tienen las sucesiones exactas en $\mathscr{A}$
+            \[
+                0\to X\xrightarrow[]{\mu_1} X\bigoplus Y\xrightarrow[]{\pi_2} Y\to 0 \quad \text{y} \quad 0\to Y\xrightarrow[]{\mu_2} X\bigoplus Y\xrightarrow[]{\pi_1} X\to 0.
+            \] 
+            Dado que $\pi_1\mu_1=1_X, \pi_2\mu_2=1_Y$ y $F$ es exacto, se tienen las sucesiones exactas en $\mathscr{B}$
+            \[
+                \resizebox{0.94\hsize}{!}{$0\to F(X)\xrightarrow[]{F(\mu_1)} F\big(X\bigoplus Y\big)\xrightarrow[]F({\pi_2)} F(Y)\to 0 \quad \text{y} \quad 0\to F(Y)\xrightarrow[]{F(\mu_2)} F\big(X\bigoplus Y\big)\xrightarrow[]{F(\pi_1)} F(X)\to 0,$}
+            \] 
+            con $F(\pi_1)F(\mu_1)=1_{F(X)}$ y $F(\pi_2)F(\mu_2)=1_{F(Y)}$. Ahora, por la Proposición \ref{Mendoza-1.9.19}, se sigue que $F\big(X\bigoplus Y\big) = F(X)\bigoplus F(Y)$, con inclusiones naturales $F(\mu_1)$ y $F(\mu_2)$.
+            
+    \end{enumerate}
+\end{proof}
+
+\begin{Lema}\label{Mendoza-1.10.5}
+    Sean $\mathscr{A}$ una categoría abeliana, $A\xrightarrow[]{f} B\xrightarrow[]{g}C$ en $\mathscr{A}$, $\text{Ker}(g)\xrightarrow[]{k_g}B$ el núcleo de $g$ y $B\xrightarrow[]{c_f} \text{CoKer}(f)$ el conúcleo de $f$. Entonces, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\text{Im}(f)\simeq\text{Ker}(g)$ en $\text{Mon}_\mathscr{A}(-,B)$.
+
+        \item $\text{CoKer}(f)\simeq \text{CoIm}(g)$ en $\text{Epi}_\mathscr{A}(B,-)$.
+
+        \item $gf=0$ y $c_fk_g=0$.
+    \end{enumerate}
+\end{Lema}
+
+\begin{proof}
+    Sea $A\xtwoheadrightarrow{f'} \text{Im}(f)\xhookrightarrow{f''} B$ la factorización de $A\xrightarrow[]{f}B$ a través de su imagen. \\
+
+    (a)$\Rightarrow$(b) Sea $\text{Im}(f)\simeq\text{Ker}(g)$ en $\text{Mon}_\mathscr{A}(-,B)$. Luego, en $\text{Epi}_\mathscr{A}(B,-)$, se tiene que
+    \begin{align*}
+        \text{CoIm}(g) &\simeq \text{CoKer}(\text{Ker}(g)) \tag{dual de \ref{Mendoza-1.6.4}(b)} \\
+                       &\simeq \text{CoKer}(\text{Im}(f)) \\
+                       &\simeq \text{CoKer}(\text{Ker}(\text{CoKer}(f))) \tag{\ref{Mendoza-1.6.4}(b)} \\
+                       &\simeq \text{CoKer}(f) \tag{\ref{Mendoza-1.6.2}(b)}.
+    \end{align*}
+
+    (b)$\Rightarrow$(a) Sea $\text{CoKer}(f)\simeq\text{CoIm}(g)$ en $\text{Epi}_\mathscr{A}(B,-)$. Luego, en $\text{Mon}_\mathscr{A}(-,B)$, se tiene que
+    \begin{align*}
+        \text{Im}(f) &\simeq \text{Ker}(\text{CoKer}(f)) \tag{\ref{Mendoza-1.6.4}(b)} \\
+                       &\simeq \text{Ker}(\text{CoIm}(g)) \\
+                       &\simeq \text{Ker}(\text{CoKer}(\text{Ker}(g))) \tag{dual de \ref{Mendoza-1.6.4}(b)} \\
+                       &\simeq \text{Ker}(g) \tag{\ref{Mendoza-1.6.2}(a)}.
+    \end{align*}
+
+    (a)$\Rightarrow$(c) Dado que $\text{Im}(f)\simeq\text{Ker}(g)$, se tiene que $gf''=0$. Luego,
+    \begin{align*}
+        gf &= g(f''f') \\
+           &= (gf'')f' \\
+           &= 0f' \\
+           &= 0.
+    \end{align*}
+    Ahora, para probar que $c_fk_g=0$, es suficiente verificar que $k_g\simeq\text{Ker}(c_f)$ en $\text{Mon}_\mathscr{A}(-,B)$. En efecto, de (a) y el inciso (b) de la Proposición \ref{Mendoza-1.6.4}, se sigue que
+    \begin{align*}
+        \text{Ker}(c_f) &= \text{Ker}(\text{CoKer}(f)) \\
+                        &\simeq \text{Im}(f) \\
+                        &\simeq \text{Ker}(g) \\
+                        &= k_g.
+    \end{align*}
+    
+    (c)$\Rightarrow$(a) Sean $gf=0$ y $c_fk_g=0$. Luego, por la propiedad universal del núcleo, tenemos que existe un morfismo $h$ que hace conmutar el siguiente diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[dotted]{dr}[swap]{\exists \ h} \arrow[]{rr}[]{f} &&B \arrow[]{r}[]{g} &C \\
+                                                                  &\text{Ker}(g). \arrow[hook]{ur}[swap]{k_g}
+        \end{tikzcd}
+    \end{center}
+    Más aún, por la propiedad universal de la imagen, se sigue que existe un morfismo tal que el siguiente diagrama en $\mathscr{A}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            &\text{Im}(f) \arrow[dotted]{dd}[]{} \arrow[hook]{dr}[]{f''} \\
+            A \arrow[two heads]{ur}[]{f'} \arrow[]{dr}[swap]{h} &&B \\
+                                                                &\text{Ker}(g) \arrow[hook]{ur}[swap]{k_g}
+        \end{tikzcd}
+    \end{center}
+    y, en particular, tenemos que $f''\le k_g$. Ahora, por la propiedad universal del conúcleo y el inciso (b) de la Proposición \ref{Mendoza-1.6.4}, tenemos que existen morfismos $j$ y $k$ tales que el siguiente diagrama en $\mathscr{A}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{dr}[swap]{f'} \arrow[]{rr}[]{f} &&B \arrow[]{r}[]{c_f} &\text{CoKer}(f) \\
+                                                       &\text{Im}(f) \arrow[hook]{ur}[]{f''} \\
+                                                       &&\text{Ker}(\text{CoKer}(f)) \arrow[dotted]{ul}{k}[swap]{\rotatebox{-45}{$\sim$}} \arrow[hook]{uu}[]{} &\text{Ker}(g). \arrow[]{uul}[swap]{k_g} \arrow[dotted]{l}[]{\exists \ j}
+        \end{tikzcd}
+    \end{center}
+    Por ende, se sigue que el morfismo $kj$ hace conmutar el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            \text{Im}(f) \arrow[hook]{dr}[]{f''} \\
+            &B, \\
+            \text{Ker}(g) \arrow[dotted]{uu}[]{kj} \arrow[hook]{ur}[swap]{k_g}
+        \end{tikzcd}
+    \end{center}
+    por lo que $k_g\le f''$. Por lo tanto, $\text{Ker}(g)\simeq\text{Im}(f)$ en $\text{Mon}_\mathscr{A}(-,B)$.
+\end{proof}
+
+\begin{Teo}\label{Mendoza-1.10.6}
+    Para un funtor aditivo $F:\mathscr{A}\to \mathscr{B}$ entre categorías abelianas, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $F$ es fiel.
+
+        \item Sea $D$ un diagrama en $\mathscr{A}$. Si el diagrama $FD$ en $\mathscr{B}$ es conmutativo, entonces $D$ es conmutativo.
+
+        \item Sea $D$ un diagrama en $\mathscr{A}$ de la forma
+            \[
+            A \xrightarrow[]{f} B\xrightarrow[]{g} C.
+            \] 
+            Si $FD$ es exacto en $\mathscr{B}$, entonces $D$ es exacto en $\mathscr{A}$.
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}\leavevmode
+
+    (a)$\Rightarrow$(b) Sean $D$ un diagrama en $\mathscr{A}$ y $\gamma,\delta$ caminos en $D$ tales que tengan los mismos puntos iniciales y finales. Como $FD$ es conmutativo, entonces $F(\gamma)=F(\delta$ y, por ser $F$ fiel, se sigue que $\gamma=\delta$, por lo que $D$ conmuta. \\
+
+    (b)$\Rightarrow$(a) Sean $X,Y\in\text{Obj}(\mathscr{A})$ y $\alpha,\beta\in\text{Hom}_\mathscr{A}(X,Y)$ tales que $F(\alpha)=F(\beta)$. Consideremos un diagrama $D$ en $\mathscr{A}$ de la forma \begin{tikzcd}X \arrow[shift left]{r}[]{\alpha} \arrow[shift right]{r}[swap]{\beta} &Y\end{tikzcd}. Dado que \begin{tikzcd}F(X) \arrow[shift left]{r}[]{F(\alpha)} \arrow[shift right]{r}[swap]{F(\beta)} &F(Y)\end{tikzcd} es conmutativo, se sigue que $D$ es conmutativo y, así, $\alpha=\beta$. \\
+
+    (c)$\Rightarrow$(a) Sean $X,Y\in\text{Obj}(\mathscr{A})$ y $\alpha\in\text{Hom}_\mathscr{A}(X,Y)$. Como $F$ es aditivo, basta ver que $\alpha\neq0$ implica que $F(\alpha)\neq0$. Supongamos que $\alpha\neq0$. Sea $D$ un diagrama en $\mathscr{A}$ de la forma $X\xrightarrow[]{1_X} X\xrightarrow[]{\alpha} Y$. Entonces, el diagrama $D$ no es exacto en $\mathscr{A}$ y, por hipótesis, se sigue que $F(X)\xrightarrow[]{1_{F(X)}} F(X)\xrightarrow[]{F(\alpha)} F(Y)$ no es exacto en $\mathscr{B}$. Ahora, dado que
+    \begin{align*}
+        c_{1_{F(X)}} &= \text{CoKer}(1_{F(X)}) \\
+                     &= \big( F(X)\xrightarrow[]{0} 0\big) \\
+                     &= 0,
+    \end{align*}
+    se sigue que $c_{1_{F(X)}}k_{F(\alpha)}=0$. Luego, por el inciso (c) del Lema \ref{Mendoza-1.10.5}, la no exactitud de $FD$ implica que $F(\alpha) = F(\alpha)1_{F(X)}\neq0$. \\
+
+    (a)$\Rightarrow$(c) Sea $D$ un diagrama en $\mathscr{A}$ de la forma $A\xrightarrow[]{f} B\xrightarrow[]{g} C$. Haremos una demostración contrapositiva. Supongamos que $D$ no es exacta en $\mathscr{A}$. Entonces, por el Lema \ref{Mendoza-1.10.5}, tenemos que $gf\neq0$ o bien $c_fk_g\neq0$. En el primer caso, dado que $F$ es fiel, entonces $F(g)F(f)\neq0$ y, por el Lema \ref{Mendoza-1.10.5}, se tiene que $FD$ no es exacto en $\mathscr{B}$. Supongamos que $c_fk_g\neq0$. Como $gk_g=0$ y $c_ff=0$, tenemos los siguientes diagramas conmutativos en $\mathscr{B}$
+    \begin{center}
+        \begin{tikzcd}
+            &F(\text{Ker}(g)) \arrow[dotted]{dl}[swap]{\exists \ \mu} \arrow[]{d}[]{F(k_g)} \\
+            \text{Ker}(F(g)) \arrow[]{r}[swap]{k_{F(g)}} &F(B) \arrow[]{r}[swap]{F(g)} &F(C)
+        \end{tikzcd}
+        \quad
+        \begin{tikzcd}
+            F(A) \arrow[]{r}[]{F(f)} &F(B) \arrow[]{d}[swap]{F(c_f)} \arrow[]{r}[]{c_{F(f)}} &\text{CoKer}(F(f)). \arrow[dotted]{dl}[]{\exists \ \delta} \\
+                                     &F(\text{CoKer}(f))
+        \end{tikzcd}
+    \end{center}
+    Por ende, tenemos que
+    \begin{align*}
+        F(c_fk_g) &= F(c_f)F(k_g) \\
+                  &= \delta c_{F(f)} k_{F(g)}\mu.
+    \end{align*}
+    Si $FD$ fuera exacta en $\mathscr{B}$ entonces, por el Lema \ref{Mendoza-1.10.5}, tendríamos que $c_{F(f)}k_{F(g)}=0$, lo que implica que $F(c_fk_g)=0$, contradiciendo que $F$ sea fiel y $c_fk_g\neq0$. Por lo tanto, $FD$ no es exacto en $\mathscr{B}$.
+\end{proof}
+
+\begin{Coro}\label{Mendoza-1.10.7}
+    Para un funtor fiel y exacto $F:\mathscr{A}\to \mathscr{B}$ entre categorías abelianas, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $F$ es aditivo y preserva núcleos, conúcleos y coproductos finitos en $\mathscr{A}$.
+
+        \item Para cualquier diagrama $D$ en $\mathscr{A}$, se tiene que el diagrama $D$ en $\mathscr{A}$ es conmutativo si, y sólo si, el diagrama $FD$ en $\mathscr{B}$ es conmutativo.
+
+        \item Para cualquier diagrama $D$ en $\mathscr{A}$ de la forma
+            \[
+            A \xrightarrow[]{f} B\xrightarrow[]{g} C
+            \] 
+            se tiene que $D$ es exacto en $\mathscr{A}$ si, y sólo si, $FD$ es exacto en $\mathscr{B}$.
+    \end{enumerate}
+\end{Coro}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Por el inciso (b) del Corolario \ref{Mendoza-1.10.4}, se tiene que $F$ es aditivo. Luego, del Teorema \ref{Mendoza-1.10.2}, se sigue que $F$ preserva coproductos finitos en $\mathscr{A}$. Ahora, como $F$ es exacto, por el Teorema \ref{Mendoza-1.10.3} y la Proposición \ref{Mendoza-Ejer.58}, se sigue que $F$ preserva núcleos y conúcleos en $\mathscr{A}$.
+
+        \item Dado que $F$ es aditivo, por el inciso (a), basta aplicar el inciso (b) del Teorema \ref{Mendoza-1.10.6}.
+
+        \item Sea $D$ un diagrama en $\mathscr{A}$ de la forma $A\xrightarrow[]{f}B\xrightarrow[]{g}C$. Supongamos que $D$ es exacto. Entonces, $\text{Im}(f)\sim\text{Ker}(g)$ en $\text{Mon}_\mathscr{A}(-,B)$. Como $F$ es exacto, por el inciso (a) sabemos que $F$ preserva núcleos y conúcleos. Por lo tanto, en $\text{Mon}_\mathscr{B}(-,FB)$ se tiene que
+            \begin{align*}
+                \text{Im}(F(f)) &\simeq \text{Ker}(\text{CoKer}(F(f))) \tag{por \ref{Mendoza-1.6.4}(b)} \\
+                                &\simeq \text{Ker}(F(\text{CoKer}(f))) \\
+                                &\simeq F(\text{Ker}(\text{CoKer}(f)) \\
+                                &\simeq F(\text{Im}(f))\tag{por \ref{Mendoza-1.6.4}(b)} \\ 
+                                &\simeq F(\text{Ker}(g)) \\
+                                &\simeq \text{Ker}(F(g)),
+            \end{align*}
+            de donde se sigue que $FD$ es exacto en $\mathscr{B}$. La implicación contraria se sigue del inciso (c) del Teorema \ref{Mendoza-1.10.6}.
+    \end{enumerate}
+\end{proof}
+
+\begin{Def}\label{Def: Subcategoría abeliana}
+    
+    Sea $\mathscr{A}$ una categoría abeliana. Una \emph{subcategoría abeliana} de $\mathscr{A}$ es una subcategoría $\mathscr{A}'$ de $\mathscr{A}$ tal que $\mathscr{A}'$ es abeliana y el funtor de inclusión $\iota_{\mathscr{A}'}:\mathscr{A}'\to \mathscr{A}, \big( X\xrightarrow[]{f}Y \big) \mapsto \big( X\xrightarrow[]{f} Y\big)$ es exacto.
+\end{Def}
+
+\begin{Prop}\label{Mendoza-1.10.8}
+    Para una subcategoría plena $\mathscr{A}'$ de una categoría abeliana $\mathscr{A}$, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\mathscr{A}'$ es una subcategoría abeliana de $\mathscr{A}$.
+
+        \item $\mathscr{A}'$ satisface las siguientes condiciones:
+
+            \begin{itemize}
+            
+                \item[(b1)] $\mathscr{A}'$ tiene objeto cero.
+
+                \item[(b2)] Para toda familia $\{A_i\}_{i=1}^n$ de objetos de $\mathscr{A}'$, existe un coproducto $\{\mu_i:A_i\to A\}_{i=1}^n$ en $\mathscr{A}'$, el cual también es un coproducto en $\mathscr{A}$.
+
+                \item[(b3)] $\mathscr{A}'$ tiene núcleos y todo núcleo en $\mathscr{A}'$ también es núcleo en $\mathscr{A}$.
+
+                \item[(b4)] $\mathscr{A}'$ tiene conúcleos y todo conúcleo en $\mathscr{A}'$ también es conúcleo en $\mathscr{A}$.
+            \end{itemize}
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    (a)$\Rightarrow$(b) Supongamos que $\mathscr{A}'$ es abeliana y que el funtor de inclusión $\iota_{\mathscr{A}'}:\mathscr{A}'\to \mathscr{A}$ es exacto. Como $\iota_{\mathscr{A}'}$ es fiel y $\mathscr{A}'$ es abeliana, basta con aplicar el inciso (a) del Corolario \ref{Mendoza-1.10.7}. \\
+
+    (b)$\Rightarrow$(a) Dado que $\mathscr{A}'$ es una subcategoría plena de $\mathscr{A}$, por (b1) y (b2), se sigue que $\mathscr{A}'$ es aditiva. Más aún, la plenitud de $\mathscr{A}'$ implica que, para cualesquiera $X,Y\in\text{Obj}(\mathscr{A}')$, si $X\xrightarrow[]{f}Y$ es un isomorfismo en $\mathscr{A}$, entonces también lo es en $\mathscr{A}'$. Luego, por ser $\mathscr{A}$ abeliana, de (b3) y (b4) se sigue que se satisface la condición (b) del Teorema \ref{Mendoza-1.10.1}, por lo que $\mathscr{A}'$ es abeliana. Finalmente, por (b3) y (b4), tenemos que el funtor de inclusión $\iota_{\mathscr{A}'}:\mathscr{A}'\to \mathscr{A}$ preserva núcleos y conúcleos. Luego, por el Teorema \ref{Mendoza-1.10.3} y la Proposición \ref{Mendoza-Ejer.58}, se tiene que $\iota_{\mathscr{A}'}$ es exacto.
+\end{proof}
+
+
+\begin{Teo}\label{Mendoza-1.10.9}
+    Sean $\mathscr{A}$ una categoría abeliana y $D$ un diagrama en $\mathscr{A}$. Entonces, existe una subcategoría abeliana $\mathscr{A}'$ de $\mathscr{A}$ tal que $\mathscr{A}'$ es una subcategoría plena y pequeña de $\mathscr{A}$ y $D$ es un diagrama en $\mathscr{A}'$.
+\end{Teo}
+
+\begin{proof}
+
+    Para cada $n\in\mathbb{N}$, definiremos inductivamente una subcategoría plena $\mathscr{A}_n$ de $\mathscr{A}$ tal que $D$ sea un diagrama en $\mathscr{A}_n$ como sigue:
+
+    \begin{itemize}
+    
+        \item[$\bullet$] $\mathscr{A}_0$ es la subcategoría plena de $\mathscr{A}$ cuyos objetos son aquellos que aparecen en la imagen de $D$.
+
+        \item[$\bullet$] Dada $\mathscr{A}_n$, definimos a $\mathscr{A}_{n+1}$ como sigue:
+
+            \begin{itemize}
+            
+                \item[(i)] $\mathscr{A}_{n+1}$ contiene a todos los objetos de $\mathscr{A}_n$;
+
+                \item[(ii)] Para cada $A\xrightarrow[]{\alpha} B$ en $\mathscr{A}_n$, agregamos a $\mathscr{A}_{n+1}$ los morfismos $\text{Ker}(\alpha)\xrightarrow[]{k_\alpha}A$ y $B\xrightarrow[]{c_\alpha}\text{CoKer}(\alpha)$ que existen en $\mathscr{A}$;
+
+                \item[(iii)] Para cualquier familia $\{A_i\}_{i\in I}$ de objetos en $\mathscr{A}_n$, con $I$ finito, agregamos a $\mathscr{A}_{n+1}$ el coproducto $\coprod_{i\in I}A_i$ que existe en $\mathscr{A}$. % AQUÍ ESTÁ BIEN DEJAR EL COPRODUCTO
+            \end{itemize}
+    \end{itemize}
+
+    De este modo, tenemos que $\{A_n\}_{n\in\mathbb{N}}$ es una cadena ascendente de subcategorías plenas y pequeñas de $\mathscr{A}$ tales que $D$ es un diagrama en $\mathscr{A}_0$. Luego, $\mathscr{A}' := \bigcup_{n\in\mathbb{N}}\mathscr{A}_n$ es una subcategoría plena y pequeña de $\mathscr{A}$ tal que $D$ es un diagrama en $\mathscr{A}'$. Más aún, dado que $\mathscr{A}'$ satisface las condiciones del inciso (b) de la Proposición \ref{Mendoza-1.10.8}, se sigue que $\mathscr{A}'$ es abeliana.
+\end{proof}
+
+\begin{Teo}[Teorema de Inmersión de Freyd-Mitchell]\label{Mendoza-1.10.10}
+    Sean $\mathscr{A}$ una categoría abeliana y $\mathscr{A}'$ una subcategoría abeliana plena y pequeña de $\mathscr{A}$. Entonces, existen un anillo $R$ y un funtor fiel, pleno y exacto
+    \[
+    F:\mathscr{A}'\to \text{Mod}(R).
+    \] 
+\end{Teo}
+
+\begin{proof}
+
+    Los detalles se pueden consultar en \cite[Theorem 7.15]{Tan-Junhan}.
+\end{proof}
+
+\begin{Lema}[Lema del 5]\label{Mendoza_Ejer.62}
+    Sean $\mathscr{A}$ una categoría abeliana y
+    \begin{equation}\label{eq: Mendoza_Ejer.62-1}
+        \begin{tikzcd}
+            A_1 \arrow[]{d}[swap]{f_1} \arrow[]{r}[]{u_1} &A_2 \arrow[]{d}[swap]{f_2} \arrow[]{r}[]{u_2} &A_3 \arrow[]{d}[]{f_3} \arrow[]{r}[]{u_3} &A_4 \arrow[]{d}[]{f_4} \arrow[]{r}[]{u_4} &A_5 \arrow[]{d}[]{f_5} \\
+            A_1' \arrow[]{r}[swap]{u_1'} &A_2 \arrow[]{r}[swap]{u_2'} &A_3' \arrow[]{r}[swap]{u_3'} &A_4' \arrow[]{r}[swap]{u_4'} &A_5'
+        \end{tikzcd}
+    \end{equation}
+    un diagrama conmutativo en $\mathscr{A}$, donde los renglones son sucesiones exactas. Entonces,
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item si $f_2$ y $f_4$ son monomorfismos y $f_1$ es un epimorfismo, entonces $f_3$ es un monomorfismo; \\
+
+        \item si $f_2$ y $f_4$ son epimorfismos y $f_5$ es un monomorfismo, entonces $f_3$ es un epimorfismo; \\
+
+        \item si $f_2$ y $f_4$ son isomorfismos, $f_1$ es un epimorfismo y $f_5$ es un monomorfismo, entonces $f_3$ es un isomorfismo.
+    \end{enumerate}
+\end{Lema}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Por el Teorema \ref{Mendoza-1.10.9}, existe una subcategoría abeliana $\mathscr{A}'$ de $\mathscr{A}$ plena, pequeña y que contiene al diagrama (\ref{eq: Mendoza_Ejer.62-1}). Luego, por el Teorema de Inmersión de Freyd-Mitchell (\ref{Mendoza-1.10.10}), existen un anillo $R$ y un funtor $F:\mathscr{A}'\to \text{Mod}(R)$ que es fiel, pleno y exacto. Más aún, por el Corolario \ref{Mendoza-1.10.7}, tenemos que el diagrama (\ref{eq: Mendoza_Ejer.62-1}) es conmutativo y tiene renglones exactos si, y sólo si, el diagrama obtenido al aplicarle $F$ a (\ref{eq: Mendoza_Ejer.62-1}) es conmutativo y tiene renglones exactos exactos en $\text{Mod}(R)$. Finalmente, como $F$ preserva monomorfismos y epimorfismos, entonces podemos suponer que $\mathscr{A} = \text{Mod}(R)$, con $R$ un anillo.
+
+            Supongamos que $f_2$ y $f_4$ son monomorfismos y que $f_1$ es un epimorfismo. Sea $x\in\text{Ker}(f_3)$. Como $u'_3f_3=f_4u_3$, tenemos que $f_4u_3(x)$, por lo que $u_3(x)\in\text{Ker}(f_4)$. Ahora, como $f_4$ es un monomorfismo, se tiene que $u_3(x)=0$, por lo que $x\in\text{Ker}(u_3)$. Como los renglones del diagrama son exactos, tenemos que $\text{Ker}(u_3)=\text{Im}(u_2)$, por lo que existe $y\in A_2$ tal que $u_2(y)=x$. Dado que $u_2(y) = x$ y $f_3(x) = 0$, se tiene que $u_2'f_2(y) = f_3u_2(y) = 0$, por lo que $f_2(y)\in\text{Ker}(u_2')$. Nuevamente, como los renglones del diagrama son exactos, entonces $\text{Ker}(u'_2) = \text{Im}(u'_1)$, por lo que existe $z\in A_1'$ tal que $u'_1(z) = f_2(y)$. Más aún, como $f_1$ es un epimorfismo, entonces existe $w\in A_1$ tal que $f_1(w)=z$. De esto, se sigue que $f_2(y) = u'_1f_1(w) = f_2u_1(w)$ y, por ser $f_2$ un monomorfismo, que $y=u_1(w)$. Por ende, tenemos que $x = u_2(y) = u_2u_1(w)$ y, como $\text{Ker}(u_2) = \text{Im}(u_1)$, se obtiene que $x=0$. Por lo tanto, $f_3$ es un monomorfismo.
+
+        \item Se sigue de aplicar el principio de dualidad al inciso (a).
+
+        \item Se sigue de (a) y (b).
+    \end{enumerate}
+\end{proof}
+
+% Demostrar en algún lado que Ker(\alpha) = Ker(-\alpha) e Im(\beta) = Im(-\beta).
+
+\end{document}

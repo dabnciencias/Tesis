@@ -1,0 +1,30 @@
+\documentclass[preview]{standalone}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{setspace}
+\usepackage{tipa}
+\usepackage{relsize}
+\usepackage{textcomp}
+\usepackage{mathrsfs}
+\usepackage{calligra}
+\usepackage{wasysym}
+\usepackage{ragged2e}
+\usepackage{physics}
+\usepackage{xcolor}
+\usepackage{microtype}
+\DisableLigatures{encoding = *, family = * }
+\linespread{1}
+
+\begin{document}
+
+\begin{center}
+\flushleft \textbf{Definición} Sean $\mathscr{C}$ una $\mathbb{Z}$-categoría, $\mathbb{E}:\mathscr{C}^\text{op}\times\mathscr{C}\to\text{Ab}$ es un bifuntor aditivo y $A,A',C,C'\in\mathscr{C}$. Definimos las correspondencias \begin{align*} \text{Hom}_\mathscr{C}(A,A')\times\mathbb{E}(C,A) &\to \mathbb{E}(C,A'), \\ (a,\delta) &\mapsto a\cdot\delta:=\mathbb{E}(C,a)(\delta), \\ \\ \mathbb{E}(C,A)\times\text{Hom}_\mathscr{C}(C',C) &\to \mathbb{E}(C',A), \\ (\delta,c) &\mapsto \delta\cdot c:=\mathbb{E}(c^\text{op},A)(\delta). \end{align*}
+\end{center}
+
+\end{document}

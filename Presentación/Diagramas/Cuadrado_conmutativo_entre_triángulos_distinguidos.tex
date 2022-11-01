@@ -1,0 +1,10 @@
+\documentclass[tikz, border=0mm]{standalone}
+\usepackage{amssymb}
+\usetikzlibrary{cd}
+\usetikzlibrary{babel}
+\begin{document}
+\begin{tikzcd}
+    X \arrow[]{d}[swap]{f} \arrow[phantom]{dr}{\circlearrowleft} \arrow[]{r}[]{} &Y \arrow[]{d}[]{g} \arrow[]{r}[]{} &Z \arrow[]{r}[]{} &T(A) \arrow[]{d}{T(a)} \\ 
+    X' \arrow[]{r}[swap]{} &Y' \arrow[]{r}[swap]{} &Z' \arrow[]{r}[swap]{} &T(A')
+\end{tikzcd}
+\end{document}

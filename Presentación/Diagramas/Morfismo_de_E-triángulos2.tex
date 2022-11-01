@@ -1,0 +1,10 @@
+\documentclass[tikz, border=0mm]{standalone}
+\usepackage{amssymb}
+\usetikzlibrary{cd}
+\usetikzlibrary{babel}
+\begin{document}
+\begin{tikzcd}
+    A \arrow[]{d}[swap]{a} \arrow[phantom]{dr}{\circlearrowleft} \arrow[]{r}[]{x} &B \arrow[]{d}[]{b} \arrow[phantom]{dr}{\circlearrowleft} \arrow[]{r}[]{y} &C \arrow[]{d}[]{c} \arrow[dashed]{r}[]{\delta} &\empty{} \\ 
+    A' \arrow[]{r}[swap]{x'} &B' \arrow[]{r}[swap]{y'} &C' \arrow[dashed]{r}[swap]{\delta'} &\empty{}.
+\end{tikzcd}
+\end{document}

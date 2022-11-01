@@ -1,0 +1,18 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'tesis.blg'
+[65] biber:340> INFO - === Mon Oct 31, 2022, 22:18:19
+[78] Biber.pm:418> INFO - Reading 'tesis.bcf'
+[151] Biber.pm:969> INFO - Using all citekeys in bib section 0
+[165] Biber.pm:4383> INFO - Processing section 0
+[175] Biber.pm:4574> INFO - Looking for bibtex file 'tesis.bib' for section 0
+[176] bibtex.pm:1713> INFO - LaTeX decoding ...
+[197] bibtex.pm:1518> INFO - Found BibTeX data source 'tesis.bib'
+[307] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[307] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[307] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'es-ES'
+[323] bbl.pm:654> INFO - Writing 'tesis.bbl' with encoding 'UTF-8'
+[328] bbl.pm:757> INFO - Output to tesis.bbl
+[329] Biber.pm:130> WARN - legacy month field 'April' in entry 'Flores-Galicia' is not an integer - this will probably not sort properly.
+[329] Biber.pm:130> WARN - legacy month field 'December' in entry 'Arentz-Hansen' is not an integer - this will probably not sort properly.
+[329] Biber.pm:130> WARN - legacy month field 'April' in entry 'Santiago_Tesis_Licenciatura' is not an integer - this will probably not sort properly.
+[329] Biber.pm:132> INFO - WARNINGS: 3

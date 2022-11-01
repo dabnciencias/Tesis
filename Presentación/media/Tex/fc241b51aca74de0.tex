@@ -1,0 +1,14 @@
+\documentclass[preview]{standalone}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[left=1.25in,right=1.25in,top=1in,bottom=1in]{geometry}\usepackage{ragged2e}\usepackage{mathrsfs}
+\begin{document}
+
+\begin{center}
+\justifying \textbf{Proposición} Sean $\mathscr{C}$ una $\mathbb{Z}$-categoría y $\mathbb{E}:\mathscr{C}^\text{op}\times\mathscr{C}\to\text{Ab}$ un bifuntor aditivo. Entonces, las siguientes condiciones se satisfacen. \begin{enumerate} \item[(a)] $a\cdot(\delta_1+\delta_2) = a\cdot\delta_1 + a\cdot\delta_2 \hspace{-0.17mm} \quad \forall \ a\in\text{Hom}_\mathscr{C}(A,A'), \ \delta_1,\delta_2\in\mathbb{E}(C,A)$. \item[(b)] $(a_1+a_1)\cdot\delta = a_1\cdot\delta + a_2\cdot\delta \quad \hspace{-0.775mm} \forall \ a_1,a_2\in\text{Hom}_\mathscr{C}(A,A'), \ \delta\in\mathbb{E}(C,A)$. \item[(c)] $1_A\cdot\delta = \delta \hspace{3.05cm} \forall \ \delta\in\mathbb{E}(C,A)$. \item[(d)] $(a'a)\cdot\delta = a'\cdot(a\cdot\delta) \hspace{1.455cm} \forall \ a\in\text{Hom}_\mathscr{C}(A,A'), \ a'\in\text{Hom}_\mathscr{C}(A',A''), \ \delta\in\mathbb{E}(C,A)$. \item[(e)] $(\delta_1+\delta_2)\cdot c = \delta_1\cdot c + \delta_2\cdot c \hspace{4.55mm} \forall \ c\in\text{Hom}_\mathscr{C}(C',C), \ \delta_1,\delta_2\in\mathbb{E}(C,A)$. \item[(f)] $\delta\cdot(c_1+c_2)=\delta\cdot c_1 + \delta\cdot c_2 \hspace{4.4mm} \forall \ c_1,c_2\in\text{Hom}_\mathscr{C}(C',C), \ \delta\in\mathbb{E}(C,A)$. \item[(g)] $\delta\cdot1_C  = \delta \hspace{3.085cm} \forall \ \delta\in\mathbb{E}(C,A)$. \item[(h)] $\delta\cdot(cc') = (\delta\cdot c)\cdot c' \hspace{1.65cm} \forall \ c\in\text{Hom}_\mathscr{C}(C',C), \ c'\in\text{Hom}_\mathscr{C}(C'',C'), \ \delta\in\mathbb{E}(C,A)$. \item[(i)] $a\cdot(\delta\cdot c) = (a\cdot\delta)\cdot c \hspace{1.55cm} \forall \ a\in\text{Hom}_\mathscr{C}(A,A'), \ c\in\text{Hom}_\mathscr{C}(C',C), \ \delta\in\mathbb{E}(C,A)$. \item[(j)] $0\cdot\delta = 0 = \delta\cdot0 \hspace{2.3cm} \forall \ \delta\in\mathbb{E}(C,A)$. \end{enumerate}
+\end{center}
+
+\end{document}

@@ -1,0 +1,500 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global}
+    \entry{Arentz-Hansen}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=8532bea7673d3ad1a85973c803e97dfa}{%
+           family={Arentz-Hansen},
+           familyi={A\bibinithyphendelim H\bibinitperiod},
+           given={E.\bibnamedelimi B.},
+           giveni={E\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Norwegian University of Science {and} Technology}%
+      }
+      \strng{namehash}{8532bea7673d3ad1a85973c803e97dfa}
+      \strng{fullhash}{8532bea7673d3ad1a85973c803e97dfa}
+      \strng{bibnamehash}{8532bea7673d3ad1a85973c803e97dfa}
+      \strng{authorbibnamehash}{8532bea7673d3ad1a85973c803e97dfa}
+      \strng{authornamehash}{8532bea7673d3ad1a85973c803e97dfa}
+      \strng{authorfullhash}{8532bea7673d3ad1a85973c803e97dfa}
+      \field{labelalpha}{Are17}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{12}
+      \field{title}{Classifying Subcategories in Quotients of Exact Categories}
+      \field{type}{Tesis de maestría}
+      \field{year}{2017}
+    \endentry
+    \entry{Bühler}{article}{}
+      \name{author}{1}{}{%
+        {{hash=82435995c06254dce82ea97768e7dbc0}{%
+           family={Bühler},
+           familyi={B\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{82435995c06254dce82ea97768e7dbc0}
+      \strng{fullhash}{82435995c06254dce82ea97768e7dbc0}
+      \strng{bibnamehash}{82435995c06254dce82ea97768e7dbc0}
+      \strng{authorbibnamehash}{82435995c06254dce82ea97768e7dbc0}
+      \strng{authornamehash}{82435995c06254dce82ea97768e7dbc0}
+      \strng{authorfullhash}{82435995c06254dce82ea97768e7dbc0}
+      \field{labelalpha}{Büh10}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Expo. Math.}
+      \field{title}{Exact Categories}
+      \field{volume}{28}
+      \field{year}{2010}
+      \field{pages}{1\bibrangedash 69}
+      \range{pages}{69}
+      \verb{doi}
+      \verb 10.1007/BFb0058580
+      \endverb
+    \endentry
+    \entry{Flores-Galicia}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=3bc496300faeb4aa575c8b28db2dc875}{%
+           family={{Flores Galicia}},
+           familyi={F\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Nacional Autónoma de México}%
+      }
+      \strng{namehash}{3bc496300faeb4aa575c8b28db2dc875}
+      \strng{fullhash}{3bc496300faeb4aa575c8b28db2dc875}
+      \strng{bibnamehash}{3bc496300faeb4aa575c8b28db2dc875}
+      \strng{authorbibnamehash}{3bc496300faeb4aa575c8b28db2dc875}
+      \strng{authornamehash}{3bc496300faeb4aa575c8b28db2dc875}
+      \strng{authorfullhash}{3bc496300faeb4aa575c8b28db2dc875}
+      \field{labelalpha}{Flo13}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{Categorías trianguladas}
+      \field{type}{Tesina de maestría}
+      \field{year}{2013}
+    \endentry
+    \entry{Freyd}{book}{}
+      \name{author}{1}{}{%
+        {{hash=405acfc4a568ea9318f58d472ce2086b}{%
+           family={Freyd},
+           familyi={F\bibinitperiod},
+           given={P.\bibnamedelimi J.},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Harper {and} Row}%
+      }
+      \strng{namehash}{405acfc4a568ea9318f58d472ce2086b}
+      \strng{fullhash}{405acfc4a568ea9318f58d472ce2086b}
+      \strng{bibnamehash}{405acfc4a568ea9318f58d472ce2086b}
+      \strng{authorbibnamehash}{405acfc4a568ea9318f58d472ce2086b}
+      \strng{authornamehash}{405acfc4a568ea9318f58d472ce2086b}
+      \strng{authorfullhash}{405acfc4a568ea9318f58d472ce2086b}
+      \field{labelalpha}{Fre64}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Harper's Series in Modern Mathematics}
+      \field{title}{Abelian Categories}
+      \field{year}{1964}
+    \endentry
+    \entry{Keller}{article}{}
+      \name{author}{1}{}{%
+        {{hash=08b96e9c1338051238403849a4594d4e}{%
+           family={Keller},
+           familyi={K\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{08b96e9c1338051238403849a4594d4e}
+      \strng{fullhash}{08b96e9c1338051238403849a4594d4e}
+      \strng{bibnamehash}{08b96e9c1338051238403849a4594d4e}
+      \strng{authorbibnamehash}{08b96e9c1338051238403849a4594d4e}
+      \strng{authornamehash}{08b96e9c1338051238403849a4594d4e}
+      \strng{authorfullhash}{08b96e9c1338051238403849a4594d4e}
+      \field{labelalpha}{Kel90}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Manuscripta Math.}
+      \field{title}{Chain Complexes and Stable Categories}
+      \field{volume}{67}
+      \field{year}{1990}
+      \field{pages}{379\bibrangedash 417}
+      \range{pages}{39}
+      \verb{doi}
+      \verb 10.1007/BF02568439
+      \endverb
+    \endentry
+    \entry{Mitchell}{book}{}
+      \name{author}{1}{}{%
+        {{hash=3129e3166d4ffe02bf777452c26328bf}{%
+           family={Mitchell},
+           familyi={M\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{3129e3166d4ffe02bf777452c26328bf}
+      \strng{fullhash}{3129e3166d4ffe02bf777452c26328bf}
+      \strng{bibnamehash}{3129e3166d4ffe02bf777452c26328bf}
+      \strng{authorbibnamehash}{3129e3166d4ffe02bf777452c26328bf}
+      \strng{authornamehash}{3129e3166d4ffe02bf777452c26328bf}
+      \strng{authorfullhash}{3129e3166d4ffe02bf777452c26328bf}
+      \field{labelalpha}{Mit65}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Pure and Applied Mathematics}
+      \field{title}{Theory of Categories}
+      \field{year}{1965}
+    \endentry
+    \entry{Nakaoka}{article}{}
+      \name{author}{1}{}{%
+        {{hash=ab7d08038633204d0777222aa0ff94f8}{%
+           family={Nakaoka},
+           familyi={N\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{ab7d08038633204d0777222aa0ff94f8}
+      \strng{fullhash}{ab7d08038633204d0777222aa0ff94f8}
+      \strng{bibnamehash}{ab7d08038633204d0777222aa0ff94f8}
+      \strng{authorbibnamehash}{ab7d08038633204d0777222aa0ff94f8}
+      \strng{authornamehash}{ab7d08038633204d0777222aa0ff94f8}
+      \strng{authorfullhash}{ab7d08038633204d0777222aa0ff94f8}
+      \field{labelalpha}{Nak18}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Appl. Categor. Struct.}
+      \field{title}{A Simultaneous Generalization of Mutation and Recollement of Cotorsion Pairs on a Triangulated Category}
+      \field{volume}{26}
+      \field{year}{2018}
+      \field{pages}{491\bibrangedash 544}
+      \range{pages}{54}
+      \verb{doi}
+      \verb 10.1007/s10485-017-9501-3
+      \endverb
+    \endentry
+    \entry{NakaokaPalu}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ab7d08038633204d0777222aa0ff94f8}{%
+           family={Nakaoka},
+           familyi={N\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=150b8fe24c64ebbc2f687c867d9602bf}{%
+           family={Palu},
+           familyi={P\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{180e3496ce3ff52f6e066bf4d530327b}
+      \strng{fullhash}{180e3496ce3ff52f6e066bf4d530327b}
+      \strng{bibnamehash}{180e3496ce3ff52f6e066bf4d530327b}
+      \strng{authorbibnamehash}{180e3496ce3ff52f6e066bf4d530327b}
+      \strng{authornamehash}{180e3496ce3ff52f6e066bf4d530327b}
+      \strng{authorfullhash}{180e3496ce3ff52f6e066bf4d530327b}
+      \field{labelalpha}{NP19}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Cah. Topol. Géom. Différ. Catég.}
+      \field{note}{NP19}
+      \field{number}{2}
+      \field{title}{Extriangulated Categories, Hovey Twin Cotorsion Pairs and Model Structures}
+      \field{volume}{60}
+      \field{year}{2019}
+      \field{pages}{117\bibrangedash 193}
+      \range{pages}{77}
+    \endentry
+    \entry{Popescu}{book}{}
+      \name{author}{1}{}{%
+        {{hash=5377a76c8a5777fc07103e2821f49bed}{%
+           family={Popescu},
+           familyi={P\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{5377a76c8a5777fc07103e2821f49bed}
+      \strng{fullhash}{5377a76c8a5777fc07103e2821f49bed}
+      \strng{bibnamehash}{5377a76c8a5777fc07103e2821f49bed}
+      \strng{authorbibnamehash}{5377a76c8a5777fc07103e2821f49bed}
+      \strng{authornamehash}{5377a76c8a5777fc07103e2821f49bed}
+      \strng{authorfullhash}{5377a76c8a5777fc07103e2821f49bed}
+      \field{labelalpha}{Pop73}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Abelian Categories with Applications to Rings and Modules}
+      \field{year}{1973}
+    \endentry
+    \entry{Puppe}{article}{}
+      \name{author}{1}{}{%
+        {{hash=73325d81554a767141f55f0283a36bbb}{%
+           family={Puppe},
+           familyi={P\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{73325d81554a767141f55f0283a36bbb}
+      \strng{fullhash}{73325d81554a767141f55f0283a36bbb}
+      \strng{bibnamehash}{73325d81554a767141f55f0283a36bbb}
+      \strng{authorbibnamehash}{73325d81554a767141f55f0283a36bbb}
+      \strng{authornamehash}{73325d81554a767141f55f0283a36bbb}
+      \strng{authorfullhash}{73325d81554a767141f55f0283a36bbb}
+      \field{labelalpha}{Pup62}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Math. Ann.}
+      \field{title}{Korrespondenzen in abelschen Kategorien}
+      \field{volume}{148}
+      \field{year}{1962}
+      \field{pages}{1\bibrangedash 30}
+      \range{pages}{30}
+      \verb{doi}
+      \verb 10.1007/BF01438388
+      \endverb
+    \endentry
+    \entry{Quillen}{article}{}
+      \name{author}{1}{}{%
+        {{hash=45a2ceee22b7804cbcd4a41eea4e690f}{%
+           family={Quillen},
+           familyi={Q\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{45a2ceee22b7804cbcd4a41eea4e690f}
+      \strng{fullhash}{45a2ceee22b7804cbcd4a41eea4e690f}
+      \strng{bibnamehash}{45a2ceee22b7804cbcd4a41eea4e690f}
+      \strng{authorbibnamehash}{45a2ceee22b7804cbcd4a41eea4e690f}
+      \strng{authornamehash}{45a2ceee22b7804cbcd4a41eea4e690f}
+      \strng{authorfullhash}{45a2ceee22b7804cbcd4a41eea4e690f}
+      \field{labelalpha}{Qui72}
+      \field{sortinit}{Q}
+      \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Higher K-Theories, Proceedings of the Conference, Battelle Memorial Institute, Seattle, Washington}
+      \field{title}{Higher Algebraic K-Theory}
+      \field{volume}{341}
+      \field{year}{1972}
+      \field{pages}{85\bibrangedash 147}
+      \range{pages}{63}
+      \verb{doi}
+      \verb 10.1007/BFb0067053
+      \endverb
+    \endentry
+    \entry{Santiago_Tesis_Licenciatura}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=03c4a6368e6dc3577ca8f9452e86c48c}{%
+           family={{Santiago Vargas}},
+           familyi={S\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Nacional Autónoma de México}%
+      }
+      \strng{namehash}{03c4a6368e6dc3577ca8f9452e86c48c}
+      \strng{fullhash}{03c4a6368e6dc3577ca8f9452e86c48c}
+      \strng{bibnamehash}{03c4a6368e6dc3577ca8f9452e86c48c}
+      \strng{authorbibnamehash}{03c4a6368e6dc3577ca8f9452e86c48c}
+      \strng{authornamehash}{03c4a6368e6dc3577ca8f9452e86c48c}
+      \strng{authorfullhash}{03c4a6368e6dc3577ca8f9452e86c48c}
+      \field{labelalpha}{San07}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{Elementos de álgebra homológica en categorías abelianas y el Teorema de Inmersión en la categoría de grupos abelianos}
+      \field{type}{Tesis de licenciatura}
+      \field{year}{2007}
+    \endentry
+    \entry{Stovicek}{online}{}
+      \name{author}{1}{}{%
+        {{hash=e4dd8cb10e6dff79f32f80d6d5c3513a}{%
+           family={Šťovíček},
+           familyi={Š\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{e4dd8cb10e6dff79f32f80d6d5c3513a}
+      \strng{fullhash}{e4dd8cb10e6dff79f32f80d6d5c3513a}
+      \strng{bibnamehash}{e4dd8cb10e6dff79f32f80d6d5c3513a}
+      \strng{authorbibnamehash}{e4dd8cb10e6dff79f32f80d6d5c3513a}
+      \strng{authornamehash}{e4dd8cb10e6dff79f32f80d6d5c3513a}
+      \strng{authorfullhash}{e4dd8cb10e6dff79f32f80d6d5c3513a}
+      \field{labelalpha}{Šťo13}
+      \field{sortinit}{Š}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Exact Model Categories, Approximation Theory, and Cohomology of Quasi-Coherent Sheaves}
+      \field{year}{2013}
+      \verb{doi}
+      \verb 10.48550/arXiv.1301.5206
+      \endverb
+    \endentry
+    \entry{Tan-Junhan}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3a19efeda3e417ead9474dd1e1d4f0e3}{%
+           family={{Tan Junhan}},
+           familyi={T\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{3a19efeda3e417ead9474dd1e1d4f0e3}
+      \strng{fullhash}{3a19efeda3e417ead9474dd1e1d4f0e3}
+      \strng{bibnamehash}{3a19efeda3e417ead9474dd1e1d4f0e3}
+      \strng{authorbibnamehash}{3a19efeda3e417ead9474dd1e1d4f0e3}
+      \strng{authornamehash}{3a19efeda3e417ead9474dd1e1d4f0e3}
+      \strng{authorfullhash}{3a19efeda3e417ead9474dd1e1d4f0e3}
+      \field{labelalpha}{Tan19}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv: Category Theory}
+      \field{title}{The Freyd-Mitchell Embedding Theorem}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.48550/arXiv.1901.08591
+      \endverb
+    \endentry
+    \entry{Thomason}{book}{}
+      \name{author}{2}{}{%
+        {{hash=f3892b208d5f23d8cac01a89f30fa1c9}{%
+           family={Thomason},
+           familyi={T\bibinitperiod},
+           given={R.\bibnamedelimi W.},
+           giveni={R\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=dadeb3098ae6a457502fd5af29eda57d}{%
+           family={Trobaugh},
+           familyi={T\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Birkhäuser}%
+      }
+      \strng{namehash}{cd914dda562837821aba633bb0f5a545}
+      \strng{fullhash}{cd914dda562837821aba633bb0f5a545}
+      \strng{bibnamehash}{cd914dda562837821aba633bb0f5a545}
+      \strng{authorbibnamehash}{cd914dda562837821aba633bb0f5a545}
+      \strng{authornamehash}{cd914dda562837821aba633bb0f5a545}
+      \strng{authorfullhash}{cd914dda562837821aba633bb0f5a545}
+      \field{labelalpha}{TT90}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{The Grothendieck Festschrift}
+      \field{title}{Higher Algebraic K-Theory of Schemes and of Derived Categories}
+      \field{volume}{3}
+      \field{year}{1990}
+    \endentry
+    \entry{Verdier}{book}{}
+      \name{author}{1}{}{%
+        {{hash=f8fa442bbf75d658c2942d1b307cc658}{%
+           family={Verdier},
+           familyi={V\bibinitperiod},
+           given={J.\bibnamedelimi L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Paris: Société mathématique de France}%
+      }
+      \strng{namehash}{f8fa442bbf75d658c2942d1b307cc658}
+      \strng{fullhash}{f8fa442bbf75d658c2942d1b307cc658}
+      \strng{bibnamehash}{f8fa442bbf75d658c2942d1b307cc658}
+      \strng{authorbibnamehash}{f8fa442bbf75d658c2942d1b307cc658}
+      \strng{authornamehash}{f8fa442bbf75d658c2942d1b307cc658}
+      \strng{authorfullhash}{f8fa442bbf75d658c2942d1b307cc658}
+      \field{labelalpha}{Ver96}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0303-1179}
+      \field{series}{Astérisque 239}
+      \field{title}{Des catégories dérivées des catégories abéliennes}
+      \field{year}{1996}
+      \verb{doi}
+      \verb 10.24033/ast.364
+      \endverb
+    \endentry
+    \entry{Yoneda}{article}{}
+      \name{author}{1}{}{%
+        {{hash=e9afd0301d5fa2144d349c5b2f72dff2}{%
+           family={Yoneda},
+           familyi={Y\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{e9afd0301d5fa2144d349c5b2f72dff2}
+      \strng{fullhash}{e9afd0301d5fa2144d349c5b2f72dff2}
+      \strng{bibnamehash}{e9afd0301d5fa2144d349c5b2f72dff2}
+      \strng{authorbibnamehash}{e9afd0301d5fa2144d349c5b2f72dff2}
+      \strng{authornamehash}{e9afd0301d5fa2144d349c5b2f72dff2}
+      \strng{authorfullhash}{e9afd0301d5fa2144d349c5b2f72dff2}
+      \field{labelalpha}{Yon60}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{J. Fac. Sci. Univ. Tokyo}
+      \field{title}{On Ext and Exact Sequences}
+      \field{volume}{8}
+      \field{year}{1960}
+      \field{pages}{507\bibrangedash 576}
+      \range{pages}{70}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

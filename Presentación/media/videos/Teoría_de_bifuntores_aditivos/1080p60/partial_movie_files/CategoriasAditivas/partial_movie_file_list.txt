@@ -1,0 +1,2 @@
+# This file is used internally by FFMPEG.
+file 'file:/home/diek/ExTr/Presen/media/videos/Teoría_de_bifuntores_aditivos/1080p60/partial_movie_files/CategoriasAditivas/2179840226_1743025708_1487158455.mp4'

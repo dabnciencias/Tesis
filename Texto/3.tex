@@ -1,0 +1,1225 @@
+\documentclass[tesis]{subfiles}
+\begin{document}
+
+\chapter{Categorías trianguladas}\label{Chap: Categorías trianguladas}
+
+Las categorías trianguladas están compuestas de forma similar a las categorías exactas; sin embargo, en este caso, la definición de las sucesiones de morfismos involucran a un endofuntor de cierto tipo, y los axiomas que verifica la clase de dichas sucesiones son significativamente diferentes.
+
+\section{Definición de categoría triangulada} \label{Sec: Definición de categoría triangulada}
+
+\begin{Def}\label{Def: Triángulos}
+    Sea $\mathscr{A}$ una categoría aditiva. Un \emph{funtor de traslación} es un automorfismo aditivo\footnote{En algunas fuentes de la literatura, se define un funtor de traslación de forma más general como una autoequivalencia aditiva de categorías.} $T:\mathscr{A}\xrightarrow[]{\sim} \mathscr{A}$. Escribiremos $T^n(X)=X[n]$ para cualesquiera $X\in\text{Obj}(\mathscr{A}), n\in\mathbb{Z}$. Un \emph{triángulo} en $\mathscr{A}$ es un diagrama
+    \[
+        X\to Y\to Z\to T(X),
+    \] 
+    el cual denotamos también por
+    \begin{center}
+        \begin{tikzcd}
+            &Z \arrow[maps to]{ddl}[]{[1]} \\ \\
+            X \arrow[]{rr}[]{} &&Y \arrow[]{uul}[]{}.
+        \end{tikzcd}
+    \end{center}
+    Un \emph{morfismo de triángulos} es una terna $(f,g,h)\in\text{Mor}^3(\mathscr{A})$ que hace conmutar el siguiente diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[]{d}[swap]{f} \arrow[]{r}[]{} &Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{} &Z \arrow[]{d}[swap]{h} \arrow[]{r}[]{} &T(X) \arrow[]{d}[]{T(f)} \\
+            X' \arrow[]{r}[]{} &Y' \arrow[]{r}[]{} &Z' \arrow[]{r}[]{} &T(X').
+        \end{tikzcd}
+    \end{center}
+\end{Def}
+
+\begin{Obs}\label{Mendoza_CT-Ejer.1}
+    Sean $\mathscr{A}$ una categoría aditiva y $T:\mathscr{A}\to \mathscr{A}$ un funtor de traslación. Las clases de triángulos en $\mathscr{A}$ y de morfismos de triángulos en $\mathscr{A}$, junto con la composición de morfismos inducida de $\mathscr{A}$ componente a componente, forman una categoría llamada la \emph{categoría de triángulos asociada al par} $(\mathscr{A},T)$, que denotamos por $\mathscr{T}(\mathscr{A},T)$. En particular, un morfismo de triángulos $(u,v,w)$ es un \emph{isomorfismo de triángulos} si, y sólo si, $u,v$ y $w$ son isomorfismos en $\mathscr{A}$.
+    \vspace{1mm}
+
+    En efecto: Sea $\mathscr{T} := \mathscr{T}(\mathscr{A},T)$, y sean $\alpha=(A,A',A'',a,a',a''), \beta=(B,B',B'',b,b',b''), \gamma=(C,C',C'',\break c,c',c'') , \delta=(D,D',D'',d,d',d'')$ objetos en $\mathscr{T}$ y $\alpha\xrightarrow[]{(f,f',f'')}\beta, \beta\xrightarrow[]{(g,g',g'')}\gamma, \gamma\xrightarrow[]{(h,h',h'')}\delta$ morfismos en $\mathscr{T}$.
+        
+        \begin{enumerate}
+            \item[(C1)] Dado que $\mathscr{A}$ es una categoría, tenemos que $\text{Hom}_\mathscr{A}(A,B), \text{Hom}_\mathscr{A}(A',B')$ y $\text{Hom}_\mathscr{A}(A'',B'')$ son clases, por lo que $\text{Hom}_\mathscr{T}(\alpha,\delta)\subseteq\text{Hom}_\mathscr{A}(A,B)\times\text{Hom}_\mathscr{A}(A',B')\times\text{Hom}_\mathscr{A}(A'',B'')$ es una clase.
+            
+            \item[(C2)] Se sigue de la construcción de $\mathscr{T}$.
+            
+            \item[(C3)] Por definición de morfismo en $\mathscr{T}$, tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+                \begin{equation}\label{eq: 1.(a)-1}
+                    \begin{tikzcd}
+                        A \arrow[]{d}[swap]{f} \arrow[]{r}[]{a} &A' \arrow[]{d}[swap]{f'} \arrow[]{r}[]{a'} &A'' \arrow[]{d}[]{f''} \arrow[]{r}[]{a''} &T(A) \arrow[]{d}[]{T(f)} \\
+                        B \arrow[]{d}[swap]{g} \arrow[]{r}[]{b} &B' \arrow[]{d}[swap]{g'} \arrow[]{r}[]{a'} &A'' \arrow[]{d}[]{g''} \arrow[]{r}[]{b''} &T(B) \arrow[]{d}[]{T(g)} \\
+                        C \arrow[]{r}[swap]{c} &C' \arrow[]{r}[swap]{c'} &C'' \arrow[]{r}[swap]{c''} &T(C)
+                    \end{tikzcd}
+                \end{equation}
+                De los dos cuadrados conmutativos del lado izquierdo y la asociatividad de la composición de morfismos en $\mathscr{A}$ tenemos que $c(gf) = (g'f')a$. Análogamente, de los dos cuadrados conmutativos del centro se sigue que $c'(g'f')=(g''f'')a'$. Por los dos cuadrados conmutativos de la derecha, tenemos que
+                \[
+                    c''(g''f'') = \big(T(g)T(f)\big)a'' = T(gf)a'',
+                \]
+                por lo que $\alpha\xrightarrow[]{(gf,g'f',g''f'')}\gamma$ es un morfismo en $\mathscr{T}$. Por ende, la composición de morfismos en $\mathscr{T}$ está bien definida.
+        
+        \begin{enumerate}
+            \item[(i)] Observemos que
+            \begin{align*}
+                \big( (h,h',h'')(g,g',g'') \big) (f,f',f'') &= (hg,h'g',h''g'')(f,f',f'') \\
+                                                   &= \big( (hg)f, (h'g')f', (h''g'')f'' \big) \\
+                                                   &= \big( h(gf), h'(g'f'), h''(g''f'') \big) \tag{$\mathscr{A}$ es una categoría} \\
+                                                   &= (h,h',h'') (gf, g'f', g''f'') \\
+                                                   &= (h,h',h'') \big( (g,g',g'')(f,f',f'') \big),
+            \end{align*}
+            por lo que la composición de morfismos en $\mathscr{T}$ es asociativa.
+            
+            \item[(ii)] Observemos que el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    B \arrow[]{d}[swap]{1_B} \arrow[]{r}[]{b} &B' \arrow[]{d}[swap]{1_{B'}} \arrow[]{r}[]{b'} &B'' \arrow[]{d}[]{1_{B''}} \arrow[]{r}[]{b''} &T(B) \arrow[]{d}[]{T(1_B)} \\
+                    B \arrow[]{r}[swap]{b} &B' \arrow[]{r}[swap]{b'} &B'' \arrow[]{r}[swap]{b''} &T(B)
+                \end{tikzcd}
+            \end{center}
+            conmuta trivialmente, pues $1_B, 1_{B'}, 1_{B''}$ y $1_{T(B)}$ son morfismos identidad en $\mathscr{A}$, y $T(1_B) = 1_{T(B)}$ por ser $T$ un funtor. Por ende, tenemos el morfismo $\beta\xrightarrow{(1_U,1_V,1_W)}\beta$ en $\mathscr{T}$. Ahora, del diagrama (\ref{eq: 1.(a)-1}), se sigue que $f\in \text{Hom}_\mathscr{A}(A,B), f'\in \text{Hom}_\mathscr{A}(A',B''), f''\in \text{Hom}_\mathscr{A}(A'',B''), g\in \text{Hom}_\mathscr{A}(B,C), g'\in \text{Hom}_\mathscr{A}(B',C')$ y $g''\in \text{Hom}_\mathscr{A}(B'',C'')$. Como $1_B,1_{B'}$ y $1_{B''}$ son morfismos identidad en $\mathscr{A}$, entonces
+            \begin{align*}
+                (1_B,1_{B'},1_{B''})(f,f',f'') &= (1_Bf, 1_{B'}f', 1_{B''}f'') \\
+                                     &= (f,f',f''), \\ \\
+                (g,g',g'')(1_B,1_{B'},1_{B''}) &= (g1_B, g'1_{B'}, g''1_{B''}) \\
+                                     &= (g,g',g''),
+            \end{align*}
+            por lo que $(1_B,1_{B'},1_{B''})$ es el morfismo identidad del objeto $\beta$ en $\mathscr{T}$.
+            \end{enumerate}
+        \end{enumerate}
+ 
+    De lo anterior, se sigue que $\mathscr{T}$ es una categoría. Ahora demostraremos la segunda parte. Sean $\eta=(E,E',E'',e,e',e''), \mu=(M,M',M'',m,m',m'')\in \text{Obj}(\mathscr{T})$ y $\eta\xrightarrow{(f,g,h)} \mu\in\text{Mor}(\mathscr{T})$. Entonces, tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+            \begin{equation}\label{eq: 1(b)}
+                \begin{tikzcd}
+                    E \arrow[]{d}[swap]{f} \arrow[]{r}[]{e} &E' \arrow[]{d}[swap]{g} \arrow[]{r}[]{e'} &E'' \arrow[]{d}[]{h} \arrow[]{r}[]{e''} &T(E) \arrow[]{d}[]{T(f)} \\
+                    M \arrow[]{r}[swap]{m} &M' \arrow[]{r}[swap]{m'} &M'' \arrow[]{r}[swap]{m''} &T(M).
+                \end{tikzcd}
+            \end{equation}
+            
+            $(\Rightarrow)$ Si $(f,g,h)$ es un isomorfismo en $\mathscr{T}$, entonces existe $(f',g',h')\in\text{Mor}(\mathscr{A})^3$ tal que el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    M \arrow[]{d}[swap]{f'} \arrow[]{r}[]{m} &M' \arrow[]{d}[swap]{g'} \arrow[]{r}[]{m'} &M'' \arrow[]{d}[]{h'} \arrow[]{r}[]{m''} &T(M) \arrow[]{d}[]{T(f')} \\
+                    E \arrow[]{r}[swap]{e} &E' \arrow[]{r}[swap]{e'} &E'' \arrow[]{r}[swap]{e''} &T(E)
+                \end{tikzcd}
+            \end{center}
+            conmuta y
+            \begin{align*}
+                (f',g',h')(f,g,h) &= (f'f,g'g,h'h) \\
+                                  &= (1_E, 1_{E'}, 1_{E''}), \\ \\
+                (f,g,h)(f',g',h') &= (ff',gg',hh') \\
+                                  &= (1_M, 1_{M'}, 1_{M''}),
+            \end{align*}
+            de donde se sigue que $f'f=1_E, ff'=1_M, g'g=1_{E'}, gg'=1_{M'}, h'h=1_{E''}$ y $hh'=1_{M''}$. Por ende, $f, g$ y $h$ son isomorfismos en $\mathscr{A}$. \\
+
+            $(\Leftarrow)$ Supongamos que $f, g$ y $h$ son isomorfismos en $\mathscr{A}$. Entonces, existen $f'\in\text{Hom}_\mathscr{A}(M,E), g'\in\text{Hom}_\mathscr{A}(M',E')$ y $h'\in\text{Hom}_\mathscr{A}(M'',E'')$ tales que $f'f=1_E, ff'=1_M, g'g=1_{E'}, gg'=1_{M'}, h'h=1_{E''}$ y $hh'=1_{M''}$. Dado que por hipótesis el diagrama (\ref{eq: 1(b)}) conmuta, se sigue que
+            \begin{align*}
+                mf=ge &\iff mff' = gef' \\
+                      &\iff m = gef' \\
+                      &\iff g'm = g'gef' \\
+                      &\iff g'm=ef',
+            \end{align*}
+            \begin{align*}
+                m'g=he' &\iff m'gg' = he'g' \\
+                      &\iff m' = he'g' \\
+                      &\iff h'm' = h'he'g' \\
+                      &\iff h'm' = e'g',
+            \end{align*}
+            \begin{align*}
+                m''h=T(f)e'' &\iff m''hh'=T(f)e''h' \\
+                         &\iff m''=T(f)e''h' \\
+                         &\iff T(f')m''=T(f')T(f)e''h' \\
+                         &\iff T(f')m''=T(f'f)e''h' \\
+                         &\iff T(f')m''=T(1_E)e''h' \\
+                         &\iff T(f')m''=e''h'. \tag{$T(1_E)=1_{T(E)}$}
+            \end{align*}
+            Por ende, el siguiente diagrama en $\mathscr{A}$ conmuta
+            \begin{center}
+                \begin{tikzcd}
+                M \arrow[]{d}[swap]{f'} \arrow[]{r}[]{m} &M' \arrow[]{d}[swap]{g'} \arrow[]{r}[]{m'} &M'' \arrow[]{d}[]{h'} \arrow[]{r}[]{m''} &T(M) \arrow[]{d}[]{T(f')} \\
+                E \arrow[]{r}[swap]{e} &E' \arrow[]{r}[swap]{e'} &E'' \arrow[]{r}[swap]{e''} &T(E).
+                \end{tikzcd}
+            \end{center}
+            Es decir, tenemos que $\mu\xrightarrow{(f',g',h')} \eta$ es un morfismo en $\mathscr{T}$ tal que
+            \begin{align*}
+                (f',g',h')(f,g,h) &= (f'f,g'g,h'h) \\
+                                  &= (1_E, 1_{E'}, 1_{E''}), \\ \\
+                (f,g,h)(f',g',h') &= (ff',gg',hh') \\
+                                  &= (1_M, 1_{M'}, 1_{M''}),
+            \end{align*}
+            de donde se sigue que $\eta\xrightarrow{(f,g,h)}\mu$ es un isomorfismo en $\mathscr{T}$.
+
+\end{Obs}
+
+\begin{Def}\label{Def: Categoría triangulada}
+    Una \emph{categoría pretriangulada} es una terna ($\mathscr{A},T,\Delta)$, donde $\mathscr{A}$ es una categoría aditiva, $T:\mathscr{A}\to \mathscr{A}$ es un funtor de traslación y $\Delta$ es una clase de objetos en $\mathscr{T}(\mathscr{A},T)$, llamados \emph{triángulos distinguidos} en $\mathscr{A}$, que es cerrada por isomorfismos en $\mathscr{T}(\mathscr{A},T)$ y satisface los siguientes axiomas.
+
+    \begin{itemize}
+
+        \item[(TR1a)] Para cualquier $X\in\text{Obj}(\mathscr{A})$, tenemos que
+            \begin{center}
+                \begin{tikzcd}
+                    &0 \arrow[maps to]{ddl}[]{[1]} \\ \\
+                    X \arrow[]{rr}[swap]{1_{X}} &&X \arrow[]{uul}[]{}
+                \end{tikzcd}
+            \end{center}
+            es un triángulo distinguido.
+
+        \item[(TR1b)] Para cualquier morfismo $X\xrightarrow[]{f} Y$ en $\mathscr{A}$, existe un triángulo distinguido
+            \begin{center}
+                \begin{tikzcd}
+                    &Z \arrow[maps to]{ddl}[]{[1]} \\ \\
+                    X \arrow[]{rr}[swap]{f} &&Y. \arrow[]{uul}[]{}
+                \end{tikzcd}
+            \end{center}
+
+        \item[(TR2)] Si el triángulo
+            \begin{equation}\label{eq: (TR2)-1}
+                \begin{tikzcd}
+                    &Z \arrow[maps to]{ddl}{[1]}[swap]{w} \\ \\
+                    X \arrow{rr}[swap]{u} &&Y \arrow{uul}[swap]{v}
+                \end{tikzcd}
+            \end{equation}
+            es distinguido, entonces el triángulo
+            \begin{equation}\label{eq: (TR2)-2}
+                \begin{tikzcd}
+                    &T(X) \arrow[maps to]{ddl}{[1]}[swap]{-T(u)} \\ \\
+                    Y \arrow{rr}[swap]{v} &&Z \arrow{uul}[swap]{w}
+                \end{tikzcd}
+            \end{equation}
+            también lo es.
+            
+        \item[(TR3)] Si
+            \begin{equation}\label{eq: (TR3)}
+                \begin{tikzcd}
+                    X \arrow[]{d}[swap]{f} \arrow[]{r}[]{} &Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{} &Z \arrow[]{r}[]{} &T(X) \arrow[]{d}[]{T(u)} \\
+                    X' \arrow[]{r}[]{} &Y' \arrow[]{r}[]{} &Z' \arrow[]{r}[]{} &T(X')
+                \end{tikzcd}
+            \end{equation}
+            es un diagrama donde los renglones son triángulos distinguidos y el cuadrado es conmutativo, entonces existe $h:Z\to Z'$ en $\text{Mor}(\mathscr{A})$ tal que $(f,g,h)$ es un morfismo de triángulos distinguidos.
+
+        %\item[(TR4)] Sean $X\xrightarrow[]{f}Y, Y\xrightarrow[]{g}Z\in\text{Mor}(\mathscr{A})$. Entonces, el diagrama
+        %    \begin{center}
+        %        \begin{tikzcd}
+        %            X \arrow[]{d}[swap]{1_{X}} \arrow[]{r}[]{f} &Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{a} &Z' \arrow[]{r}[]{} &T(X) \arrow[]{d}[]{T(1_{X})} \\
+        %            X \arrow[]{d}[swap]{f} \arrow[]{r}[]{gf} &Z \arrow[]{r}[]{b} \arrow[]{d}[swap]{1_{Z}} &Y' \arrow[]{r}[]{} &T(X) \arrow[]{d}[]{T(f)} \\
+        %            Y \arrow[]{r}[swap]{g} &Z \arrow[]{r}[swap]{c} &X' \arrow[]{r}[]{} &T(Y),
+        %        \end{tikzcd}
+        %    \end{center}
+        %    donde los renglones son triángulos distinguidos, puede ser completado al diagrama conmutativo
+        %    \begin{center}
+        %        \begin{tikzcd}
+        %            X \arrow[]{d}[swap]{1_{X}} \arrow[]{r}[]{f} &Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{a} &Z' \arrow[]{r}[]{} \arrow[]{d}[]{u} &T(X) \arrow[]{d}[]{T(1_{X})} \\
+        %            X \arrow[]{d}[swap]{f} \arrow[]{r}[]{gf} &Z \arrow[]{r}[]{b} \arrow[]{d}[swap]{1_{Z}} &Y' \arrow[]{r}[]{} \arrow[]{d}[]{v} &T(X) \arrow[]{d}[]{T(f)} \\
+        %            Y \arrow[]{r}[swap]{g} \arrow[]{d}[swap]{a} &Z \arrow[]{r}[swap]{c} \arrow[]{d}[swap]{b} &X' \arrow[]{r}[]{} \arrow[]{d}[]{1_{X'}} &T(Y) \arrow[]{d}[]{T(a)} \\
+        %            Z' \arrow[]{r}[swap]{u} &Y' \arrow[]{r}[swap]{v} &X' \arrow[]{r}[swap]{w} &T(Z'),
+        %        \end{tikzcd}
+        %    \end{center}
+        %    donde los renglones son triángulos distinguidos, y de donde se sigue que las ternas $(1_{X},g,u), (f,1_{Z},v)$ y $(a,b,1_{X'})$ son morfismos de triángulos.
+
+    \end{itemize}
+
+    \noindent Una categoría pretriangulada $(\mathscr{A},T,\Delta)$ es \emph{triangulada} si además satisface el siguiente axioma.
+
+    \begin{itemize}
+
+    \item[(TR4)] Para cualesquiera $X\xrightarrow[]{u}Y, Y\xrightarrow[]{v}Z\in\text{Mor}(\mathscr{A})$, el diagrama con triángulos distinguidos en sus renglones (que podemos formar por (TR1b))
+            \begin{center}
+                \begin{tikzcd}
+                    X \arrow[equals]{d} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{v} \arrow[]{r}[]{i} &Z' \arrow[]{r}[]{i'} &T(X) \arrow[equals]{d} \\
+                    X \arrow[]{d}[swap]{u} \arrow[]{r}[]{vu} &Z \arrow[]{r}[]{k} \arrow[equals]{d} &Y' \arrow[]{r}[]{k'} &T(X) \arrow[]{d}[]{T(u)} \\
+                    Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{r} &X' \arrow[]{r}[swap]{r'} &T(Y)
+                \end{tikzcd}
+            \end{center}
+            puede ser completado al diagrama conmutativo
+            \begin{center}
+                \begin{tikzcd}
+                    X \arrow[equals]{d} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{v} \arrow[]{r}[]{i} &Z' \arrow[]{r}[]{i'} \arrow[dotted]{d}[]{\exists \ f} &T(X) \arrow[equals]{d} \\
+                    X \arrow[]{d}[swap]{u} \arrow[]{r}[]{vu} &Z \arrow[]{r}[]{k} \arrow[equals]{d} &Y' \arrow[]{r}[]{k'} \arrow[dotted]{d}[]{\exists \ g} &T(X) \arrow[]{d}[]{T(u)} \\
+                    Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{j} &X' \arrow[]{r}[swap]{j'} \arrow[]{d}[]{h} &T(Y) \arrow[]{d}[]{T(i)} \\
+                                                                &&T(Z') \arrow[equals]{r} &T(Z'),
+                \end{tikzcd}
+            \end{center}
+            donde la tercera columna es un triángulo distinguido.
+    \end{itemize}
+\end{Def}
+
+\begin{Obs}\label{Obs: Categoría pretriangulada}\leavevmode
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item El axioma (TR1b) se conoce como el \emph{axioma de completación de morfismos a triángulos distinguidos}.
+
+        \item El axioma (TR2) se conoce como el \emph{axioma de rotación de triángulos distinguidos}, pues podemos interpretarlo como el que toda ``rotación'' de un triángulo distinguido en el sentido negativo da como resultado otro triángulo distinguido\footnote{Más adelante veremos que este axioma es equivalente a pedir que toda ``rotación'' de un triángulo distinguido en el sentido positivo dé como resultado otro triángulo distinguido, pues ambas afirmaciones se implican entre sí (ver la Proposición \ref{Mendoza_CT-1.3} y Observación \ref{Obs: (TR2)}).}, como se puede apreciar comparando los diagramas (\ref{eq: (TR2)-1}) y (\ref{eq: (TR2)-2}).
+
+        \item El axioma (TR3) se puede parafrasear afirmando que cualquier cuadrado conmutativo entre triángulos distinguidos como en (\ref{eq: (TR3)}) puede ser completado a un morfismo de triángulos distinguidos. 
+
+        \item El axioma (TR4) se conoce como el \emph{axioma del octaedro}, pues se puede escribir como el siguiente diagrama
+            \begin{center}
+                \begin{tikzcd}
+                    &&&Y' \arrow[dotted]{ddddl}[]{\exists \ g} \\ \\ \\ \\
+                    && X'\arrow[maps to]{dll}[]{h} \arrow[maps to]{dddddr}[swap]{j'} &&&&Z, \arrow[]{uuuulll}[swap]{k} \arrow[]{llll}[swap]{\quad \ \ j} \\
+                    Z' \arrow[dotted]{uuuuurrr}[]{\exists \ f} \arrow[maps to, crossing over]{rrrr}[]{\quad \quad i'} &&&&X \arrow[from=uuuuul, crossing over, maps to]{}[swap]{k'} \arrow[]{ddddl}[]{u} \arrow[]{urr}[swap]{vu}\\ \\ \\ \\
+                      &&&Y \arrow[]{uuuulll}[]{i} \arrow[]{uuuuurrr}[swap]{v}
+                \end{tikzcd}
+            \end{center}
+            donde las caras del octaedro con una sola flecha $\mapsto$ representan triángulos distinguidos, y las caras con dos flechas $\mapsto$ o bien ninguna representan triángulos conmutativos. Otra forma a menudo más útil de ver al axioma (TR4) es afirmando que, para cualesquiera morfismos $X\xrightarrow[]{u}Y, Y\xrightarrow[]{v}Y$ en $\mathscr{A}$, el diagrama en $\mathscr{A}$
+            \begin{equation}\label{eq: (TR4)}
+                \begin{tikzcd}
+                    X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{v} \arrow[]{r}[]{i} &Z'\arrow[dotted]{d}[]{f} \arrow[]{r}[]{i'} &T(X) \arrow[equals]{d}[]{} \\
+                    X \arrow[]{r}[swap]{vu} &Z \arrow[]{d}[swap]{j} \arrow[]{r}[swap]{k} &Y' \arrow[dotted]{d}[]{g} \arrow[]{r}[swap]{k'} &T(X) \arrow[]{d}[]{T(u)} \\
+                                            &X' \arrow[]{d}[swap]{j'} \arrow[equals]{r}[]{} &X' \arrow[]{d}[]{T(i)j'} \arrow[]{r}[swap]{j'} &T(Y) \\
+                                            &T(Y) \arrow[]{r}[swap]{T(i)} &T(Z')
+                \end{tikzcd}
+            \end{equation}
+            conmuta, donde los dos renglones y las dos columnas con cuatro objetos son triángulos distinguidos.
+    \end{enumerate}
+\end{Obs}
+
+\section{Propiedades fundamentales de categorías trianguladas} \label{Sec: Propiedades fundamentales de categorías trianguladas}
+
+\begin{Lema}\label{Mendoza_CT-1.1} % Esto se parece a Mendoza-Ejer.34
+    Para una categoría pretriangulada $(\mathscr{A},T,\Delta)$ y $\eta = (X,Y,Z,u,v,w), \eta' = (X',Y',Z',u',v',\break w')\in\Delta$, las siguientes condiciones se satisfacen.
+\end{Lema}
+
+\begin{enumerate}[label=(\alph*)]
+
+    \item Si existen morfismos $g:Y\to Y'$ y $h:Z\to Z'$ en $\mathscr{A}$ tales que $hv=v'g$, entonces existe un morfismo $f:X\to X'$ en $\mathscr{A}$ tal que $(f,g,h):\eta\to \eta'$ es un morfismo en $\mathscr{T}(\mathscr{A},T)$.
+
+    \item Si existen morfismos $f:X\to X'$ y $h:Z\to Z'$ en $\mathscr{A}$ tales que $T(f)w=w'h$, entonces existe un morfismo $g:Y\to Y'$ en $\mathscr{A}$ tal que $(f,g,h):\eta\to \eta'$ es un morfismo en $\mathscr{T}(\mathscr{A},T)$.
+\end{enumerate}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Supongamos que existen $g:Y\to Y'$ y $h:Z\to Z'$ en $\mathscr{A}$ tales que $hv=v'g$. Entonces, tenemos el diagrama en $\mathscr{A}$
+    \begin{equation}\label{eq: 2.1.5-1}
+        \begin{tikzcd}
+            X \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{h} \arrow[]{r}[]{w} &T(X) \\
+            X' \arrow[]{r}[swap]{u'} &Y' \arrow[]{r}[swap]{v'} &Z' \arrow[]{r}[swap]{w'} &T(X'),
+        \end{tikzcd}
+    \end{equation}
+    donde el cuadrado conmuta. Aplicando (TR2) a cada triángulo distinguido, tenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{v} &Z \arrow[]{d}[swap]{h} \arrow[]{r}[]{w} &T(X) \arrow[]{r}[]{-T(u)} &T(Y) \arrow[]{d}[]{T(v)} \\
+            Y' \arrow[]{r}[swap]{v'} &Z' \arrow[]{r}[swap]{w'} &T(X') \arrow[]{r}[swap]{-T(u')} &T(Y').
+        \end{tikzcd}
+    \end{center}
+    Luego, por (TR3), existe $t\in\text{Hom}_\mathscr{A}(T(X),T(X'))$ tal que el siguiente diagrama en $\mathscr{A}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{v} &Z \arrow[]{d}[swap]{h} \arrow[]{r}[]{w} &T(X) \arrow[dotted]{d}[]{t} \arrow[]{r}[]{-T(u)} &T(Y) \arrow[]{d}[]{T(v)} \\
+            Y' \arrow[]{r}[swap]{v'} &Z' \arrow[]{r}[swap]{w'} &T(X') \arrow[]{r}[swap]{-T(u')} &T(Y').
+        \end{tikzcd}
+    \end{center}
+    Dado que $T$ es un automorfismo, en particular es una equivalencia de categorías. Por la Proposición \ref{Mendoza-Ejer.5}, sabemos $T$ que es fiel, pleno y denso. En particular, el que $T$ sea pleno implica que $T:\text{Hom}_\mathscr{A}(X,X')\to\text{Hom}_\mathscr{A}(T(X),T(X'))$ es un epimorfismo en Sets. Por ende, existe $f\in\text{Hom}_\mathscr{A}(X,X')$ tal que $T(f)=t$, por lo que el diagrama en $\mathscr{A}$
+    \begin{equation}\label{eq: 2.1.5-2}
+        \begin{tikzcd}
+            Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{v} &Z \arrow[]{d}[swap]{h} \arrow[]{r}[]{w} &T(X) \arrow[]{d}[]{T(f)} \arrow[]{r}[]{-T(u)} &T(Y) \arrow[]{d}[]{T(v)} \\
+            Y' \arrow[]{r}[swap]{v'} &Z' \arrow[]{r}[swap]{w'} &T(X') \arrow[]{r}[swap]{-T(u')} &T(Y')
+        \end{tikzcd}
+    \end{equation}
+    conmuta. En particular,
+    \begin{align*}
+        -T(u')T(f) = T(v)\big(-T(u)\big) &\implies -T(u'f) = -T(vu) \\
+                                         &\implies T(u'f) = T(vu) \\
+                                         &\implies u'f=vu \tag{$T$ es fiel}.
+    \end{align*}
+    Luego, de los cuadrados conmutativos al centro de los diagramas (\ref{eq: 2.1.5-1}) y (\ref{eq: 2.1.5-2}) se sigue que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[]{d}[swap]{f} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{g} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{h} \arrow[]{r}[]{w} &T(X) \arrow[]{d}[]{T(f)} \\
+            X' \arrow[]{r}[swap]{u'} &Y' \arrow[]{r}[swap]{v'} &Z' \arrow[]{r}[swap]{w'} &T(X')
+        \end{tikzcd}
+    \end{center}
+    conmuta. Por ende, $(f,g,h):\eta\to \eta'$ es un morfismo en $\mathscr{T}(\mathscr{A},T)$.
+
+        \item Es análogo a (a), aplicando (TR2) dos veces a cada triángulo distinguido en vez de una.
+            
+    \end{enumerate}
+\end{proof}
+
+\begin{Def}\label{Def: Funtor cohomológico}
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $\mathscr{B}$ una categoría abeliana. Un funtor aditivo covariante (respectivamente, contravariante) $F:\mathscr{A}\to \mathscr{B}$ es \emph{cohomológico} si para todo $X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\in\Delta$ se tiene que la sucesión $F(X)\xrightarrow[]{F(u)}F(Y)\xrightarrow[]{F(v)}F(Z)$ \big(respectivamente, $F(Z)\xrightarrow[]{F(v)} F(Y)\xrightarrow[]{F(x)}F(X)$\big) es exacta\footnote{Ver la Definición \ref{Def: Sucesión exacta} en el Apéndice \ref{Chap: Categorías abelianas}.} en $\mathscr{B}$.
+\end{Def}
+
+\begin{Teo}\label{Mendoza_CT-1.2}
+    Para una categoría pretriangulada $(\mathscr{A},T,\Delta)$, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Si $X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)$ es un triángulo distinguido, entonces $vu=0$ y $wv=0$.
+
+        \item Para todo $A\in\text{Obj}(\mathscr{A})$, los funtores $\text{Hom}_\mathscr{A}(A,-), \text{Hom}_\mathscr{A}(-,A):\mathscr{A}\to \text{Ab}$ son cohomológicos.
+
+        \item Para todo $\eta\xrightarrow[]{(f,g,h)}\eta'\in\text{Mor}(\mathscr{T})$, con $\eta,\eta'\in\Delta$ se tiene que si $f$ y $g$ son isomorfismos en $\mathscr{A}$, entonces $h$ es un isomorfismo en $\mathscr{A}$.
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Por (TR2) y (TR1a), tenemos los triángulos distinguidos $Y\xrightarrow[]{v} Z\xrightarrow[]{w}TX \xrightarrow[]{-Tu} TY$ y $Z\xrightarrow[]{1_Z}Z\to 0\to TZ$, respectivamente, con los cuales podemos formar el diagrama en $\mathscr{A}$ con cuadrado conmutativo
+    \begin{center}
+        \begin{tikzcd}
+            Y \arrow[]{d}[swap]{v} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{1_Z} \arrow[]{r}[]{w} &TX \arrow[]{r}[]{-Tu} &TY \arrow[]{d}[]{Tv} \\
+            Z \arrow[]{r}[swap]{1_Z} &Z \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &TZ.
+        \end{tikzcd}
+    \end{center}
+    Por (TR3), tenemos que existe un morfismo $h:TX\to 0$ en $\mathscr{A}$ que hace conmutar el siguiente diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            Y \arrow[]{d}[swap]{v} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{1_Z} \arrow[]{r}[]{w} &TX \arrow[dotted]{d}[]{h} \arrow[]{r}[]{-Tu} &TY \arrow[]{d}[]{Tv} \\
+            Z \arrow[]{r}[swap]{1_Z} &Z \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &TZ,
+        \end{tikzcd}
+    \end{center}
+    de donde se sigue que $0=Tv(-Tu)=-T(vu)$, lo que implica que $T(vu)=0$. Como $T$ es un automorfismo, en particular, $T^{-1}$ es un funtor aditivo. Luego, del Lema \ref{Lema: Los funtores aditivos fijan al objeto cero}, se sigue que
+    \begin{align*}
+        vu &= T^{-1}(T(vu)) \\
+           &= T^{-1}(0) \\
+           &= 0.
+    \end{align*}
+
+\item Sean $A\in\text{Obj}(\mathscr{A})$ y $\eta=X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\in\Delta$. 
+
+    Veamos que la sucesión $\text{Hom}_\mathscr{A}(A,X)\xrightarrow[]{\text{Hom}_\mathscr{A}(A,u)} \text{Hom}_\mathscr{A}(A,Y)\xrightarrow[]{\text{Hom}_\mathscr{A}(A,v)} \text{Hom}_\mathscr{A}(M,Z)$ es exacta en Ab. En efecto, observemos que
+    \begin{align*}
+        \text{Hom}_\mathscr{A}(A,v)\text{Hom}_\mathscr{A}(A,u) &= \text{Hom}_\mathscr{A}(A,vu) \\
+                                                               &= \text{Hom}_\mathscr{A}(A,0) \tag{por el inciso (a)} \\
+                                                               &= 0,
+    \end{align*}
+    de donde se sigue que $\text{Im}\big( \text{Hom}_\mathscr{A}(A,u) \big) \subseteq\text{Ker}\big( \text{Hom}_\mathscr{A}(A,v) \big)$. Ahora, sea $\varphi\in\text{Ker}\big(\text{Hom}_\mathscr{A}(A,v)\big)$. Entonces, $\varphi\in\text{Hom}_\mathscr{A}(A,Y)$ y $v \varphi = 0$. Por (TR1a), tenemos que $\alpha=(A,A,0,1_A,0,0)$ es un triángulo distinguido. Aplicando (TR2) a $\alpha$ y a $\eta$, tenemos el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{\varphi} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \arrow[]{r}[]{} &T(A) \arrow[]{r}[]{-1_{T(A)}} &T(A) \arrow[]{d}[]{T(\varphi)} \\
+            Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X) \arrow[]{r}[swap]{-T(u)} &T(Y),
+        \end{tikzcd}
+    \end{center}
+    donde el cuadrado es conmutativo y los renglones son triángulos distinguidos. Por (TR3), tenemos que existe $T(A)\xrightarrow[]{\psi}T(X)$ en $\mathscr{A}$ tal que hace conmutar el siguiente diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[]{d}[swap]{\varphi} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \arrow[]{r}[]{} &T(A) \arrow[dotted]{d}[]{\psi} \arrow[]{r}[]{-1_{T(A)}} &T(A) \arrow[]{d}[]{T(\varphi)} \\
+            Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X) \arrow[]{r}[swap]{-T(u)} &T(Y).
+        \end{tikzcd}
+    \end{center}
+    Dado que $T$ es un automorfismo, tenemos que $g:=T^{-1}(\psi):A\to X\in\text{Mor}(\mathscr{A})$ es tal que $T(g)=\psi$. Luego,
+    \begin{align*}
+        T(\varphi)\big(-1_A\big) = -T(u)\psi &\iff -T(\varphi) = -T(u)T(g) \\
+            &\iff T(\varphi) = T(ug) \\
+            &\iff T^{-1}\big( T(\varphi)\big) = T^{-1}\big( T(ug) \big) \\
+            &\iff \varphi = ug = \text{Hom}_\mathscr{A}(A,u)(g),
+    \end{align*}
+    de donde se sigue que $\text{Ker}\big( \text{Hom}_\mathscr{A}(A,u) \big) \subseteq\text{Im}\big( \text{Hom}_\mathscr{A}(A,v) \big)$. Por ende,
+    \[
+    \text{Im}\big( \text{Hom}_\mathscr{A}(A,u) \big) =\text{Ker}\big( \text{Hom}_\mathscr{A}(A,v) \big).
+    \] 
+
+    La verificación de que $\text{Hom}_\mathscr{A}(Z,A) \xrightarrow[]{\text{Hom}_\mathscr{A}(v,A)} \text{Hom}_\mathscr{A}(Y,A) \xrightarrow[]{\text{Hom}_\mathscr{A}(u,A)} \text{Hom}_\mathscr{A}(X,A)$ es exacta en Ab es análoga a la anterior, aplicando (TR2) tres veces a $\eta$ y dos veces a $\alpha$. Como $\eta\in\Delta$ es arbitrario, concluimos que los funtores $\text{Hom}_\mathscr{A}(A,-),\text{Hom}_\mathscr{A}(-,A):\mathscr{A}\to \text{Ab}$ son cohomológicos.
+
+\item Sean $\eta=(X,Y,Z,u,v,w), \eta'=(X',Y',Z',u',v',w')\in\Delta$ y $\eta\xrightarrow[]{(f,g,h)}\eta'\in\text{Mor}(\mathscr{T})$ tal que $f$ y $g$ son isomorfismos en $\mathscr{A}$. Entonces, dado que los funtores preservan isomorfismos, tenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[]{d}{\rotatebox{90}{$\sim$}}[swap]{f} \arrow[]{r}[]{u} &Y \arrow[]{d}{\rotatebox{90}{$\sim$}}[swap]{g} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{h} \arrow[]{r}[]{w} &T(X) \arrow[]{d}{T(f)}[swap]{\rotatebox{90}{$\sim$}} \\
+            X' \arrow[]{r}[swap]{u'} &Y' \arrow[]{r}[swap]{v'} &Z' \arrow[]{r}[swap]{w'} &T(X'),
+        \end{tikzcd}
+    \end{center}
+    donde los renglones son triángulos distinguidos. Por (TR2) y el inciso (b), aplicando $\text{Hom}_\mathscr{A}(Z',-)$ tenemos que
+    \begin{center}
+        \begin{tikzcd}
+            \mathscr{A}(Z',X) \arrow[]{d}{\rotatebox{90}{$\sim$}}[swap]{\mathscr{A}(Z',f)} \arrow[]{r}[]{} &\mathscr{A}(Z',Y) \arrow[]{d}{\rotatebox{90}{$\sim$}}[swap]{\mathscr{A}(Z',g)} \arrow[]{r}[]{} &\mathscr{A}(Z',Z) \arrow[]{d}{\mathscr{A}(Z',h)} \arrow[]{r}[]{} &\mathscr{A}(Z',T(X)) \arrow[]{d}{\mathscr{A}(Z',T(f))}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{} &\mathscr{A}(Z',T(Y)) \arrow[]{d}{\mathscr{A}(Z',T(g))}[swap]{\rotatebox{90}{$\sim$}} \\
+            \mathscr{A}(Z',X') \arrow[]{r}[]{} &\mathscr{A}(Z',Y') \arrow[]{r}[]{} &\mathscr{A}(Z',Z') \arrow[]{r}[]{} &\mathscr{A}(Z',T(X')) \arrow[]{r}[]{} &\mathscr{A}(Z',T(Y'))
+        \end{tikzcd}
+    \end{center}
+    es un diagrama conmutativo exacto en Ab. Dado que Ab es una categoría abeliana, por el Lema \ref{Mendoza_Ejer.62} (Lema del 5) se tiene que $\text{Hom}_\mathscr{A}(Z',h):\text{Hom}_\mathscr{A}(Z',Z)\xrightarrow[]{\sim}\text{Hom}_\mathscr{A}(Z',Z')$ en Ab. En particular, existe $\phi\in\text{Hom}_\mathscr{A}(Z',Z)$ tal que $h\phi=1_{Z'}$. Análogamente, aplicando $\text{Hom}_\mathscr{A}(-,Z')$ tenemos que existe $\phi'\in\text{Hom}_\mathscr{A}(Z',Z)$ tal que $\phi'h=1_Z$. Dado que
+    \begin{align*}
+        \phi' &= \phi'1_{Z'} \\
+              &= \phi'h\phi \\
+              &= 1_Z\phi \\
+              &= \phi,
+    \end{align*}
+    concluimos que $h$ es un isomorfismo en $\mathscr{A}$.
+    \end{enumerate}
+\end{proof}
+
+\begin{Prop}\label{Mendoza_CT-1.3}
+    
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $\eta=(X,Y,Z,u,v,w)\in\mathscr{T}$. Entonces, $X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)$ es un triángulo distinguido si, y sólo si, $Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\xrightarrow[]{-T(u)} T(Y)$ es un triángulo distinguido.
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    $(\Rightarrow)$ Esto es el axioma (TR2). \\
+
+    $(\Leftarrow)$ Supongamos que $Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\xrightarrow[]{T(u)}T(Y)$ es un triángulo distinguido. Dado que $\eta\in\mathscr{T}$, en particular tenemos que $X\xrightarrow[]{u}Y\in\text{Mor}(\mathscr{A})$. Por (TR1b), podemos completar el morfismo $u$ en un triángulo distinguido $\eta' = (X,Y',Z',u,v',w')$. Aplicando (TR2) tres veces a $\eta$ y a $\eta'$, tenemos el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            T(X) \arrow[equals]{d}[]{} \arrow[]{r}[]{-T(u)} &T(Y) \arrow[equals]{d}[]{} \arrow[]{r}[]{-T(v)} &T(Z) \arrow[]{r}[]{-T(w)} &T^2(X) \arrow[equals]{d}[]{} \\
+            T(X) \arrow[]{r}[swap]{-T(u)} &T(Y) \arrow[]{r}[swap]{-T(v')} &T(Z') \arrow[]{r}[swap]{-T(w')} &T^2(X'),
+        \end{tikzcd}
+    \end{center}
+    donde el cuadrado es conmutativo y los renglones son triángulos distinguidos. Por (TR3), existe $T(Z)\xrightarrow[]{t}T(Z')\in\text{Mor}(\mathscr{A})$ tal que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            T(X) \arrow[equals]{d}[]{} \arrow[]{r}[]{-T(u)} &T(Y) \arrow[equals]{d}[]{} \arrow[]{r}[]{-T(v)} &T(Z) \arrow[dotted]{d}[]{h} \arrow[]{r}[]{-T(w)} &T^2(X) \arrow[equals]{d}[]{} \\
+            T(X) \arrow[]{r}[swap]{-T(u)} &T(Y) \arrow[]{r}[swap]{-T(v')} &T(Z') \arrow[]{r}[swap]{-T(w')} &T^2(X'),
+        \end{tikzcd}
+    \end{center}
+    conmuta. Más aún, por el inciso (c) del Teorema \ref{Mendoza_CT-1.2}, tenemos que $h:T(Z)\xrightarrow[]{\sim}T(Z')$ en $\mathscr{A}$. Observemos que
+    \begin{align*}
+        h\big(-T(v)\big) = -T(v') &\iff -hT(v) = T(v') \\
+                                  &\iff T^{-1}(hT(v)) = T^{-1}(T(v')) \tag{$T$ es automorfismo} \\ 
+                                  &\iff T^{-1}(h)v = v', \\ \\
+            -T(w) = -T(w')h &\iff T^{-1}(T(w)) = T^{-1}(T(w')h) \\
+                            &\iff w = w'T^{-1}(h),
+    \end{align*}
+    donde $T^{-1}(h)$ es un isomorfismo, puesto que los funtores preservan isomorfismos. Por ende, el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[equals]{d}[]{} \arrow[]{r}[]{v} &Z \arrow[]{d}{T^{-1}(h)}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{w} &T(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v'} &Z' \arrow[]{r}[swap]{w'} &T(X),
+        \end{tikzcd}
+    \end{center}
+    conmuta. Por la Observación \ref{Mendoza_CT-Ejer.1}, tenemos que los triángulos $\eta$ y $\eta'$ son isomorfos en $\mathscr{T}$. Como $\eta'\in\Delta$ y la clase de triángulos distinguidos es cerrada por isomorfismos, tenemos que $X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)$ es un triángulo distinguido.
+\end{proof}
+
+\begin{Obs}\label{Obs: (TR2)}\leavevmode
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item El axioma (TR2) puede ser reemplazado por el siguiente axioma:
+
+        \begin{itemize}
+            \item[(TR2')] Si el triángulo
+                \begin{equation}\label{eq: (TR2)-1}
+                    \begin{tikzcd}
+                        &Z \arrow[maps to]{ddl}{[1]}[swap]{w} \\ \\
+                        X \arrow{rr}[swap]{u} &&Y \arrow{uul}[swap]{v}
+                    \end{tikzcd}
+                \end{equation}
+                es distinguido, entonces el triángulo
+                \begin{equation}\label{eq: (TR2)-2}
+                    \begin{tikzcd}
+                        &Y \arrow[maps to]{ddl}{[1]}[swap]{v} \\ \\
+                        T^{-1}(Z) \arrow{rr}[swap]{-T^{-1}(w)} &&X \arrow{uul}[swap]{u}
+                    \end{tikzcd}
+                \end{equation}
+                también lo es.
+        \end{itemize}
+
+        En efecto: Notemos que (TR2') equivale a la implicación contraria de la Proposición \ref{Mendoza_CT-1.3}, que fue demostrada utilizando (TR2). De forma análoga, es posible demostrar que (TR2') implica a (TR2). Esta equivalencia entre (TR2) y (TR2') es la razón por la cual, en algunos textos de la literatura, la afirmación de la Proposición \ref{Mendoza_CT-1.3} se declara como axioma en vez de (TR2) o (TR2'). 
+
+    \item Para una categoría pretriangulada $(\mathscr{A},T,\Delta)$, las correspondencias
+        \begin{align*}
+            R:\mathscr{T}(\mathscr{A},T) &\to \mathscr{T}(\mathscr{A},T), \\
+            (X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)) &\mapsto (Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\xrightarrow[]{-T(u)}T(Y)), \\
+            (f,g,h) &\mapsto (g,h,T(f)), \\ \\
+            R^{-1}:\mathscr{T}(\mathscr{A},T) &\to \mathscr{T}(\mathscr{A},T), \\
+            (X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)) &\mapsto (T^{-1}(Z)\xrightarrow[]{-T^{-1}(w)}X\xrightarrow[]{u}Y\xrightarrow[]{v}Z) \\
+            (f,g,h) &\mapsto (T^{-1}(h),f,g)
+        \end{align*}
+        son funtores, e inversos entre sí. Más aún, una vez establecida la equivalencia de la Proposición \ref{Mendoza_CT-1.3}, tenemos que
+        \[
+            R(\Delta) = \Delta = R^{-1}(\Delta),
+        \] 
+        es decir, que los automorfismos $R$ y $R^{-1}$ mandan triángulos distinguidos en triángulos distinguidos. El funtor $R$ \emph{rota} triángulos distinguidos en el sentido negativo de (TR2), mientras que $R^{-1}$ los rota en el sentido positivo de (TR2').
+    \end{enumerate}
+\end{Obs}
+
+\begin{Prop}\label{Mendoza_CT-Ejer.2}
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $\eta=(X,Y,Z,u,v,w)\in\Delta$. Entonces, se cumplen las siguientes condiciones.
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $u$ es un seudonúcleo de $v$.
+
+        \item $w$ es un seudoconúcleo de $w$.
+
+        \item $v$ es un seudonúcleo de $w$ y un seudoconúcleo de $u$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Por el inciso (a) del Teorema \ref{Mendoza_CT-1.2}, tenemos que $vu=0$. Supongamos que existe un morfismo $M\xrightarrow[]{\alpha}Y$ en $\mathscr{A}$ tal que $v\alpha=0$. Por (TR1a), sabemos que $M\xrightarrow[]{1_M}M\to 0\to T(M)$ es un triángulo distinguido. Entonces, tenemos el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    M \arrow[]{r}[]{1_M} &M \arrow[]{d}[swap]{\alpha} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \arrow[]{r}[]{} &T(M) \\
+                    X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X),
+                \end{tikzcd}
+            \end{center}
+            donde el cuadrado conmuta y los renglones son triángulos distinguidos. Por el inciso (b) del Lema \ref{Mendoza_CT-1.1}, existe $M\xrightarrow[]{u'}X$ en $\mathscr{A}$ tal que el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    M \arrow[]{d}[swap]{u'} \arrow[]{r}[]{1_M} &M \arrow[]{d}[swap]{\alpha} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \arrow[]{r}[]{} &T(M) \arrow[]{d}[]{T(f)} \\
+                    X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X),
+                \end{tikzcd}
+            \end{center}
+            conmuta, de donde se sigue que $\alpha=uu'$.
+
+        \item Nuevamente, por el inciso (a) del Teorema \ref{Mendoza_CT-1.2}, tenemos que $wv=0$. Supongamos que existe un morfismo $Y\xrightarrow[]{\beta}M$ en $\mathscr{A}$ tal que $\beta v=0$. Entonces, por (TR1a) tenemos el diagrama en $\mathscr{A}$
+            \begin{center}
+                \begin{tikzcd}
+                    X \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{\beta} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{} \arrow[]{r}[]{w} &T(X) \\
+                    M \arrow[]{r}[swap]{1_M} &M \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &T(M),
+                \end{tikzcd}
+            \end{center}
+            donde el cuadrado conmuta y los renglones son triángulos distinguidos. Por el inciso (b) del Lema \ref{Mendoza_CT-1.1}, el diagrama anterior puede ser completado a un morfismo de triángulos distinguidos.
+
+        \item Por la Observación \ref{Obs: (TR2)}, tenemos que
+            \[
+            R(\eta) = Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\xrightarrow[]{-T(u)}T(Y) \quad \text{y} \quad R^{-1}(\eta) = T^{-1}(Z)\xrightarrow[]{-T^{-1}(w)}X\xrightarrow[]{u}Y\xrightarrow[]{v}Z
+            \] 
+            son triángulos distinguidos en $(\mathscr{A},T,\Delta)$. Por ende, el resultado se sigue de aplicar (a) a $R(\eta)$ y (b) a $R^{-1}(\eta)$.
+    \end{enumerate}
+\end{proof}
+
+
+\begin{Prop}\label{Mendoza_CT-Ejer.3}
+    
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $(f,g,h):\eta\to \mu$ en $\mathscr{T}(\mathscr{A},T)$, con $\eta,\mu\in\Delta$. Si dos de los tres morfismos $f,g$ y $h$ son isomorfismos en $\mathscr{A}$, entonces el tercero también lo es.
+\end{Prop}
+
+\begin{proof}
+
+    Si $f$ y $g$ son isomorfismos, se sigue del inciso (c) del Teorema \ref{Mendoza_CT-1.2}. \\
+
+    Si $g$ y $h$ son isomorfismos, por la Observación \ref{Obs: (TR2)} tenemos que $R\big( (f,g,h) \big) = (g,f,T(f))$ es un morfismo de triángulos distinguidos que cumple las condiciones del inciso (c) del Teorema \ref{Mendoza_CT-1.2}, por lo que $T(f)$ es un isomorfismo. Como $T$ es un automorfismo, tenemos que $f = T^{-1}(T(f))$. En particular, como los funtores preservan isomorfismos, se sigue que $f$ es un isomorfismo. \\
+    
+    El caso restante se demuestra de forma análoga al caso anterior utilizando el funtor $R^{-1}$.
+\end{proof}
+
+\begin{Lema}\label{Mendoza_CT-Ejer.4}
+
+    Sea $(\mathscr{A},T,\Delta)$ una categoría pretriangulada. Si $X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\in\Delta$, entonces se tienen los siguientes triángulos distinguidos:
+    \[
+        X\xrightarrow[]{-u}Y\xrightarrow[]{-v}Z\xrightarrow[]{w}T(X), \ X\xrightarrow[]{-u}Y\xrightarrow[]{v}Z\xrightarrow[]{-w}T(X), \ X\xrightarrow[]{u}Y\xrightarrow[]{-v}Z\xrightarrow[]{-w}T(X).
+    \] 
+\end{Lema}
+
+\begin{proof}
+
+    Se sigue de observar que los siguientes diagramas en $\mathscr{A}$ conmutan
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{-1_Y} \arrow[]{r}[]{v} &Z \arrow[equals]{d}[]{} \arrow[]{r}[]{w} &T(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{r}[swap]{-u} &Y \arrow[]{r}[swap]{-v} &Z \arrow[]{r}[swap]{w} &T(X), \\
+            X \arrow[]{d}[swap]{-1_X} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{-1_Z} \arrow[]{r}[]{w} &T(X) \arrow[]{d}[]{T(-1_X)} \\
+            X \arrow[]{r}[swap]{-u} &Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{-w} &T(X), \\
+            X \arrow[]{d}[]{-1_X} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{-1_Y} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{-1_Z} \arrow[]{r}[]{w} &T(X) \arrow[equals]{d}[]{T(-1_X)} \\
+            X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{-v} &Z \arrow[]{r}[swap]{-w} &T(X),
+        \end{tikzcd}
+    \end{center}
+    donde $T(-1_X) = -T(1_X) = -1_{T(X)}$ por ser $T$ un funtor aditivo y $-1_X, -1_Y, -1_Z$ y $-1_{T(X)}$ son isomorfismos \textemdash pues son sus propios inversos\textemdash, y aplicar la Observación \ref{Mendoza_CT-Ejer.1} junto con el hecho de que $\Delta$ es cerrado por isomorfismos.
+\end{proof}
+
+\subsection*{Categoría triangulada opuesta} \label{Ssec: Categoría triangulada opuesta}
+
+\begin{Prop}\label{Mendoza_CT-Ejer.5}
+
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada (respectivamente, triangulada), $\tilde{T}(f^\text{op})\break :=(T^{-1}(f))^\text{op}$ y $\tilde{\Delta}$ definida como sigue:
+    \[
+    X\xrightarrow[]{u^\text{op}} Y\xrightarrow[]{v^\text{op}} Z\xrightarrow[]{w^\text{op}} \tilde{T}X\in \tilde{\Delta} \iff Z\xrightarrow[]{v} Y\xrightarrow[]{u} X\xrightarrow[]{Tw} TZ\in\Delta.
+    \] 
+    Entonces, $(\mathscr{A}^\text{op},\tilde{T},\tilde{\Delta})$ es una categoría pretriangulada (respectivamente, triangulada).
+\end{Prop}
+
+\begin{proof}
+
+    Supongamos que $(\mathscr{A},T,\Delta)$ es una categoría pretriangulada. Sean $\eta=(E'',E',E,(e')^\text{op},\break e^\text{op},\tilde{T}((e'')^\text{op})), \mu=(M'',M',M,(m')^\text{op},m^\text{op},\tilde{T}((m'')^\text{op}))\in\text{Obj}(\mathscr{T}(\mathscr{A}^\text{op},\tilde{T}))$. \\
+
+    Como el universo de las categorías aditivas es dualizante, sabemos que $\mathscr{A}^\text{op}$ es una categoría aditiva. Notemos que $\tilde{T} = D_\mathscr{A} T^{-1} D_{\mathscr{A}^\text{op}}:\mathscr{A}^\text{op}\to \mathscr{A}^\text{op}$. Dado que $T$ es un automorfismo aditivo, se sigue que $T^{-1}$ también lo es. Ya que $D_\mathscr{A}D_{\mathscr{A}^\text{op}} = 1_{\mathscr{A}^\text{op}}$ y $D_{\mathscr{\mathscr{A}}^\text{op}}D_\mathscr{A} = 1_\mathscr{A}$, los funtores de dualidad son isomorfismos. Por la aditividad de $\mathscr{A}$, tenemos que $\text{Hom}_\mathscr{A}(X,Y)$ y $\text{Hom}_{\mathscr{A}^\text{op}}(Y,X)$ tienen la misma estructura de grupo abeliano para cualesquiera $X,Y\in\text{Obj}(\mathscr{A}) = \text{Obj}(\mathscr{A}^\text{op})$, de donde se sigue que los funtores de dualidad son aditivos. Por ende, $\tilde{T}:\mathscr{A}^\text{op}\to \mathscr{A}^\text{op}$ es un automorfismo aditivo. \\
+
+    Sea $X\in\text{Obj}(\mathscr{A}^\text{op})=\text{Obj}(\mathscr{A})$. Como ($\mathscr{A},T,\Delta)$ es una categoría pretriangulada, por (TR1a) tenemos que $X\xrightarrow[]{1_X}X\to 0\to T(X)\in\Delta$. Ahora, de la Proposición 1.3 se sigue que $T^{-1}(0)\to X\xrightarrow[]{1_X}X\to 0\in\Delta$. Dado que $T$ y $T^{-1}$ son aditivos, preservan coproductos finitos. Como un objeto cero en $\mathscr{A}$ es un coproducto vacío, tenemos que $0=T(0)$ y $T^{-1}(0)=0$, por lo que $0\to X\xrightarrow[]{1_X}X\to T(0)\in\Delta$. Luego, de la definición de $\tilde{\Delta}$ se sigue que $X\xrightarrow[]{(1_X)^\text{op}}X\to 0\to \tilde{T}(0)\in\tilde{\Delta}$. \\
+
+    Supongamos que $\eta\simeq\mu$ en $\mathscr{T}(\mathscr{A}^\text{op},\tilde{T})$, con $\mu\in\tilde{\Delta}$. Entonces, por la Observación \ref{Mendoza_CT-Ejer.1}, sabemos que existen isomorfismos $h^\text{op},g^\text{op},f^\text{op}$ en $\mathscr{A}^\text{op}$ tales que el siguiente diagrama en $\mathscr{A}^\text{op}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            E'' \arrow[]{d}{\rotatebox{90}{$\sim$}}[swap]{h^\text{op}} \arrow[]{r}[]{(e')^\text{op}} &E' \arrow[]{d}{\rotatebox{90}{$\sim$}}[swap]{g^\text{op}} \arrow[]{r}[]{e^\text{op}} &E \arrow[]{d}{f^\text{op}}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{\tilde{T}((e'')^\text{op})} &\tilde{T}(E'') \arrow[]{d}{\tilde{T}(h^\text{op})}[swap]{\rotatebox{90}{$\sim$}} \\
+            M'' \arrow[]{r}[swap]{(m')^\text{op}} &M' \arrow[]{r}[swap]{m^\text{op}} &M \arrow[]{r}[swap]{\tilde{T}((m'')^\text{op})} &\tilde{T}(M'').
+        \end{tikzcd}
+    \end{center}
+    Observemos que
+    \begin{align*}
+        f^\text{op}e^\text{op} = m^\text{op}g^\text{op} &\iff ef = gm, \\
+            g^\text{op}(e')^\text{op} = (m')^\text{op}h^\text{op} &\iff e'g = m'h, \\
+                \tilde{T}(h^\text{op})\tilde{T}((e'')^\text{op}) = \tilde{T}((m'')^\text{op})f^\text{op} &\iff \tilde{T}(h^\text{op}(e'')^\text{op}) = (T^{-1}(m''))^\text{op}f^\text{op} \\
+                                                                                                         &\iff \tilde{T}((e''h)^\text{op}) = fT^{-1}(m'') \\
+                                                                                                         &\iff T(T^{-1}(e''h)) = T(fT^{-1}(m'')) \\
+                                                                                                         &\iff e''h = T(f)m'',
+    \end{align*}
+    de donde obtenemos el siguiente diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            M \arrow[]{d}[swap]{f} \arrow[]{r}[]{m} &M' \arrow[]{d}[swap]{g} \arrow[]{r}[]{m'} &M'' \arrow[]{d}[]{h} \arrow[]{r}[]{m''} &T(M) \arrow[]{d}[]{T(f)} \\
+            E \arrow[]{r}[swap]{e} &E' \arrow[]{r}[swap]{e'} &E'' \arrow[]{r}[swap]{e''} &T(E).
+        \end{tikzcd}
+    \end{center}
+    Más aún, como $f^\text{op},g^\text{op}$ y $h^\text{op}$ son isomorfismos en $\mathscr{A}^\text{op}$, se sigue que $f,g$ y $h$ son isomorfismos en $\mathscr{A}$. Por la Observación \ref{Mendoza_CT-Ejer.1}, tenemos que $(f,g,h)$ es un isomorfismo en $\mathscr{T}(\mathscr{A},T)$. Luego, como por hipótesis $\mu\in\tilde{\Delta}$, entonces $(M,M',M'',m,m',m'')\in\Delta$. Como $(\mathscr{A},\Delta,T)$ es una categoría pretriangulada, $\Delta$ es cerrada por isomorfismos, de donde se sigue que $(E,E',E'',e,e',e'')\in\Delta$, lo que implica que $\eta\in\tilde{\Delta}$. \\
+
+    Sea $X\xrightarrow[]{f^\text{op}}Y$ en $\mathscr{A}^\text{op}$. Entonces, tenemos el morfismo $Y\xrightarrow[]{f}X$ en $\mathscr{A}$. Como $(\mathscr{A},T,\Delta)$ es una categoría pretriangulada, de (TR1b) se sigue que existe $Y\xrightarrow[]{f}X\xrightarrow[]{\alpha}Z\xrightarrow[]{\beta}T(Y)\in\Delta$ y, por la Proposición 1.3, tenemos el triángulo distinguido $T^{-1}(Z)\xrightarrow[]{T^{-1}(-\beta)} Y\xrightarrow[]{f} X\xrightarrow[]{\alpha} Z\in\Delta$. Definiendo $Z':=T^{-1}(Z)$, tenemos que $Z'\xrightarrow[]{T^{-1}(-\beta)}Y\xrightarrow[]{f}X\xrightarrow[]{\alpha}T(Z')\in\Delta$, de donde se sigue que existe $X\xrightarrow[]{f^\text{op}}Y\xrightarrow[]{\tilde{T}((-\beta)^\text{op})}Z'\xrightarrow[]{\tilde{T}(\alpha^\text{op})}\tilde{T}(X)\in\tilde{\Delta}$. \\
+
+    Supongamos que $\eta\in\tilde{\Delta}$. Entonces, tenemos que $E\xrightarrow[]{e}E'\xrightarrow[]{e'}E''\xrightarrow[]{e''}T(E)\in\Delta$. Como $(\mathscr{A},T,\Delta)$ es una categoría pretriangulada, de la Proposición 1.3 se sigue que $T^{-1}(E'')\xrightarrow[]{-T^{-1}(e'')}E\xrightarrow[]{e}E'\xrightarrow[]{e'}E''\in\Delta$ y, por el Lema \ref{Mendoza_CT-Ejer.4}, tenemos que $T^{-1}(E'')\xrightarrow[]{T^{-1}(e'')}E\xrightarrow[]{e}E'\xrightarrow[]{-e'}E''\in\Delta$. Luego, observando que $T^{-1}(E'')=\tilde{T}(E'')$, pues los funtores de dualidad fijan objetos, por definición de $\tilde{\Delta}$ tenemos que $E'\xrightarrow[]{e^\text{op}}E\xrightarrow[]{\tilde{T}((e'')^\text{op})}E''\xrightarrow[]{-\tilde{T}((e')^\text{op})} T(E')\in\tilde{\Delta}$. \\
+
+    Supongamos que $\eta,\mu\in\tilde{\Delta}$ y que existen $E''\xrightarrow[]{h^\text{op}}M'', E'\xrightarrow[]{g^\text{op}}M'$ en $\mathscr{A}^\text{op}$ tales que $g^\text{op}(e')^\text{op} = (m')^\text{op}h^\text{op}$. Entonces, $(E,E',E'',e,e',e''),(M,M',M'',m,m',m'')\in\Delta$ y $e'g = hm'$. Como $(\mathscr{A},T,\Delta)$ es una categoría pretriangulada, del inciso (b) del Lema \ref{Mendoza_CT-1.1} se sigue que existe $M\xrightarrow[]{f}E$ en $\mathscr{A}$ tal que el siguiente diagrama en $\mathscr{A}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            M \arrow[]{d}[swap]{f} \arrow[]{r}[]{m} &M' \arrow[]{d}[swap]{g} \arrow[]{r}[]{m'} &M'' \arrow[]{d}[]{h} \arrow[]{r}[]{m''} &T(M) \arrow[]{d}[]{T(f)} \\
+            E \arrow[]{r}[swap]{e} &E' \arrow[]{r}[swap]{e'} &E'' \arrow[]{r}[swap]{e''} &T(E).
+        \end{tikzcd}
+    \end{center}
+    Luego, dado que
+    \begin{align*}
+        gm = ef &\iff m^\text{op}g^\text{op} = f^\text{op}e^\text{op}, \\
+            T(f)m'' = e''h &\iff T^{-1}(T(f)m'') = T^{-1}(e''h) \\
+                           &\iff fT^{-1}(m'') = T^{-1}(e'')T^{-1}(h) \\
+                           &\iff (T^{-1}(m''))^\text{op}f^\text{op} = (T^{-1}(h))^\text{op}(T^{-1}(e''))^\text{op} \\
+                           &\iff \tilde{T}((m'')^\text{op})f^\text{op} = \tilde{T}(h^\text{op}) \tilde{T}((e'')^\text{op}),
+    \end{align*}
+    se sigue que $E\xrightarrow[]{f^\text{op}}M$ en $\mathscr{A}^\text{op}$ es tal que $\eta\xrightarrow[]{(h^\text{op},g^\text{op},f^\text{op})}\mu$ es un morfismo de triángulos en $\mathscr{T}(\mathscr{A}^\text{op},\tilde{T})$. \\
+    
+    Ahora, supongamos adicionalmente que $(\mathscr{A},T,\Delta)$ cumple el axioma (TR4). Sean $X\xrightarrow[]{u^\text{op}}Y, Y\xrightarrow[]{v^\text{op}}Z\in\text{Mor}(\mathscr{A}^\text{op})$. Como hemos visto que $(\mathscr{A}^\text{op},\tilde{T},\tilde{\Delta})$ es una categoría pretriangulada, por (TR1b) podemos formar el diagrama conmutativo en $\mathscr{A}^\text{op}$
+    \begin{equation}\label{eq: 5.1}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u^\text{op}} &Y \arrow[]{d}[swap]{v^\text{op}} \arrow[]{r}[]{i^\text{op}} &Z' \arrow[]{r}[]{(i')^\text{op}} &\tilde{T}(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{d}[swap]{u^\text{op}} \arrow[]{r}[]{v^\text{op}u^\text{op}} &Z \arrow[equals]{d}[]{} \arrow[]{r}[]{k^\text{op}} &Y' \arrow[]{r}[]{(k')^\text{op}} &\tilde{T}(X) \arrow[]{d}[]{\tilde{T}(u^\text{op})} \\
+            Y \arrow[]{r}[swap]{v^\text{op}} &Z \arrow[]{r}[swap]{r^\text{op}} &X' \arrow[]{d}[swap]{h^\text{op}} \arrow[]{r}[swap]{(r')^\text{op}} &\tilde{T}(Y) \arrow[]{d}[]{\tilde{T}(i^\text{op})} \\
+                                             &&\tilde{T}(Z') \arrow[equals]{r}[]{} &\tilde{T}(Z'),
+        \end{tikzcd}
+    \end{equation}
+    cuyos primero tres renglones son elementos de $\tilde{\Delta}$. Del diagrama (\ref{eq: 5.1}), obtenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{equation}\label{eq: 5.2}
+        \begin{tikzcd}
+            X' \arrow[]{r}[]{r} &Z \arrow[]{r}[]{v} \arrow[equals]{d}[]{} &Y \arrow[]{d}[]{u} \arrow[]{r}[]{T(r')} &T(X') \\
+            Y' \arrow[]{r}[]{k} &Z \arrow[]{d}[swap]{v} \arrow[]{r}[]{uv} &X \arrow[equals]{d}[]{} \arrow[]{r}[]{T(k')} &T(Y') \\
+            Z' \arrow[]{r}[swap]{i} &Y \arrow[]{r}[swap]{u} &X \arrow[]{r}[swap]{T(i')} &T(Z'),
+        \end{tikzcd}
+    \end{equation}
+    cuyos renglones son elementos de $\Delta$. Más aún, tenemos que
+    \begin{align*}
+        h^\text{op} &= \tilde{T}(i^\text{op}) (r')^\text{op} \\
+                    &= (T^{-1}(i))^\text{op} (r')^\text{op} \\
+                    &= (r'T^{-1}(i))^\text{op},
+    \end{align*}
+    por lo que $h = r'T^{-1}(i)$. Dado que $T$ es un funtor, se sigue que $T^2(h) = T^2(r')T(i)$ por lo que, aplicando (TR2) a los renglones del diagrama (\ref{eq: 5.2}), tenemos que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            Z \arrow[equals]{d}[]{} \arrow[]{r}[]{v} &Y \arrow[]{d}[swap]{u} \arrow[]{d}[swap]{u} \arrow[]{r}[]{T(r')} &T(X') \arrow[]{r}[]{-T(r)} &T(Z) \arrow[equals]{d}[]{} \\
+            Z \arrow[]{d}[swap]{v} \arrow[]{r}[]{uv} &X \arrow[equals]{d}[]{} \arrow[]{r}[]{T(k')} &T(Y') \arrow[]{r}[]{-T(k)} &T(Z) \arrow[]{d}[]{T(v)} \\
+            Y \arrow[]{r}[swap]{u} &X \arrow[]{r}[swap]{T(i')} &T(Z') \arrow[]{d}[swap]{-T^2(h)} \arrow[]{r}[swap]{-T(i)} &T(Y) \arrow[]{d}[]{T^2(r')} \\
+                                   &&T^2(X') \arrow[equals]{r}[]{} &T^2(X')
+        \end{tikzcd}
+    \end{center}
+    conmuta, y sus renglones son elementos de $\Delta$. Luego, por (TR4), existen $T(X')\xrightarrow[]{g'}T(Y'), T(Y')\xrightarrow[]{f'}T(Z')$ en $\mathscr{A}$ tales que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            Z \arrow[equals]{d}[]{} \arrow[]{r}[]{v} &Y \arrow[]{d}[swap]{u} \arrow[]{d}[swap]{u} \arrow[]{r}[]{T(r')} &T(X') \arrow[dotted]{d}[]{g'} \arrow[]{r}[]{-T(r)} &T(Z) \arrow[equals]{d}[]{} \\
+            Z \arrow[]{d}[swap]{v} \arrow[]{r}[]{uv} &X \arrow[equals]{d}[]{} \arrow[]{r}[]{T(k')} &T(Y') \arrow[dotted]{d}[swap]{f'} \arrow[]{r}[]{-T(k)} &T(Z) \arrow[]{d}[]{T(v)} \\
+            Y \arrow[]{r}[swap]{u} &X \arrow[]{r}[swap]{T(i')} &T(Z') \arrow[]{d}[swap]{-T^2(h)} \arrow[]{r}[swap]{-T(i)} &T(Y) \arrow[]{d}[]{T^2(r')} \\
+                                   &&T^2(X') \arrow[equals]{r}[]{} &T^2(X')
+        \end{tikzcd}
+    \end{center}
+    conmuta y su tercer renglón está en $\Delta$. Definiendo $g:= T^{-1}(G'), f:= T^{-1}(f')$, tenemos que $\nu = (T(X'),T(Y'),T(Z'),T(g),T(f),-T^2(h))\in\Delta$. Aplicando la Proposición 1.3 tres veces a $\nu$, se sigue que $X'\xrightarrow[]{-g} Y'\xrightarrow[]{-f} Z'\xrightarrow[]{T(h)} T(X')$ está en $\Delta$. Del Lema \ref{Mendoza_CT-Ejer.4}, tenemos que $X'\xrightarrow[]{g} Y'\xrightarrow[]{f} Z'\xrightarrow[]{T(h)} T(X')$ es un elemento de $\Delta$, por lo que $Z'\xrightarrow[]{f^\text{op}} Y'\xrightarrow[]{g^\text{op}} X'\xrightarrow[]{h^\text{op}} \tilde{T}(Z')$  es elemento de $\tilde{\Delta}$. Más aún, dado que
+    \begin{align*}
+        T(v)\big(-T(k)\big) = -T(i)f' &\iff -T(vk) = -T(i)f' \\
+                                      &\iff vk = i T^{-1}(f') \\
+                                      &\iff k^\text{op}v^\text{op} = f^\text{op}i^\text{op}, \\ \\
+            T(i') = f'T(k') &\iff T(i') = T(f)T(k') \\
+                            &\iff i' = fk' \\
+                            &\iff (i')^\text{op} = (k')^\text{op}f^\text{op}, \\ \\
+                -T(r) = -T(k)g' &\iff T(r) = T(k)T(g) \\
+                                &\iff r = kg \\
+                                &\iff r^\text{op} = g^\text{op}k^\text{op}, \\ \\
+                    g'T(r') = T(k')u &\iff T(g)T(r') = T(k')u \\
+                                     &\iff T(gr') = T(k')u \\
+                                     &\iff gr' = k'T^{-1}(u) \\
+                                     &\iff (r')^\text{op} g^\text{op} = \tilde{T}(u^\text{op})(k')^\text{op},
+    \end{align*}
+    se sigue que el diagrama en $\mathscr{A}^\text{op}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u^\text{op}} &Y \arrow[]{d}[swap]{v^\text{op}} \arrow[]{r}[]{i^\text{op}} &Z' \arrow[]{d}[]{f^\text{op}} \arrow[]{r}[]{(i')^\text{op}} &\tilde{T}(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{d}[swap]{u^\text{op}} \arrow[]{r}[]{v^\text{op}u^\text{op}} &Z \arrow[equals]{d}[]{} \arrow[]{r}[]{k^\text{op}} &Y' \arrow[]{d}[]{g^\text{op}} \arrow[]{r}[]{(k')^\text{op}} &\tilde{T}(X) \arrow[]{d}[]{\tilde{T}(u^\text{op})} \\
+            Y \arrow[]{r}[swap]{v^\text{op}} &Z \arrow[]{r}[swap]{r^\text{op}} &X' \arrow[]{d}[]{h^\text{op}} \arrow[]{r}[swap]{(r')^\text{op}} &\tilde{T}(Y) \arrow[]{d}[]{\tilde{T}(i^\text{op})} \\
+                                             &&\tilde{T}(Z') \arrow[equals]{r}[]{} &\tilde{T}(Z'),
+        \end{tikzcd}
+    \end{center}
+    conmuta, donde su tercera columna es un elemento de $\tilde{\Delta}$.
+\end{proof}
+
+\begin{Obs}\label{Obs: Mendoza_CT-Ejer.5}
+
+    En vista de la Proposición \ref{Mendoza_CT-Ejer.5}, definimos la categoría opuesta de una categoría triangulada $(\mathscr{A},T,\Delta)$ como $(\mathscr{A},T,\Delta)^\text{op}:= (\mathscr{A}^\text{op}, \tilde{T}, \tilde{\Delta})$. 
+\end{Obs}
+
+\begin{Lema}\label{Mendoza_CT-Ejer.6}
+
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $\eta:X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\in\Delta$. Entonces, para cada $i\in\mathbb{Z}$, el triángulo
+    \[
+        \eta^{(i)}: T^i(X) \xrightarrow[]{(-1)^i T^i(u)} T^i(Y) \xrightarrow[]{(-1)^i T^i(v)} T^i(Z) \xrightarrow[]{(-1)^i T^i(w)} T^{i+1}(X)
+    \] 
+    es distinguido.
+\end{Lema}
+
+\begin{proof}
+
+    Se sigue de observar que $\eta^{(0)}=\eta\in\Delta$ por hipótesis y que, para $j\geq0$, al aplicar (TR2) a $\eta^{(j)}$ y la implicación contraria de la Proposición 1.3 a $\eta^{(-j)}$, tres veces cada una, se obtiene que $\eta^{(j+1)}\in\Delta$ y $\eta^{-(j+1)}\in\Delta$, respectivamente.
+\end{proof}
+
+\begin{Teo}\label{Mendoza_CT-Ejer.7}
+
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada, $\mathscr{B}$ una categoría abeliana y $F:\mathscr{A}\to \mathscr{B}$ un funtor cohomológico. Para cada $i\in\mathbb{Z}$, considere el funtor $F^i:= F\circ T^i:\mathscr{A}\to \mathscr{B}$. Entonces, para cada $(X,Y,Z,u,v,w)\in\Delta$, se tiene la sucesión exacta larga en $\mathscr{B}$:
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Caso covariante:
+            \[
+                \dots \to F^i(X)\xrightarrow[]{F^i(u)} F^i(Y)\xrightarrow[]{F^i(v)} F^i(Z)\xrightarrow[]{F^i(w)} F^{i+1}(X)\to \dots
+            \] 
+
+        \item Caso contravariante:
+            \[
+                \dots \to F^i(Z)\xrightarrow[]{F^i(v)} F^i(Y)\xrightarrow[]{F^i(u)} F^i(X)\xrightarrow[]{F^{i-1}(w)} F^{i-1}(Z)\to \dots
+            \] 
+            
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}
+
+    Sean $\eta=(X,Y,Z,u,v,w)\in\Delta$ e $i\in\mathbb{Z}$. Entonces, por el Lema \ref{Mendoza_CT-Ejer.6}, sabemos que $\eta^{(i)}\in\Delta$.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Supongamos que $F$ es covariante. Sea $i\in\mathbb{Z}$. Como $F$ es cohomológico, tenemos que la sucesión
+            \begin{equation}\label{eq: CT_Ej.6-1}
+                    FT^i(X) \xrightarrow[]{F((-1)^i T^i(u))} FT^i(Y) \xrightarrow[]{F((-1)^i T^i(v))} FT^i(Z) \xrightarrow[]{F((-1)^i T^i(w))} FT^{i+1}(X)
+            \end{equation}
+            es exacta en $\mathscr{B}$. Más aún, como $F$ es aditivo, se sigue que
+            \[
+                F((-1)^iT^i(u)) = (-1)^iF(T^i(u)) = (-1)^iF^i(u).
+            \]
+            Análogamente, tenemos que $F((-1)^iT^i(v)) = (-1)^i F^i(v)$ y $F((-1)^iT^i(w)) = (-1)^i F^i(w)$. Dado que, para cualquier morfismo $\alpha$ en una categoría abeliana, tenemos que
+            \[
+                \text{Im}(\alpha)\simeq\text{Im}(-\alpha) \text{ y } \text{Ker}(\alpha)\simeq\text{Ker}(-\alpha)
+            \] 
+            como subobjetos, entonces
+            \begin{align*}
+                \text{Im}(F^i(u)) &\simeq \text{Im}( (-1)^iF^i(u) ) \\
+                                          &\simeq \text{Ker}( (-1)^iF^i(v) ) \tag{por (\ref{eq: CT_Ej.6-1})} \\
+                                          &\simeq \text{Ker}(F^i(v)),
+            \end{align*}
+            por lo que la sucesión de (a) es exacta en $F^i(Y)$. Análogamente, se demuestra que la sucesión de (a) es exacta en $F^i(Z)$. Más aún, aplicando (TR2) a $\eta^{(i)}$ y usando que $F$ es cohomológico, por un procedimiento similar se sigue que la sucesión de (a) es exacta en $F^{i+1}(X)$. Como esto es válido para todo $i\in\mathbb{Z}$, concluimos que la sucesión larga de (a) es exacta en $\mathscr{B}$.
+
+        \item Análogo al caso anterior.
+    \end{enumerate}
+\end{proof}
+
+\begin{Prop}\label{Mendoza_CT-1.4}
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w}T(X)\in\Delta$. Entonces $Z\simeq0$ en $\mathscr{A}$ si, y sólo si, $X\xrightarrow[]{u}Y$ es un isomorfismo en $\mathscr{A}$.
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    $(\Rightarrow)$ Supongamos que $Z\simeq0$ en $\mathscr{A}$. Por (TR1a) y (TR3), tenemos que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[]{d}[swap]{u} \arrow[]{r}[]{u} &Y \arrow[equals]{d}[]{} \arrow[]{r}[]{v} &Z \arrow[dotted]{d}[]{\alpha} \arrow[]{r}[]{w} &T(X) \arrow[]{d}[]{T(u)} \\
+            Y \arrow[]{r}[swap]{1_Y} &Y \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &T(Y)
+        \end{tikzcd}
+    \end{center}
+    conmuta, donde sus renglones son triángulos distinguidos. Como $Z\simeq0$ y $0$ es un objeto final en $\mathscr{A}$, tenemos que $\alpha$ es un isomorfismo en $\mathscr{A}$. Luego, de la Proposición \ref{Mendoza_CT-Ejer.3}, se sigue que $X\xrightarrow[]{u}Y$ es un isomorfismo en $\mathscr{A}$. \\
+
+    $(\Leftarrow)$ Supongamos que $X\xrightarrow[]{u}Y$ es un isomorfismo en $\mathscr{A}$. Entonces, existe $u^{-1}:Y\xrightarrow[]{\sim}X$ tal que $u^{-1}u=1_X$ y $uu^{-1}=1_Y$. Por (TR1a), (TR3) y el inciso (c) del Teorema \ref{Mendoza_CT-1.2}, tenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}{\rotatebox{90}{$\sim$}}[swap]{u^{-1}} \arrow[]{r}[]{v} &Z \arrow[dotted]{d}{\beta}[swap]{\rotatebox{90}{$\sim$}} \arrow[]{r}[]{w} &T(X) \arrow[]{d}[]{T(u)} \\
+            X \arrow[]{r}[swap]{1_X} &X \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &T(Y),
+        \end{tikzcd}
+    \end{center}
+    de donde se sigue que $Z\simeq0$ en $\mathscr{A}$.
+\end{proof}
+
+% ¿Observar cómo 1.4 con 1.3 y aplicando los funtores Hom-covariante y Hom-contravariante se obtienen sucesiones exactas en Ab?
+
+\begin{Prop}\label{Mendoza_CT-1.5}
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $\eta=(X,Y,Z,u,v,w), \eta' = (X',Y',\break Z',u',v',w')\in\Delta$. Entonces
+    \[
+        \eta\bigoplus\eta' := \big(X\bigoplus X', Y\bigoplus Y', Z\bigoplus Z', u\bigoplus u', v\bigoplus v', w\bigoplus w'\big)
+    \] 
+    es un triángulo distinguido.
+\end{Prop}
+
+\begin{proof}
+
+    Por (TR1b), podemos completar el morfismo $X\bigoplus X'\xrightarrow[]{u\bigoplus u'}Y\bigoplus Y'$ en $\mathscr{A}$ a un triángulo distinguido $\chi = (X\bigoplus X',Y\bigoplus Y',L,u\bigoplus u',m, n)\in\Delta$. Luego, por (TR3), tenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[]{d}[swap]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} \arrow[]{r}[]{u} &Y \arrow[]{d}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} \arrow[]{r}[]{v} &Z \arrow[dotted]{d}[]{f} \arrow[]{r}[]{w} &(X) \arrow[]{d}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} \\
+            X\bigoplus X' \arrow[]{r}[]{\big(\begin{smallmatrix} u \ 0 \\ 0 \ u'  \end{smallmatrix}\big)} &Y\bigoplus Y' \arrow[]{r}[]{m} &L \arrow[]{r}[]{n} &T(X\bigoplus X') \\
+            X \arrow[]{u}[]{\big( \begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\big)} \arrow[]{r}[swap]{u'} &Y' \arrow[]{u}[swap]{\big( \begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\big)} \arrow[]{r}[swap]{v'} &Z' \arrow[dotted]{u}[swap]{f'} \arrow[]{r}[swap]{w'} &T(X'), \arrow[]{u}[swap]{\big(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\big)}
+        \end{tikzcd}
+    \end{center}
+    de donde se sigue que el diagrama en $\mathscr{A}$
+    \begin{equation}\label{eq: 1.5-2}
+        \begin{tikzcd}
+            X\bigoplus X' \arrow[equals]{d}[]{} \arrow[]{r}[]{\big(\begin{smallmatrix} u \ 0 \\ 0 \ u' \end{smallmatrix}\big)} &Y\bigoplus Y' \arrow[equals]{d}[]{} \arrow[]{r}[]{\big(\begin{smallmatrix} v \ 0 \\ 0 \ v' \end{smallmatrix}\big)} &Z\bigoplus Z' \arrow[]{d}[]{(f, f')} \arrow[]{r}[]{\big(\begin{smallmatrix} w \ 0 \\ 0 \ w' \end{smallmatrix}\big)} &T\big(X\bigoplus X'\big) \arrow[equals]{d}[]{} \\
+            X\bigoplus X' \arrow[]{r}[swap]{\big(\begin{smallmatrix} u \ 0 \\ 0 \ u' \end{smallmatrix}\big)} &Y\bigoplus Y' \arrow[]{r}[swap]{m} &L \arrow[]{r}[swap]{n} &T\big(X\bigoplus X'\big)
+        \end{tikzcd}
+    \end{equation}
+    conmuta. Sea $M\in\text{Obj}(\mathscr{A})$. Por el Teorema \ref{Mendoza_CT-Ejer.7}, se tienen las sucesiones exactas en Ab
+    \begin{align*}
+        &\mathscr{A}(M,X)\xrightarrow[]{\mathscr{A}(M,u)} \mathscr{A}(M,Y)\xrightarrow[]{\mathscr{A}(M,v)} \mathscr{A}(M,Z)\xrightarrow[]{\mathscr{A}(M,w)} \mathscr{A}(M,T(X))\xrightarrow[]{\mathscr{A}(M,T(u))} \mathscr{A}(M,T(Y)), \\
+        &\mathscr{A}(M,X')\xrightarrow[]{\mathscr{A}(M,u')} \mathscr{A}(M,Y')\xrightarrow[]{\mathscr{A}(M,v')} \mathscr{A}(M,Z')\xrightarrow[]{\mathscr{A}(M,w')} \mathscr{A}(M,T(X'))\xrightarrow[]{\mathscr{A}(M,T(u'))} \mathscr{A}(M,T(Y'))
+    \end{align*}
+    que denotamos por $\overline{\eta}$ y $\overline{\eta'}$, respectivamente. Por la Proposición \ref{Prop: cerradura de sucesiones exactas cortas por sumas directas finitas en categorías abelianas}, tenemos que $\overline{\eta}\bigoplus \overline{\eta'}$ es una sucesión exacta en Ab. Similarmente, aplicando el Teorema \ref{Mendoza_CT-Ejer.7} a $\chi$, tenemos la sucesión exacta en Ab
+    \begin{equation*}
+        \resizebox{\hsize}{!}{$\mathscr{A}\big(M,X\bigoplus X'\big)\xrightarrow[]{} \mathscr{A}\big(M, Y\bigoplus Y'\big)\xrightarrow[]{\mathscr{A}(M,m)} \mathscr{A}(M,L)\xrightarrow[]{\mathscr{A}(M,n)} \mathscr{A}\big(M,T\big(X\bigoplus X'\big)\big)\xrightarrow[]{\mathscr{A}\big(M,T\big(u\bigoplus u'\big)\big)} \mathscr{A}\big(M,T\big(Y\bigoplus Y'\big)$,}
+    \end{equation*}
+    la cual denotamos por $\overline{\chi}$. Aplicando el funtor Hom-covariante $\mathscr{A}(M,-)$ al diagrama (\ref{eq: 1.5-2}), obtenemos el diagrama
+
+    \begin{center}
+        \adjustbox{scale=0.883}{%
+            \begin{tikzcd}
+                \mathscr{A}\big(M,X\bigoplus X'\big) \arrow[equals]{d}[]{} \arrow[]{r}[]{} &\mathscr{A}\big(M, Y\bigoplus Y'\big) \arrow[equals]{d}[]{} \arrow[]{r}[]{} &\mathscr{A}\big(M,Z\bigoplus Z'\big) \arrow[]{d}[]{\mathscr{A}(M,h)} \arrow[]{r}[]{} &\mathscr{A}\big(M,T\big(X\bigoplus X'\big)\big) \arrow[equals]{d}[]{} \arrow[]{r}[]{} &\mathscr{A}\big(M,T\big(Y\bigoplus Y'\big)\big) \arrow[equals]{d}[]{} \\
+                \mathscr{A}\big(M,X\bigoplus X'\big) \arrow[]{r}[]{} &\mathscr{A}\big(M,Y\bigoplus Y'\big) \arrow[]{r}[]{} &\mathscr{A}(M,L) \arrow[]{r}[]{} &\mathscr{A}\big(M,T\big(X\bigoplus X'\big)\big) \arrow[]{r}[]{} &\mathscr{A}\big(M,T\big(Y\bigoplus Y'\big)\big),
+            \end{tikzcd}
+        }
+    \end{center}
+
+    en Ab, el cual es conmutativo y tiene renglones exactos pues, dado que el funtor $\mathscr{A}(M,-)$ es aditivo, del Teorema \ref{Mendoza-1.10.2} se sigue que el primer renglón del diagrama es isomorfo a $\overline{\eta}\bigoplus \overline{\eta'}$. Luego, por el inciso (c) del Lema \ref{Mendoza_Ejer.62} (Lema del 5), tenemos que $\mathscr{A}(M,h):\mathscr{A}\big(M,Z\bigoplus Z'\big)\xrightarrow[]{\sim} \mathscr{A}(M,L)$ en Ab. Dado que lo anterior vale para cualquier $M\in\text{Obj}(\mathscr{A})$, de la Proposición \ref{Mendoza_CT-Ejer.8} se sigue que $h:Z\bigoplus Z'\xrightarrow[]{\sim}L$ en $\mathscr{A}$. Luego, por la Observación \ref{Mendoza_CT-Ejer.1}, tenemos que $(1_{X\bigoplus X'},1_{Y\bigoplus Y'},h):\eta\bigoplus\eta'\xrightarrow[]{\sim}\chi$ en $\mathscr{T}(\mathscr{A},T)$, con $\chi\in\Delta$. Dado que $\Delta$ es cerrada por isomorfismos, concluimos que $\eta\bigoplus\eta'\in\Delta$.
+\end{proof}
+
+\begin{Coro}\label{Mendoza_CT-1.6}
+    Sea ($\mathscr{A},T,\Delta)$ una categoría pretriangulada. Entonces, para cualesquiera $X,Z\in\text{Obj}(\mathscr{A})$, se tiene que
+    \[
+        X \xrightarrow[]{\big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} X\bigoplus Z \xrightarrow[]{(\begin{smallmatrix} 0 \ 1 \end{smallmatrix})} Z \xrightarrow[]{0} T(X)
+    \] 
+    es un triángulo distinguido.
+\end{Coro}
+
+\begin{proof}
+
+    Sean $X,Z\in\text{Obj}(\mathscr{A})$. Por (TR1a) y el inciso (c) del Teorema \ref{Mendoza_CT-1.3}, tenemos a los triángulos distinguidos $\eta=(X,X,0,1_X,0,0)$ y $\mu = (0,Z,Z,0,1_Z,0)$. Luego, de la Proposición \ref{Mendoza_CT-1.6}, se sigue que
+    \begin{align*}
+        \eta\bigoplus\mu &= X\xrightarrow[]{1_X\bigoplus 0}X\bigoplus Z \xrightarrow[]{0\bigoplus 1_Z} Z\xrightarrow[]{0} T(X) \\
+                      &= X \xrightarrow[]{\big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} X\bigoplus Z \xrightarrow[]{(\begin{smallmatrix} 0 \ 1 \end{smallmatrix})} Z \xrightarrow[]{0} T(X) \in\Delta.
+    \end{align*}
+\end{proof}
+
+\begin{Def}\label{Def: Triángulo escindible}
+    
+    Sea $(\mathscr{A},T,\Delta)$ una categoría pretriangulada. Un triángulo distinguido $(X,Y,Z,u,v,w)$ es \emph{escindible} si existe un isomorfismo $\lambda:Y\xrightarrow[]{\sim}X\coprod Z$ tal que el siguiente diagrama en $\mathscr{A}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}{\rotatebox{90}{$\sim$}}[swap]{\lambda} \arrow[]{r}[]{v} &Z \arrow[equals]{d}[]{} \\
+            X \arrow[]{r}[swap]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &X\bigoplus Z \arrow[]{r}[swap]{(\begin{smallmatrix} 0 \ 1 \end{smallmatrix})} &Z.
+        \end{tikzcd}
+    \end{center}
+\end{Def}
+
+\begin{Prop}\label{Mendoza_CT-1.8} 
+    Para un triángulo distinguido $\eta=(X,Y,Z,u,v,w)$ en una categoría pretriangulada $(\mathscr{A},T,\Delta)$, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $w=0$.
+
+        \item $u$ es un monomorfismo escindible.
+
+        \item $v$ es un epimorfismo escindible.
+
+        \item $\eta$ es escindible. 
+
+        \item Existe $X\bigoplus Z\xrightarrow[]{\lambda}Y\in\text{Mor}(\mathscr{A})$ tal que el diagrama en $\mathscr{A}$
+            \begin{center}
+               \begin{tikzcd}
+               X \arrow[equals]{d}[]{} \arrow[]{r}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &X\bigoplus Z \arrow[]{d}{\lambda} \arrow[]{r}[]{(\begin{smallmatrix} 0 \ 1 \end{smallmatrix})} &Z \arrow[equals]{d}[]{} \\
+                   X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z.
+               \end{tikzcd}
+           \end{center}
+           conmuta.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}
+
+    Sea $\eta' = \big(X,X\bigoplus Z,Z,1_X\bigoplus0,0\bigoplus 1_Z,0\big)\in\Delta$, por el Corolario \ref{Mendoza_CT-1.6}. \\
+
+    (a)$\Rightarrow$(b) Supongamos que $w=0$. Entonces, tenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{r}[]{v} &Z \arrow[]{d}[]{} \arrow[]{r}[]{w=0} &T(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{r}[swap]{1_X} &X \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &T(X),
+        \end{tikzcd}
+    \end{center}
+    donde los renglones son triángulos distinguidos por hipótesis y por (TR1a). Por el inciso (a) del Lema \ref{Mendoza_CT-1.1}, existe $Y\xrightarrow[]{u'}X\in\text{Mor}(\mathscr{A})$ tal que hace conmutar el diagrama
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{u'} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{} \arrow[]{r}[]{w=0} &T(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{r}[swap]{1_X} &X \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &T(X),
+        \end{tikzcd}
+    \end{center}
+    de donde se sigue que $u'u=1_X$. \\
+
+    (b)$\Rightarrow$(c) Supongamos que $u$ es un monomorfismo escindible. Entonces, existe $Y\xrightarrow[]{u'}X\in\text{Mor}(\mathscr{A})$ tal que $u'u=1_X$. Por (TR1a) y (TR3), existe $Z\xrightarrow[]{f}0\in\text{Mor}(\mathscr{A})$ tal que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{u'} \arrow[]{r}[]{v} &Z \arrow[]{d}[]{} \arrow[]{r}[]{w} &T(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{r}[swap]{1_X} &X \arrow[]{r}[]{} &0 \arrow[]{r}[]{} &T(X)
+        \end{tikzcd}
+    \end{center}
+    conmuta. Luego, del cuadrado conmutativo de la derecha, además de (TR1a) y la Proposición \ref{Mendoza_CT-1.3}, tenemos que el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[]{d}[]{} \arrow[]{r}[]{} &Z \arrow[]{r}[]{1_Z} &Z \arrow[equals]{d}[]{} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \\
+            X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X),
+        \end{tikzcd}
+    \end{center}
+    donde los dos renglones son triángulos distinguidos, el cuadrado conmuta, y se utilizó que $T(0)=0$ por el Lema \ref{Lema: Los funtores aditivos fijan al objeto cero}. Por el inciso (b) del Lema \ref{Mendoza_CT-1.1} existe $Z\xrightarrow[]{v'}Y\in\text{Mor}(\mathscr{A})$ tal que hace conmutar el diagrama
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[]{d}[]{} \arrow[]{r}[]{} &Z \arrow[]{d}[swap]{v'} \arrow[]{r}[]{1_Z} &Z \arrow[equals]{d}[]{} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \\
+            X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X),
+        \end{tikzcd}
+    \end{center}
+    de donde se sigue que $vv'=1_Z$. \\
+
+    (c)$\Rightarrow$(d) Supongamos que $v$ es un epimorfismo escindible. Entonces, existe $Z\xrightarrow[]{v'}Y\in\text{Mor}(\mathscr{A})$ tal que $vv'=1_Z$. Dado que por el inciso (a) del Teorema \ref{Mendoza_CT-1.2} sabemos que $vu=0$, se sigue que el diagrama en $\mathscr{A}$
+            \begin{center}
+               \begin{tikzcd}
+                   X \arrow[equals]{d}[]{} \arrow[]{r}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &X\bigoplus Z \arrow[]{d}{(\begin{smallmatrix} u \ v' \end{smallmatrix})} \arrow[]{r}[]{(\begin{smallmatrix} 0 \ 1 \end{smallmatrix})} &Z \arrow[equals]{d}[]{} \\
+                   X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z
+               \end{tikzcd}
+           \end{center}
+           conmuta. Sea $\lambda:=(\begin{smallmatrix}  u \ v' \end{smallmatrix})$. Aplicando (TR2) a $\eta$ y $\eta'$, tenemos el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X\bigoplus Z \arrow[]{d}[swap]{\lambda} \arrow[]{r}[]{(\begin{smallmatrix} 0 \ 1 \end{smallmatrix})} &Z \arrow[equals]{d}[]{} \arrow[]{r}[]{0} &T(X) \arrow[]{r}[]{-T\big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &T\big(X\bigoplus Z\big) \arrow[]{d}[]{T(\lambda)} \\
+            Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X) \arrow[]{r}[]{-T(u)} &T(Y), 
+        \end{tikzcd}
+    \end{center}
+    donde los renglones son triángulos distinguidos. Por (TR3), el diagrama anterior puede ser completado a un morfismo de triángulos distinguidos. Luego, por la Proposición \ref{Mendoza_CT-1.3}, tenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &X\bigoplus Z \arrow[]{d}[swap]{\lambda} \arrow[]{r}[]{(\begin{smallmatrix}  0 \ 1 \end{smallmatrix})} &Z \arrow[equals]{d}[]{} \arrow[]{r}[]{0} &T(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{0} &T(X),
+        \end{tikzcd}
+    \end{center}
+    donde los renglones son triángulos distinguidos. De la Proposición \ref{Mendoza_CT-Ejer.3}, se sigue que $\lambda$ es un isomorfismo en $\mathscr{A}$. \\
+
+    (d)$\Rightarrow$(e) Trivial. \\
+
+    (e)$\Rightarrow$(a) Supongamos que existe $X\bigoplus Z\xrightarrow[]{\lambda}Y\in\text{Mor}(\mathscr{A})$ tal que el diagrama en $\mathscr{A}$
+            \begin{center}
+               \begin{tikzcd}
+               X \arrow[equals]{d}[]{} \arrow[]{r}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &X\bigoplus Z \arrow[]{d}{\lambda} \arrow[]{r}[]{(\begin{smallmatrix} 0 \ 1 \end{smallmatrix})} &Z \arrow[equals]{d}[]{} \\
+                   X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z.
+               \end{tikzcd}
+           \end{center}
+           conmuta. Aplicando (TR2) a $\eta$ y $\eta'$, tenemos el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X\bigoplus Z \arrow[]{d}[swap]{\lambda} \arrow[]{r}[]{(\begin{smallmatrix} 0 \ 1 \end{smallmatrix})} &Z \arrow[equals]{d}[]{} \arrow[]{r}[]{0} &T(X) \arrow[]{r}[]{-T\big(\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} &T\big(X\bigoplus Z\big) \arrow[]{d}[]{T(\lambda)} \\
+            Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X) \arrow[]{r}[]{-T(u)} &T(Y), 
+        \end{tikzcd}
+    \end{center}
+    donde los renglones son triángulos distinguidos. Por (TR3), el diagrama anterior puede ser completado a un morfismo de triángulos distinguidos, de donde se sigue que $w=0$.
+\end{proof}
+
+%\begin{Obs}\label{Obs: Caracterización de triángulos distinguidos escindibles} % Observar analogía de 1.8 con la caracterización de sucesiones exactas cortas escindibles en categorías abelianas, ¡con una novedad! Y tender el puente aplicando los funtores Hom-covariante y Hom-contravariante
+    
+%\end{Obs}
+
+\begin{Coro}\label{Mendoza_CT-1.9}
+    Para una categoría pretriangulada $(\mathscr{A},T,\Delta)$, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Todo monomorfismo en $\mathscr{A}$ es escindible.
+
+        \item Todo epimorfismo en $\mathscr{A}$ es escindible.
+
+        \item Si $\mathscr{A}$ es abeliana, entonces $\mathscr{A}$ es semisimple; es decir, $\text{Ext}_{\mathscr{A}}^{1}(X,Y)=0$ para cualesquiera $X,Y\in\text{Obj}(\mathscr{A})$.
+    \end{enumerate}
+\end{Coro}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Sea $X\xrightarrow[]{f}Y\in\text{Mor}(\mathscr{A})$ un monomorfismo. Por (TR1b), $f$ puede ser completado a un triángulo distinguido $(X,Y,Z,f,g,w)$ y, por la Proposición \ref{Mendoza_CT-1.3}, tenemos que $T^{-1}(Z)\xrightarrow[]{T^{-1}(w)} X\xrightarrow[]{f}Y \xrightarrow[]{g}Z$ es un triángulo distinguido. Del inciso (a) del Teorema \ref{Mendoza_CT-1.2}, se sigue que 
+            \[
+                f\big(-T^{-1}(w)\big) = 0 = f0,
+            \]
+            lo que implica que $-T^{-1}(w)=0$, pues $f$ es un monomorfismo. Luego, de la Proposición \ref{Mendoza_CT-1.8} se sigue que $f$ es un monomorfismo escindible.
+
+        \item Por la Observación \ref{Mendoza_CT-Ejer.5}, se sigue de aplicar el principio de dualidad al inciso (a). 
+
+        \item Se sigue de (a) y (b).
+    \end{enumerate}
+\end{proof}
+
+\begin{Prop}\label{Mendoza_CT-1.10}
+
+    La clase de triángulos distinguidos en una categoría pretriangulada es cerrada por sumandos directos.
+\end{Prop}
+
+\begin{proof}
+
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $\eta=(X,Y,Z,u,v,w), \eta'=(X',Y',W',u',\break v',w')$ en $\mathscr{T}$ tales que $\eta\bigoplus\eta' = \big(X\bigoplus X',Y\bigoplus Y', Z\bigoplus Z', u\bigoplus u', v\bigoplus v', w\bigoplus w'\big)$ es un triángulo distinguido. Por (TR1b), podemos completar al morfismo $X\xrightarrow[]{u}Y$ en $\mathscr{A}$ en un triángulo distinguido $(X,Y,E,u,a,b)$, por lo que tenemos el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[]{d}[swap]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} \arrow[]{r}[]{u} &Y \arrow[]{d}[swap]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} \arrow[]{r}[]{a} &E \arrow[]{r}[]{b} &T(X) \arrow[]{d}[]{\big( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix}\big)} \\
+            X\bigoplus X' \arrow[]{r}[swap]{\big( \begin{smallmatrix} u \ 0 \\ 0 \ u' \end{smallmatrix}\big)} &Y\bigoplus Y' \arrow[]{r}[swap]{\big( \begin{smallmatrix} v \ 0 \\ 0 \ v' \end{smallmatrix}\big)} &Z\bigoplus Z' \arrow[]{r}[swap]{\big( \begin{smallmatrix} w \ 0 \\ 0 \ w' \end{smallmatrix}\big)} &T\big(X\bigoplus X'\big),
+        \end{tikzcd}
+    \end{center}
+    donde los renglones son triángulos distinguidos y el cuadrado es conmutativo. Por (TR3), existe un morfismo $\big(\begin{smallmatrix} \alpha \\ \beta \end{smallmatrix}\big)$ en $\mathscr{A}$ que completa el diagrama anterior y lo hace conmutar. En particular, como $T\big(X\bigoplus X'\big) = T(X)\bigoplus T(X')$ por el Teorema \ref{Mendoza-1.10.2}, obtenemos el diagrama conmutativo en $\mathscr{A}$
+    \begin{equation}\label{eq: 1.10-1}
+        \begin{tikzcd}
+            X \arrow[equals]{d}[]{} \arrow[]{r}[]{u} &Y \arrow[equals]{d}[]{} \arrow[]{r}[]{a} &E \arrow[]{d}[]{\alpha} \arrow[]{r}[]{b} &T(X) \arrow[equals]{d}[]{} \\
+            X \arrow[]{r}[swap]{u} &Y \arrow[]{r}[swap]{v} &Z \arrow[]{r}[swap]{w} &T(X).
+        \end{tikzcd}
+    \end{equation}
+
+    Sea $M\in\text{Obj}(\mathscr{A})$. Dado que $\eta\bigoplus\eta'\in\Delta$, por los Teoremas \ref{Mendoza_CT-Ejer.7} y \ref{Mendoza-1.10.2}, tenemos la sucesión exacta en Ab
+    \[
+        \resizebox{\hsize}{!}{$\mathscr{A}\big(M,X\bigoplus X'\big)\to \mathscr{A}\big(M,Y\bigoplus Y'\big)\to \mathscr{A}\big(M,Z\bigoplus Z'\big)\to \mathscr{A}\big(M,T(X)\bigoplus T(X')\big)\to \mathscr{A}\big(M,T(Y)\bigoplus T(Y')\big)$.}
+    \] 
+    Ahora, como el funtor Hom-covariante $\mathscr{A}(M,-)$ es aditivo, se sigue que la sucesión
+    \[
+        \mathscr{A}(M,X)\xrightarrow[]{\mathscr{A}(M,u)} \mathscr{A}(M,Y)\xrightarrow[]{\mathscr{A}(M,v)} \mathscr{A}(M,Z)\xrightarrow[]{\mathscr{A}(M,w)} \mathscr{A}(M,T(X))\xrightarrow[]{\mathscr{A}(M,T(u)} \mathscr{A}(M,T(Y))
+    \] 
+    es exacta en Ab. Luego, por el Teorema \ref{Mendoza_CT-Ejer.7} y el diagrama conmutativo \ref{eq: 1.10-1}, se tiene el siguiente diagrama conmutativo y exacto en Ab
+    \begin{center}
+        \begin{tikzcd}
+            \mathscr{A}(M,X) \arrow[equals]{d}[]{} \arrow[]{r}[]{} &\mathscr{A}(M,Y) \arrow[equals]{d}[]{} \arrow[]{r}[]{} &\mathscr{A}(M,E) \arrow[]{d}[]{\mathscr{A}(M,\alpha)} \arrow[]{r}[]{} &\mathscr{A}(M,T(X)) \arrow[equals]{d}[]{} \arrow[]{r}[]{} &\mathscr{A}(M,T(Y)) \arrow[equals]{d}[]{} \\
+            \mathscr{A}(M,X) \arrow[]{r}[]{} &\mathscr{A}(M,Y) \arrow[]{r}[]{} &\mathscr{A}(M,Z) \arrow[]{r}[]{} &\mathscr{A}(M,T(X)) \arrow[]{r}[]{} &\mathscr{A}(M,T(Y)).
+        \end{tikzcd}
+    \end{center}
+    Luego, por el Lema \ref{Mendoza_Ejer.62} (Lema del 5) en Ab, se sigue que $\mathscr{A}(M,\alpha):\mathscr{A}(M,E)\xrightarrow[]{\sim} \mathscr{A}(M,Z)$ y, de la Proposición \ref{Mendoza_CT-Ejer.8}, tenemos que $\alpha:E\xrightarrow[]{\sim}Z$ en $\mathscr{A}$. Finalmente, del diagrama (\ref{eq: 1.10-1}), la Observación \ref{Mendoza_CT-Ejer.1} y el hecho de que $\Delta$ sea cerrada por isomorfismos, concluimos que $\eta\in\Delta$.
+\end{proof}
+
+\begin{Prop}\label{Mendoza_CT-Ejer.9}
+
+    Sean $(\mathscr{A},T,\Delta)$ una categoría pretriangulada y $\eta=(X,Y,Z,u,v,w), \eta'=(X',Y',\break Z',u',v',w')\in\Delta$. Entonces, para el diagrama en $\mathscr{A}$
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[]{r}[]{u} &Y \arrow[]{d}[]{g} \arrow[]{r}[]{v} &Z \arrow[]{r}[]{w} &T(X) \\
+            X' \arrow[]{r}[swap]{u'} &Y' \arrow[]{r}[swap]{v'} &Z' \arrow[]{r}[swap]{w'} &T(X)',
+        \end{tikzcd}
+    \end{center}
+    las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $v'gu=0$.
+
+        \item Existe $f:X\to X'$ en $\mathscr{A}$ tal que $gu = u'f$.
+
+        \item Existe $h:Z\to Z'$ en $\mathscr{A}$ tal que $hv = v'g$.
+
+        \item Existe $f:X\to X'$ y $h:Z\to Z'$ en $\mathscr{A}$ tal que $(f,g,h):\eta\to \eta'$ en $\mathscr{T}(\mathscr{A},\Delta)$.
+    \end{enumerate}
+    Más aún, si $\text{Hom}_\mathscr{A}(X,T^{-1}Z')=0$ y las condiciones anteriores se satisfacen, entonces el morfismo $f$ en (b) (respectivamente, $h$ en (c)) es único.
+    
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    (a)$\Rightarrow$(b) Se sigue de la Proposición \ref{Mendoza_CT-Ejer.2}. \\
+
+    (b)$\Rightarrow$(c) Se sigue el axioma (TR3). \\
+
+    (c)$\Rightarrow$(d) Se sigue del inciso (b) del Lema \ref{Mendoza_CT-1.1}. \\
+
+    (d)$\Rightarrow$(a) Se sigue del inciso (a) del Teorema \ref{Mendoza_CT-1.2}. \\
+
+    Ahora, supongamos que las condiciones anteriores se satisfacen y, adicionalmente, que $\text{Hom}_\mathscr{A}(X,\break T^{-1}(Z'))=0$. Por el inciso (b) del Teorema \ref{Mendoza_CT-1.2}, sabemos que los funtores $\text{Hom}_\mathscr{A}(X,-)$ y $\text{Hom}_\mathscr{A}(-,Z')$ son cohomológicos. Aplicando la Proposición 1.3 a $\eta$ y $\text{Hom}_\mathscr{A}(X,-)$ al triángulo distinguido resultante, obtenemos la sucesión exacta
+    \[
+        \text{Hom}_\mathscr{A}(X,T^{-1}(Z')) \to \text{Hom}_\mathscr{A}(X,X') \xrightarrow[]{\text{Hom}_\mathscr{A}(X,u')} \text{Hom}_\mathscr{A}(X,Y')
+    \] 
+    en Ab. Dado que $\text{Hom}_\mathscr{A}(X,T^{-1}(Z)) = 0$, se sigue que $\text{Hom}_\mathscr{A}(X,u')$ es un monomorfismo, lo que implica que $u'$ es un monomorfismo. Por ende, si existen $X\xrightarrow[]{f}X', X\xrightarrow[]{f'}X'$ en $\mathscr{A}$ tales que $gu = u'f = u'f'$, entonces $f=f'$. \\
+
+    Análogamente, aplicando (TR2) a $\eta$ y $\text{Hom}_\mathscr{A}(-,Z')$ al triángulo distinguido resultante, obtenemos la sucesión
+    \[
+        \text{Hom}_\mathscr{A}(T(X),Z') \to \text{Hom}_\mathscr{A}(Y,Z') \xrightarrow[]{\text{Hom}_\mathscr{A}(v,Z')} \text{Hom}_\mathscr{A}(Z,Z'),
+    \] 
+    la cual es exacta en Ab. Como $T$ es un automorfismo aditivo, se sigue que $T^{-1}:\text{Hom}_\mathscr{A}(T(X),Z')\simeq\text{Hom}_\mathscr{A}(X,T^{-1}(Z'))=0$, por lo que $\text{Hom}_\mathscr{A}(v,Z')$ es un monomorfismo, de donde se sigue que $v$ es un epimorfismo. Por ende, si existen $Z\xrightarrow[]{h}Z', Z\xrightarrow[]{h'}Z'$ en $\mathscr{A}$ tales que $v'g = hv = h'v$, entonces $h=h'$.
+\end{proof}
+
+\begin{Coro}\label{Mendoza_CT-Ejer.10}
+
+    Sean $(\mathscr{C},T,\Delta)$ una categoría pretriangulada y $\eta$ un triángulo distinguido dado por el diagrama
+    \begin{center}
+        \begin{tikzcd}
+            &Z \arrow[maps to]{dl}[swap]{w} \\
+            X \arrow[]{rr}[swap]{u} &&Y \arrow[]{ul}[swap]{v}
+        \end{tikzcd}
+    \end{center}
+    tal que $\text{Hom}_\mathscr{C}(X,T^{-1}(Z))=0$. Entonces, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+
+        \item Si el triángulo $\eta'$ dado por el diagrama 
+            \begin{center}
+                \begin{tikzcd}
+                    &Z' \arrow[maps to]{dl}[swap]{w'} \\
+                    X \arrow[]{rr}[swap]{u} &&Y \arrow[]{ul}[swap]{v'}
+                \end{tikzcd}
+            \end{center}
+            pertenece a $\Delta$, entonces existe un único morfismo $g:Z\to Z'$ en $\mathscr{C}$ tal que $(1_X,1_Y,g):\eta\xrightarrow[]{\sim}\eta'$ en $\mathscr{T}(\mathscr{C},\Delta)$.
+
+        \item Si $X\xrightarrow[]{u}Y\xrightarrow[]{v}Z\xrightarrow[]{w'}T(X)$ es un triángulo distinguido, entonces $w=w'$.
+    \end{enumerate}
+\end{Coro}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Se sigue directamente de la Proposición \ref{Mendoza_CT-Ejer.9}, del inciso (c) del Teorema \ref{Mendoza_CT-1.2} y de la Observación \ref{Mendoza_CT-Ejer.1}
+
+        \item Se sigue del inciso (a), pues necesariamente $g=1_Z$.
+    \end{enumerate}
+\end{proof}
+
+\section{El bifuntor aditivo $\text{Ext}^1$ en categorías trianguladas} \label{Sec: El bifuntor aditivo Ext1 en categorías trianguladas}
+
+\begin{Def}
+    Para una categoría triangulada $(\mathscr{A},T,\Delta)$, definimos el bifuntor
+    \[
+    \text{Ext}^1_{(\mathscr{A},T,\Delta)}(-,-) := \text{Hom}(-,-[1]),
+    \] 
+    donde $\text{Hom}(-,-)$ es el bifuntor Hom con dominio en $\mathscr{A}^\text{op}\times\mathscr{A}$.
+\end{Def}
+
+\begin{Obs}\label{Obs: Funtor E1}
+    Sea $(\mathscr{A},T,\Delta)$ una categoría triangulada. Entonces, el bifuntor $\text{Ext}^1_{(\mathscr{A},T,\Delta)}(-,-)$ es aditivo.
+
+    \vspace{1mm}
+
+    En efecto: Se sigue del inciso (3) de la Observación \ref{Obs: funtores aditivos}.
+\end{Obs}
+
+\begin{Def}\cite[Definition 1.1]{Nakaoka}\label{Def: Pares de cotorsión en categorías trianguladas} %Definition 1.1 in ''A Simultaneous Generalization of Mutation and Recollement of Cotorsion Pairs on a Triangulated Category'' by Nakaoka
+    Sea $(\mathscr{A},T,\Delta)$ una categoría triangulada. Un \emph{par de cotorsión (completo)} $(\mathcal{U},\mathcal{V})$ en $(\mathscr{A},T,\Delta)$ es un par $(\mathcal{U},\mathcal{V})$ de subcategorías aditivas plenas de $\mathscr{A}$, cerradas por sumandos directos en $\mathscr{A}$, tal que cumple las siguientes condiciones.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\text{Ext}^1_{(\mathscr{A},T,\Delta)}(\mathcal{U},\mathcal{V})=0$.
+            
+        \item Para cualquier $C\in\text{Obj}(\mathscr{A})$, existe un triángulo distinguido $U\to C\to V[1]\to U[1]$ tal que $U\in\mathcal{U}, V\in\mathcal{V}$.
+    \end{enumerate}
+\end{Def}
+
+\begin{Obs}
+    Sean $(\mathscr{A},T,\Delta)$ una categoría triangulada y $(\mathcal{U},\mathcal{V})$ un par de cotorsión completo en $(\mathscr{A},T,\Delta)$. Entonces, para cualquier $C\in\text{Obj}(\mathscr{A})$, tenemos un triángulo distinguido $U\to C\to V[1]\to U[1]$, con $U\in\mathcal{U}, V\in\mathcal{V}$. En particular, aplicando la Proposición \ref{Mendoza_CT-1.3}, obtenemos el triángulo distinguido
+    \[
+        V\to U\to C\to V[1].
+    \] 
+    Por otro lado, podemos considerar a $C[1]\in\text{Obj}(\mathscr{A})$, tomar un triángulo distinguido $U'\to C[1]\to V'[1]\to U'[1]$, con $U'\in\mathcal{U}, V'\in\mathcal{V}$, y aplicar la Proposición \ref{Mendoza_CT-1.3} dos veces para obtener el triángulo distinguido
+    \[
+        C \to V' \to U' \to C[1].
+    \] 
+    De esta forma, obtenemos sucesiones análogas a las que aparecen en la Definición \ref{Def: Pares de cotorsión en categorías exactas}.
+    
+\end{Obs}
+
+\end{document}

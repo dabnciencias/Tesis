@@ -1,0 +1,2094 @@
+\documentclass[tesis]{subfiles}
+\begin{document}
+
+\chapter{Categorías aditivas}\label{Chap: Categorías aditivas}
+
+Las categorías aditivas son el punto de partida común de las estructuras básicas más importantes en la actualidad para el estudio del álgebra homológica: las categorías abelianas, las categorías exactas y las categorías trianguladas. Para llegar a la construcción de categoría aditiva, comenzaremos estudiando las categorías con objeto cero y luego dotaremos a las clases de morfismos entre objetos de estas categorías con algunas estructuras algebraicas básicas.
+
+\section{Categorías con objeto cero} \label{Mendoza-1.5}
+
+\begin{Def}\label{Def: Categoría con objeto cero}
+    Sea $\mathscr{C}$ una categoría. Decimos que $\mathscr{C}$ es una \emph{categoría con objeto cero} si existe un objeto cero $0$ en $\mathscr{C}$. En tal caso, un morfismo $X\xrightarrow{f} Y$ en $\mathscr{C}$ es un \emph{morfismo cero} si se factoriza a través del objeto cero; diagramáticamente,
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[dotted]{dr} \arrow{rr}{f} & &Y. \\
+                                               &0 \arrow[dotted]{ur}
+        \end{tikzcd}
+    \end{center}
+\end{Def}
+
+\begin{Obs}\label{Mendoza-1.5.1-Ejer.51}
+
+    Sean $\mathscr{C}$ una categoría con objeto cero y $0\in\text{Obj}(\mathscr{C})$ un objeto cero en $\mathscr{C}$. 
+  
+    \begin{enumerate}[label=(\arabic*)]
+
+        \item Dado que, por el inciso (2) de la Observación \ref{Obs: Objeto cero}, sabemos que la noción de objeto cero es auto dual, se sigue que el universo de las categorías con objeto cero es dualizante.
+    
+        \item Para cualesquiera $X,Y\in\text{Obj}(\mathscr{C})$, existe un único morfismo cero en $\text{Hom}_\mathscr{C}(X,Y)$, el cual se denota por $0_{X,Y}$ o bien por $0$.
+
+            En efecto: Sean $0'$ otro objeto cero en $\mathscr{C}$ y el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &0' \arrow{dr}{\beta'} \\
+            X \arrow{dr}[swap]{\alpha} \arrow{ur}{\alpha'} & &Y. \\
+                                  &0 \arrow{ur}[swap]{\beta}
+        \end{tikzcd}
+    \end{center}
+    Veamos que dicho diagrama conmuta. Dado que $|\text{Hom}_\mathscr{C}(0',0)|=1=|\text{Hom}_\mathscr{C}(0',Y)|$, existe $0'\xrightarrow{h} 0$ en $\mathscr{C}$ tal que $\beta h=\beta'$. Análogamente, se tiene que $h\alpha'=\alpha$, pues $|\text{Hom}_\mathscr{C}(X,0)=1$. Por lo tanto, $\beta'\alpha' = \beta h\alpha' = \beta\alpha$.
+
+
+        \item Sea $A \in \text{Obj}(\mathscr{C})$ tal que $1_A = 0_{A,A}.$ Entonces $A$ es un objeto cero en $\mathscr{C}$.
+
+            En efecto: Puesto que $0\in\text{Obj}(\mathscr{C})$ es un objeto cero en $\mathscr{C}$, tenemos que $|\text{Hom}_\mathscr{C}(A,0)|=|\text{Hom}_\mathscr{C}(0,A)|=1=|\text{Hom}_\mathscr{C}(0,0)|$. Sean $\alpha$ y $\beta$ los únicos morfismos en $\text{Hom}_\mathscr{C}(A,0)$ y $\text{Hom}_\mathscr{C}(0,A)$, respectivamente. Por hipótesis, tenemos que $\beta\alpha=0_{A,A}=1_A$. Por otro lado, como $\alpha\beta\in\text{Hom}_\mathscr{C}(0,0)$, se sigue que $\beta\alpha=1_0$. Por ende, $\alpha:A\xrightarrow[]{\sim}0$ y $\beta:0\xrightarrow[]{\sim}A$. Observemos entonces que, para cada $X\in\text{Obj}(\mathscr{C})$, tenemos que las funciones $\overline{\alpha}:\text{Hom}_\mathscr{C}(X,A)\to \text{Hom}_\mathscr{C}(X,0)$ y $\overline{\beta}:\text{Hom}_\mathscr{C}(A,X)\to \text{Hom}_\mathscr{C}(0,X)$ dadas por $\overline{\alpha}(f) = \alpha f, \overline{\beta}(g) = g\beta$ son biyectivas. Por lo tanto, $|\text{Hom}_\mathscr{C}(X,A)|=1=|\text{Hom}_\mathscr{C}(A,X)|$ para todo $X\in\text{Obj}(\mathscr{C})$, de donde concluimos que $A$ es un objeto cero en $\mathscr{C}$.
+
+        \end{enumerate}
+\end{Obs}
+
+\begin{Lema}\label{Mendoza-1.8.9}
+    Sean $\mathscr{C}$ una categoría con objeto cero y
+    \begin{center}
+        \begin{tikzcd}
+            P \arrow[]{d}[swap]{v_1} \arrow[]{r}[]{v_2} &A_2 \arrow[]{d}[]{} \\
+            A_1 \arrow[]{r}[]{} &0
+        \end{tikzcd}
+    \end{center}
+    un diagrama en $\mathscr{C}$. Entonces, el diagrama anterior es un producto fibrado si, y sólo si, $P=A_1\prod A_2$ con proyecciones naturales $v_1,v_2$.
+\end{Lema}
+
+\begin{proof}
+    $(\Rightarrow)$ Supongamos que el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            P \arrow{d}[swap]{v_1} \arrow{r}{v_2} &A_2 \arrow{d} \\
+            A_1 \arrow{r} &0
+        \end{tikzcd}
+    \end{center}
+    es un producto fibrado. Sean $Q\in\text{Obj}(\mathscr{C})$ y $Q\xrightarrow[]{\alpha_1} A_1, Q\xrightarrow[]{\alpha_2} A_2\in\text{Mor}(\mathscr{C})$. Entonces, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            Q \arrow[bend right = 30]{ddr}[swap]{\alpha_i} \arrow[bend left = 30]{drr}[]{\alpha_2} \\
+            &P \arrow{d}[swap]{v_1} \arrow{r}{v_2} &A_2 \arrow{d} \\
+            &A_1 \arrow{r} &0.
+        \end{tikzcd}
+    \end{center}
+    Por la propiedad universal del producto fibrado, existe un único morfismo $Q\xrightarrow[]{\gamma} P$ tal que $v_i\gamma=\alpha_i$ para $i\in\{1,2\}$. Por lo tanto, $P$ y $\{\alpha_i:P\to A_i\}_{i\in\{1,2\}}$ son un producto en $\mathscr{C}$ para $\{A_1,A_2\}$, es decir, $P=A_1\prod A_2$ y $v_1,v_2$ son proyecciones naturales. \\
+
+    $(\Leftarrow)$ Sea $P=A_1\prod A_2$ con proyecciones naturales $v_1,v_2$. Observemos que el siguiente diagrama en $\mathscr{C}$ es conmutativo
+    \begin{equation}\label{1.8.9-1}
+        \begin{tikzcd}
+            P \arrow{d}[swap]{v_1} \arrow{r}{v_2} &A_2 \arrow{d} \\
+            A_1 \arrow{r} &0. 
+        \end{tikzcd}
+    \end{equation}
+    Por la propiedad universal del producto, tenemos que para todo $P'\in\text{Obj}(\mathscr{C})$ y $P'\xrightarrow[]{\beta_1} A_1, P'\xrightarrow[]{\beta_2} A_2$ existe un único morfismo $P'\xrightarrow[]{\beta} P$ tal que $v_1\beta=\beta_1$ y $v_2\beta=\beta_2$. En particular, $\beta$ es el único morfismo que hace conmutar el siguiente diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            P' \arrow[bend right = 30]{ddr}[swap]{\beta_1} \arrow[bend left = 30]{drr}[]{\beta_2} \arrow[dotted]{dr}[]{\beta} \\
+            &P \arrow{d}[swap]{v_1} \arrow{r}{v_2} &A_2 \arrow{d} \\
+            &A_1 \arrow{r} &0. 
+        \end{tikzcd}
+    \end{center}
+    Por lo tanto, concluimos que el diagrama conmutativo (\ref{1.8.9-1}) es un producto fibrado en $\mathscr{C}$.
+\end{proof}
+
+\noindent Dualmente, se tiene el siguiente Lema.
+
+\begin{Lema}\label{Mendoza-1.8.9*}
+    Sean $\mathscr{C}$ una categoría con objeto cero y
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[]{d}[]{} \arrow[]{r}[]{} &A_2 \arrow[]{d}[]{u_2} \\
+            A_1 \arrow[]{r}[swap]{u_1} &C
+        \end{tikzcd}
+    \end{center}
+    un diagrama en $\mathscr{C}$. Entonces el diagrama anterior es una suma fibrada si, y sólo si, $C=A_1\coprod C_2$ con inclusiones naturales $u_1,u_2$.
+\end{Lema}
+
+\begin{proof}
+    Se sigue de aplicar el principio de dualidad al Lema \ref{Mendoza-1.8.9}, lo cual es válido por el inciso (1) de la Observación \ref{Mendoza-1.5.1-Ejer.51}.
+\end{proof}
+
+\begin{Def}
+    Sea $\mathscr{C}$ una categoría con objeto cero. Para cada familia $\{A_i\}_{i\in I}$ de objetos en $\mathscr{C}$ se define la familia de morfismos $\delta^A:=\big\{A_i\xrightarrow[]{\delta^A_{i,j}} A_j\big\}_{(i,j)\in I^2}$ en $\mathscr{C}$ dada por
+    \[
+        \delta^A_{i,j}:= \begin{cases} 0 &\text{si} \ i\neq j \\ 1_{A_i} &\text{si} \ i=j. \end{cases}
+    \] 
+\end{Def}
+
+\begin{Obs}\label{Obs: Producto en categorías con objeto cero}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $\{A_i\}_{i\in I}$ una familia de objetos en $\mathscr{C}$ tales que tiene un producto $\{\prod_{i\in I}A_i\xrightarrow[]{\pi_i} A_i\}_{i\in I}$ en $\mathscr{C}$. Entonces, para cualquier $I\neq\varnothing$, existe una única familia de morfismos $\{A_i\xrightarrow[]{\mu_i} \prod_{i\in I}A_i\}_{i\in I}$ tales que $\pi_i\mu_j = \delta^A_{i,j}$ para cualesquiera $i,j\in I$. 
+
+    \vspace{1mm}
+    En efecto: Para cada $i\in I$, consideramos la familia $\big\{A_i\xrightarrow[]{\delta_{i,j}^A} A_j\big\}_{j\in I}$. Luego, por la propiedad universal del producto, tenemos el siguiente diagrama conmutativo
+        \begin{center}
+            \begin{tikzcd}
+                A_i \arrow[]{dr}[swap]{\delta_{i,j}^A} \arrow[dotted]{rr}[]{\exists! \ \mu_i} & &\prod_{i\in I}A_i \arrow[]{dl}[]{\pi_j} & &\empty{} \\
+                                                           &A_i & & &\empty{}\arrow[phantom]{u}[]{\forall \ j\in J.}
+            \end{tikzcd}
+        \end{center}
+    Para cada $i\in I$, la igualdad $\pi_i\mu_i=1_{A_i}$ implica que el morfismo $A_i\xrightarrow[]{\mu_i} \prod_{i\in I}A_i$ es un monomorfismo escindible y, en particular, un monomorfismo, el cual es conocido como la $i$-ésima inclusión natural de $A_i$ en el producto $\prod_{i\in I}A_i$. 
+\end{Obs}
+
+\begin{Obs}\label{Mendoza-1.8.3(3)}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $\{A_i\}_{i\in I}$ una familia de objetos en $\mathscr{C}$ tales que tiene un coproducto $\{A_i\xrightarrow[]{\mu_i} \coprod_{i\in I}A_i\}_{i\in I}$ en $\mathscr{C}$.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item Para cualquier $I\neq\varnothing$, existe una única familia de morfismos $\{\coprod_{i\in I}A_i\xrightarrow[]{\pi_i} A_i\}_{i\in I}$ en $\mathscr{C}$ tales que $\pi_i\mu_j = \delta^A_{i,j}$ para cualesquiera $i,j\in I$. 
+
+            \vspace{1mm}
+            En efecto: Se sigue de aplicar el principio de dualidad a la Observación \ref{Obs: Producto en categorías con objeto cero}.
+
+            En tal caso, el morfismo $\coprod A_i\xrightarrow[]{\pi_i} A_i$ se conoce como la $i$-ésima proyección natural de $\coprod_{i\in I}A_i$ en $A_i$. Dado que $\pi_i\mu_i=1_{A_i}$, se tiene que $\mu_i$ es un monomorfismo escindible y $\pi_i$ es un epimorfismo escindible para cada $i\in I$.
+
+        \item En general, la familia $\{\coprod_{i\in I}A_i\xrightarrow[]{\pi_i} A_i\}_{i\in I}$ obtenida en (1) no tiene por qué ser un producto de $\{A_i\}_{i\in I}$. %\footnote{¿Agregar una afirmación análoga en la observación anterior? En todo caso, habría que modificar la demostración del Lema \ref{Mendoza-1.8.2}.}.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Prop}\label{Mendoza_CT-Ejer.21}
+    Sean $\mathscr{C}$ una categoría con objeto cero, $\{M_i\}_{i=1}^n$ una familia finita de objetos en $\mathscr{C}$ y $M$ un producto o un coproducto de $\{M_i\}_{i=1}^n$ en $\mathscr{C}$. Si $M \simeq 0$, entonces $M_i \simeq 0$ para cada $i \in [1,n].$
+\end{Prop}
+
+\begin{proof}
+    Supongamos que  $M \simeq 0.$ Sean $M \xrightarrow[]{\pi_i} M_i$ y $M_i \xrightarrow[]{\mu_i} M$ para $i\in[1,n]$ las proyecciones e inclusiones naturales, respectivamente. Por el inciso (1) de la Observación \ref{Obs: Objeto cero}, tenemos que $\pi_i=0$ para cada $i \in I$. De la Observación \ref{Obs: Producto en categorías con objeto cero}, o bien, del inciso (1) de la Observación \ref{Mendoza-1.8.3(3)}, se sigue que $1_{M_i} = \pi_i \mu_i =0$ para cada $i \in I$. Finalmente, del inciso (3) de la Observación \ref{Mendoza-1.5.1-Ejer.51}, concluimos que $M_i\simeq0$ para cada $i\in[1,n]$.
+\end{proof}
+
+\subsection*{Objetos proyectivos e inyectivos} \label{Ssec: Objetos proyectivos e inyectivos}
+
+\begin{Def}\label{Def: Objeto proyectivo}
+    Sea $\mathscr{C}$ una categoría. Un objeto $P$ en $\mathscr{C}$ es \emph{proyectivo} si para todo diagrama en $\mathscr{C}$ de la forma
+    \begin{center}
+        \begin{tikzcd}
+            &P \arrow[]{d}[]{f} \\
+            X \arrow[two heads]{r}[swap]{g} &Y
+        \end{tikzcd}
+    \end{center}
+    se tiene que $f$ se factoriza a través de $g$; esto es,
+    \begin{equation}\label{eq: Proyectivo}
+        \begin{tikzcd}
+            &P \arrow[]{d}[]{f} \arrow[dotted]{dl}[swap]{\exists \ f'} \\
+            X \arrow[two heads]{r}[swap]{g} &Y.
+        \end{tikzcd}
+    \end{equation}
+    Denotaremos por $\text{Proj}(\mathscr{C})$ a la clase de todos los objetos proyectivos en $\mathscr{C}$, siguiendo la notación preponderante derivada del término \emph{projective} en inglés.
+\end{Def}
+
+%El siguiente resultado es una caracterización de objetos proyectivos en una categoría arbitraria.
+
+%\begin{Prop}\label{Prop: Caracterización de objetos proyectivos}
+%    Sea $\mathscr{C}$ una categoría. Entonces $P\in\text{Obj}(\mathscr{C})$ es proyectivo si, y sólo si, el funtor Hom-covariante $\text{Hom}_\mathscr{C}(P,-)$ manda preserva epimorfismos.\footnote{Revisar a qué se refiere que ``preserve epimorfismos'' en MacLane (1978) p.118. Pista: es que manda epimorfismos en $\mathscr{C}$ en epimorfismos en Sets.}.
+%\end{Prop}
+%
+%\begin{proof}
+%
+%\end{proof}
+
+\begin{Lema}\label{Mendoza-1.10.19}
+    Sean $\mathscr{C}$ una categoría y $P\xhookrightarrow{\alpha} Q$ un monomorfismo escindible en $\mathscr{C}$, con $Q$ proyectivo. Entonces, $P$ es proyectivo.
+\end{Lema}
+
+\begin{proof}
+
+    Sea $Q\xrightarrow[]{\beta} P$ tal que $\beta\alpha=1_P$. Consideremos un diagrama en $\mathscr{C}$ de la forma
+    \begin{center}
+        \begin{tikzcd}
+            &P \arrow[]{d}[]{f} \\
+            X \arrow[two heads]{r}[swap]{g} &Y.
+        \end{tikzcd}
+    \end{center}
+    Como $Q\in\text{Proj}(\mathscr{C})$, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            Q \arrow[dotted]{d}[swap]{\exists \ f'} \arrow[]{r}[]{\beta} &P \arrow[]{d}[]{f} \\
+            X \arrow[two heads]{r}[swap]{g} &Y.
+        \end{tikzcd}
+    \end{center}
+    Veamos que el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &P \arrow[]{d}[]{f} \arrow[]{dl}[swap]{f'\alpha} \\
+            X \arrow[two heads]{r}[swap]{g} &Y.
+        \end{tikzcd}
+    \end{center}
+    conmuta. En efecto,
+    \begin{align*}
+        g(f'\alpha) &= (gf')\alpha \\
+                    &= (f\beta)\alpha \\
+                    &= f(\beta\alpha) \\
+                    &= f1_P \\
+                    &= f.
+    \end{align*}
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.10.21}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $\{P_i\}_{i\in I}$ una familia de objetos en $\mathscr{C}$ tal que existe el coproducto $\coprod_{i\in I}P_i$ en $\mathscr{C}$. Entonces,
+    \[
+    \coprod_{i\in I}P_i\in \text{Proj}(\mathscr{C}) \iff P_i\in \text{Proj}(\mathscr{C}) \quad \forall \ i\in I.
+    \] 
+\end{Prop}
+
+\begin{proof}
+    Sean $\{P_i\xrightarrow[]{\mu_i} \coprod_{i\in I}P_i\}_{i\in I}$ las inclusiones naturales y $\{\coprod_{i\in I}P_i\xrightarrow[]{\pi_i} P_i\}_{i\in I}$ las proyecciones naturales vistas en las Observaciones \ref{Mendoza-1.8.3} y \ref{Mendoza-1.8.3(3)}, respectivamente. \\
+
+    $(\Rightarrow)$ Sea $i\in I$. Dado que $\pi_i\mu_i=1_{P_i}$ y $\coprod_{i\in I}P_i\in\text{Proj}(\mathscr{C})$, por el Lema \ref{Mendoza-1.10.19} tenemos que $P_i\in\text{Proj}(\mathscr{C})$. \\
+
+    $(\Leftarrow)$ Consideremos un diagrama en $\mathscr{C}$ de la forma
+    \begin{center}
+        \begin{tikzcd}
+            &\coprod_{i\in I}P_i \arrow[]{d}[]{f} \\
+            X \arrow[two heads]{r}[swap]{g} &Y.
+        \end{tikzcd}
+    \end{center}
+    Luego, para cada $i\in I$, de $P_i\in\text{Proj}(\mathscr{C})$ se sigue que
+    \begin{center}
+        \begin{tikzcd}
+            P_i \arrow[dotted]{d}[swap]{\exists \ f_i} \arrow[]{r}[]{\mu_i} &\coprod_{i\in I}P_i \arrow[]{d}[]{f} \\
+            X \arrow[two heads]{r}[swap]{g} &Y.
+        \end{tikzcd}
+    \end{center}
+    Ahora, considerando la familia $\{P_i\xrightarrow[]{f_i} X\}_{i\in I}$ y usando la propiedad universal del coproducto, tenemos que el siguiente diagrama conmuta
+    \begin{center}
+        \begin{tikzcd}
+            P_i \arrow[]{rr}[]{\mu_i} \arrow[]{dr}[swap]{f_i} &&\coprod_{i\in I}P_i \arrow[dotted]{dl}[]{\exists \ f'} \\
+                                                              &X
+        \end{tikzcd}
+        $\forall \ i\in I$.
+    \end{center}
+    Luego, como para cualquier $i\in I$ tenemos que
+    \begin{align*}
+        (gf')\mu_i &= g(f'\mu_i) \\
+                   &= gf_i \\
+                   &= f\mu_i,
+    \end{align*}
+    de la propiedad universal del producto se sigue que $gf'=f$. Por ende, concluimos que $\coprod_{i\in I}P_i\in\text{Proj}(\mathscr{C})$.
+\end{proof}
+
+%\begin{Prop}\label{Mendoza-1.10.20}
+%    Para una categoría abeliana $\mathscr{A}$ y $P\in\text{Obj}(\mathscr{A})$, las siguientes condiciones son equivalentes.
+%
+%    \begin{enumerate}[label=(\alph*)]
+%    
+%        \item $P\in\text{Proj}(\mathscr{A})$.
+%
+%        \item Todo epimorfismo $\alpha:X\twoheadrightarrow P$ en $\mathscr{A}$ es escindible.
+%    \end{enumerate}
+%\end{Prop}
+%
+%\begin{proof}
+%    $(a)\Rightarrow(b)$ Sea \begin{tikzcd} X \arrow[two heads]{r}[]{\alpha} &Y \end{tikzcd}. Luego, por ser $P$ proyectivo, se tiene
+%    \begin{center}
+%        \begin{tikzcd}
+%            &P \arrow[]{d}[]{1_P} \arrow[dotted]{dl}[swap]{\exists \ \alpha'} \\
+%            X \arrow[two heads]{r}[swap]{\alpha} &P,
+%        \end{tikzcd}
+%    \end{center}
+%    es decir, $\alpha\alpha'=1_P$. Por ende, $\alpha$ es un epimorfismo escindible. \\
+%
+%    $(b)\Rightarrow(a)$ Consideremos el diagrama en $\mathscr{A}$
+%    \begin{center}
+%        \begin{tikzcd}
+%           &P \arrow[]{d}[]{g} \\
+%            M \arrow[two heads]{r}[swap]{f} &N.
+%        \end{tikzcd}
+%    \end{center}
+%    Como $\mathscr{A}$ tiene productos fibrados, existe el producto fibrado de $f$ y $g$
+%    \begin{center}
+%        \begin{tikzcd}
+%            X \arrow[]{d}[swap]{g'} \arrow[]{r}[]{f'} &P \arrow[]{d}[]{g} \\
+%            M \arrow[two heads]{r}[swap]{f} &N.
+%        \end{tikzcd}
+%    \end{center}
+%    Ahora, como $f$ es un epimorfismo, por el inciso a de ?? \ref{Mendoza-1.10.15} tenemos que $f':X\to P$ es un epimorfismo. Entonces, por hipótesis, $f'$ es un epimorfismo escindible y por el inciso (b) de \ref{Mendoza-1.10.15} tenemos que $f'$ se factoriza a través de $f$. Por ende, se sigue que $P$ es proyectivo.
+%\end{proof}
+
+\begin{Def}\label{Def: Suficientes proyectivos}
+    Una categoría $\mathscr{C}$ tiene \emph{suficientes proyectivos} si para cualquier $X\in\text{Obj}(\mathscr{C})$ existe un epimorfismo $P\twoheadrightarrow X$, con $P\in\text{Proj}(\mathscr{C})$.
+\end{Def}
+
+\begin{Def}\label{Def: Objeto inyectivo}
+    Sea $\mathscr{C}$ una categoría. Un objeto $Q$ en $\mathscr{C}$ es \emph{inyectivo} si para todo diagrama en $\mathscr{C}$ de la forma
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[hook]{r}[]{g} \arrow[]{d}[swap]{f} &Y \\
+            Q
+        \end{tikzcd}
+    \end{center}
+    se tiene que $f$ se factoriza a través de $g$; esto es,
+    \begin{equation}\label{eq: Inyectivo}
+        \begin{tikzcd}
+            X \arrow[]{d}[swap]{f} \arrow[hook]{r}[]{g} &Y \arrow[dotted]{dl}[]{\exists \ f'} \\
+            Q.
+        \end{tikzcd}
+    \end{equation}
+    Denotaremos por $\text{Inj}(\mathscr{C})$ a la clase de todos los objetos inyectivos en $\mathscr{C}$, siguiendo la notación preponderante derivada del término \emph{injective} en inglés.
+\end{Def}
+
+\begin{Obs}\label{Obs: Objetos inyectivos}
+    Si invertimos el sentido de las flechas en el diagrama (\ref{eq: Proyectivo}) y reemplazamos el epimorfismo por un monomorfismo \textemdash su noción dual\textemdash, obtenemos el diagrama (\ref{eq: Inyectivo}). Haciendo el proceso análogo con el diagrama (\ref{eq: Inyectivo}), se obtiene el diagrama (\ref{eq: Proyectivo}). Esto muestra que las nociones de objeto proyectivo y objeto inyectivo son duales entre sí. Es decir, que si $\mathscr{C}$ es una categoría y $Q$ es un objeto en $\mathscr{C}$, entonces
+    \[
+    Q\in\text{Proj}(\mathscr{C}) \iff Q\in\text{Inj}(\mathscr{C}^\text{op}).
+    \] 
+    
+\end{Obs}
+
+%El siguiente resultado es una caracterización de objetos proyectivos en una categoría abeliana.
+
+%\begin{Prop}\label{Prop: Caracterización de objetos proyectivos}
+%    Sea $\mathscr{C}$ una categoría. Entonces $Q\in\text{Obj}(\mathscr{C})$ es inyectivo si, y sólo si, el funtor Hom-contravariante $\text{Hom}_\mathscr{C}(-,Q):\mathscr{C}\to \text{Sets}$ manda monomorfismos en $\mathscr{C}$ en epimorfismos en Sets\footnote{Revisar MacLane (1978) p.118.}.
+%\end{Prop}
+%
+%\begin{proof}
+%
+%\end{proof}
+
+En vista de la Observación anterior, las demostraciones de los siguientes dos resultados se siguen de aplicar el principio de dualidad al Lema \ref{Mendoza-1.10.19} y la Proposición \ref{Mendoza-1.10.21}, respectivamente.
+
+\begin{Lema}\label{Mendoza-Ej.69}
+    Sean $\mathscr{C}$ una categoría y $Q\xtwoheadrightarrow[]{\beta} M$ un epimorfismo escindible en $\mathscr{C}$, con $Q$ inyectivo. Entonces $M$ es inyectivo.
+\end{Lema}
+
+\begin{Prop}\label{Mendoza-Ej.71}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $\{Q_i\}_{i\in I}$ una familia de objetos en $\mathscr{C}$ tal que existe el producto $\prod_{i\in I}Q_i$ en $\mathscr{C}$. Entonces,
+    \[
+    \prod_{i\in I}Q_i\in \text{Inj}(\mathscr{C}) \iff Q_i\in \text{Inj}(\mathscr{C}) \quad \forall \ i\in I.
+    \] 
+\end{Prop}
+
+%\begin{Prop}\label{Mendoza-1.10.20}
+%    Para una categoría abeliana $\mathscr{A}$ y $P\in\text{Obj}(\mathscr{A})$, las siguientes condiciones son equivalentes.
+%
+%    \begin{enumerate}[label=(\alph*)]
+%    
+%        \item $P\in\text{Proj}(\mathscr{A})$.
+%
+%        \item Todo epimorfismo $\alpha:X\twoheadrightarrow P$ en $\mathscr{A}$ es escindible.
+%    \end{enumerate}
+%\end{Prop}
+%
+%\begin{proof}
+%    $(a)\Rightarrow(b)$ Sea \begin{tikzcd} X \arrow[two heads]{r}[]{\alpha} &Y \end{tikzcd}. Luego, por ser $P$ proyectivo, se tiene
+%    \begin{center}
+%        \begin{tikzcd}
+%            &P \arrow[]{d}[]{1_P} \arrow[dotted]{dl}[swap]{\exists \ \alpha'} \\
+%            X \arrow[two heads]{r}[swap]{\alpha} &P,
+%        \end{tikzcd}
+%    \end{center}
+%    es decir, $\alpha\alpha'=1_P$. Por ende, $\alpha$ es un epimorfismo escindible. \\
+%
+%    $(b)\Rightarrow(a)$ Consideremos el diagrama en $\mathscr{A}$
+%    \begin{center}
+%        \begin{tikzcd}
+%           &P \arrow[]{d}[]{g} \\
+%            M \arrow[two heads]{r}[swap]{f} &N.
+%        \end{tikzcd}
+%    \end{center}
+%    Como $\mathscr{A}$ tiene productos fibrados, existe el producto fibrado de $f$ y $g$
+%    \begin{center}
+%        \begin{tikzcd}
+%            X \arrow[]{d}[swap]{g'} \arrow[]{r}[]{f'} &P \arrow[]{d}[]{g} \\
+%            M \arrow[two heads]{r}[swap]{f} &N.
+%        \end{tikzcd}
+%    \end{center}
+%    Ahora, como $f$ es un epimorfismo, por el inciso a de ?? \ref{Mendoza-1.10.15} tenemos que $f':X\to P$ es un epimorfismo. Entonces, por hipótesis, $f'$ es un epimorfismo escindible y por el inciso (b) de \ref{Mendoza-1.10.15} tenemos que $f'$ se factoriza a través de $f$. Por ende, se sigue que $P$ es proyectivo.
+%\end{proof}
+
+\begin{Def}\label{Def: Suficientes inyectivos}
+    Una categoría $\mathscr{C}$ tiene \emph{suficientes inyectivos} si para cualquier $X\in\text{Obj}(\mathscr{C})$ existe un monomorfismo $X\hookrightarrow Q$, con $Q\in\text{Inj}(\mathscr{C})$.
+\end{Def}
+
+
+\subsubsection*{Biproductos} \label{Sssec: Biproductos}
+
+\begin{Def}\label{Def: Biproducto}
+    Sean $\mathscr{C}$ una categoría localmente pequeña con objeto cero y $\{A_i\}_{i\in I}$ una familia de objetos en $\mathscr{C}$, con $I$ un conjunto, tal que existe un coproducto $\coprod_{i\in I}A_i$ en $\mathscr{C}$. Decimos que $\coprod_{i\in I}A_i$ es un \emph{biproducto} en $\mathscr{C}$ para $\{A_i\}_{i\in I}$ si existe un producto $\prod_{i\in I}A_i$ en $\mathscr{C}$ y el morfismo $\coprod_{i\in I}A_i\xrightarrow[]{\delta} \prod_{i\in I}A_i$, dado por la matriz
+    \[
+    [\varphi(\delta)]_{i,j}:=\delta_{i,j}^A = \begin{cases} 1_{A_i} &\text{si } i=j \\ 0 &\text{si } i\neq j, \end{cases}
+    \] 
+    es un isomorfismo. Denotaremos por
+    \[
+    \bigoplus_{i\in I}A_i
+    \] 
+    a un biproducto en $\mathscr{C}$ para $\{A_i\}_{i\in I}$, en caso de que exista.
+\end{Def}
+
+\begin{Obs}\label{Observaciones del biproducto}
+    Sea $\mathscr{C}$ una categoría localmente pequeña con objeto cero. El biproducto en $\mathscr{C}$ de una familia vacía de objetos en $\mathscr{C}$, si existe, es un objeto cero en $\mathscr{C}$. Recíprocamente, cualquier objeto cero en $\mathscr{C}$ es un biproducto en $\mathscr{C}$ para una familia vacía de objetos en $\mathscr{C}$.
+    \vspace{1mm}
+
+    En efecto: Se sigue del inciso (4) de las Observaciones \ref{Observaciones del producto} y \ref{Mendoza-1.8.3}.
+\end{Obs}
+
+\begin{Ejem}\label{Ejem: Biproductos finitos}
+    En la categoría $\text{Mod}(R)$, para cualquier familia finita $\{M_i\}_{i=1}^n$ de $R$-módulos, la suma directa finita $\bigoplus_{i=1}^n M_i$ es un biproducto (finito) en $\text{Mod}(R)$ para $\{M_i\}_{i=1}^n$. En particular, esto es válido para las categorías $\text{Vect}_K$ y Ab.
+\end{Ejem}
+
+\begin{Prop} \label{Mendoza-1.8.12}
+    Para una categoría $\mathscr{C}$ localmente pequeña con objeto cero, $A=\coprod_{i\in I}A_i$ y $B = \prod_{i\in I}A_i$ en $\mathscr{C}$, con $I$ un conjunto, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item $\delta:A\xrightarrow[]{\sim} B$ en $\mathscr{C}$.
+
+        \item $\big\{A_i\xrightarrow[]{\mu^B_i} B\big\}_{i\in I}$ es un coproducto.
+
+        \item $\big\{A\xrightarrow[]{\pi^A_i} A_i\big\}_{i\in I}$ es un producto.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}
+
+    Podemos suponer que $I\neq\varnothing$. \\
+
+    $(a)\Rightarrow(b)$ Por hipótesis, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{equation}\label{1.8.12-1}
+        \begin{tikzcd}
+            A \arrow[]{r}{\delta}[swap]{\sim} &B \arrow[]{d}[]{\pi_i^B} &&\empty{} \\
+            A_j \arrow[]{u}[]{\mu_j^A} \arrow[]{r}[swap]{\delta_{i,j}^A} &A_i &&\empty{} \arrow[phantom]{u}[]{\forall \ i,j\in I.}
+        \end{tikzcd}
+    \end{equation}
+    Ahora, para cada $j\in I$ fijo, tenemos que
+    \[
+        \pi_i^B(\delta\mu_j^A) = \delta_{i,j}^A = \pi_i^B(\mu_j^B) \quad \forall \ i\in I;
+    \] 
+    por la propiedad universal del producto, se sigue que
+    \[
+        \delta\mu_j^A = \mu_j^B \quad \forall \ j\in I.
+    \] 
+    Luego, como $\delta$ es un isomorfismo, de la Proposición \ref{Mendoza-Ejer.42} se sigue (b). \\
+
+    $(b)\Rightarrow(a)$ Por la Proposición \ref{Mendoza-Ejer.42}, existe un morfismo $\lambda:A\xrightarrow[]{\sim}B$ en $\mathscr{C}$ tal que $\lambda\mu_i^A=\mu_i^B$ para cada $i\in I$. Observemos que, para cualesquiera $i,j\in I$, tenemos que
+    \begin{align*}
+        [\varphi(\delta)]_{i,j} &= \delta_{i,j}^A \\
+                                 &= \pi_i^B\mu_j^B \\
+                                 &= \pi_i^B\lambda\mu_j^A \\
+                                 &= [\varphi(\lambda)]_{i,j},
+    \end{align*}
+    por lo que $\varphi(\delta)=\varphi(\lambda)$. Luego, por la Proposición \ref{Mendoza-1.8.11}, tenemos que $\delta=\lambda$, de donde se sigue (a). \\
+
+    $(a)\Rightarrow (c)$ Nuevamente, por hipótesis, tenemos el diagrama conmutativo (\ref{1.8.12-1}) en $\mathscr{C}$. Para cada $j\in I$ fijo, tenemos que
+    \[
+        (\pi_i^B\delta)\mu_j^A = \delta_{i,j}^A = (\pi_i^A)\mu_j^A \quad \forall \ i\in I;
+    \] 
+    por la propiedad universal del coproducto, es sigue que
+    \[
+    \pi_i^B\delta = \pi_i^A \quad \forall \ j\in I.
+    \] 
+    Luego, como $\delta$ es un isomorfismo, por la Proposición \ref{Mendoza-Ejer.42*}, concluimos que $\big\{A\xrightarrow[]{\pi_i^A} A_i\big\}_{i\in I}$ es un producto en $\mathscr{C}$. \\
+
+    $(c)\Rightarrow(a)$ Supongamos que $\big\{A\xrightarrow[]{\pi_i^A} A_i\big\}_{i\in I}$ es un producto en $\mathscr{C}$. Por la Proposición \ref{Mendoza-Ejer.42*}, existe $\kappa:A\xrightarrow[]{\sim}B$ en $\mathscr{C}$ tal que $\pi_i^B\kappa = \pi_i^A$ para todo $i\in I$. Veamos que $\kappa=\delta$ para lo cual, por la Proposición 1.8.11, basta demostrar que $\varphi(\kappa) = \varphi(\delta)$. Sean $i,j\in I$, entonces
+    \begin{align*}
+        [\varphi(\kappa)]_{i,j} &= \pi_i^B\kappa\mu_j^A \\
+                                 &= \pi_i^A\mu_j^A \\
+                                 &= \delta_{i,j}^A \\
+                                 &= [\varphi(\delta)]_{i,j}.
+    \end{align*}
+    Por lo tanto, $\delta:A\xrightarrow[]{\sim}B$ en $\mathscr{C}$.
+\end{proof}
+
+\subsection*{Núcleos y conúcleos} \label{Ssec: Núcleos y conúcleos}
+
+\begin{Def}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $A\xrightarrow{f} B$ un morfismo en $\mathscr{C}$. Un \emph{núcleo} de $f$ es un morfismo $K\xrightarrow[]{\kappa} A$ en $\mathscr{C}$ que satisface las siguientes condiciones.
+    \begin{itemize}
+        \item[(Núc1)] $f\kappa = 0$.
+         
+        \item[(Núc2)] Propiedad universal del núcleo: para todo morfismo $X\xrightarrow{g} A$ en $\mathscr{C}$ tal que $fg=0$, existe un único morfismo $X\xrightarrow[]{g'} K$ tal que $g=\kappa g'$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    &X \arrow[dotted]{dl}[swap]{\exists! \ g'} \arrow{d}{g} \\
+                    K \arrow{r}[swap]{\kappa} &A \arrow{r}{f} &B.
+                \end{tikzcd}
+            \end{center}
+    \end{itemize}
+    Un \emph{seudonúcleo} de $f$ es un morfismo que cumple con las condiciones anteriores, exceptuando la unicidad en (Núc2).
+\end{Def}
+
+\begin{Obs}\label{Mendoza-1.5.3}
+    
+    Sean $\mathscr{C}$ una categoría con objeto cero $0\in\text{Obj}(\mathscr{C})$ y $K\xrightarrow[]{\kappa} A$ un núcleo de $f:A\to B$ en $\mathscr{C}$.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item $\kappa\in\text{Obj}(\text{Mon}_\mathscr{C}(-,A))$ y es único hasta isomorfismos en $\text{Mon}_\mathscr{C}(-,A)$.
+
+            En efecto: Se sigue del inciso (b) de \ref{Mendoza-1.5.2} y el inciso (1) de \ref{Mendoza-1.1.4}.
+
+        \item En vista de (1), y en caso de que $f$ admita un núcleo, denotaremos por
+            \[
+                \text{Ker}(f)\xrightarrow[]{k_f}A
+            \] 
+            a la elección de uno de ellos, siguiendo la notación preponderante derivada del término \emph{kernel} en inglés, i.e.,
+            \[
+                \text{Ker}(A\xrightarrow[]{f}B) := (\text{Ker}(f)\xrightarrow[]{k_f}A).
+            \] 
+            
+        \item Por el inciso (c) de \ref{Mendoza-1.5.2} y dado que $0\to B$ es un monomorfismo, se tiene que $\text{Ker}(f)\simeq f^{-1}(0)$ en $\text{Mon}_\mathscr{C}(0,A)$.
+
+        \item $\text{Ker}(f)\simeq 0$ en $\text{Mon}_\mathscr{C}(-,A)$ si $f$ es un monomorfismo.
+
+            En efecto: Dado que $f\mu=0$, se tiene que el siguiente diagrama conmuta
+            \begin{center}
+                \begin{tikzcd}
+                    K \arrow[]{dr}[swap]{0_{K,0}} \arrow[]{r}[]{\kappa} &A \arrow[]{r}[]{f} &B. \\
+                                                                        &0 \arrow[hook]{u}[]{0_{0,A}}\arrow[]{ur}[swap]{0_{0,B}}
+                \end{tikzcd}
+            \end{center}
+            Ahora, como $f\mu=0_{K,B} = f0_{K,A}$ y $f$ es un monomorfismo, se sigue que $\kappa=0_{K,A}$, por lo que los siguientes diagramas conmutan
+            \begin{center}
+                \begin{tikzcd}
+                    K \arrow[hook]{rr}[]{\kappa = 0_{K,A}} \arrow[]{dr}[swap]{0_{K,0}} & &A &\empty{} &K \arrow[hook]{rr}[]{\kappa = 0_{K,A}} & &A. \\
+                                                                                       &0 \arrow[hook]{ur}[swap]{0_{0,A}} & & & &0 \arrow[]{ul}[]{0_{0,K}} \arrow[hook]{ur}[swap]{0_{0,A}}
+                \end{tikzcd}
+            \end{center}
+            Por lo tanto, $K\simeq 0$ en $\text{Mon}_\mathscr{C}(-,A)$.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Lema}\label{Mendoza-1.5.4}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $A\xrightarrow[]{\alpha}B\xrightarrow[]{\beta}C$ en $\mathscr{C}$ tales que existen $\text{Ker}(\alpha)$ y $\text{Ker}(\beta\alpha)$. Entonces,
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\text{Ker}(\alpha)\subseteq\text{Ker}(\beta\alpha)$.
+
+        \item Si $\beta$ es un monomorfismo, entonces $\text{Ker}(\alpha)\simeq \text{Ker}(\beta\alpha)$ en $\text{Mon}_\mathscr{C}(-,A)$.
+    \end{enumerate}
+\end{Lema}
+
+\begin{proof}
+    Dado que existen $\text{Ker}(\alpha)$ y $\text{Ker}(\beta\alpha)$, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            \text{Ker}(\alpha) \arrow[hook]{dr}[]{k_\alpha} &&B \arrow[]{dd}[]{\alpha} \\
+                                                            &A \arrow[]{ur}[]{\alpha} \arrow[]{dr}[swap]{\beta\alpha} \\
+            \text{Ker}(\beta\alpha) \arrow[hook]{ur}[swap]{k_{\beta\alpha}} &&C.
+        \end{tikzcd}
+    \end{center}
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Dado que
+            \begin{align*}
+                (\beta\alpha)k_\alpha &= \beta(\alpha k_\alpha) \\
+                                      &= \beta0 \\
+                                      &= 0,
+            \end{align*}
+            por la propiedad universal del núcleo se sigue que existe $\text{Ker}(\alpha)\xrightarrow[]{t}\text{Ker}(\beta\alpha)$ tal que $k_{\beta\alpha}t = k_\alpha$. Por ende, $k_\alpha \le k_{\beta\alpha}$, por lo que $\text{Ker}(\alpha)\subseteq\text{Ker}(\beta\alpha)$.
+
+        \item Supongamos que $\beta$ es un monomorfismo. Entonces, de
+            \begin{align*}
+                \beta(\alpha k_{\beta\alpha}) &= (\beta\alpha)k_{\beta\alpha} \\
+                                              &= 0 \\
+                                              &= \beta0,
+            \end{align*}
+            se sigue que $\alpha k_{\beta\alpha} = 0$. Luego, por la propiedad universal del núcleo tenemos que existe $\text{Ker}(\beta\alpha)\xrightarrow[]{r} \text{Ker}(\alpha)$ tal que $k_\alpha r=k_{\beta\alpha}$. Por ende, $k_{\beta\alpha}\le k_\alpha$ y, como $k_\alpha\le k_{\beta\alpha}$, se sigue del inciso (2) de la Observación \ref{Mendoza-1.1.2} que $k_\alpha\simeq k_{\beta\alpha}$ en $\text{Mon}_\mathscr{C}(-,A)$.
+    \end{enumerate}
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.5.6}
+    Sean $\mathscr{C}$ una categoría con objeto cero y consideremos el diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            \text{Ker}(\alpha_1) \arrow[equals]{d}[]{} \arrow[]{r}[]{\gamma} &P \arrow[]{d}[]{\beta_1} \arrow[]{r}[]{\beta_2} &A_2 \arrow[]{d}[]{\alpha_2} \\
+            \text{Ker}(\alpha_1) \arrow[]{r}[swap]{k_{\alpha_1}} &A_1 \arrow[]{r}[swap]{\alpha_2} &A,
+        \end{tikzcd}
+    \end{center}
+    donde el cuadrado derecho es un producto fibrado y $\gamma$ es el morfismo inducido del producto fibrado y los morfismos $K\xhookrightarrow[]{\alpha_1} A_1$ y $\text{Ker}(\alpha_1)\xrightarrow[]{0}A_2$. Entonces, $\gamma\simeq\text{Ker}(\beta_2)$ en $\text{Mon}_\mathscr{C}(-,P)$.
+\end{Prop}
+
+\begin{proof}
+
+    Veamos que $\gamma$ es un núcleo de $\beta_2$. Por construcción de $\gamma$, se sigue que $\beta_2\gamma=0$. Ahora, supongamos que existe $X\xrightarrow[]{v}P$ en $\mathscr{C}$ tal que $\beta_2 v=0$. Dado que
+    \begin{align*}
+        \alpha_1(\beta_1 v) &= (\alpha_1\beta_1)v \\
+                            &= (\alpha_2\beta_2) v \\
+                            &= \alpha_2(\beta_2 v) \\
+                            &= 0,
+    \end{align*}
+    de la propiedad universal del núcleo se sigue que existe $X\xrightarrow[]{v'}\text{Ker}(\alpha_1)$ tal que hace conmutar el siguiente diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            &X \arrow[dotted]{dl}[swap]{v'} \arrow[]{d}[]{v} \\
+            \text{Ker}(\alpha_1) \arrow[equals]{d}[]{} \arrow[]{r}[]{\gamma} &P \arrow[]{d}[]{\beta_1} \arrow[]{r}[]{\beta_2} &A_2 \arrow[]{d}[]{\alpha_2} \\
+            \text{Ker}(\alpha_1) \arrow[]{r}[swap]{k_{\alpha_1}} &A_1 \arrow[]{r}[swap]{\alpha_2} &A.
+        \end{tikzcd}
+    \end{center}
+    Observemos que
+    \begin{align*}
+        \beta_1v &= k_{\alpha_1}v' \\
+                 &= \beta_1(\gamma v'), \\ \\
+        \beta_2 v &= 0 \\
+                  &= \beta_2(\gamma v').
+    \end{align*}
+    Entonces, por la propiedad universal del producto fibrado, tenemos que $v = \gamma v'$. Finalmente, como $k_{\alpha_1} = \beta_1\gamma$ es un monomorfismo, por el inciso (5) de la Observación \ref{Obs: Morfismos especiales}, tenemos que $\gamma$ es un monomorfismo, de donde se sigue que $v'$ es el único morfismo en $\mathscr{C}$ tal que $v=\gamma v'$.
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.5.7}
+    Sean $\mathscr{C}$ una categoría con objeto cero y consideremos el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            A' \arrow[]{r}[]{\beta} &A \arrow[]{d}[]{\alpha_1} \\
+            B' \arrow[]{r}[swap]{\alpha_3:= k_{\alpha_2}} &B \arrow[]{r}[swap]{\alpha_2} &B''.
+        \end{tikzcd}
+    \end{center}
+    Entonces, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Existe $A'\xrightarrow[]{\gamma}B'$ en $\mathscr{C}$ tal que
+            \begin{equation}\label{eq: Mendoza-1.5.7-1}
+                \begin{tikzcd}
+                    A' \arrow[]{d}[swap]{\gamma} \arrow[]{r}[]{\beta} &A \arrow[]{d}[]{\alpha_1} \\
+                    B' \arrow[]{r}[swap]{\alpha_2} &B
+                \end{tikzcd}
+            \end{equation}
+            es un producto fibrado en $\mathscr{C}$.
+
+        \item $\beta\simeq \text{Ker}(\alpha_3\alpha_1)$ en $\text{Mon}_\mathscr{C}(-,A)$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    (a)$\Rightarrow$(b) Veamos que $\beta$ es un núcleo de $A\xrightarrow[]{\alpha_3\alpha_1}B''$. Observemos que
+    \begin{align*}
+        \alpha_3\alpha_1\beta &= \alpha_3\alpha_2\gamma \\
+                              &= k_{\alpha_2}\alpha_2\gamma \\
+                              &= 0.
+    \end{align*}
+    Sea $X\xrightarrow[]{\theta}A$ en $\mathscr{C}$ tal que $(\alpha_3\alpha_1)\theta=\alpha_3(\alpha_1\theta)=0$. Como $\alpha_2 = \text{Ker}(\alpha_3)$, por la propiedad universal del núcleo, existe $X\xrightarrow[]{\psi}B'$ en $\mathscr{C}$ tal que $\alpha_2\psi=\alpha_1\theta$. Luego, por la propiedad universal del producto fibrado (\ref{eq: Mendoza-1.5.7-1}), se sigue que existe $X\xrightarrow[]{\theta'}A'$ en $\mathscr{C}$ tal que hace conmutar el siguiente diagrama
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[bend right = 30]{ddr}[swap]{\psi} \arrow[dotted]{dr}[swap]{\theta'} \arrow[bend left = 30]{rrd}[]{\theta} \\
+            &A' \arrow[]{d}[swap]{\gamma} \arrow[]{r}[]{\beta} &A \arrow[]{d}[]{\alpha_1} \\
+            &B' \arrow[]{r}[swap]{\alpha_2} &B.
+        \end{tikzcd}
+    \end{center}
+    Ahora, por el inciso (1) de la Observación \ref{Mendoza-1.5.3}, sabemos que $\alpha_2$ es un monomorfismo. Por el Corolario \ref{Mendoza-Ejer.8(a)}, se sigue que $\beta$ es un monomorfismo. Por ende, $\theta'$ es el único morfismo en $\mathscr{C}$ tal que $\beta\theta'=\theta$. \\
+
+    (b)$\Rightarrow$(a) Tenemos que $\alpha_3(\alpha_1\beta) = (\alpha_3\alpha_1)\beta = 0$. Como $\alpha_2=\text{Ker}(\alpha_3)$, se sigue que existe $A'\xrightarrow[]{\gamma}B'$ en $\mathscr{C}$ tal que hace conmutar el diagrama (\ref{eq: Mendoza-1.5.7-1}). Sean $X\xrightarrow[]{\theta_1}A, X\xrightarrow[]{\theta_2}B'$ en $\mathscr{C}$ tales que $\alpha_1\theta_1 = \alpha_2\theta_2$. Observemos que
+    \begin{align*}
+        (\alpha_3\alpha_1)\theta_1 &= \alpha_3(\alpha_1\theta_1) \\
+                                   &= \alpha_3(\alpha_2\theta_2) \\
+                                   &= (\alpha_3\alpha_2)\theta_2 \\
+                                   &= 0. \tag{$\alpha_2 = \text{Ker}(\alpha_3)$}
+    \end{align*}
+    Luego, como $\beta = \text{Ker}(\alpha_3\alpha_1)$, por la propiedad universal del núcleo, existe un único morfismo $X\xrightarrow[]{\theta}A'$ en $\mathscr{C}$ tal que $\beta\theta=\theta_1$. Más aún, como por el inciso (1) de la Observación \ref{Mendoza-1.5.3} sabemos que $\alpha_2$ es un monomorfismo, de
+    \begin{align*}
+        \alpha_2\theta_2 &= \alpha_1\theta_1 \\
+                         &= \alpha_1(\beta\theta) \\
+                         &= (\alpha_1\beta)\theta \\
+                         &= (\alpha_2\gamma)\theta \\
+                         &= \alpha_2(\gamma\theta)
+    \end{align*}
+    se sigue que $\theta_2 = \gamma\theta$, por lo que el siguiente diagrama en $\mathscr{C}$ conmuta
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[bend right = 30]{ddr}[swap]{\theta_2} \arrow[dotted]{dr}[swap]{\exists ! \ \theta} \arrow[bend left = 30]{rrd}[]{\theta_1} \\
+            &A' \arrow[]{d}[swap]{\gamma} \arrow[]{r}[]{\beta} &A \arrow[]{d}[]{\alpha_1} \\
+            &B' \arrow[]{r}[swap]{\alpha_2} &B.
+        \end{tikzcd}
+    \end{center}
+\end{proof}
+
+\begin{Lema}\label{Mendoza-1.8.2}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $A_1,A_2\in\text{Obj}(\mathscr{C})$ tales que existe $A_1\prod A_2$ en $\mathscr{C}$. Entonces, las inclusiones y proyecciones naturales
+    \[
+        A_1\xrightarrow[]{\mu_1}A_1\prod A_2\xrightarrow[]{\pi_2}A_2 \quad \text{y} \quad A_2\xrightarrow[]{\mu_2}A_1\prod A_2\xrightarrow[]{\pi_1}A_1
+    \] 
+    satisfacen que $\mu_1\simeq\text{Ker}(\pi_2)$ y $\mu_2\simeq\text{Ker}(\pi_1)$ en $\text{Mon}_\mathscr{C}(-,A_1\prod A_2)$.
+\end{Lema}
+
+\begin{proof}
+
+    Por el inciso (1) de la Observación \ref{Mendoza-1.8.3(3)}, tenemos que $\pi_2\mu_1=\delta^A_{2,1}=0$ y que $\mu_1$ es un monomorfismo. Ahora, sea $X\xrightarrow[]{h}A_1\prod A_2$ tal que $\pi_2h=0$. Consideremos $h':=\pi_1h:X\to A_1$
+    \begin{center}
+        \begin{tikzcd}
+            &X \arrow[]{dl}[swap]{h'} \arrow[]{d}[]{h} \\
+            A_1 \arrow[]{r}[swap]{\mu_1} &A_1\prod A_2 \arrow[]{r}[]{\pi_2} &A_2.
+        \end{tikzcd}
+    \end{center}
+    Aseguramos que $h=\mu_1h'$. En efecto, tenemos que
+    \begin{align*}
+        \pi_1h &= h' \\
+               &= 1_{A_1}h' \\
+               &= \pi_1\mu_1h', \\ \\
+        \pi_2h &= 0 \\
+               &= \pi_2\mu_1 h'.
+    \end{align*}
+    Por la propiedad universal del producto, se obtiene que $h=\mu_1h'$, y la unicidad de $h'$ se sigue de que $\mu_1$ es un monomorfismo. La demostración de $\mu_2\simeq\text{Ker}(\pi_1)$ es análoga.
+\end{proof}
+
+\begin{Lema} \label{Mendoza-1.5.2}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $K\xrightarrow[]{\kappa}A\xrightarrow[]{f}B$ en $\mathscr{C}$. Entonces, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item $\kappa$ es un núcleo de $f$.
+
+        \item $\kappa$ es un igualador de $A\underset{0}{\overset{f}{\rightrightarrows}}B$.
+
+        \item El diagrama en $\mathscr{C}$
+            \begin{center}
+                \begin{tikzcd}
+                    K \arrow{d}[swap]{\kappa} \arrow{r} &0 \arrow{d} \\
+                    A \arrow{r}[swap]{f} &B
+                \end{tikzcd}
+            \end{center}
+            es un producto fibrado.
+    \end{enumerate}
+\end{Lema}
+
+\begin{proof}\leavevmode
+
+    (a)$\Rightarrow$(b) Sea $\kappa$ un núcleo de $f$. Entonces $f\kappa = 0$. Como $0\kappa = 0$, se sigue que $f\kappa = 0\kappa$. Supongamos que existe un morfismo $X\xrightarrow{g} A$ en $\mathscr{C}$ tal que $fg=0g$. Entonces, $fg=0$. Por la propiedad universal del núcleo, existe un único morfismo $X\xrightarrow[]{g'} K$ tal que $g=\kappa g'$. Por ende, $g'$ es tal que el siguiente diagrama conmuta
+    \begin{center}
+        \begin{tikzcd}
+            &X \arrow[dotted]{dl}[swap]{g'} \arrow[]{d}[]{f} \\
+            K \arrow[]{r}[swap]{\kappa} &A \arrow[shift left]{r}[]{f} \arrow[shift right]{r}[swap]{0} &B.
+        \end{tikzcd}
+    \end{center}
+    De la unicidad en la propiedad universal del núcleo, se sigue que $g'$ es el único morfismo en $\mathscr{C}$ que hace conmutar el diagrama anterior. Por lo tanto, $\kappa$ es un igualador de $A\underset{0}{\overset{f}{\rightrightarrows}}B$.
+
+    (b)$\Rightarrow$(c) Sea $\kappa$ un igualador de $A\underset{0}{\overset{f}{\rightrightarrows}}B$. Entonces, $f\kappa = 0\kappa$. Como $0\kappa = 0$, tenemos el siguiente diagrama conmutativo en $\mathscr{C}$
+    \begin{equation} \label{Mendoza-1.5.2-1}
+        \begin{tikzcd}
+            K \arrow[]{d}[swap]{\kappa} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \\
+            A \arrow[]{r}[swap]{f} &B.
+        \end{tikzcd}
+    \end{equation}
+    Veamos que este diagrama es un producto fibrado para $A\xrightarrow[]{f}B\xleftarrow[]{}0$. Supongamos que existen morfismos $P\xrightarrow[]{\beta_1} A, P\xrightarrow[]{\beta_2} 0$ en $\mathscr{C}$ tales que $f\beta_1 = 0\beta_2$. Como el codominio de $\beta_2$ es $0$, se sigue que $\beta_2=0$. Luego, $f\beta_1=0=0\beta_1$, por lo que el morfismo $P\xrightarrow[]{\beta_1} A$ es tal que $f\beta_1=0\beta_1$. Por la propiedad universal del igualador, existe un único morfismo $P\xrightarrow[]{f'} K$ tal que $\kappa f' = \beta_1$. Más aún, como $0f'=0$, tenemos que $f'$ hace conmutar el siguiente diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            P \arrow[bend right = 30]{ddr}[swap]{\beta_1} \arrow[bend left = 30]{drr}[]{} \arrow[dotted]{dr}[]{f'} \\
+            &K \arrow[]{d}[swap]{\kappa} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \\
+            &A \arrow[]{r}[swap]{f} &B.
+        \end{tikzcd}
+    \end{center}
+    De la unicidad en la propiedad universal del igualador, se sigue que $f'$ es el único morfismo en $\mathscr{C}$ que hace conmutar el diagrama anterior. Por lo tanto, (\ref{Mendoza-1.5.2-1}) es un producto fibrado. \\
+
+    (c)$\Rightarrow$(a) Sea el diagrama en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            K \arrow[]{d}[swap]{\kappa} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \\
+            A \arrow[]{r}[swap]{f} &B
+        \end{tikzcd}
+    \end{center}
+    un producto fibrado. En particular, el diagrama anterior es conmutativo, por lo que $f\kappa=0$. Supongamos que existe un morfismo $X\xrightarrow{g} A$ en $\mathscr{C}$ tal que $fg=0$. Entonces, el morfismo $g$ es tal que el siguiente diagrama conmuta
+    \begin{center}
+        \begin{tikzcd}
+            X \arrow[bend right = 30]{ddr}[swap]{g} \arrow[bend left = 30]{drr}[]{} \\
+            &K \arrow[]{d}[swap]{\kappa} \arrow[]{r}[]{} &0 \arrow[]{d}[]{} \\
+            &A \arrow[]{r}[swap]{f} &B.
+        \end{tikzcd}
+    \end{center}
+    Por la propiedad universal del producto fibrado, existe un único morfismo $X\xrightarrow[]{g'} K$ tal que $g=\kappa g'$. Por ende, $g'$ hace conmutar el siguiente diagrama
+    \begin{center}
+        \begin{tikzcd}
+            &X \arrow[dotted]{dl}[swap]{\exists! \ g'} \arrow[]{d}[]{g} \\
+            K \arrow[]{r}[swap]{\kappa} &A \arrow[]{r}[]{f} &B.
+        \end{tikzcd}
+    \end{center}
+    De la unicidad en la propiedad universal del producto fibrado, se sigue que $g'$ es el único morfismo en $\mathscr{C}$ que hace conmutar el diagrama anterior. Por lo tanto, $\kappa$ es un núcleo de $f$. 
+\end{proof}
+
+\begin{Def} \label{Def: Conúcleo}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $A\xrightarrow{f} B$ un morfismo en $\mathscr{C}$. Un \emph{conúcleo} de $f$ es un morfismo $B\xrightarrow{p} C$ en $\mathscr{C}$ que satisface las siguientes condiciones.
+    \begin{itemize}
+    
+        \item[(CoNúc1)] $pf=0$. \\
+
+        \item[(CoNúc2)] Propiedad universal del conúcleo: para todo morfismo $B\xrightarrow{g} X$ en $\mathscr{C}$ tal que $gf=0$, existe un único morfismo $C\xrightarrow[]{g'} X$ tal que $g=g'p$; diagramáticamente,
+            \begin{center}
+                \begin{tikzcd}
+                    A \arrow[]{r}[]{f} &B \arrow[]{d}[swap]{g} \arrow[]{r}[]{p} &C. \arrow[dotted]{dl}[]{\exists! \ g'} \\
+                                       &X
+                \end{tikzcd}
+            \end{center}
+    \end{itemize}
+    Un \emph{seudoconúcleo} de $f$ es un morfismo que cumple con las condiciones anteriores, exceptuando la unicidad en (CoNúc2).
+\end{Def}
+
+\begin{Lema}\label{Mendoza-1.8.2*}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $A_1,A_2\in\text{Obj}(\mathscr{C})$ tales que existe $A_1\coprod A_2$ en $\mathscr{C}$. Entonces, las inclusiones y proyecciones naturales
+    \[
+        A_1\xrightarrow[]{\mu_1}A_1\prod A_2\xrightarrow[]{\pi_2}A_2 \quad \text{y} \quad A_2\xrightarrow[]{\mu_2}A_1\prod A_2\xrightarrow[]{\pi_1}A_1
+    \] 
+    satisfacen que $\pi_1\simeq\text{CoKer}(\mu_2)$ y $\pi_2\simeq\text{CoKer}(\mu_1)$ en $\text{Epi}_\mathscr{C}(A_1\coprod A_2,-)$.
+\end{Lema}
+
+\begin{Obs} \label{Dualidad de núcleo y conúcleo}
+
+    Sean $\mathscr{C}$ una categoría con objeto cero y $A\xrightarrow{f} B$ un morfismo en $\mathscr{C}$.
+    \begin{enumerate}[label=(\arabic*)]
+    
+        %\item La categoría opuesta $\mathscr{C}^{\text{op}}$ de $\mathscr{C}$ tiene un objeto cero. Más aún, dicho objeto cero también es objeto cero en $\mathscr{C}$.
+
+        \item $B\xrightarrow{p} C$ es un conúcleo de $f$ en $\mathscr{C}$ si, y sólo si, $C\xrightarrow[]{p^{\text{op}}} B$ es un núcleo de $B\xrightarrow[]{f^{\text{op}}} A$ en $\mathscr{C}^{\text{op}}$. Es decir, el conúcleo es el concepto dual del núcleo en categorías con objeto cero. El conúcleo de $f$ (si existe) es único hasta isomorfismos en $\text{Epi}_\mathscr{C}(B,-)$. 
+
+        \item En vista de (1), y en caso de que $f$ admita un conúcleo, denotaremos por
+            \[
+                B\xrightarrow[]{c_f} \text{CoKer}(f)
+            \]
+            a la elección de uno de ellos, i.e.,
+            \[
+                \text{CoKer}(A\xrightarrow[]{f}B) := (B\xrightarrow[]{c_f}\text{CoKer}(f)).
+            \] 
+            Note que
+            \[
+                (B\xrightarrow[]{c_f}\text{CoKer}(f) = \big(\text{Ker}(f^{\text{op}})\xrightarrow[]{\kappa_{f^{\text{op}}}} B\big)^{\text{op}},
+            \] 
+            por lo que $\text{CoKer}(f) = \big(\text{Ker}(f^{\text{op}})\big)^{\text{op}}$.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Prop}\label{Mendoza-1.5.8}
+    Sean $\mathscr{C}$ una categoría con objeto cero y $A\xrightarrow[]{\alpha}B$ en $\mathscr{C}$ tal que existen $\text{Ker}(\alpha)$ y $\text{CoKer}(\text{Ker}(\alpha))$. Entonces,
+    \[
+    \text{Ker}(\alpha) \simeq \text{Ker}(\text{CoKer}(\text{Ker}(\alpha)) \text{ en } \text{Mon}_\mathscr{C}(-,A).
+    \] 
+\end{Prop}
+
+\begin{proof}
+
+    Sea $p:= c_{k_\alpha}:A\to \text{CoKer}(k_\alpha)$. Dado que $\alpha k_\alpha=0$ y $p=c_{k_\alpha}$, existe un único morfismo $\text{CoKer}(k_\alpha)\xrightarrow[]{q} B$ en $\mathscr{C}$ tal que $\alpha=qp$. Entonces, tenemos el diagrama conmutativo en $\mathscr{C}$
+    \begin{center}
+        \begin{tikzcd}
+            \text{Ker}(\alpha) \arrow[hook]{r}[]{k_\alpha} &A \arrow[]{rr}[]{\alpha} &&B, \\
+            X \arrow[]{ur}[swap]{\theta} &&\text{CoKer}(k_\alpha) \arrow[dotted]{ur}[swap]{q}
+        \end{tikzcd}
+    \end{center}
+    por lo que basta ver que $k_\alpha$ es un núcleo de $p$. En efecto, tenemos que $pk_\alpha = c_{k_\alpha} = 0$. Sea $X\xrightarrow[]{\theta}A$ en $\mathscr{C}$ tal que $p\theta=0$. Luego, tenemos que
+    \begin{align*}
+        \alpha\theta &= qp\theta \\
+                     &= q0 \\
+                     &= 0
+    \end{align*}
+    y, como $k_\alpha = \text{Ker}(\alpha)$, existe un único $X\xrightarrow[]{\theta'} \text{Ker}(\alpha)$ en $\mathscr{C}$ tal que $\theta = k_{\alpha} \theta'$.
+\end{proof}
+
+\begin{Obs}\label{Obs: pares núcleo-conúcleo triviales} % Se menciona en Mendoza-1.6.5.
+    Sean $\mathscr{C}$ una categoría con objeto cero y $A\xrightarrow[]{f} B$ en $\mathscr{C}$.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item $\text{Ker}(B\to 0) = \big(B\xrightarrow[]{1_B}B\big)$.
+            
+            En efecto: $B\xrightarrow[]{1_B}B$ es tal que $0_{B,0}1_B=0$. Sea $X\xrightarrow[]{h} B$ un morfismo en $\mathscr{C}$ tal que $0_{B,0}h=0$. Entonces, $X\xrightarrow[]{h} B$ es tal que $h=1_Bh$ trivialmente. Supongamos que $X\xrightarrow[]{h'} B$ es un morfismo en $\mathscr{C}$ tal que $h=1_Bh'$. Entonces $h=h'$, por lo que $h$ es único. Por lo tanto, $B\xrightarrow[]{1_B}B$ es un núcleo de $0_{B,0}$, es decir, $\text{Ker}\big(B\xrightarrow[]{}0\big) = \big(B\xrightarrow[]{1_B}B\big)$.
+
+        \item Si $f$ es un epimorfismo, entonces $\text{CoKer}\big(A\xrightarrow[]{f} B\big) = (B\to 0)$.
+
+            En efecto: Supongamos que $f$ es un epimorfismo. Claramente, $0_{B,0}\in\text{Hom}_\mathscr{C}(B,0)$ es tal que $0_{B,0}f=0_{A,0}$. Sea $B\xrightarrow[]{g} X$ un morfismo en $\mathscr{C}$ tal que $gf=0_{A,X}$. Entonces, tenemos que
+            \begin{align*}
+                0_{X,0}gf &= 0_{X,0}0_{A,X} \\
+                         &= 0_{A,0} \tag{$0$ es un objeto final en $\mathscr{C}$} \\
+                         &= 0_{B,0}f.
+            \end{align*}
+            Como $f$ es un epimorfismo, se sigue que $0_{X,0}g = 0_{B,0}$. Más aún, por ser $0$ un objeto final en $\mathscr{C}$, $0_{X,0}\in\text{Hom}_\mathscr{C}(X,0)$ es el único morfismo en $\mathscr{C}$ con esta propiedad.
+    \end{enumerate}
+\end{Obs}
+
+\section{Categorías semiaditivas} \label{Sec: Categorías semiaditivas}
+
+\begin{Def}\label{Def: Categoría semiaditiva}
+    Una categoría $\mathscr{C}$ se dice que es \emph{semiaditiva} si satisface las siguientes condiciones:
+
+    \begin{itemize}
+
+        \item[(SA1)] $\mathscr{C}$ es una categoría localmente pequeña con objeto cero;
+
+        \item [(SA2)] para cualesquiera $A,B\in\text{Obj}(\mathscr{C}), \text{Hom}_\mathscr{C}(A,B)$ tiene estructura de monoide abeliano $\big( \text{Hom}_\mathscr{C}(A,B), \break +,e_{A,B}\big)$, donde el elemento neutro $e_{A,B}$ es el morfismo cero en $\mathscr{C}$.
+
+        \item[(SA3)] la composición de morfismos en $\mathscr{C}$ es bilineal, es decir,
+            \[
+                \gamma(\alpha+\beta) = \gamma\alpha+\gamma\beta \quad \land \quad (\alpha+\beta)\eta = \alpha\eta + \beta\eta,
+            \] 
+            cada vez que dichas composiciones tengan sentido.
+            
+    \end{itemize}
+\end{Def}
+
+\begin{Obs} \label{Observaciones de las categorías semiaditivas}
+    El universo de las categorías semiaditivas es dualizante.
+
+    \vspace{1mm}
+    En efecto: Sea $\mathscr{C}$ una categoría semiaditiva. Entonces, existe un objeto cero $0$ en $\mathscr{C}$ y, por el inciso (2) de la Observación \ref{Obs: Objeto cero}, tenemos que $0$ es un objeto cero en $\mathscr{C}^\text{op}$. \\
+
+    Ahora, sean $A,B\in\text{Obj}(\mathscr{C}^\text{op})$. Definimos la suma entre elementos $f^{\text{op}},g^{\text{op}}\in\text{Hom}_{\mathscr{C}^{\text{op}}}(B,A)$ como
+    \[
+        f^{\text{op}}+g^{\text{op}} := (f+g)^{\text{op}}.
+    \] 
+    Luego, ya que $\text{Hom}_\mathscr{C}(A,B)$ tiene estructura de monoide abeliano, para cualesquiera $f^{\text{op}},g^{\text{op}},h^{\text{op}}\in\text{Hom}_{\mathscr{C}^{\text{op}}}(B,A)$, tenemos que
+    \begin{align*}
+        (f^{\text{op}} + g^{\text{op}}) + h^{\text{op}} &= (f+g)^{\text{op}} + h^{\text{op}} \\
+                                                        &= \big((f+g)+h\big)^{\text{op}} \\
+                                                        &= \big(f+(g+h)\big)^{\text{op}} \\
+                                                        &= f^{\text{op}} + (g+h)^{\text{op}} \\
+                                                        &= f^{\text{op}} + (g^{\text{op}}+h^{\text{op}}), \\ \\
+        f^{\text{op}} + e_{A,B}^{\text{op}} &= (f+e_{A,B})^{\text{op}} \\
+                                            &= f^{\text{op}} \\
+                                            &= (e_{A,B}+f)^{\text{op}} \\
+                                            &= e_{A,B}^{\text{op}}+f^{\text{op}},
+    \end{align*}
+    \begin{align*}
+        f^{\text{op}} + g^{\text{op}} &= (f+g)^{\text{op}} \\
+                                      &= (g+f)^{\text{op}} \\
+                                      &= g^{\text{op}}+f^{\text{op}},
+    \end{align*}
+    por lo que $\text{Hom}_{\mathscr{C}^{\text{op}}}(B,A)$ tiene estructura de monoide abeliano. \\
+
+    Por último, dado que la composición de morfismos en $\mathscr{C}$ es bilineal, también lo es en $\mathscr{C}^{\text{op}}$, pues
+    \begin{align*}
+        \eta^{\text{op}}(\alpha^{\text{op}}+\beta^{\text{op}}) &= \eta^{\text{op}}(\alpha+\beta)^{\text{op}} \\
+                                                                 &= \big((\alpha+\beta)\eta\big)^{\text{op}} \\
+                                                                 &= (\alpha\eta+\beta\eta)^{\text{op}} \\
+                                                                 &= (\alpha\eta)^{\text{op}} + (\beta\eta)^{\text{op}} \\
+                                                                 &= \eta^{\text{op}}\alpha^{\text{op}} + \eta^{\text{op}}\beta^{\text{op}}, \\ \\
+                                                                 (\alpha^{\text{op}}+\beta^{\text{op}})\gamma^{\text{op}} &= (\alpha+\beta)^{\text{op}}\gamma^{\text{op}} \\
+                                                                                                                          &= \big(\gamma(\alpha+\beta)\big)^{\text{op}} \\
+                                                                                                                          &= (\gamma\alpha+\gamma\beta)^{\text{op}} \\
+                                                                                                                          &= (\gamma\alpha)^{\text{op}} + (\gamma\beta)^{\text{op}} \\
+                                                                                                                          &= \alpha^{\text{op}}\gamma^{\text{op}} + \beta^{\text{op}}\gamma^{\text{op}}
+    \end{align*}
+    cada vez que dichas composiciones tengan sentido. De lo anterior, concluimos que, si $\mathscr{C}$ es una categoría semiaditiva, entonces $\mathscr{C}^\text{op}$ también lo es, por lo que el universo de las categorías semiaditivas es dualizante. Por lo tanto, cualquier resultado válido para categorías semiaditivas tendrá un resultado dual válido para el mismo tipo de categorías.
+\end{Obs}
+
+\begin{Prop} \label{Mendoza-1.9.2}
+    Para una familia finita $\{A_i\xrightarrow[]{\mu_i} A\}_{i=1}^n$ de morfismos en una categoría semiaditiva $\mathscr{C}$, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item $A$ y $\{A_i\xrightarrow[]{\mu_i} A\}_{i=1}^n$ son un coproducto en $\mathscr{C}$ para $\{A_i\}_{i=1}^n$.
+
+        \item Existe una familia $\{A\xrightarrow[]{\pi_i} A_i\}_{i=1}^n$ de morfismos en $\mathscr{C}$ tales que $\sum_{i=1}^n \mu_i\pi_i = 1_A$ y $\pi_i\mu_j = \delta_{i,j}^A$ para cualesquiera $i,j\in\{1,2,...,n\}$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    $(a)\Rightarrow(b)$ Por el inciso (3) de la Observación \ref{Observaciones del producto}, existe una familia $\{A\xrightarrow[]{\pi_i} A_i\}_{i=1}^n$ de morfismos en $\mathscr{C}$ tales que $\pi_i\mu_j = \delta^A_{i,j}$ para cualesquiera $i,j\in\{1,2,...,n\}$. Para cada $j\in\{1,2,...,n\}$, se tiene que
+    \begin{align*}
+        \bigg(\sum_{i=1}^n \mu_i\pi_i\bigg)\mu_j &= \sum_{i=1}^n \mu_i(\pi_i\mu_j) \\
+                                                 &= \sum_{i=1}^n \mu_i \delta^A_{i,j} \\
+                                                 &= \mu_j \tag{$e_{X,Y}=0_{X,Y} \ \ \forall \ X,Y\in\text{Obj}(\mathscr{C})$} \\
+                                                 &= 1_A\mu_j.
+    \end{align*}
+    Por la propiedad universal del coproducto, se sigue que $\sum_{i=1}^n \mu_i\pi_i = 1_A$. \\
+
+    $(b)\Rightarrow(a)$ Sea $\{\pi_i:A\to A_i\}_{i=1}^n$ una familia de morfismos en $\mathscr{C}$ tales que $\sum_{i=1}^n \mu_i\pi_i = 1_A$ y $\pi_i\mu_j = \delta^A_{i,j}$ para cualesquiera $i,j\in\{1,2,...,n\}$. Dada una familia $\{A_i\xrightarrow[]{f_i} B\}_{i=1}^n$ en $\mathscr{C}$, definimos $f:=\sum_{j=1}^n f_j\mu_j$. Veamos que el diagrama
+    \begin{center}
+        \begin{tikzcd}
+            &A \arrow[]{dd}[]{f} \\
+            A_i \arrow[]{ur}[]{\mu_i} \arrow[]{dr}[swap]{f_i} & \\
+                                                              &B
+        \end{tikzcd}
+    \end{center}
+    conmuta para cada $i\in I$. Sea $i\in I$. Entonces, tenemos que
+    \begin{align*}
+        f\mu_i &= \bigg( \sum_{j=1}^n f_j\pi_j \bigg) \mu_i \\
+               &= \sum_{j=1}^n f_j(\pi_j\mu_i) \\
+               &= \sum_{j=1}^n f_j \delta^A_{i,j} \\
+               &= f_i. \tag{$e_{X,Y} = 0_{X,Y} \ \ \forall \ X,Y\in\text{Obj}(\mathscr{C})$}
+    \end{align*}
+    Ahora, supongamos que $A\xrightarrow[]{f'} B$ es tal que $f'\mu_i=f_i$ para todo $i\in I$. Luego,
+    \begin{align*}
+        f' &= f'1_A \\
+           &= f'\bigg( \sum_{i=1}^n \mu_i\pi_i \bigg) \\
+           &= \sum_{i=1}^n (f'\mu_i)\pi_i \\
+           &= \sum_{i=1}^n f_i\pi_i \\
+           &= f.
+    \end{align*}
+\end{proof}
+
+\begin{Prop}\label{Mendoza-Ejer.43}
+    Para una familia finita $\{A\xrightarrow[]{\pi_i} A_i\}_{i=1}^n$ de morfismos en una categoría semiaditiva $\mathscr{C}$, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+
+        \item $A$ y $\{A\xrightarrow[]{\pi_i} A_i\}_{i=1}^n$ son un producto en $\mathscr{C}$ para $\{A_i\}_{i=1}^n$.
+
+        \item Existe $\{A_i\xrightarrow[]{\mu_i} A\}_{i=1}^n$ en $\mathscr{C}$ tal que $\sum_{i=1}^n \mu_i\pi_i = 1_A$ y $\pi_i\mu_j = \delta_{i,j}^A$ para todo $i,j\in[1,n]$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}
+    Por la Observación \ref{Observaciones de las categorías semiaditivas}, sabemos que el universo de las categorías semiaditivas es dualizante; es decir, si $\mathscr{C}$ es una categoría semiaditiva, entonces $\mathscr{C}^{\text{op}}$ también lo es. Aplicando la Proposición \ref{Mendoza-1.9.2} a la familia de morfismos $\{A_i\xrightarrow[]{\pi_i^{\text{op}}} A\}_{i=1}^n$ en $\mathscr{C}^{\text{op}}$, tenemos las siguientes condiciones equivalentes.
+
+    \begin{enumerate}
+
+        \item[(c)] $A$ y $\{A_i\xrightarrow[]{\pi_i^{\text{op}}} A\}_{i=1}^n$ son un coproducto en $\mathscr{C}^{\text{op}}$ para $\{A_i\}_{i=1}^n$.
+
+        \item[(d)] Existe $\{A\xrightarrow[]{\mu_i^{\text{op}}} A_i\}_{i=1}^n$ en $\mathscr{C}^{\text{op}}$ tal que $\sum_{i=1}^n \pi_i^{\text{op}}\mu_i^{\text{op}} = 1_A$ y $\mu_i^{\text{op}}\pi_j^{\text{op}} = \delta_{i,j}^A$ para todo $i,j\in[1,n]$.
+    \end{enumerate}
+
+    \noindent Luego, aplicando el funtor $D_{\mathscr{C}^\text{op}}$ a la proposición categórica $(\text{c})\Leftrightarrow(\text{d})$, tenemos que las siguientes condiciones son equivalentes.
+    \begin{enumerate}[label=(\alph*)]
+
+        \item $A$ y $\{A\xrightarrow[]{\pi_i} A_i\}_{i=1}^n$ son un producto en $\mathscr{C}$ para $\{A_i\}_{i=1}^n$.
+
+        \item Existe $\{A_i\xrightarrow[]{\mu_i} A\}_{i=1}^n$ en $\mathscr{C}$ tal que $\sum_{i=1}^n \mu_i\pi_i = 1_A$ y $\pi_i\mu_j = \delta_{i,j}^A$ para todo $i,j\in[1,n]$.
+    \end{enumerate}
+\end{proof}
+
+\begin{Teo}\label{Mendoza-1.9.3}
+    En una categoría semiaditiva, todo coproducto finito es un biproducto finito.
+\end{Teo}
+
+\begin{proof}
+    Sean $\mathscr{C}$ una categoría semiaditiva y $\{A_i\}_{i\in I}$ una familia de objetos en $\mathscr{C}$, con $I$ finito, tal que existe el coproducto $\coprod_{i\in I}A_i$ en $\mathscr{C}$. \\
+
+    Supongamos que $I=\varnothing$. Entonces, por el inciso (4) de la Observación \ref{Mendoza-1.8.3} tenemos que $A:=\coprod_{i\in I}A_i$ es un objeto inicial en $\mathscr{C}$. Además, por vacuidad, todo objeto final en $\mathscr{C}$ es un producto de $\{A_i\}_{\in I}$, por lo que basta ver que $A$ es un objeto final en $\mathscr{C}$. Sea $X\in\text{Obj}(\mathscr{C})$. Entonces, para todo $f\in\text{Hom}_\mathscr{C}(X,A)$, tenemos que
+    \begin{align*}
+        f &= 1_Af \\
+          &= 0_{A,A}f \\
+          &= 0_{X,A} \\
+          &= e_{X,A},
+    \end{align*}
+    por lo que $|\text{Hom}_\mathscr{C}(X,A)|=1$. Por ende, $A$ es un objeto final en $\mathscr{C}$. \\
+
+    Supongamos que $I\neq \varnothing$. Sea $\{A_i\xrightarrow[]{\mu_i} A\}_{i\in I}$ un coproducto para $\{A_i\}_{i\in I}$ en $\mathscr{C}$. Entonces, por la Proposición \ref{Mendoza-1.9.2}, existe una familia de morfismos $\{A\xrightarrow[]{\pi_i} A_i\}_{i\in I}$ tal que $\sum_{i\in J} \mu_i\pi_i = 1_A$ y $\pi_i\mu_j=\delta_{i,j}^A$ para cualesquiera $i,j\in[1,n]$. Por \ref{Mendoza-Ejer.43}, tenemos que $A$ y $\{A\xrightarrow[]{\pi_i} A_i\}_{i\in I}$ son un producto en $\mathscr{C}$ para $\{A_i\}_{i\in I}$. Luego, por la Proposición \ref{Mendoza-1.8.12}, concluimos que $A$ es un biproducto.
+\end{proof}
+
+\begin{Coro}\label{Mendoza-1.9.3*}
+    En una categoría semiaditiva, todo producto finito es un biproducto finito.
+\end{Coro}
+
+\begin{proof}
+    Se sigue de la Observación \ref{Observaciones de las categorías semiaditivas}, pues basta aplicar el principio de dualidad al Teorema \ref{Mendoza-1.9.3}.
+\end{proof}
+
+\begin{Nota}
+    Dado que, por el Teorema \ref{Mendoza-1.9.3} y el Corolario \ref{Mendoza-1.9.3*}, sabemos que en las categorías semiaditivas no existe distinción entre las nociones de producto, coproducto y biproducto cuando estos son finitos, denotaremos a todos los productos finitos y coproductos finitos en categorías semiaditivas empleando la notación de biproducto.
+\end{Nota}
+
+\begin{Prop}\label{Mendoza-Ej.44}
+    Sean $\mathscr{C}$ una categoría semiaditiva y $A = \bigoplus_{i=1}^n A_i, B=\bigoplus_{i=1}^m B_j$ en $\mathscr{C}$, con $m$ y $n$ enteros positivos. Entonces $\text{Mat}_{m \times n}(A,B)$ es un monoide abeliano, con la suma dada por 
+\[
+    [\alpha+\beta]_{ij}:=[\alpha]_{ij}+[\beta]_{ij} \text{ en } \text{Hom}_{\mathscr{C}}(A_j,B_i)\quad \forall \ (i,j)\in[1,n]\times[1,m]
+\]
+y neutro aditivo $[0]_{ij} = 0_{A_j,B_i}$ para cualquier $(i,j)\in[1,n]\times[1,m]$.
+\end{Prop}
+
+\begin{proof}
+    Sean $i \in [1,n]$ y $j \in [1,m]$. Por ser $\mathscr{C}$ una categoría semiaditiva, tenemos que $\text{Hom}_{\mathscr{C}}(A_j,A_i)$ tiene estructura de monoide abeliano. Entonces, dado que la suma en $\text{Hom}_{\mathscr{C}}(A_j,B_i)$ es asociativa, se tiene que 
+\begin{align*}
+    [(\alpha + \beta)+\gamma]_{ij}&= [\alpha+\beta]_{ij} + [\gamma]_{ij} \\ &=([\alpha]_{ij} + [\beta]_{ij})+[\gamma]_{ij}\\
+    &= [\alpha]_{ij} + ([\beta]_{ij}+[\gamma]_{ij})\\
+    &=[\alpha]_{ij} + [\beta+\gamma]_{ij} \\
+    &= [\alpha+(\beta+\gamma)]_{ij}.
+\end{align*}
+De esto se sigue que $(\alpha+\beta)+\gamma = \alpha+(\beta+\gamma)$, es decir, la suma es asociativa en $\text{Mat}_{m \times n}(A,B).$\\
+
+Ahora bien, como la suma en $\text{Hom}_{\mathscr{C}}(A_j,B_i)$ es conmutativa, tenemos que 
+\[ [\alpha+\beta]_{ij} = [\alpha]_{ij}+[\beta]_{ij} = [\beta]_{ij}+[\alpha]_{ij} = [\beta+\alpha]_{ij},\]
+por lo que $\alpha+\beta = \beta+\alpha$. Por ende, la suma en $\text{Mat}_{m \times n}(A,B)$ es conmutativa.\\
+
+Finalmente, como $[0]_{ij}$ es el neutro aditivo de $\text{Hom}_{\mathscr{C}}(A_i, B_j)$, tenemos que $[\alpha+0]_{ij} = [\alpha]_{ij} + [0]_{ij} = [\alpha]_{ij}.$ De esto se sigue que $\alpha+0 = \alpha$, por lo que $0$ es un neutro aditivo en $\text{Mat}_{m\times n}(A,B).$\\
+
+Por lo tanto, $\text{Mat}_{m\times n}(A,B)$ tiene estructura de monoide abeliano.
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.9.4}
+    Sean $\mathscr{C}$ una categoría semiaditiva y $A=\bigoplus_{i=1}^n A_i, B=\bigoplus_{j=1}^m B_j$ en $\mathscr{C}$, con $m$ y $n$ enteros positivos. Entonces, la función $\varphi_{B,A}:\text{Hom}_\mathscr{C}(A,B)\to \text{Mat}_{m\times n}(A,B)$ de la Proposición \ref{Mendoza-1.8.11} es un isomorfismo de monoides abelianos, cuyo inverso es
+    \[
+        \varphi^{-1}_{B,A}(\alpha) = \sum_{i,j} \mu_i^B [\alpha]_{i,j} \pi_j^A.
+    \] 
+\end{Prop}
+
+\begin{proof}
+
+    Sean $f,g\in\text{Hom}_\mathscr{C}(A,B)$. Entonces, para cualesquiera $i\in\{1,2,...,n\}, j\in\{1,2,...,m\}$, tenemos que
+    \begin{align*}
+        [\varphi_{B,A}(f+g)]_{i,j} &= \pi_i^B(f+g)\mu_j^A \\
+                                   &= \pi_i^Bf\mu_j^A + \pi_i^Bg\mu_j^A \\
+                                   &= [\varphi_{B,A}(f)]_{i,j} + [\varphi_{B,A}(g)]_{i,j} \\
+                                   &= [\varphi_{B,A}(f) + \varphi_{B,A}(g)]_{i,j} \\ \\
+                                   & \ \text{y} \\ \\
+        [\varphi_{B,A}(0_{A,B})]_{i,j} &= \pi_i^B 0_{A,B} \mu_j^A \\
+                                       &= 0_{A_j,B_i} \\
+                                       &= [0]_{i,j},
+    \end{align*}
+    de donde se sigue que $\varphi_{B,A}(f+g) = \varphi_{B,A}(f) + \varphi_{B,A}(g)$ y $\varphi_{B,A}(0_{A,B})=0$. Ahora, definimos
+    \begin{align*}
+        \psi: \text{Mat}_{m\times n}(A,B)&\to \text{Hom}_\mathscr{C}(A,B), \\
+                                  \alpha &\mapsto \sum_{i,j} \mu_i^B[\alpha]_{i,j}\pi_j^A.
+    \end{align*}
+    Entonces, para todo $f\in\text{Hom}_\mathscr{C}(A,B)$, tenemos que
+    \begin{align*}
+        \psi(\varphi_{B,A}(f)) &= \sum_{i,j} \mu_i^B [\varphi_{B,A}(f)]_{i,j} \pi_j^A \\
+                               &= \sum_{i,j} \mu_i^B(\pi_i^B f \mu_j^A)\pi_j^A \\
+                               &= 1_B f 1_A \\
+                               &= f, 
+    \end{align*}
+    de donde se sigue que $\psi\varphi_{B,A}=1_{\text{Hom}_\mathscr{C}(A,B)}$. Por otro lado, sea $\alpha\in \text{Mat}_{m\times n}(A,B)$. Entonces, para cualesquiera $k\in\{1,2,...,n\}, l\in\{1,2,...,m\}$, tenemos que
+    \begin{align*}
+        [\alpha]_{k,l} &= \sum_{i,j} \delta_{k,i}^B [\alpha]_{i,j} \delta_{j.l}^A \\
+                       &= \sum_{i,j} \pi_k^B\mu_i^B [\alpha]_{i,j} \pi_j^A\mu_l^A \\
+                       &= [\varphi_{B,A}(\psi(\alpha))]_{k,l},
+    \end{align*}
+    por lo que $\varphi_{B,A}(\psi(\alpha))=\alpha$, de donde se sigue que $\varphi_{B,A}\psi=1_{ \text{Mat}_{m\times n}(A,B)}$. Como $\varphi_{A,B}$ es un morfismo de monoides abelianos, se sigue que $\psi$ también lo es, de donde concluimos que $\varphi_{B,A}:\text{Hom}_\mathscr{C}(A,B)\to \text{Mat}_{m\times n}(A,B)$ es un isomorfismo de monoides abelianos.
+\end{proof}
+
+\begin{Prop}\label{Mendoza-1.9.6}
+    Sean $\mathscr{C}$ una categoría semiaditiva y $A=\bigoplus_{i=1}^n A_i, B=\bigoplus_{j=1}^m B_j, C=\bigoplus_{k=1}^l C_k$ en $\mathscr{C}$, con $m,n$ y $k$ enteros positivos. Entonces, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Para cualesquiera $f\in\text{Hom}_\mathscr{C}(A,B), g\in\text{Hom}_\mathscr{C}(B,C)$, se tiene que
+            \[
+                \varphi_{C,A}(gf) = \varphi_{C,B}(g) \varphi_{B,A}(f).
+            \] 
+
+        \item $\varphi_{A,A} (1_A) = \mathbbm{1}_A,$ donde $[\mathbbm{1}_A]_{i,j}:=\delta_{i,j}^A$ para cualesquiera $i,j\in[1,n]$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Para todo $(k,i)\in[1,l]\times[1,n]$, tenemos que
+            \begin{align*}
+                [\varphi_{C,A}(gf)]_{k,i} &= \pi_k^Cg1_B f\mu_i^A \\
+                                          &= \pi_k^Cg\bigg(\sum_{j=1}^m \mu_j^B\pi_j^B \bigg)f\mu_i^A \\
+                                          &= \sum_{j=1}^m (\pi_k^Cg\mu_j^B)(\pi_j^Bf\mu_i^A) \\
+                                          &= \sum_{j=1}^m [\varphi_{C,B}(g)]_{k,j} [\varphi_{B,A}(f)]_{j,i} \\
+                                          &= [\varphi_{C,B}(g)\varphi_{B,A}(f)]_{k,i},
+            \end{align*}
+            de donde se sigue que $\varphi_{C,A}(gf) = \varphi_{C,B}(g)\varphi_{B,A}(f)$.
+
+        \item Para cualesquiera $i,j\in[1,n]$, tenemos que
+            \begin{align*}
+                [\mathbbm{1}_A]_{i,j} &= \delta_{i,j}^A \\
+                                      &= \pi_i^A1_A\mu_j^A \\
+                                      &= [\varphi_{A,A}(1_A)]_{i,j};
+            \end{align*}
+            por ende, $\varphi_{A,A}(1_A) = \mathbbm{1}_A$.
+    \end{enumerate}
+\end{proof}
+
+%\begin{Obs}\label{Obs: Morfismos diagonal y codiagonal}%\leavevmode
+%    %\begin{enumerate}[label=(\arabic*)]
+%    %
+%    %    \item Sea $\mathscr{C}$ una categoría con objeto cero tal que existe un biproducto $A\coprod A$ para todo $A\in\text{Obj}(\mathscr{C})$. En tal caso, $\delta:A\coprod A\xrightarrow[]{\sim}A\prod A$ en $\mathscr{C}$, con $\varphi(\delta) = \big( \begin{smallmatrix} 1_A &0 \\ 0 &1_A \end{smallmatrix}\big)$. Luego, por la Proposición \ref{Mendoza-1.8.12}, podemos escribir que $A\coprod A=A\prod A$. En este caso, tenemos $A\xrightarrow[]{\Delta_A}A\coprod A \xrightarrow[]{\nabla_A}A$ en $\mathscr{C}$.
+%
+%    %    \item Sea $\mathscr{C}$ una categoría con objeto cero tal que existe un biproducto $A\bigoplus A$ para todo $A\in\text{Obj}(\mathscr{C})$. En tal caso, tenemos $A\xrightarrow[]{\Delta_A}A\bigoplus A \xrightarrow[]{\nabla_A}A$ en $\mathscr{C}$.
+%
+%    %    \item Sea $\mathscr{C}$ una categoría semiaditiva tal que, para todo $A\in\text{Obj}(\mathscr{C})$, existe $A\coprod A$ en $\mathscr{C}$. Entonces, por el Teorema \ref{Mendoza-1.9.3}, se sigue que $A\coprod A = A\bigoplus A$  en $\mathscr{C}$.
+%    %\end{enumerate}
+%
+%    Sea $\mathscr{C}$ una categoría con objeto cero tal que existe un biproducto $A\bigoplus A$ para todo $A\in\text{Obj}(\mathscr{C})$. En tal caso, tenemos $A\xrightarrow[]{\Delta_A}A\bigoplus A \xrightarrow[]{\nabla_A}A$ en $\mathscr{C}$.
+%\end{Obs}
+
+\begin{Lema}\label{Mendoza-1.9.10}
+    Sea $\mathscr{C}$ una categoría semiaditiva tal que, para todo $M\in\text{Obj}(\mathscr{C})$, existe $M\bigoplus M$. Entonces, para $A,B\in\text{Obj}(\mathscr{C})$ y $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B)$, la suma $\alpha+\beta$ en $\text{Hom}_\mathscr{C}(A,B)$ está dada por cualquiera de las siguientes composiciones de morfismos en $\mathscr{C}$:
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $A\xrightarrow[]{\Delta_A} A\bigoplus A\xrightarrow[]{(\begin{smallmatrix} \alpha &\beta \end{smallmatrix})} B$;
+
+        \item $A\xrightarrow[]{\big( \begin{smallmatrix} \alpha \\ \beta \end{smallmatrix} \big)} B\bigoplus B \xrightarrow[]{\nabla_B} B$;
+
+        \item $A\xrightarrow[]{\Delta_A} A\bigoplus A \xrightarrow[]{\big( \begin{smallmatrix} \alpha &0 \\ 0 &\beta \end{smallmatrix} \big)} B\bigoplus B\xrightarrow[]{\nabla_B} B$.
+    \end{enumerate}
+\end{Lema}
+
+\begin{proof}
+
+    Se sigue directamente de la multiplicación de matrices\footnote{Ver la Definición \ref{Def: Morfismo diagonal y codiagonal}.}.
+\end{proof}
+
+\begin{Teo}\label{Mendoza-1.9.11}
+    Sea $\mathscr{C}$ una categoría con objeto cero tal que, para todo $M\in\text{Obj}(\mathscr{C})$, existen biproductos de la forma $M\bigoplus M$ en $\mathscr{C}$. Entonces, para cualesquiera $A,B\in\text{Obj}(\mathscr{C})$, existe una única manera de definir una estructura de monoide abeliano en $\text{Hom}_\mathscr{C}(A,B)$ de manera tal que $\mathscr{C}$ sea una categoría semiaditiva.
+\end{Teo}
+
+\begin{proof}
+
+    Sean $A,B\in\text{Obj}(\mathscr{C})$. Para $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B)$, definimos $\alpha+\beta$ y $\alpha\times\beta$ como las siguientes composiciones de morfismos 
+    \begin{align*}
+        \alpha+\beta &:= A\xrightarrow[]{\Delta_A}A\bigoplus A\xrightarrow[]{(\begin{smallmatrix} \alpha &\beta \end{smallmatrix})} B, \\
+        \alpha\times\beta &:= A\xrightarrow[]{\big(\begin{smallmatrix} \alpha \\ \beta \end{smallmatrix}\big)}B\bigoplus B\xrightarrow[]{\nabla_B} B.
+    \end{align*}
+    Veremos ahora que $(\text{Hom}_\mathscr{C}(A,B),+,0_{A,B})$ es un monoide abeliano y que la composición de morfismos es bilineal con respecto a la suma definida anteriormente. Haremos la demostración por pasos:
+
+    \begin{itemize}
+    
+        \item[(i)] $\alpha+0=\alpha=0+\alpha$ para todo $\alpha\in\text{Hom}_\mathscr{C}(A,B)$.
+
+            Consideremos el diagrama en $\mathscr{C}$
+            \begin{equation}\label{1.6.13-1}
+                \begin{tikzcd}
+                    &A\arrow[]{dl}[swap]{\alpha} &&A \arrow[]{dr}[]{\alpha} \\
+                    B &&A\bigoplus A \arrow[]{ur}[]{\pi_2}  \arrow[]{rr}[]{(\begin{smallmatrix} 0 \ \alpha \end{smallmatrix})} \arrow[]{ul}[swap]{\pi_1} \arrow[]{ll}[swap]{(\begin{smallmatrix} \alpha \ 0 \end{smallmatrix})} &&B. \\
+                      &A \arrow[]{ul}[]{\alpha} \arrow[]{ur}[swap]{\mu_1} &&A \arrow[]{ul}[]{\mu_2}\arrow[]{ur}[swap]{\alpha}
+                \end{tikzcd}
+            \end{equation}
+            Por la Proposición \ref{Mendoza-1.8.11}, tenemos que $(\begin{smallmatrix} \alpha &0 \end{smallmatrix})\mu_1=\alpha=(\begin{smallmatrix} 0 &\alpha \end{smallmatrix})\mu_2$ y $(\begin{smallmatrix} \alpha &0 \end{smallmatrix})\mu_2=(\begin{smallmatrix} 0 &\alpha \end{smallmatrix})\mu_1$. En particular, se tiene que
+            \[
+                (\begin{smallmatrix} \alpha &0 \end{smallmatrix})\mu_i = (\begin{smallmatrix} \alpha &\pi_1 \end{smallmatrix})\mu_i \quad \land \quad (\begin{smallmatrix} 0 &\alpha \end{smallmatrix})\mu_i = (\begin{smallmatrix} \pi_2 &\alpha \end{smallmatrix})\mu_i \quad \forall \ i\in \{1,2\}.
+            \] 
+            Por la propiedad universal del coproducto, se sigue que $(\begin{smallmatrix} \alpha &0 \end{smallmatrix}) = \alpha\pi_1$ y $(\begin{smallmatrix} 0 &\alpha \end{smallmatrix}) = \alpha\pi_2$. Luego,
+            \begin{align*}
+                \alpha+0 &= (\begin{smallmatrix} \alpha &0 \end{smallmatrix})\Delta_A  \\
+                         &= \alpha\pi_1\Delta_A \\
+                         &= \alpha1_A \\
+                         &= \alpha \\
+                         &= \alpha\pi_2\Delta_A \\
+                         &= (\begin{smallmatrix} 0 &\alpha \end{smallmatrix})\Delta_A \\
+                         &= 0+\alpha.
+            \end{align*}
+            
+        \item[(ii)] $(\alpha+\beta)^{\text{op}} = \alpha^{\text{op}}\times\beta^{\text{op}}$ para cualesquiera $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B)$.
+
+            Sean $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B)$. Entonces, tenemos que
+            \begin{align*}
+                (\alpha+\beta)^{\text{op}} &= \big((\begin{smallmatrix} \alpha &\beta \end{smallmatrix})\Delta_A\big)^{\text{op}} \\
+                                           &= \Delta_A^{\text{op}}\begin{smallmatrix} \alpha &\beta \end{smallmatrix}^{\text{op}} \\
+                                           &= \nabla_A \big( \begin{smallmatrix} \alpha^{\text{op}} \\ \beta^{\text{op}} \end{smallmatrix}\big) \\
+                                           &= \alpha^{\text{op}}\times\beta^{\text{op}}.
+            \end{align*}
+
+        \item[(iii)] $\alpha\times0=\alpha=0\times\alpha$.
+
+            Por (ii) y (i), tenemos que
+            \begin{align*}
+                \alpha\times0 &(\alpha^{\text{op}}+0^{\text{op}})^{\text{op}} \\
+                              &= (\alpha^{\text{op}})^{\text{op}} \\
+                              &= \alpha \\
+                              &= (0^{\text{op}}+\alpha^{\text{op}})^{\text{op}} \\
+                              &= 0\times\alpha.
+            \end{align*}
+
+        \item[(iv)] $\gamma(\alpha+\beta)=\gamma\alpha+\gamma\beta$ para cualesquiera $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B), \gamma\in\text{Hom}_\mathscr{C}(B,C)$.
+
+            Sean $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B)$ y $\gamma\in\text{Hom}_\mathscr{C}(B,C)$. Luego,
+            \begin{align*}
+                \gamma(\alpha+\beta) &= \gamma(\begin{smallmatrix} \alpha &\beta \end{smallmatrix})\Delta_A \\
+                                     &= ( \begin{smallmatrix} \gamma\alpha &\gamma\beta \end{smallmatrix}) \Delta_A \tag{Proposición \ref{Mendoza-1.9.6} (a)} \\
+                                     &= \gamma\alpha+\gamma\beta.
+            \end{align*}
+
+        \item[(v)] $(\alpha\times\beta)\rho = \alpha\rho\times\beta\rho$ para cualesquiera $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B), \rho\in\text{Hom}_\mathscr{C}(C,A)$.
+
+            Sean $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B)$ y $\rho\in\text{Hom}_\mathscr{C}(C,A)$. Por (ii) y (iv), tenemos que
+            \begin{align*}
+                \big((\alpha\times\beta)\rho\big)^{\text{op}} &= \rho^{\text{op}}(\alpha\times\beta)^{\text{op}} \\
+                                                              &= \rho^{\text{op}}(\alpha^{\text{op}}+\beta^{\text{op}}) \\
+                                                              &= \rho^{\text{op}}\alpha^{\text{op}}+\rho^{\text{op}}\beta^{\text{op}} \\
+                                                              &= (\alpha\rho)^{\text{op}} + (\beta\rho)^{\text{op}} \\
+                                                              &= (\alpha\rho\times\beta\rho)^{\text{op}},
+            \end{align*}
+            de donde se sigue que $(\alpha\times\beta)\rho=\alpha\rho\times\beta\rho$.
+
+        \item[(vi)] Para $\{\theta_i\}_{i=1}^4\subseteq\text{Hom}_\mathscr{C}(A,B)$, se tiene que $(\theta_1+\theta_3)\times(\theta_2+\theta_4) = (\theta_1\times\theta_2)+(\theta_3\times\theta_4)$.
+
+            Consideremos el morfismo dado por la matriz
+            \[
+                \psi:= \big( \begin{smallmatrix} \theta_1 &\theta_3 \\ \theta_2 &\theta_4 \end{smallmatrix}\big) : A\bigoplus A\to B\bigoplus B.
+            \] 
+            Veamos que
+            \[
+                \nabla_B(\psi\Delta_A) = (\theta_1+\theta_3)\times(\theta_2+\theta_4).
+            \] 
+            Para ello, primero verificaremos que
+            \[
+                \psi\Delta_A = \big( \begin{smallmatrix} (\begin{smallmatrix} \theta_1 &\theta_3 \end{smallmatrix}) \Delta_A \\ (\begin{smallmatrix} \theta_2 &\theta_4 \end{smallmatrix}) \Delta_A \end{smallmatrix}\big):A\to B\bigoplus B
+            \] 
+            para lo cual, debido a la Proposición \ref{Mendoza-1.8.11}, basta ver que
+            \begin{equation}\label{eq:1.6.13-1}
+                \pi_1^B(\psi\Delta_A) = (\begin{smallmatrix} \theta_1 &\theta_3  \end{smallmatrix})\Delta_A \quad \land \quad \pi_2^B(\psi\Delta_A) = (\begin{smallmatrix} \theta_2 &\theta_4 \end{smallmatrix})\Delta_A.
+            \end{equation}
+            En efecto, por la definición de $\psi$, tenemos que
+            \begin{align*}
+                \theta_1 &= \pi_1^B \psi \mu_1^B, \\
+                \theta_3 &= \pi_1^B \psi \mu_2^A, \\
+                \theta_2 &= \pi_2^B \psi \mu_1^B, \\
+                \theta_4 &= \pi_2^B \psi \mu_2^B;
+            \end{align*}
+            por ende, $\pi_1^B\psi = (\begin{smallmatrix} \theta_1 &\theta_3 \end{smallmatrix}):A\bigoplus A\to B$ y $\pi_2^B\psi = (\begin{smallmatrix} \theta_2 &\theta_4 \end{smallmatrix})$, de donde se siguen (\ref{eq:1.6.13-1}). Luego, tenemos que
+            \begin{align*}
+                \nabla_B(\psi\Delta_A) &= \nabla_B\big(\begin{smallmatrix} (\begin{smallmatrix} \theta_1 &\theta_3 \end{smallmatrix})\Delta_A \\ (\begin{smallmatrix} \theta_2 &\theta_4 \end{smallmatrix})\Delta_A \end{smallmatrix} \\
+                                       &= \nabla_B\big(\begin{smallmatrix} \theta_1+\theta_3 \\ \theta_2+\theta_4 \end{smallmatrix}\big) \\
+                                       &= (\theta_1+\theta_3)\times(\theta_2+\theta_4).
+            \end{align*}
+            Ahora, veamos que $\nabla_B\psi)\Delta_A = (\theta_1\times\theta_2)+(\theta_3\times\theta_4)$. En efecto, dado que $\psi_{i,j}=\pi_i^B\psi\mu_j^A$ para cualesquiera $i,j\in\{1,2\}$, tenemos que $(\psi^{\text{op}})_{j,i}=\psi^{\text{op}}_{i,j}=(\mu_j^A)^{\text{op}}\psi^{\text{op}}(\pi_i^B)^{\text{op}}$ para $i,j\in\{1,2\}$, por lo que
+            \[
+                \psi^{\text{op}} = \big( \begin{smallmatrix} \theta_1^{\text{op}} &\theta_2^{\text{op}} \\ \theta_3^{\text{op}} &\theta_4^{\text{op}} \end{smallmatrix}\big).
+            \] 
+            Observemos que
+            \begin{align*}
+                \big((\nabla_B\psi)\Delta_A\big)^{\text{op}} &= \Delta_A^{\text{op}}(\Delta_B\psi)^{\text{op}} \\
+                                                             &= \nabla_A(\psi^{\text{op}}\nabla_B^{\text{op}}) \\
+                                                             &= \Delta_A(\psi^{\text{op}}\Delta_B) \\
+                                                             &= (\theta_1^{\text{op}}+\theta_2^{\text{op}})\times(\theta_3^{\text{op}}+\theta_4^{\text{op}}),
+            \end{align*}
+            por lo que, de (ii), se sigue que
+            \begin{align*}
+                (\nabla_B\psi)\Delta_A &= \big((\theta_1^{\text{op}}+\theta_2^{\text{op}})\times(\theta_3^{\text{op}}+\theta_4^{\text{op}})\big)^{\text{op}} \\
+                                       &= (\theta_1^{\text{op}}+\theta_2^{\text{op}})^{\text{op}}+(\theta_3^{\text{op}}+\theta_4^{\text{op}})^{\text{op}} \\
+                                       &= (\theta_1\times\theta_2)+(\theta_3\times\theta_4).
+            \end{align*}
+            Por ende, de $\Delta_B(\psi\nabla_A)=(\Delta_B\psi)\nabla_A$, concluimos que
+            \[
+                (\theta_1+\theta_3)\times(\theta_2+\theta_4) = (\theta_1\times\theta_2)+(\theta_3\times\theta_4).
+            \] 
+            
+        \item[(vii)] $\alpha+\beta=\alpha\times\beta$ para cualesquiera $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B)$.
+
+            Por (iii), (vi) y (i), tenemos que
+            \begin{align*}
+                \alpha+\beta &= (\alpha\times0)+(0\times\beta) \\
+                             &= (\alpha+0)\times(0+\beta) \\
+                             &= \alpha\times\beta.
+            \end{align*}
+    \end{itemize}
+
+    Por (i), sabemos que existe un elemento identidad de la suma en $\text{Hom}_\mathscr{C}(A,B)$. Además, para cualesquiera $\alpha,\beta,\gamma\in\text{Hom}_\mathscr{C}(A,B)$, tenemos que
+    \begin{align*}
+        (\alpha+\beta)+\gamma &= (\alpha\times\beta)+(0\times\gamma) \tag{por (i), (vii) y (iii)} \\
+                              &= (\alpha\times0)+(\beta\times\gamma) \tag{por (vi)} \\
+                              &= \alpha+(\beta+\gamma), \tag{por (vii) y (iii)} \\ \\
+        \alpha+\beta &= (0\times\alpha)+(\beta\times0) \tag{por (iii)} \\
+                     &= (0+\beta)\times(\alpha+0) \tag{por (vi)} \\
+                     &= (0+\beta)+(\alpha+0) \tag{por (vii)} \\
+                     &= \beta+\alpha,
+    \end{align*}
+    por lo que la suma en $\text{Hom}_\mathscr{C}(A,B)$ es asociativa y conmutativa, de donde se sigue que $(\text{Hom}_\mathscr{C}(A,B),+,0_{A,B})$ es un monoide abeliano. La bilinealidad de la composición de morfismos con respecto a la suma se sigue de (iv), (v) y (vii). Por ende, $\mathscr{C}$ es una categoría semiaditiva; la unicidad se sigue del Lema \ref{Mendoza-1.9.10}.
+\end{proof}
+
+\begin{Teo}\label{Mendoza-1.9.12}
+    Para una categoría $\mathscr{C}$, las siguientes condiciones son equivalentes.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\mathscr{C}$ es una categoría semiaditiva con coproductos finitos.
+
+        \item $\mathscr{C}$ es una categoría localmente pequeña con objeto cero, coproductos finitos y tiene biproductos de la forma $M\bigoplus M$ en $\mathscr{C}$ para todo $M\in\text{Obj}(\mathscr{C})$.
+
+        \item $\mathscr{C}$ es localmente pequeña y tiene biproductos finitos.
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}
+    La implicación $(c)\Rightarrow(b)$ se sigue trivialmente de la definición de biproducto, mientras que las implicaciones $(b)\Rightarrow(a)$ y $(a)\Rightarrow(c)$ se siguen de los Teoremas \ref{Mendoza-1.9.11} y \ref{Mendoza-1.9.3}, respectivamente.
+\end{proof}
+
+\section{Categorías preaditivas y $\mathbb{Z}$-categorías} \label{Sec: Categorías preaditivas y Z-categorías}
+
+\begin{Def}\label{Def: Categoría preaditiva}
+    Una categoría $\mathscr{C}$ se dice que es \emph{preaditiva} si satisface las siguientes condiciones:
+
+    \begin{itemize}
+
+        \item[(PA1)] $\mathscr{C}$ es una categoría localmente pequeña con objeto cero;
+
+        \item [(PA2)] para cualesquiera $A,B\in\text{Obj}(\mathscr{C})$, $\text{Hom}_\mathscr{C}(A,B)$ tiene estructura de grupo abeliano;
+
+        \item[(PA3)] la composición de morfismos en $\mathscr{C}$ es bilineal.
+    \end{itemize}
+    Una categoría localmente pequeña que sólo satisface las condiciones (PA2) y (PA3) se conoce como $\mathbb{Z}$-\emph{categoría}.
+\end{Def}
+
+\begin{Obs} \label{Mendoza-1.9.1}
+    Sea $\mathscr{C}$ una $\mathbb{Z}$-categoría.
+
+    \begin{enumerate}[label=(\arabic*)]
+
+        \item Para cada $X,Y\in\text{Obj}(\mathscr{C})$, denotemos por $e_{X,Y}$ al neutro aditivo de $\text{Hom}_\mathscr{C}(X,Y)$. Entonces, para $Z\xrightarrow[]{f}X\xrightarrow[]{e_{X,Y}}Y\xrightarrow[]{g}W$ en $\mathscr{C}$, se tiene que
+            \[
+            ge_{X,Y} = e_{X,W} \quad \text{y} \quad e_{X,Y}f = e_{Z,Y}.
+            \] 
+
+            En efecto: $ge_{X,Y} = g(e_{X,Y}+e_{X,Y}) = ge_{X,Y} + e_{Z,Y}$ en $\text{Hom}_\mathscr{C}(X,W)$; por lo tanto, $ge_{X,Y}=e_{X,W}$. Análogamente, $e_{X,Y}f = e_{Z,Y}$.
+
+        \item Todo objeto inicial o final en $\mathscr{C}$ es un objeto cero en $\mathscr{C}$.
+
+            En efecto: Supongamos que $I$ es un objeto inicial en $\mathscr{C}$. Sean $X\in\text{Obj}(\mathscr{C})$ y $f\in\text{Hom}_\mathscr{C}(X,I)$. Luego,
+            \[
+                f = 1_I f = e_{I,I}f \overset{(1)}{=} e_{X,I}.
+            \] 
+            Por ende, $\text{Hom}_\mathscr{C}(X,I) = \{e_{X,I}\}$ para todo $X\in\text{Obj}(\mathscr{C})$, es decir, $I$ es un objeto final en $\mathscr{C}$, por lo que es un objeto cero.
+
+            Por otro lado, supongamos que $I'$ es un objeto final en $\mathscr{C}$. Sean $Y\in\text{Obj}(\mathscr{C})$ y $g\in\text{Hom}_\mathscr{C}(I',Y)$. Luego,
+            \[
+            g = g1_{I'} = ge_{I',I'} = e_{I',Y}.
+            \] 
+            Por lo tanto, $\text{Hom}_\mathscr{C}(I',Y) = \{e_{I',Y}\}$ para todo $Y\in\text{Obj}(\mathscr{C})$, es decir $I'$ es un objeto inicial en $\mathscr{C}$, por lo que es un objeto cero.
+
+        \item $\mathscr{C}^\text{op}$ es una $\mathbb{Z}$-categoría. Es decir, el universo de las $\mathbb{Z}$-categorías es dualizante.
+
+            En efecto: Se sigue de la conmutatividad de la operación de un grupo abeliano, por lo que el grupo opuesto de un grupo abeliano es abeliano, y de las series de equivalencias
+            \begin{align*}
+                \gamma(\alpha+\beta) = \gamma\alpha+\gamma\beta &\iff \big(\gamma(\alpha+\beta)\big)^\text{op}  = (\gamma\alpha+\gamma\beta)^\text{op} \\
+                                                                &\iff (\alpha+\beta)^\text{op}\gamma^\text{op} = (\gamma\alpha)^\text{op} + (\gamma\beta)^\text{op} \\
+                                                                &\iff (\alpha^\text{op}+\beta^\text{op})\gamma^\text{op} = \alpha^\text{op}\gamma^\text{op} + \beta^\text{op}\gamma^\text{op}, \\ \\
+                (\alpha+\beta)\eta = \alpha\eta + \beta\eta &\iff \big((\alpha+\beta)\eta\big)^\text{op} = (\alpha\eta + \beta\eta)^\text{op} \\
+                                                            &\iff \eta^\text{op}(\alpha+\beta)^\text{op} = (\alpha\eta)^\text{op} + (\beta\eta)^\text{op} \\
+                                                            &\iff \eta^\text{op}(\alpha^\text{op}+\beta^\text{op}) = \eta^\text{op}\alpha^\text{op} + \eta^\text{op}\beta^\text{op}.
+            \end{align*}
+        
+        \item La categoría producto de dos $\mathbb{Z}$-categorías es una $\mathbb{Z}$-categoría. En particular, por (3), $\mathscr{C}^\text{op}\times\mathscr{C}$ es una $\mathbb{Z}$-categoría.
+
+            En efecto: Se sigue de que todo producto de dos grupos abelianos es un grupo abeliano, con la operación de suma definida entrada a entrada, y de que la composición de morfismos en $\mathscr{C}\times\mathscr{C}'$ también está definida entrada a entrada, por lo que la bilinealidad en $\mathscr{C}\times\mathscr{C}'$ se induce de la bilinealidad en $\mathscr{C}$ y $\mathscr{C}'$.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Obs}\label{Mendoza-1.9.1 preaditiva}
+
+    Sea $\mathscr{C}$ una categoría preaditiva.
+
+    \begin{enumerate}[label=(\arabic*)]
+            
+        \item $\mathscr{C}$ es semiaditiva.
+
+            En efecto: Basta mostrar que $0_{A,B}=e_{A,B}$ para cualesquiera $A,B\in\text{Obj}(\mathscr{C})$, lo cual se obtiene del inciso (1) de la Observación \ref{Mendoza-1.9.1} como sigue
+            \[
+                0_{A,B} = e_{A,B} 0_{A,A} = e_{A,B}.
+            \] 
+
+            \item $\mathscr{C}$ tiene núcleos si, y sólo si, $\mathscr{C}$ tiene igualadores.
+
+                En efecto: Basta revisar que para cualesquiera $\alpha,\beta:A\to B, \ \text{Ker}(\alpha-\beta) = \text{Equ}(\alpha,\beta)$.
+
+            \item Para todo $\alpha\in\text{Hom}_\mathscr{C}(A,B)$, $\alpha$ es un monomorfismo si, y sólo si, $\text{Ker}(\alpha)=0$.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Prop}\label{Mendoza-1.9.16}
+    Sea $\mathscr{C}$ una categoría preaditiva. Entonces, las siguientes condiciones se satisfacen
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Para $A_1\xrightarrow[]{\mu_1}A$ y $A\xrightarrow[]{\pi_1}A_1$ en $\mathscr{C}$ tales que $\pi_1\mu_1=1_{A_1}$, se tiene lo siguiente.
+
+            \begin{itemize}
+            
+                \item[(a1)] $\mu_1\pi_1$ es idempotente en $\text{End}_\mathscr{C}(A)$.
+
+                \item[(a2)] Existe el núcleo de $1_A-\mu_1\pi_1$ y $\text{Ker}\big( A\xrightarrow[]{1_A-\mu_1\pi_1} A\big) \simeq \big( A_1\xrightarrow[]{\mu_1} A\big)$ en $\text{Mon}_\mathscr{C}(-,A)$.
+
+                \item[(a3)] Existe el conúcleo de $1_A-\mu_1\pi_1$ y $\text{CoKer}\big( A\xrightarrow[]{1_A-\mu_1\pi_1} A\big) \simeq \big( A\xrightarrow[]{\pi_1} A_1\big)$ en $\text{Epi}_\mathscr{C}(A,-)$.
+            \end{itemize}
+
+        \item Sea $\theta^2=\theta\in\text{End}_\mathscr{C}(A)$ tal que existen $\text{Ker}\big(A\xrightarrow[]{1_A-\theta}A\big) = \big(A_1\xrightarrow[]{\mu_1}A \big)$ y $\text{Ker}\big(A\xrightarrow[]{\theta}A \big) = \big(A_2\xrightarrow[]{\mu_2} A\big)$. Entonces, $A=A_1\coprod A_2$, con $\mu_1, \mu_2$ como inclusiones naturales.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Sean $A_1\xrightarrow[]{\mu_1}A$ y $A\xrightarrow[]{\pi_1}A_1$ en $\mathscr{C}$ tales que $\pi_1\mu_1=1_{A_1}$.
+
+            \begin{itemize}
+            
+                \item[(a1)] $(\pi_1\mu_1)^2 = \pi_1(\mu_1\pi_1)\mu_1 = \pi_1\mu_1$.
+
+                \item[(a2)] Tenemos $A_1\xrightarrow[]{\mu_1}A\xrightarrow[]{1-\mu_1\pi_1} A$. Primero, observemos que $(1-\mu_1\pi_1)\mu_1 = \mu_1 - \mu_1(\pi_1\mu_1) = 0$. Ahora, sea $X\xrightarrow[]{f}A$ en $\mathscr{C}$ tal que $(1-\mu_1\pi_2)f = 0$. Entonces, $f=\mu_1(\pi_1f)$, por lo que $f$ se factoriza a través de $\mu_1$, y dicha factorización es única, pues $\mu_1$ es un monomorfismo.
+
+                \item[(a3)] Dual a (a2).
+            \end{itemize}
+
+        \item Por la Proposición \ref{Mendoza-1.9.2} y el inciso (1) de la Observación \ref{Mendoza-1.9.1 preaditiva}, para ver que $\{ A_1\xrightarrow[]{\mu_1}A, A_2\xrightarrow[]{\mu_2}A \}$ es un coproducto de $\{A_1,A_2\}$ en $\mathscr{C}$, basta con verificar que existen $A\xrightarrow[]{\pi_1}A_1$ y $A\xrightarrow[]{\pi_2}A_2$ en $\mathscr{C}$ tales que $\pi_1\mu_j = \delta_{i,j}^A$ para cualesquiera $i,j\in\{1,2\}$ y $1_A = \mu_1\pi_1 + \mu_2\pi_2$.
+
+            En efecto, dado que $(1_A-\theta)\theta = \theta - \theta^2 = 0$ y $\mu_1 = \text{Ker}(1_A-\theta)$, tenemos que existe $A\xrightarrow[]{\pi_1}A_1$ en $\mathscr{C}$ tal que $\theta=\mu_1\pi_1$. Ahora, como $(1_A-\theta)\mu_1=0$, entonces $\mu_1 = \theta\mu_1$. Luego, dado que $\mu_1$ es un monomorfismo, de la serie de equivalencias
+            \begin{align*}
+                \mu_1\pi_1\mu_1 &= \theta\mu_1 \\
+                                &= \mu_1 \\
+                                &= \mu_11_{A_1},
+            \end{align*}
+            se sigue que $\pi_1\mu_1 = 1_{A_1}$. Similarmente, como $\theta(1_A-\theta)=0$ y $\mu_2=\text{Ker}(\theta)$, tenemos que existe $A\xrightarrow[]{\pi_2}A_2$ en $\mathscr{C}$ tal que $1_A-\theta = \mu_2\pi_2$, lo que implica que $1_A = \mu_1\pi_1 + \mu_2\pi_2$. Luego, dado que $\mu_2$ es un monomorfismo, de la serie de equivalencias
+            \begin{align*}
+                \mu_2\pi_2\mu_2 &= (1_A-\theta)\mu_2 \\
+                                &= \mu_2 - \theta\mu_2 \\
+                                &= \mu_2 \\
+                                &= \mu_2 1_{A_2},
+            \end{align*}
+            se sigue que $\pi_2\mu_2 = 1_{A_2}$. 
+
+            Por otro lado, tenemos que
+            \begin{align*}
+                \pi_1 &= \pi_11_A \\
+                      &= \pi_1(\mu_2\pi_2 + \mu_1\pi_2) \\
+                      &= \pi_1\mu_2\pi_2 + \pi_1\mu_1\pi_1 \\
+                      &= \pi_1\mu_2\pi_2 + \pi_1,
+            \end{align*}
+            lo que implica que $\pi_1\pi_2\pi_2=0$. Como $\pi_2$ es un epimorfismo y $0\pi_2=0$, se sigue que $\pi_1\mu_2=0$. Análogamente, se comprueba que $\pi_2\mu_1=0$.
+    \end{enumerate}
+\end{proof}
+
+\section{Categorías aditivas} \label{Sec: Categorías aditivas}
+
+\begin{Def}\label{Def: Categoría aditiva}
+    Una categoría \emph{aditiva} $\mathscr{A}$ es una $\mathbb{Z}$-categoría con coproductos finitos.
+\end{Def}
+
+\begin{Teo} \label{Mendoza-1.9.14}
+    Una categoría $\mathscr{A}$ es aditiva si, y sólo si, las siguientes condiciones se satisfacen.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item $\mathscr{A}$ es una categoría localmente pequeña con objeto cero.
+
+        \item $\mathscr{A}$ tiene coproductos finitos y productos finitos.
+
+        \item Para toda familia finita $\{A_i\}_{i=1}^n$ de objetos en $\mathscr{A}$, el morfismo
+            \[
+            \delta=\begin{pmatrix} 1_{A_1} &0 &0 \\ 0 &\ddots &0 \\ 0 & 0 &1_{A_n}\end{pmatrix}:\coprod_{i=1}^n A_i\to \prod_{i=1}^n A_i
+            \] 
+            es un isomorfismo en $\mathscr{A}$.
+
+        \item Para todo $A\in\text{Obj}(\mathscr{A})$, existe $S_A\in\text{End}_\mathscr{A}(A)$ tal que $\nabla_A\begin{pmatrix} 1_A &0 \\ 0 &S_A \end{pmatrix}\Delta_A = 0$, es decir, tal que el siguiente diagrama conmuta
+            \begin{center}
+                \begin{tikzcd}
+                    A\coprod A \arrow{r}{\big( \begin{smallmatrix} 1_A \\ 0 \end{smallmatrix} \begin{smallmatrix} 0 \\ S_A \end{smallmatrix} \big)} &A\coprod A \arrow{d}{\nabla_A} \\
+                    A \arrow{u}{\Delta_A} \arrow{r}[swap]{0} &A .
+                \end{tikzcd}
+            \end{center}
+    \end{enumerate}
+\end{Teo}
+
+\begin{proof}\leavevmode
+    
+    $(\Rightarrow)$ Como $\mathscr{A}$ tiene coproductos finitos, por el inciso (4) de la Observación \ref{Mendoza-1.8.3} y el inciso (2) de la Observación \ref{Mendoza-1.9.1}, se sigue que $\mathscr{A}$ es una categoría con objeto cero. Más aún, por el inciso (3), concluimos que $\mathscr{A}$ es semiaditiva. Luego, por el Teorema \ref{Mendoza-1.9.3} y la Proposición \ref{Mendoza-1.8.12} se obtienen las condiciones (b) y (c), respectivamente. \\
+
+    Sean $A\in\text{Obj}(\mathscr{A})$ y $\alpha\in\text{End}_\mathscr{A}(A)$. Por el inciso (c) del Lema \ref{Mendoza-1.9.10}, tenemos que
+    \[
+        1_A + \alpha = \nabla_A \begin{pmatrix} 1_A & 0 \\ 0 & \alpha \end{pmatrix} \Delta_A.
+    \] 
+    Luego, como $\text{End}_\mathscr{A}(A)$ es un grupo abeliano, basta tomar $S_A:=-1_A$ para obtener (d). \\
+
+    $(\Leftarrow)$ Por las condiciones (a), (b) y (c), tenemos que $\mathscr{A}$ es una categoría con objeto cero y biproductos finitos. Por el Teorema \ref{Mendoza-1.9.11} y el Lema \ref{Mendoza-1.9.10}, tenemos que $\mathscr{A}$ es semiaditiva y que, para cualesquiera $A,B\in\text{Obj}(\mathscr{A}), \text{Hom}_\mathscr{A}(A,B)$ tiene estructura de monoide abeliano dado por
+    \[
+        \alpha+\beta = \nabla_A \begin{pmatrix} \alpha & 0 \\ 0 & \beta \end{pmatrix} \Delta_A.
+    \] 
+    Luego, por la condición (d), tenemos que existe $S_A\in\text{End}_\mathscr{A}(A)$ tal que $1_A+S_A=0$. Por lo tanto, para todo $\alpha\in\text{Hom}_\mathscr{A}(A,B)$, se tiene que 
+    \[
+        \alpha+\alpha S_A = \alpha(1_A+S_A) = \alpha0 = 0,
+    \] 
+    por lo que $-\alpha=\alpha S_A\in\text{Hom}_\mathscr{A}(A,B)$, de donde se sigue que $\text{Hom}_\mathscr{A}(A,B)$ es un grupo abeliano.
+\end{proof}
+
+\begin{Ejem}\label{Ejem: Categoría aditiva}
+    $\text{Mod}(R)$ es una categoría aditiva.
+\end{Ejem}
+
+% Mostrar en alguna parte (de preferencia, al final del capítulo) que toda categoría aditiva es semiaditiva (se sigue de la caracterización 1.3.2 y de 1.2.4(3)) y que, por 1.2.7 y 1.2.8 se acostumbra usar la notación de suma directa para biproductos finitos, por lo que emplearemos dicha notación en los capítulos posteriores.
+
+\begin{Obs}\label{Mendoza-1.9.15}
+
+    Sean $\mathscr{C}$ una categoría y $\mathscr{A}$ una categoría aditiva.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item El universo de las categorías semiaditivas con coproductos finitos es dualizante. % Más aún, en tal caso, $(\alpha+\beta)^{\text{op}} = \alpha^{\text{op}} + \beta^{\text{op}}$ para cualesquiera $\alpha,\beta\in\text{Hom}_\mathscr{C}(A,B).
+
+            En efecto: Se sigue de la Observación \ref{Observaciones de las categorías semiaditivas} y de notar que la condición (c) del Teorema \ref{Mendoza-1.9.12} es auto dual. % Por otro lado, por el Teorema \ref{Mendoza-1.9.11}, tenemos que
+            %\[
+            %    (\alpha+\beta)^{\text{op}} = \alpha^{\text{op}}\times\beta^{\text{op}} = \alpha^{\text{op}}+\beta^{\text{op}}.
+            %\] 
+
+        \item El universo de las categorías aditivas es dualizante.
+
+            En efecto: Se sigue de observar que las condiciones (a), (b), (c) y (d) del Teorema \ref{Mendoza-1.9.14} son auto duales.
+
+        %\item Por el inciso (c) del Teorema \ref{Mendoza-1.9.14} tenemos que todo coproducto finito en $\mathscr{A}$ y todo producto finito en $\mathscr{A}$ es un biproducto finito en $\mathscr{A}$. Por ende, en el contexto de las categorías aditivas no existe distinción entre las nociones de coproducto, producto y biproducto en el caso finito, por lo que denotamos a todos los coproductos finitos y productos finitos en categorías aditivas empleando la notación de biproducto.
+    \end{enumerate}
+\end{Obs}
+
+\begin{Def}\label{Def: Cerraduras}
+    Sean $\mathscr{A}$ una categoría aditiva, $\chi\subseteq\text{Obj}(\mathscr{A})$ una clase de objetos en $\mathscr{A}$ y $\Phi\subseteq\text{Mor}(\mathscr{A})$ una clase de morfismos en $\mathscr{A}$. Entonces,
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\chi$ es \emph{cerrada por isomorfismos} en $\mathscr{A}$ si para cada isomorfismo $X\simeq W$ en $\mathscr{A}$, con $X\in\chi$, se tiene que $W\in\chi$;
+
+        \item $\chi$ es \emph{cerrada por sumas directas finitas} en $\mathscr{A}$ si para cualesquiera $A,B\in\chi$ se tiene que el biproducto $A\bigoplus B$ en $\mathscr{A}$ está en $\chi$.
+
+        \item $\chi$ es \emph{cerrada por sumandos directos} en $\mathscr{A}$ si para cada biproducto $X=Y\bigoplus Z$ en $\mathscr{A}$, con $X\in\chi$, se tiene que $Y,Z\in\chi$;
+
+        \item $\Phi$ es \emph{cerrada por composiciones} si, para cualesquiera $f,g\in \Phi$ tales que existe $fg\in\text{Mor}(\mathscr{A})$, se tiene que $fg\in \Phi$.
+    \end{enumerate}
+\end{Def}
+
+\begin{Def}\label{Def: Subcategoría aditiva}
+    Sea $\mathscr{A}$ una categoría aditiva. Una \emph{subcategoría aditiva} de $\mathscr{A}$ es una subcategoría $\mathscr{A}'$ de $\mathscr{A}$ tal que $\mathscr{A}'$ es una categoría aditiva y todo coproducto finito en $\mathscr{A}'$ es un coproducto en $\mathscr{A}$.
+\end{Def}
+
+\begin{Obs}\label{Obs: Subcategoría aditiva}
+
+    Sean $\mathscr{A}$ una categoría aditiva y $\mathscr{A}'$ una subcategoría aditiva de $\mathscr{A}$. Si $\text{Obj}(\mathscr{A}')$ es cerrada por sumandos directos en $\mathscr{A}$, entonces es cerrada por isomorfismos en $\mathscr{A}$.
+
+    \vspace{1mm}
+    En efecto: Sea $\varphi:X\xrightarrow[]{\sim}W$ en $\mathscr{A}$, con $X\in\text{Obj}(\mathscr{A}')$. Dado que $\mathscr{A}'$ tiene coproductos finitos, en particular existe un coproducto vacío en $\mathscr{A}'$, el cual es un objeto cero $0$ en $\mathscr{A}$. Notando que $W\bigoplus0\in\text{Obj}(\mathscr{A})$ junto con los morfismos $\varphi^{-1}$ y $0_{0,X}$ es un biproducto en $\mathscr{A}$ para $X$, concluimos que $W\in\text{Obj}(\mathscr{A}')$.
+\end{Obs}
+
+\section{Funtores aditivos} \label{Sec: Funtores aditivos}
+
+\begin{Def}\label{Def: Funtor aditivo}
+    Sean $\mathscr{C}$ y $\mathscr{D} \hspace{2mm} \mathbb{Z}$-categorías. Decimos que:
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item un funtor covariante $F:\mathscr{C}\to \mathscr{D}$ es \emph{aditivo} si $F:\text{Hom}_\mathscr{C}(X,Y)\to \text{Hom}_\mathscr{D}(F(X),F(Y))$ es un morfismo en Ab para cualesquiera $X,Y\in\text{Obj}(\mathscr{C})$;
+
+        \item un funtor contravariante $G:\mathscr{C}\to \mathscr{D}$ es \emph{aditivo} si $G:\text{Hom}_\mathscr{C}(X,Y)\to \text{Hom}_\mathscr{D}(G(Y),G(X))$ es un morfismo en Ab para cualesquiera $X,Y\in\text{Obj}(\mathscr{C})$.%;
+
+        %\item un bifuntor $H:\mathscr{C}'\times \mathscr{C}\to \mathscr{D}$ es \emph{aditivo} si para cualesquiera $X\in \text{Obj}(\mathscr{C}), X'\in \text{Obj}(\mathscr{C}')$ tenemos que $H(-,X):\mathscr{C}'\to \mathscr{D}$ y $H(X',-): \mathscr{C}\to \mathscr{D}$ son funtores aditivos.
+    \end{enumerate}
+\end{Def}
+
+\begin{Obs}\label{Obs: funtores aditivos}\leavevmode
+
+    \begin{enumerate}[label=(\arabic*)]
+
+        \item La composición de funtores aditivos es un funtor aditivo.
+    
+        \item Sean $\mathscr{C}$ y $\mathscr{D} \hspace{2mm} \mathbb{Z}$-categorías. Entonces, tenemos la siguiente serie de equivalencias
+        \begin{align*}
+            F:\mathscr{C}\to \mathscr{D} \text{ es aditivo} &\iff F^\text{op}=D_\mathscr{D}\circ F:\mathscr{C}\to \mathscr{D}^\text{op} \text{ es aditivo} \\
+                                                             &\iff F_\text{op} = F\circ D_{\mathscr{C}^\text{op}}: \mathscr{C}^\text{op}\to \mathscr{D} \text{ es aditivo} \\
+                                                             &\iff F_\text{op}^\text{op} = D_\mathscr{D}\circ F\circ D_{\mathscr{C}^\text{op}}: \mathscr{C}^\text{op}\to \mathscr{D}^\text{op} \text{ es aditivo},
+        \end{align*}
+        independientemente de la varianza del funtor $F:\mathscr{C}\to \mathscr{D}$.
+
+        En efecto: Se sigue de que el funtor de dualidad entre $\mathbb{Z}$-categorías sea un funtor aditivo y de (1).
+
+    \item Sean $\mathscr{C}, \mathscr{C}'$ y $\mathscr{D} \hspace{2mm} \mathbb{Z}$-categorías, y $H:\mathscr{C}'\times\mathscr{C}\to \mathscr{D}$ un bifuntor. Entonces, el bifuntor $H$ es aditivo si, y sólo si, los funtores $H(X',-):\mathscr{C}\to \mathscr{D}$ y $H(-,X):\mathscr{C}'\to \mathscr{D}$ son aditivos para cualesquiera $X'\in\text{Obj}(\mathscr{C}')$ y $H\in\text{Obj}(\mathscr{C})$.
+
+    %\item Sea $H: \mathscr{A}'\times \mathscr{A}\to \mathscr{B}$ un bifuntor aditivo. Entonces, las composiciones \[
+    %        H\circ \big(D_{(\mathscr{A}')^\text{op}}\times 1_\mathscr{A}\big):(\mathscr{A}')^\text{op}\times \mathscr{A}\to \mathscr{B} \quad \text{y} \quad H\circ \big(1_{\mathscr{A}}\times D_{\mathscr{A}^\text{op}}\big): \mathscr{A}'\times \mathscr{A}^\text{op}\to \mathscr{B}
+    %\] 
+    %son funtores biaditivos con varianza opuesta en la primera y segunda entrada, respectivamente. 
+    \end{enumerate}
+\end{Obs}
+
+\begin{Ejem}\label{Mendoza-Ej.55}
+    Sean $\mathscr{C}$ una $\mathbb{Z}$-categoría y $X\in\text{Obj}(\mathscr{C})$.
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item El funtor Hom-covariante $\text{Hom}_\mathscr{C}(X,-):\mathscr{C}\to \text{Ab}$ es aditivo. 
+
+        \item El funtor Hom-contravariante $\text{Hom}_{\mathscr{C}}(-,X):\mathscr{C}\to \text{Ab}$ es aditivo.
+
+        \item El bifuntor Hom $\text{Hom}(-,-):\mathscr{C}^\text{op}\times \mathscr{C}\to \text{Ab}$ es aditivo\footnote{Ver el inciso (4) de la Observación \ref{Mendoza-1.9.1}.}.
+    \end{enumerate}
+\end{Ejem}
+
+% AGREGAR QUE SI UN FUNTOR ADITIVO ES UN ISOMORFISMO DE CATEGORÍAS, SU INVERSO ES ADITIVO (grupos)
+
+\begin{Lema}\label{Lema: Los funtores aditivos fijan al objeto cero}
+    Los funtores aditivos entre categorías preaditivas mandan objetos cero en su dominio en objetos cero en su codominio.
+\end{Lema}
+
+\begin{proof}
+
+    Sean $F:\mathscr{C}\to \mathscr{D}$ un funtor aditivo, con $\mathscr{C}$ y $\mathscr{D}$ categorías preaditivas, y $0\in\text{Obj}(\mathscr{C})$ un objeto cero en $\mathscr{C}$. Como $F:\text{End}_\mathscr{C}(0)\to \text{End}_\mathscr{D}(F(0))$ es un morfismo de grupos abelianos y $\text{End}_\mathscr{C}(0) = \{1_0 = 0_{0,0}\}$, se tiene que $1_{F(0)} = F(1_0) = 0_{F(0),F(0)}$. Por el inciso (3) de la Observación \ref{Mendoza-1.5.1-Ejer.51}, se sigue que $F(0)$ es un objeto cero en $\mathscr{D}$.
+\end{proof}
+
+\begin{Obs}
+    El Lema \ref{Lema: Los funtores aditivos fijan al objeto cero} es similar a cómo, en topología algebraica, cualquier función punteada manda al punto distinguido de su dominio en el punto distinguido de su contradominio. Recordando que todas las categorías preaditivas son categorías con objeto cero, puede que esta similitud sea la razón por la cual algunas fuentes le dan a las categorías con objeto cero el nombre de \emph{categorías punteadas}.
+\end{Obs}
+
+\begin{Def}\label{Def: Funtor que preserva coproductos finitos}
+    Sean $\mathscr{A}$ y $\mathscr{B}$ categorías aditivas. Decimos que:
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Un funtor covariante $F:\mathscr{A}\to \mathscr{B}$ \emph{preserva coproductos finitos} en $\mathscr{A}$ si para todo coproducto $\{A_i\xrightarrow[]{\mu_i} \bigoplus_{i\in I}A_i\}_{i\in I}$ en $\mathscr{A}$, con $I$ finito, se tiene que $F(\bigoplus_{i\in I}A_i) = \bigoplus_{i\in I}F(A_i)$ y $\big\{F(A_i)\xrightarrow[]{F(\mu_i)} \bigoplus_{i\in I}F(A_i)\big\}_{i\in I}$ es un coproducto en $\mathscr{B}$.
+
+        \item Un funtor contravariante $G:\mathscr{A}\to \mathscr{B}$ \emph{manda productos finitos} en $\mathscr{A}$ \emph{en coproductos finitos} en $\mathscr{B}$ si el funtor $G_\text{op}=G\circ D_{\mathscr{A}^\text{op}}:\mathscr{A}^\text{op}\to \mathscr{B}$ preserva coproductos finitos en $\mathscr{A}^\text{op}$.
+    \end{enumerate}
+\end{Def}
+
+\begin{Lema}\label{Mendoza-Ejer.52}
+    Sean $\mathscr{A}$ y $\mathscr{B}$ categorías aditivas, $X =\bigoplus_{i=1}^n X_i$ y $Y=\bigoplus_{j=1}^n Y_j$ en $\mathscr{A}$, $F:\mathscr{A} \to \mathscr{B}$ un funtor que preserva coproductos finitos en $\mathscr{A}$ y $\alpha \in \text{Mat}_{m\times n}(X,Y).$ Consideremos $\overline{\alpha}:= \sum_{t,r} \mu_t^Y[\alpha]_{t,r}\pi_r^X \in \text{Hom}_{\mathscr{A}}(X,Y)$. Entonces
+\[ [\varphi_{FY,FX}(F(\overline{\alpha}))]_{i,j} = F([\alpha]_{i,j}) \quad \forall i,j. \]
+Es decir,la matriz asociada a $F(\alpha) \in \text{Hom}_{\mathscr{B}}(FX,FY)$, se obtiene de $\alpha$, aplicando $F$ a cada elemento de dicha matriz.
+\end{Lema}
+
+\begin{proof}
+
+    Sea $(i,j)\in[1,n]\times[1,m]$. Por la Proposición \ref{Mendoza-1.9.4}, tenemos que
+    \begin{align*}
+        [\varphi_{FY,FX}(F(\overline{\alpha}))]_{i,j} &= \bigg[\varphi_{FY,FX}\bigg(F\bigg( \sum_{t,r} \mu_t^Y [\alpha]_{t,r} \pi_r^X \bigg)\bigg) \bigg]_{i,j} \\
+                                                      &= \bigg[ \varphi_{FY,FX} \bigg( \sum_{t,r} \bigg( F \big( \mu_t^Y [\alpha]_{t,r} \pi_r^X \big) \bigg) \bigg) \bigg]_{i,j} \tag{$F$ es aditivo} \\
+                                                      &= \bigg[ \varphi_{FY,FX} \bigg( \sum_{t,r} \bigg( F \big( \mu_t^Y \big) F\big( [\alpha]_{t,r} \big) F \big( \pi_r^X \big) \bigg) \bigg) \bigg]_{i,j} \\
+                                                      &= \bigg[ \varphi_{FY,FX} \bigg( \sum_{t,r} \mu_t^{FY} [F(\alpha)]_{t,r} \pi_r^{FX} \bigg) \bigg]_{i,j} \tag{$F$ preserva coproductos} \\
+                                                      &= \big[ \varphi_{FY,FX} \big( \varphi^{-1}_{FY,FX} (F(\alpha)) \big) \big]_{i,j} \\
+                                                      &= [F(\alpha)]_{i,j} \\
+                                                      &= F([\alpha]_{i,j}).
+    \end{align*}
+\end{proof}
+
+\begin{Teo}\label{Mendoza-1.10.2}
+    Sea $F:\mathscr{A}\to \mathscr{B}$ un funtor entre categorías aditivas. Entonces, $F$ es aditivo si, y sólo si, $F$ preserva coproductos finitos en $\mathscr{A}$.
+\end{Teo}
+
+\begin{proof}
+
+    $(\Rightarrow)$ Sean $A\in\text{Obj}(\mathscr{A})$ y $\{A_i\xrightarrow[]{\mu_i} A\}_{i\in I}$, con $I$ finito, tal que $A=\bigoplus_{i\in I}A_i$ con $\{\mu_i\}_{i\in I}$ como inclusiones naturales. \\
+
+    Supongamos que $I=\varnothing$. Entonces, por la Observación \ref{Observaciones del biproducto}, tenemos que $A$ es un objeto cero en $\mathscr{A}$. Luego, del Lema \ref{Lema: Los funtores aditivos fijan al objeto cero} se sigue que $F(A)$ es un objeto cero en $\mathscr{B}$, y por la misma Observación anterior, tenemos que $F(A)$ es un coproducto en $\mathscr{B}$. \\
+
+    Supongamos ahora que $I\neq\varnothing$. Podemos suponer que $I=\{1,2,...,n\}$. Por la Proposición \ref{Mendoza-1.9.2}, existe una familia de morfismos $\{A\xrightarrow[]{\pi_i} A_i\}_{i=1}^n$ en $\mathscr{A}$ tales que $\pi_i\mu_j = \delta_{i,j}^A$ para cualesquiera $i,j\in[1,n]\times[1,n]$ y $\sum_{i=1}^n \mu_i\pi_i=1_A$. Luego, por ser $F$ un funtor aditivo, se tiene que
+    \[
+        F(\pi_i)F(\mu_j) = \delta_{i,j}^{F(A)} \quad \text{y} \quad \sum_{i=1}^n F(\mu_i)F(\pi_i) = 1_{F(A)}.
+    \] 
+    Por ende, de la Proposición \ref{Mendoza-1.9.2} se sigue que $F(A) = \bigoplus_{i=1}^n F(A_i)$ con inclusiones naturales $\big\{F(A_i)\xrightarrow[]{F(\mu_i)} F(A)\big\}_{i=1}^n$. \\
+
+    $(\Leftarrow)$ Sean $X,Y\in\text{Obj}(\mathscr{A})$ y $\alpha,\beta\in\text{Hom}_\mathscr{A}(X,Y)$. Por el Lema \ref{Mendoza-1.9.10}, tenemos que
+    \begin{align*}
+        F(\alpha+\beta) &= F\big(X\xrightarrow[]{\alpha+\beta}Y\big) \\
+                        &= F\bigg( X\xrightarrow[]{\big(\begin{smallmatrix} \alpha \\ \beta \end{smallmatrix}\big)} Y\bigoplus Y \xrightarrow[]{(\begin{smallmatrix} 1_Y &1_Y \end{smallmatrix})} Y \bigg) \\
+                        &= F(X)\xrightarrow[]{\big(\begin{smallmatrix} F(\alpha) \\ F(\beta) \end{smallmatrix}\big)} F\big(Y\bigoplus Y\big) \xrightarrow[]{(\begin{smallmatrix} 1_{F(Y)} &1_{F(Y)} \end{smallmatrix})} F(Y) \tag{Lema \ref{Mendoza-Ejer.52}} \\
+                        &= F(\alpha) + F(\beta).
+    \end{align*}
+\end{proof}
+
+\begin{Coro}\label{Mendoza-Ejer.53}
+    Sea $G: \mathscr{A} \to \mathscr{B}$ un funtor contravariante entre categorías aditivas. Entonces, $G$ es aditivo si, y sólo si, $G$ manda productos finitos en $\mathscr{A}$ en coproductos finitos en $\mathscr{B}$.
+\end{Coro}
+
+\begin{proof}
+
+    Por el inciso (2) de la Observación \ref{Obs: funtores aditivos} se tiene que $G$ es aditivo si, y sólo si, $G_{op}$ es aditivo. Ahora, como  $G_{op} = G \circ D_{A^{op}}$ es un funtor covariante, por el Teorema \ref{Mendoza-1.10.2} tenemos que $G_{op}$ es aditivo si, y sólo si, $G_{op}$ preserva coproductos en $\mathscr{A}^{op}.$ De esto se sigue que $G$ sea aditivo es equivalente a que $G_{op}$ preserve coproductos finitos en $\mathscr{A}^{op}$. Dado que la noción dual de coproducto es producto, concluimos que $G$ es aditivo si, y sólo si, $G$ manda productos finitos en $\mathscr{A}$ en coproductos finitos en $\mathscr{B}.$
+\end{proof}
+
+\subsection*{Ideales de categorías aditivas} \label{Ssec: Ideales de categorías aditivas}
+
+\begin{Def}\label{Def: Ideal de una categoría aditiva}
+    Sea $\mathscr{A}$ una categoría aditiva. Un \emph{ideal} de $\mathscr{A}$ es una clase de morfismos en $\mathscr{A}$
+    \[
+        J = \bigcup_{(X,Y)\in\text{Obj}(\mathscr{A})^2} J(X,Y),
+    \] 
+    con $J(X,Y)\subseteq\text{Hom}_\mathscr{A}(X,Y)$, tal que satisface las siguientes condiciones.
+
+    \begin{enumerate}
+    
+        \item[(I1)] Para cualesquiera $X,Y\in\text{Obj}(\mathscr{A})$, $J(X,Y)$ es un subgrupo abeliano de $\text{Hom}_\mathscr{A}(X,Y)$.
+
+        \item[(I2)] Para cualesquiera morfismos componibles $W\xrightarrow[]{\alpha}X\xrightarrow[]{f}Y\xrightarrow[]{\beta}Z$ en $\mathscr{A}$, si $f\in J(X,Y)$, entonces $\beta f\alpha\in J(W,Z)$.
+    \end{enumerate}
+    En caso de que $J$ sea un ideal de $\mathscr{A}$, lo denotaremos por $J\trianglelefteq \mathscr{A}$.
+\end{Def}
+
+\begin{Obs}\label{Obs: Ideal de una categoría aditiva}
+    Sean $\mathscr{A}$ una categoría aditiva y $J$ un ideal de $\mathscr{A}$.
+
+    \begin{enumerate}[label=(\arabic*)]
+    
+        \item Para cualesquiera $X,Y\in\text{Obj}(\mathscr{A})$, tenemos la relación de equivalencia $\simeq_{X,Y}$ en $\text{Hom}_\mathscr{A}(X,Y)$ dada por
+            \[
+                f \simeq_{X,Y} g \iff f-g \in J(X,Y),
+            \] 
+            la cual nos define una relación de congruencia $\cong$ en $\mathscr{A}$. Por ende, podemos considerar la categoría cociente\footnote{Ver la Definición \ref{Def: Relación de congruencia y categoría cociente}.} $\mathscr{A}/\cong$. Dado que esta relación de congruencia está caracterizada por el ideal $J$, la categoría cociente anterior se conoce como la \emph{categoría cociente de} $\mathscr{A}$ \emph{sobre} $J$, y se denota por $\mathscr{A}/J$. Explícitamente,
+            \begin{align*}
+                \text{Obj}(\mathscr{A}/J) :=& \ \text{Obj}(\mathscr{A}), \\
+                \text{Hom}_{\mathscr{A}/J}(X,Y) :=& \ \text{Hom}_\mathscr{A}(X,Y)/J(X,Y) &\forall \ X,Y\in\text{Obj}(\mathscr{A}/J). \\
+                \big(g + J(Y,Z)\big)\big(f + J(X,Y)\big) =& \ gf + J(X,Z)  &\forall \ f\in\text{Hom}_{\mathscr{A}/J}(X,Y), g\in\text{Hom}_{\mathscr{A}/J}(Y,Z).
+            \end{align*}
+
+        \item El funtor cociente
+                \begin{align*}
+                    \pi_J:\mathscr{A}&\to \mathscr{A}/J, \\
+                    \big(X\xrightarrow[]{f}Y\big)&\mapsto \big(X\xrightarrow[]{f+J(X,Y)}Y\big)
+                \end{align*}
+                es pleno, denso y aditivo. En particular, la categoría cociente $\mathscr{A}/J$ es aditiva.
+
+                En efecto: La plenitud y aditividad de $\pi_J$ se siguen de que, por definición, $\pi_J$ actúa sobre cada grupo abeliano $\text{Hom}_\mathscr{A}(X,Y)$ como el epimorfismo canónico al grupo cociente $\text{Hom}_{\mathscr{A}/J}(X,Y)$, que es un morfismo de grupos abelianos suprayectivo. La densidad de $\pi_J$ es trivial, pues el funtor cociente fija objetos. Luego, por la funtorialidad y aditividad de $\pi_J$, tenemos que la composición de morfismos en $\mathscr{A}/J$ es blilineal. Más aún, de la existencia de coproductos finitos en $\mathscr{A}$ y la caracterización de coproductos finitos dada por el inciso (b) de la Proposición \ref{Mendoza-1.9.2}, se sigue que $\mathscr{A}/J$ tiene coproductos finitos.
+
+            \item Sea $\chi\subseteq\text{Obj}(\mathscr{A})$ una clase de objetos cerrada por sumas directas finitas en $\mathscr{A}$. Entonces, la colección de todos los morfismos que se pueden factorizar a través de algún objeto en $\chi$ es un ideal de $\mathscr{A}$.
+
+                En efecto: Sean $X,Y\in\text{Obj}(\mathscr{A})$ y $J(X,Y)\subseteq\text{Hom}_\mathscr{A}(X,Y)$ el conjunto de todos los morfismos de $X$ en $Y$ factorizables a través de algún objeto en $\chi$. Supongamos que los morfismos $f_1,f_2\in J(X,Y)$ se pueden factorizar a través de $J_1, J_2\in\text{Obj}(\chi)$, respectivamente. Entonces, tenemos los siguientes diagramas conmutativos en $\mathscr{A}$
+                \begin{center}
+                    \begin{tikzcd}
+                        X \arrow[dotted]{dr}[swap]{j_1} \arrow[]{rr}[]{f_1} &&Y. \\
+                        &J_1 \arrow[dotted]{ur}[swap]{j_1'}
+                    \end{tikzcd}
+                    \hspace{3cm}
+                    \begin{tikzcd}
+                        X \arrow[dotted]{dr}[swap]{j_2} \arrow[]{rr}[]{f_2} &&Y \\
+                        &J_2 \arrow[dotted]{ur}[swap]{j_2'}
+                    \end{tikzcd}
+                \end{center}
+                Por ende, tenemos que
+                \begin{align*}
+                    f_1 + (-f_2) &= f_1 - f_2 \\
+                                 &= j_1'j_1 - j_2'j_2 \\
+                                 &= (\begin{smallmatrix} j_1' & -j_2' \end{smallmatrix}) \big(\begin{smallmatrix} j_1 \\ j_2 \end{smallmatrix}\big),
+                \end{align*}
+                con $X\xrightarrow[]{(\begin{smallmatrix} j_1' &-j_2' \end{smallmatrix})} J_1\bigoplus J_2$ y $J_1\bigoplus J_2\xrightarrow[]{\big(\begin{smallmatrix} j_1 \\ j_2 \end{smallmatrix}\big)}Y$ en $\mathscr{A}$. Como $\chi$ es cerrada por sumas directas finitas, se sigue que $J_1\bigoplus J_2\in\text{Obj}(\chi)$, por lo que $f_1-f_2\in J(X,Y)$. Esto implica que $J(X,Y)$ es un subgrupo abeliano de $\text{Hom}_\mathscr{A}(X,Y)$. 
+
+                Ahora, sean $W\xrightarrow[]{\alpha}X\xrightarrow[]{f}Y\xrightarrow[]{\beta}Z$ morfismos componibles en $\mathscr{A}$, con $f\in J(X,Y)$. Entonces, tenemos el diagrama conmutativo en $\mathscr{A}$
+                \begin{center}
+                    \begin{tikzcd}
+                        W\arrow[]{r}[]{\alpha} &X\arrow[]{rr}[]{f} \arrow[dotted]{dr}[swap]{j} &&Y\arrow[]{r}[]{\beta} &Z, \\
+                                               &&J \arrow[dotted]{ur}[swap]{j'}
+                    \end{tikzcd}
+                \end{center}
+                con $J\in\text{Obj}(\chi)$, de donde se sigue que el diagrama en $\mathscr{A}$
+                \begin{center}
+                    \begin{tikzcd}
+                        W \arrow[]{dr}[swap]{j\alpha} \arrow[]{rr}[]{\beta f \alpha} &&Z \\
+                                                         &J\arrow[]{ur}[swap]{\beta j'}
+                    \end{tikzcd}
+                \end{center}
+                conmuta, i.e., que $\beta f\alpha\in J(W,Z)$.
+
+            \item En vista de (3), para una subcategoría plena $\chi\subseteq\mathscr{A}$ cerrada por sumas directas finitas, denotaremos por $\langle\chi\rangle$ al ideal de todos los morfismos que se factorizan a través de algún objeto en $\chi$, y por $\mathscr{A}/\chi := \mathscr{A}/\langle\chi\rangle$ a la categoría cociente asociada a dicho ideal.
+    \end{enumerate}
+\end{Obs}
+
+\subsection*{Bifuntores aditivos, bimódulos generalizados y matrices asociadas} \label{Ssec: Bifuntores aditivos, bimódulos generalizados y matrices asociadas}
+
+\begin{Def}
+    Sean $\mathscr{C}$ una $\mathbb{Z}$-categoría, $\mathbb{E}:\mathscr{C}^\text{op}\times\mathscr{C}\to \text{Ab}$ un bifuntor aditivo y $A,A',C,C'\in\text{Obj}(\mathscr{C})$. Definimos las correspondencias
+    \begin{align*}
+        \text{Hom}_\mathscr{C}(A,A')\times\mathbb{E}(C,A) &\to \mathbb{E}(C,A'), \\
+        (a,\delta) &\mapsto a\cdot\delta:=\mathbb{E}(C,a)(\delta), \\ \\
+        \mathbb{E}(C,A)\times\text{Hom}_\mathscr{C}(C',C) &\to \mathbb{E}(C',A), \\
+        (\delta,c) &\mapsto \delta\cdot c:=\mathbb{E}(c^\text{op},A)(\delta).
+    \end{align*}
+\end{Def}
+
+\begin{Prop}\label{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}
+    Sean $\mathscr{C}$ una $\mathbb{Z}$-categoría y $\mathbb{E}:\mathscr{C}^\text{op}\times\mathscr{C}\to \text{Ab}$ un bifuntor aditivo. Entonces, las siguientes condiciones se satisfacen.
+    
+    \begin{enumerate}[label=(\alph*)]
+
+        \item $a\cdot(\delta_1+\delta_2) = a\cdot\delta_1 + a\cdot\delta_2 \quad \forall \ a\in\text{Hom}_\mathscr{C}(A,A'), \ \delta_1,\delta_2\in\mathbb{E}(C,A)$.
+    
+        \item $(a_1+a_1)\cdot\delta = a_1\cdot\delta + a_2\cdot\delta \quad \forall \ a_1,a_2\in\text{Hom}_\mathscr{C}(A,A'), \ \delta\in\mathbb{E}(C,A)$.
+
+        \item $1_A\cdot\delta = \delta \quad \forall \ \delta\in\mathbb{E}(C,A)$.
+
+        \item $(a'a)\cdot\delta = a'\cdot(a\cdot\delta) \quad \forall \ a\in\text{Hom}_\mathscr{C}(A,A'), a'\in\text{Hom}_\mathscr{C}(A',A''), \delta\in\mathbb{E}(C,A)$.
+
+        \item $(\delta_1+\delta_2)\cdot c = \delta_1\cdot c + \delta_2\cdot c \quad \forall \ c\in\text{Hom}_\mathscr{C}(C',C), \ \delta_1,\delta_2\in\mathbb{E}(C,A)$.
+
+        \item $\delta\cdot(c_1+c_2)=\delta\cdot c_1 + \delta\cdot c_2 \quad \forall \ c_1,c_2\in\text{Hom}_\mathscr{C}(C',C), \ \delta\in\mathbb{E}(C,A)$.
+
+        \item $\delta\cdot1_C  = \delta\quad \forall \ \delta\in\mathbb{E}(C,A)$.
+
+        \item $\delta\cdot(cc') = (\delta\cdot c)\cdot c' \quad \forall \ c\in\text{Hom}_\mathscr{C}(C',C), c'\in\text{Hom}_\mathscr{C}(C'',C'), \delta\in\mathbb{E}(C,A)$.
+
+        \item $a\cdot(\delta\cdot c) = (a\cdot\delta)\cdot c \quad \forall \ a\in\text{Hom}_\mathscr{C}(A,A'), c\in\text{Hom}_\mathscr{C}(C',C), \delta\in\mathbb{E}(C,A)$.
+
+        \item $0\cdot\delta = 0 = \delta\cdot0 \quad \forall \ \delta\in\mathbb{E}(C,A)$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+    Por el inciso (3) de la Observación \ref{Obs: funtores aditivos} sabemos que, para cualquier $X\in\text{Obj}(\mathscr{C})$, los funtores $\text{Hom}(X,-):\mathscr{C}\to \text{Ab}, \text{Hom}(-,X):\mathscr{C}\to \text{Ab}, \mathbb{E}(X,-):\mathscr{C}\to \text{Ab}$ y $\mathbb{E}(-,X):\mathscr{C}\to \text{Ab}$ son aditivos.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Sean $a\in\text{Hom}_\mathscr{C}(A,A')$ y $\delta_1,\delta_2\in\mathbb{E}(C,A)$. Entonces,
+            \begin{align*}
+                a\cdot(\delta_1+\delta_2) &= \mathbb{E}(C,a)(\delta_1+\delta_2) \\
+                                          &= \mathbb{E}(C,a)(\delta_1)+\mathbb{E}(C,a)(\delta_2) \\
+                                          &= a\cdot\delta_1 + a\cdot\delta_2.
+            \end{align*}
+
+        \item Sean $a_1,a_2\in\text{Hom}_\mathscr{C}(A,A')$ y $\delta\in\mathbb{E}(C,A)$. Entonces,
+            \begin{align*}
+                (a_1+a_2)\cdot\delta &= \mathbb{E}(C,a_1+a_2)(\delta) \\
+                                     &= \mathbb{E}(C,a_1)(\delta) + \mathbb{E}(C,a_2)(\delta) \\
+                                     &= a_1\cdot\delta + a_2\cdot\delta.
+            \end{align*}
+
+        \item Sea $\delta\in\mathbb{E}(C,A)$. Entonces,
+            \begin{align*}
+                1_A\cdot\delta &= \mathbb{E}(C,1_A)(\delta) \\
+                               &= 1_{\mathbb{E}(C,A)}\delta \\
+                               &= \delta.
+            \end{align*}
+
+        \item Sean $a\in\text{Hom}_\mathscr{C}(A,A'), a'\in\text{Hom}_\mathscr{C}(A',A'')$ y $\delta\in\mathbb{E}(C,A)$. Entonces,
+            \begin{align*}
+                (a'a\cdot\delta) &= \mathbb{E}(a'a,C)(\delta) \\
+                                 &= (\mathbb{E}(a',C)\mathbb{E}(a,C))(\delta) \\
+                                 &= \mathbb{E}(a',C)(\mathbb{E}(a,C)(\delta)) \\
+                                 &= a'\cdot(a\cdot\delta).
+            \end{align*}
+
+        \item Análogo a (a).
+
+        \item Análogo a (b).
+
+        \item Análogo a (c).
+
+        \item Análogo a (d).
+
+        \item Observemos que
+            \begin{align*}
+                a\cdot(\delta\cdot c) &= \mathbb{E}(1_{C'}{}^\text{op},a)(\delta\cdot c) \\
+                                      &= \mathbb{E}(1_{C'}{}^\text{op},a)\mathbb{E}(c^\text{op},1_A)(\delta) \\
+                                      &= \mathbb{E}(c^\text{op},a)(\delta) \\
+                                      &= \mathbb{E}(c^\text{op},1_{A'})\mathbb{E}(1_C{}^\text{op},a)(\delta) \\
+                                      &= \mathbb{E}(c^\text{op}, 1_{A'})(a\cdot\delta) \\
+                                      &= (a\cdot\delta)\cdot c.
+            \end{align*}
+
+        \item Se sigue de que los morfismos de grupos fijan a los elementos neutros.
+    \end{enumerate}   
+\end{proof}
+
+\begin{Obs}\label{Obs: Bimódulo generalizado inducido por un bifuntor aditivo}
+    Recordemos que, en el inciso (7) del Ejemplo \ref{Ejem: Categorías}, vimos que podemos pensar a un monoide como una categoría con un solo objeto. De forma similar, los incisos (a) a (i) de la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo} nos dicen que podemos interpretar a un bifuntor aditivo sobre una $\mathbb{Z}$-categoría con un solo objeto como un bimódulo. Más generalmente, esta Proposición nos dice que un bifuntor aditivo $\mathbb{E}:\mathscr{C}^\text{op}\times\mathscr{C}\to \text{Ab}$, con $\mathscr{C}$ una $\mathbb{Z}$-categoría, puede ser considerado como un bimódulo sobre los anillos generalizados $\text{Mor}(\mathscr{C}^\text{op})$ y $\text{Mor}(\mathscr{C})$, cuyos productos están parcialmente definidos, en general.
+\end{Obs} %Corregir
+
+A continuación, generalizaremos la Definición \ref{Def: Mat}, de matrices asociadas al bifuntor aditivo Hom, a cualquier bifuntor aditivo y demostraremos un resultado análogo a la Proposición \ref{Mendoza-1.8.11} para estas nuevas matrices. Para lograr esto, necesitaremos restringirnos al uso de biproductos finitos, por lo que consideraremos categorías aditivas, cuyos productos son $\mathbb{Z}$-categorías\footnote{Ver el inciso (4) de la Observación \ref{Mendoza-1.9.1}.}. 
+
+\begin{Def}\label{Def: E-matrices}
+    Sean $\mathscr{A}$ una categoría aditiva, $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo y $C=\bigoplus_{j=1}^n C_j, A=\bigoplus_{i=1}^m A_i$ en $\mathscr{A}$, con $m$ y $n$ enteros positivos. Denotaremos por $\text{Mat}^\mathbb{E}_{m\times n}(C,A)$ al conjunto de matrices $\alpha$, de orden $m\times n$, con entradas $[\alpha]_{i,j}\in\mathbb{E}(C_j,A_i)$. Para $\alpha,\beta\in\text{Mat}^\mathbb{E}_{m\times n}(C,A)$, definimos
+\[
+    \alpha = \beta \iff [\alpha]_{i,j} = [\beta]_{i,j} \quad \forall \ (i,j)\in [1,m]\times[1,n].
+\] 
+Llamaremos \emph{$\mathbb{E}$-matrices} a los elementos de $\text{Mat}^\mathbb{E}_{m\times n}(C,A)$. Notamos que\footnote{Ver la Definición \ref{Def: Mat}.} $\text{Mat}^\text{Hom}_{m\times n}(C,A) = \text{Mat}_{m\times n}(C,A)$, por lo que podemos llamar Hom-matrices a los elementos de $\text{Mat}_{m\times n}(C,A)$.
+\end{Def}
+
+\begin{Obs}\label{Obs: E-matrices}
+    Sean $\mathscr{A}$ una categoría aditiva, $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo y $C=\bigoplus_{j=1}^n C_j, A=\bigoplus_{i=1}^m A_i$ en $\mathscr{A}$, con $m$ y $n$ enteros positivos. Entonces, el conjunto de $\mathbb{E}$-matrices $\text{Mat}^\mathbb{E}_{m\times n}(C,A)$ tiene estructura de grupo abeliano, inducida de la de $\mathbb{E}(C,A)$, con la operación de suma de matrices usual y el elemento neutro formado por la matriz cuya entrada $[0]_{i,j}$ es el elemento neutro del grupo abeliano $\mathbb{E}(C_j,A_i)$.
+\end{Obs}
+
+\begin{Prop}\label{Mendoza-1.8.11g}
+    Sean $\mathscr{A}$ una categoría aditiva, $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to   \text{Ab}$ un bifuntor aditivo y $C=\bigoplus_{j=1}^n C_j, A=\bigoplus_{i=1}^m A_i$ en $\mathscr{A}$, con $m$ y $n$ enteros positivos. Entonces, la correspondencia
+    \[
+        \Phi^\mathbb{E} = \Phi^\mathbb{E}_{A,C}:\mathbb{E}(C,A) \to \text{Mat}^\mathbb{E}_{m\times n}(C,A),
+    \]
+    dada por $[\Phi^\mathbb{E}(\delta)]_{i,j} := \pi_i^A\cdot \delta\cdot\mu_j^C$ para todo $(i,j)\in [1,m]\times[1,n]$, es un isomorfismo en Ab.
+\end{Prop}
+
+\begin{proof}
+
+    De los incisos (a) y (e) de la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, se sigue que $\Phi^\mathbb{E}$ es un morfismo de grupos abelianos. \\
+
+    Sean $\delta_1,\delta_2\in\mathbb{E}(C,A)$ tales que $\Phi^\mathbb{E}(\delta_1) = \Phi^\mathbb{E}(\delta_2)$. Entonces, tenemos que
+    \begin{equation*}
+        \pi_i^A\cdot\delta_1\cdot\mu_j^C = \pi_i^A\cdot\delta_2\cdot\mu_j^C
+    \end{equation*}
+    para todo $(i,j)\in[1,m]\times[1,n]$. Luego, de la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, se sigue que
+    \begin{align*}
+        \sum_{i=1}^m \sum_{j=1}^n \mu_i^A\cdot(\pi_i^A\cdot\delta_1\cdot\mu_j^C)\cdot\pi_j^C &= \sum_{i=1}^m \sum_{j=1}^n \mu_i^A\cdot(\pi_i^A\cdot\delta_1\cdot\mu_j^C)\cdot\pi_j^C \\
+                                                                                             &\Downarrow \\
+        \sum_{i=1}^m \sum_{j=1}^n (\mu_i^A\pi_i^A)\cdot\delta_1\cdot(\mu_j^C\pi_j^C) &= \sum_{i=1}^m \sum_{j=1}^n (\mu_i^A\pi_i^A)\cdot\delta_2\cdot(\mu_j^C\pi_j^C) \\
+                                                                                             &\Downarrow \\
+        \bigg(\sum_{i=1}^m \mu_i^A\pi_i^A\bigg)\cdot\delta_1\cdot\bigg(\sum_{j=1}^n \mu_j^C\pi_j^C\bigg) &= \bigg(\sum_{i=1}^m \mu_i^A\pi_i^A\bigg)\cdot\delta_2\cdot\bigg(\sum_{j=1}^n \mu_j^C\pi_j^C\bigg) \\
+                                                                                     &\Downarrow \\
+        1_A\cdot\delta_1\cdot1_C &= 1_A\cdot\delta_2\cdot1_C \tag{Proposición \ref{Mendoza-1.9.2}} \\
+                                 &\Downarrow \\
+        \delta_1 &= \delta_2,
+    \end{align*}
+    por lo que $\Phi^\mathbb{E}$ es inyectiva. \\
+
+    Por otro lado, sea $\alpha\in\text{Mat}^\mathbb{E}_{m\times n}(C,A)$. Entonces, tenemos que $[\alpha]_{i,j}\in\mathbb{E}(C_j,A_i)$ para todo $(i,j)\in[1,m]\times[1,n]$. Consideremos $\delta:=(\sum_{i=1}^m\mu_i^A)\cdot[\alpha]_{i,j}\cdot(\sum_{j=1}^n\pi_j^C)\in\mathbb{E}(C,A)$. Por la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}, para todo $(i',j')\in[1,m]\times[1,n]$, tenemos que
+    \begin{align*}
+        [\Phi^\mathbb{E}(\delta)]_{i',j'} &= \pi_{i'}^A\cdot\bigg(\bigg(\sum_{i=1}^m\mu_i^A\bigg)\cdot[\alpha]_{i,j}\cdot\bigg(\sum_{j=1}^n\pi_j^C\bigg)\bigg)\cdot\mu_{j'}^C \\
+                                          &=  \bigg(\pi_{i'}^A\bigg(\sum_{i=1}^m\mu_i^A\bigg)\bigg) \cdot[\alpha]_{i,j}\cdot\bigg(\bigg(\sum_{j=1}^n\pi_j^C\bigg)\mu_{j'}^C\bigg) \\
+                                          &= \bigg(\sum_{i=1}^m\pi_{i'}^A\mu_i^A\bigg)\cdot[\alpha]_{i,j}\cdot\bigg(\sum_{j=1}^n\pi_j^C\mu_{j'}^C\bigg) \tag{bilinealidad en $\mathscr{A}$} \\
+                                          &= \bigg( \sum_{i=1}^m \delta^A_{i',i} \bigg) \cdot[\alpha]_{i,j}\cdot \bigg( \sum_{j=1}^n \delta^C_{j,j'} \bigg) \tag{Proposición \ref{Mendoza-Ejer.43}} \\
+                                          &= \sum_{i=1}^m \sum_{j=1}^n \big(\delta^A_{i',i}\cdot[\alpha]_{i,j}\cdot\delta^C_{j,j'}\big) \\
+                                          &= 1_{A_{i'}}\cdot[\alpha]_{i',j'}\cdot1_{C_{j'}} \\
+                                          &= [\alpha]_{i',j'},
+    \end{align*}
+    de donde se sigue que $\Phi^\mathbb{E}$ es suprayectiva. Por lo tanto, $\Phi^\mathbb{E}$ es un isomorfismo de grupos abelianos.
+\end{proof}
+
+\begin{Coro}
+    Sea $\mathscr{A}$ una categoría aditiva. Entonces, la correspondencia $\varphi$ de la Proposición \ref{Mendoza-1.8.11} es un isomorfismo en Ab. 
+\end{Coro}
+
+\begin{proof}
+    Se sigue de aplicar la Proposición \ref{Mendoza-1.8.11g} al bifuntor aditivo Hom.
+\end{proof}
+
+Por último, veremos que el producto de Hom-matrices con $\mathbb{E}$-matrices, que definiremos a continuación, es compatible con las acciones de bimódulo vistas en la Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}.
+
+\begin{Def}
+    Sean $\mathscr{A}$ una categoría aditiva, $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to\text{Ab}$ un bifuntor aditivo, $C=\bigoplus_{j=1}^n C_j, A=\bigoplus_{i=1}^m A_i$ en $\mathscr{A}$, con $m$ y $n$ enteros positivos, y $\delta\in\mathbb{E}(C,A)$.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Si $A'=\bigoplus_{k=1}^p A'_k$, con $p$ un entero positivo, y $a\in\text{Hom}_\mathscr{A}(A,A')$, definimos el producto $\varphi_{A',A}(a)\Phi^\mathbb{E}_{A,C}(\delta)$ con entradas
+            \[
+                [\varphi_{A',A}(a)\Phi^\mathbb{E}_{A,C}(\delta)]_{k,j} := \sum_{i=1}^m [\varphi_{A',A}(a)]_{k,i} \cdot [\Phi^\mathbb{E}_{A,C}(\delta)]_{i,j} \quad \forall \ (k,j)\in[1,p]\times[1,n].
+            \] 
+            
+        \item Si $C' = \bigoplus_{l=1}^q C'_l$, con $q$ un entero positivo, y $c\in\text{Hom}_\mathscr{A}(C',C)$, definimos el producto $\Phi^\mathbb{E}_{A,C}(\delta)\varphi_{C,C'}(c)$ con entradas
+            \[
+                [\Phi^\mathbb{E}_{A,C}(\delta)\varphi_{C,C'}(c)]_{i,l} := \sum_{j=1}^n [\Phi^\mathbb{E}_{A,C}(\delta)]_{i,j} \cdot [\varphi_{C,C'}(c)]_{j,l} \quad \forall \ (i,l)\in[1,m]\times[1,q].
+            \] 
+    \end{enumerate}
+    Notamos que, en ambos casos, el producto de una Hom-matriz con una $\mathbb{E}$-matriz da como resultado una $\mathbb{E}$-matriz.
+\end{Def}
+
+\begin{Prop}\label{Prop: Multiplicación de matrices con E-matrices y compatibilidad con acciones de bimódulo}
+    Sean $\mathscr{A}$ una categoría aditiva, $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to   \text{Ab}$ un bifuntor aditivo, $C=\bigoplus_{j=1}^n C_j, A=\bigoplus_{i=1}^mA_i$ en $\mathscr{A}$, con $m$ y $n$ enteros positivos y $\delta\in\mathbb{E}(C,A)$. Entonces, se satisfacen las siguientes condiciones.
+
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item $\Phi^\mathbb{E}_{A',C}(a\cdot\delta) = \varphi_{A',A}(a)\Phi^\mathbb{E}_{A,C}(\delta) \quad \forall \ A'=\bigoplus_{k=1}^p A'_k$ en $\mathscr{A}, a\in\text{Hom}_\mathscr{A}(A,A')$.
+    
+        \item $\Phi^\mathbb{E}_{A,C'}(\delta\cdot c) = \Phi^\mathbb{E}_{A,C}(\delta)\varphi_{C,C'}(c) \quad \forall \ C'=\bigoplus_{l=1}^q C'_l$ en $\mathscr{A}, c\in\text{Hom}_\mathscr{A}(C',C)$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}\leavevmode
+    \begin{enumerate}[label=(\alph*)]
+    
+        \item Sean $A' = \bigoplus_{k=1}^p$ en $\mathscr{A}$ y $a\in\text{Hom}_\mathscr{A}(A,A')$. Entonces, para todo $(k,j)\in[1,p]\times[1,n]$, tenemos que
+            \begin{align*}
+                [\Phi^\mathbb{E}_{A',C}(a\cdot\delta)]_{k,j} &= \pi_k^{A'}\cdot(a\cdot\delta)\cdot\mu_j^C  \\
+                                                             &= \big(\pi_k^{A'}a\big)\cdot\delta\cdot\mu_j^C \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(d)}\\
+                                                             &= \bigg(\pi_k^{A'}a\bigg(\sum_{i=1}^m \mu_i^A\pi_i^A\bigg)\bigg)\cdot\delta\cdot\mu_j^C \tag{Proposición \ref{Mendoza-1.9.2}} \\
+                                                             &= \bigg(\sum_{i=1}^m \pi_k^{A'}a \mu_i^A\pi_i^A\bigg)\cdot\delta\cdot\mu_j^C \tag{bilinealidad en $\mathscr{A}$} \\
+                                                             &= \sum_{i=1}^m\big( \pi_k^{A'}a \mu_i^A\pi_i^A\big)\cdot\delta\cdot\mu_j^C \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(b)} \\
+                                                             &= \sum_{i=1}^m\big( \pi_k^{A'}a \mu_i^A\big)\cdot(\pi_i^A\cdot\delta\cdot\mu_j^C) \tag{Proposición \ref{Prop: Bimódulo generalizado inducido por un bifuntor aditivo}(d)} \\
+                                                             &= \sum_{i=1}^m [\varphi_{A',A}(a)]_{k,i} \cdot [\Phi^\mathbb{E}_{A,C}(\delta)]_{i,j} \\
+                                                             &= [\varphi_{A',A}(a) \Phi^\mathbb{E}_{A,C}(\delta)]_{k,j}.
+            \end{align*}
+
+        \item Análogo a (a).
+    \end{enumerate}
+\end{proof}
+
+%\subsection*{$\mathbb{E}$-extensiones} \label{Ssec: E-extensiones}
+%
+%\begin{Def}\cite[Definition 2.1]{NakaokaPalu}\label{Def: E-extensión}
+%    Sean $\mathscr{A}$ una categoría aditiva y $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo. Para cualesquiera $A,C\in\text{Obj}(\mathscr{A})$, una $\mathbb{E}$-\emph{extensión} es un elemento $\delta\in\mathbb{E}(C,A)$. Por ende, formalmente, una $\mathbb{E}$-extensión es una terna $(A,\delta,C)$. En particular, decimos que el elemento $0\in\mathbb{E}(C,A)$ es la $\mathbb{E}$-\emph{extensión escindible}.
+%\end{Def}
+%
+%\begin{Def}\cite[Definition 2.3]{NakaokaPalu}\label{Def: Morfismo de E-extensiones}
+%    Sean $(A,\delta,C)$ y $(A',\delta',C')$ $\mathbb{E}$-extensiones. Un par de morfismos $(a,c):(A,\delta,C)\to (A',\delta',C')$ con $a\in\text{Hom}_\mathscr{A}(A,A'), c\in\text{Hom}_\mathscr{A}(C,C')$ es un \emph{morfismo de} $\mathbb{E}$-\emph{extensiones} si satisface la igualdad $a\cdot\delta = \delta'\cdot c$, y lo denotamos por $(a,c):\delta\to \delta'$.
+%\end{Def}
+%
+%\begin{Obs}\cite[Remark 2.4]{NakaokaPalu}\label{Observaciones de morfismos de E-extensiones}
+%    Sean $\mathscr{A}$ una categoría aditiva y $\mathbb{E}:\mathscr{A}^\text{op}\times\mathscr{A}\to \text{Ab}$ un bifuntor aditivo.
+%
+%    \begin{enumerate}[label=(\arabic*)]
+%    
+%        \item Las $\mathbb{E}$-extensiones y los morfismos de $\mathbb{E}$-extensiones forman la categoría $\mathbb{E}\text{-Ext}(\mathscr{A})$ de $\mathbb{E}$-extensiones de $\mathscr{A}$, donde la composición de morfismos y los morfismos identidad se inducen de $\mathscr{A}$.
+%
+%        \item Sean  $(A,\delta,C)$ una $\mathbb{E}$-extensión y $A',C'\in\text{Obj}(\mathscr{A})$. Entonces, cualquier morfismo $a\in\text{Hom}_\mathscr{A}(A,A')$ induce el morfismo de $\mathbb{E}$-extensiones
+%            \[
+%                (a,1_{C}):\delta\to a\cdot\delta,
+%            \] 
+%            y cualquier morfismo $c\in\text{Hom}_\mathscr{A}(C',C)$ induce el morfismo de $\mathbb{E}$-extensiones
+%            \[
+%                (1_{A},c):\delta\cdot c\to \delta.
+%            \] 
+%    \end{enumerate}
+%\end{Obs}
+%
+%\begin{Obs}\cite[Definition 2.6]{NakaokaPalu}\label{Def: Suma de E-extensiones}
+%    Sean $(A,\delta,C), (A',\delta',C')$ $\mathbb{E}$-extensiones y $C\xrightarrow[]{\mu_C}C\bigoplus C'\xleftarrow[]{\mu_{C'}}C', A\xleftarrow[]{\pi_A}A\bigoplus A'\xrightarrow[]{\pi_{A'}}A'$ un coproducto y un producto en $\mathscr{A}$, respectivamente. Dado que $\mathbb{E}$ es un bifuntor aditivo, por el Teorema \ref{Mendoza-1.10.2} tenemos que
+%    \[
+%        \mathbb{E}\big(C\bigoplus C',A\bigoplus A'\big) \simeq \mathbb{E}(C,A)\bigoplus \mathbb{E}(C,A')\bigoplus \mathbb{E}(C',A)\bigoplus \mathbb{E}(C',A').
+%    \] 
+%    Sea $\delta\bigoplus\delta'\in\mathbb{E}(C\bigoplus C',A\bigoplus A')$ el elemento correspondiente a $(\delta,0,0,\delta')$ según el isomorfismo anterior. Si $A=A'$ y $C=C'$, entonces, por la Proposición \ref{Prop: Multiplicación de matrices con E-matrices y compatibilidad con acciones de bimódulo}, tenemos que
+%    \begin{align*}
+%        \Phi_{A,C}(\nabla_A\cdot\delta\bigoplus\delta'\cdot\Delta_C) &= \varphi_{A,A\bigoplus A}(\nabla_A)\Phi_{A\bigoplus A,C\bigoplus C}(\delta\bigoplus\delta')\varphi_{C\bigoplus C,C} \\
+%                                                                    &= (\begin{smallmatrix} 1 &1 \end{smallmatrix}) \big(\begin{smallmatrix} \delta &0 \\ 0 &\delta' \end{smallmatrix}\big) \big(\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\big) \\
+%                                                                    &= \delta + \delta'.
+%    \end{align*}
+%    donde $\Delta_C:C\to C\bigoplus C$ y $\nabla_A:A\bigoplus A\to A$ son los morfismos diagonal y codiagonal\footnote{Ver la Definición \ref{Def: Morfismo diagonal y codiagonal}.}.
+%\end{Obs}
+
+\end{document}
