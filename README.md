@@ -11,3 +11,16 @@ La carpeta `Presentación/` contiene cuatro subcarpetas:
 * `media/`, que contiene todas las animaciones generadas por los códigos de `Códigos/` y que son utilizadas para generar la presentación utilizando [Manim Editor](https://docs.editor.manim.community/en/stable/).
 
 Es posible generar la presentación localmente descargando la carpeta `"Una introducción a las categorías extrianguladas"/`, ejecutando en comando `python -m http.server` (suponiendo que Python ya está instalado) desde una terminal virtual ubicada dentro de dicha carpeta, y abriendo un navegador en la página web que indique la terminal después de haber realizado el paso previo.
+
+## Jurado
+
+Director de tesis: Dr. Octavio Mendoza Hernández
+
+Sinodales:
+* Dr. Gustavo Jasso Ahuja,
+* Dra. Corina Edith Sáenz Valadez,
+* Dr. Valente Santiago Vargas,
+* Dra. Martha Lizbeth Shaid Sandoval Miranda,
+* Dra. Diana Avella Alaminos.
+
+Examen de grado: 31 de octubre de 2022 (aprobado con mención honorífica).
