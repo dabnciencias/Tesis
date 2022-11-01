@@ -14,7 +14,7 @@ Es posible generar la presentación localmente descargando la carpeta `"Una intr
 
 ## Jurado
 
-Director de tesis: Dr. Octavio Mendoza Hernández
+Director de tesis: Dr. Octavio Mendoza Hernández.
 
 Sinodales:
 * Dr. Gustavo Jasso Ahuja,
