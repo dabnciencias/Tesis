@@ -10,7 +10,7 @@ La carpeta `Presentación/` contiene cuatro subcarpetas:
 * `"Una introducción a las categorías extrianguladas"/`, que contiene todas las animaciones de la presentación;
 * `media/`, que contiene todas las animaciones generadas por los códigos de `Códigos/` y que son utilizadas para generar la presentación utilizando [Manim Editor](https://docs.editor.manim.community/en/stable/).
 
-Es posible generar la presentación localmente descargando la carpeta `"Una introducción a las categorías extrianguladas"/`, ejecutando en comando `python -m http.server` (suponiendo que Python ya está instalado) desde una terminal virtual ubicada dentro de dicha carpeta, y abriendo un navegador en la página web que indique la terminal después de haber realizado el paso previo.
+Es posible generar la presentación localmente descargando la carpeta `"Una introducción a las categorías extrianguladas"/`, ejecutando el comando `python -m http.server` (suponiendo que Python ya está instalado) desde una terminal virtual ubicada dentro de dicha carpeta, y abriendo un navegador en la página web que indique la terminal después de haber realizado el paso previo.
 
 ## Jurado
 
