@@ -2,7 +2,7 @@ from manim import *
 from manim_editor import PresentationSectionType
 
 ################################################################
-############ Realizado con Manim Community v.0.15.2 ############
+############ Realizado con Manim Community v.0.14.0 ############
 ################################################################
 
 # Colores

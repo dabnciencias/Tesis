@@ -1,9 +1,9 @@
 from manim import *
 from manim_editor import PresentationSectionType
-from manim.mobject.geometry.tips import ArrowTriangleFilledTip
+from manim.mobject.geometry import ArrowTriangleFilledTip #Es necesario agregar ".tips" a "manim.object.geometry" para algunas versiones de manim más recientes que v.0.14.0
 
 ################################################################
-############ Realizado con Manim Community v.0.15.2 ############
+############ Realizado con Manim Community v.0.14.0 ############
 ################################################################
 
 # Colores

@@ -1,9 +1,9 @@
 from manim import *
 from manim_editor import PresentationSectionType
-from manim.mobject.geometry.tips import ArrowTriangleFilledTip
+from manim.mobject.geometry import ArrowTriangleFilledTip #Es necesario agregar ".tips" a "manim.object.geometry" para algunas versiones de manim más recientes que v.0.14.0
 
 ################################################################
-############ Realizado con Manim Community v.0.15.2 ############
+############ Realizado con Manim Community v.0.14.0 ############
 ################################################################
 
 # Colores
@@ -261,7 +261,7 @@ class SucesionExactaAsociada(MovingCameraScene):
 
         texto3 = Tex(r"\justifying \textbf{Corolario} ", "Para cualquier morfismo de $\mathbb{E}$-triángulos").scale(escalaTexto).align_on_border(LEFT, buff=buffIzquierdo).shift(2.9*UP)
         texto3[0].set_color(NARANJA)
-        ecuación3 = SVGMobject("./Morfismo_de_E-triángulos2.svg").set_color(WHITE).scale(escalaTexto).next_to(texto3, 1.5*DOWN).set_x(0)
+        ecuación3 = SVGMobject("../Diagramas/Morfismo_de_E-triángulos2.svg").set_color(WHITE).scale(escalaTexto).next_to(texto3, 1.5*DOWN).set_x(0)
         ecuación3[27:29].set_color(BLACK)
         ecuación3[38:42].set_color(BLACK)
         flechaDelta = DashedArrow(start=ecuación3[27].get_left()-[0.3,0,0], end=ecuación3[27].get_right()+[0.3,0,0], dash_length=0.2)
@@ -393,7 +393,7 @@ class ObjetosProyectivosEInyectivos(MovingCameraScene):
         defi_1[0][0:10].set_color(NARANJA)
         defi_1[0][20].set_color(GRIS)
         defi_1[0][55].set_color(GRIS)
-        ecuación1 = SVGMobject("./E-proyectivo.svg").next_to(defi_1, DOWN).scale(escalaTexto).set_color(WHITE)
+        ecuación1 = SVGMobject("../Diagramas/E-proyectivo.svg").next_to(defi_1, DOWN).scale(escalaTexto).set_color(WHITE)
         ecuación1[13:].set_color(BLACK)
         flechaDelta = DashedArrow(start=ecuación1[13].get_left()-[0.3,0,0], end=ecuación1[13].get_right()+[0.3,0,0], dash_length=0.2)
         delta = Group(flechaDelta, MathTex("\delta").set_color(WHITE).scale(0.45).next_to(flechaDelta, UP, buff=0))
