@@ -30,8 +30,8 @@ MovingCameraScene.move_camera = move_camera
 
 class Portada(MovingCameraScene):
     def construct(self):
-        logoUNAM = SVGMobject("../../LaTeX/logo_UNAM.svg").set_color(BLACK).scale(1.5).align_on_border(UP+LEFT, buff=0.4)
-        logoIMATE = SVGMobject("../../LaTeX/logo_IMATE.svg").scale(1.25).align_on_border(UP+RIGHT, buff=0.25).shift(0.35*DOWN)
+        logoUNAM = SVGMobject("../Diagramas/logo_UNAM.svg").set_color(BLACK).scale(1.5).align_on_border(UP+LEFT, buff=0.4)
+        logoIMATE = SVGMobject("../Diagramas/logo_IMATE.svg").scale(1.25).align_on_border(UP+RIGHT, buff=0.25).shift(0.35*DOWN)
         título1 = Tex(r"Una introducción a las categorías").set_color(BLACK).set_x(0).scale(1.5).shift(0.2*DOWN)
         título2 = Tex(r"extrianguladas").set_color(BLACK).next_to(título1, DOWN).set_x(0).scale(1.5)
         nombre = Tex("Diego Alberto Barceló Nieves").scale(0.9).set_color(BLACK).next_to(título2, 1.25*DOWN).set_x(0)
